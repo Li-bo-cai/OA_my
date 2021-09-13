@@ -23,15 +23,36 @@
           <!-- 密码 -->
           <el-form-item prop="password" class="form_item">
             <img src="@/assets/images/key.png" alt="">
-            <el-input :key="passwordType" v-model="loginForm.password" :type="passwordType" placeholder="密码" tabindex="2"></el-input>
+            <el-input v-model="loginForm.password" :type="passwordType" placeholder="密码" tabindex="2"></el-input>
           </el-form-item>
-          <el-button class="loginBtn" type="info">登录</el-button>
+          <el-button class="sendBtn" type="info">登录</el-button>
         </el-form>
-        <p>忘记密码？</p>
+        <p @click="forget_pwd">忘记密码？</p>
       </template>
+
       <!-- 忘记密码 -->
-      <template>
-        
+      <template v-if="!state">
+        <div class="title">找回密码</div>
+        <el-form :model="forgetForm" :rules="loginRules" ref="ruleForm">
+          <!-- 账号 -->
+          <el-form-item prop="username" class="form_item">
+            <img src="@/assets/images/user.png" alt="">
+            <el-input v-model="forgetForm.username" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
+          </el-form-item>
+          <!-- 验证码 -->
+          <el-form-item prop="code" class="form_item">
+            <img src="@/assets/images/key.png" alt="">
+            <el-input v-model="forgetForm.code" maxlength="6" placeholder="短信验证码" tabindex="2"></el-input>
+            <el-button class="get_code" type="primary" :disabled="disabled" @click="get_code">{{codeMsg}}</el-button>
+          </el-form-item>
+          <!-- 密码 -->
+          <el-form-item prop="password" class="form_item">
+            <img src="@/assets/images/key.png" alt="">
+            <el-input v-model="forgetForm.password" :type="passwordType" placeholder="请输入新密码" tabindex="2"></el-input>
+          </el-form-item>
+          <el-button class="sendBtn" type="info">确定</el-button>
+        </el-form>
+        <p @click="go_login">返回登录</p>
       </template>
 
     </div>
@@ -41,32 +62,61 @@
 <script lang="ts">
 import { login } from "../../api/user/user.api";
 import { reactive, ref } from "vue";
-
+import loginRules from "./loginRuls";
 export default {
   setup() {
-    // 定义所有数据导出
+    // 定义登录数据
     const loginForm = reactive({
       username: "",
       password: "",
     });
-    const state = ref<boolean>(true);
-    // 规则
-    const loginRules = {
-      username: [
-        {
-          min: 8,
-          max: 11,
-          message: "长度在 8 到 11 个字符",
-          trigger: "blur",
-        },
-      ],
-      password: [],
+    // 定义忘记密码数据
+    const forgetForm = reactive({
+      username: "",
+      code: "",
+      password: "",
+    });
+    // 切换登录与忘记密码
+    let state = ref<boolean>(true);
+    let codeMsg = ref<string>("获取验证码");
+    let disabled = ref<boolean>(false);
+    let time = 60;
+    // 方法
+    const forget_pwd = () => {
+      state.value = false;
+    };
+    const go_login = () => {
+      state.value = true;
+    };
+    const get_code = () => {
+      disabled.value = true;
+      count_down();
+    };
+    //倒计时事件
+    const count_down = () => {
+      let timer = setInterval(() => {
+        if (time > 0) {
+          time--;
+          codeMsg.value = `重新获取(${time})`;
+        } else {
+          clearInterval(timer);
+          codeMsg.value = "获取验证码";
+          disabled.value = false;
+        }
+        console.log(time);
+      }, 1000);
     };
 
     return {
+      ...loginRules(), //引入规则
       state, //状态
+      codeMsg, //按钮文本
+      disabled, //按钮状态
       loginForm,
-      loginRules,
+      forgetForm,
+      forget_pwd, //忘记密码
+      go_login, //返回登录
+      get_code, //返回点击事件
     };
   },
 };
@@ -82,7 +132,7 @@ export default {
   flex: 5;
   margin-right: 80px;
   .title {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 20px;
   }
   .text {
@@ -108,11 +158,20 @@ export default {
       width: 100px;
       height: 100px;
       border-radius: 50%;
+      border: 1px solid #ccc;
     }
   }
-  p{
+  p {
     float: right;
     cursor: pointer;
+  }
+  .title {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  .get_code {
+    // width: 100px;
+    margin-left: 30px;
   }
 }
 :deep .form_item .el-form-item__content {
@@ -130,10 +189,11 @@ export default {
 :deep .el-input__inner {
   padding-left: 40px;
 }
-.loginBtn {
+.sendBtn {
   margin: 80px 0 30px 0;
 }
 .el-button {
   width: 100%;
+  padding: 0;
 }
 </style>
