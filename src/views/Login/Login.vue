@@ -18,12 +18,12 @@
           <!-- 账号 -->
           <el-form-item prop="username" class="form_item">
             <img src="@/assets/images/user.png" alt="">
-            <el-input v-model="loginForm.username" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
+            <el-input v-model="loginForm.username" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password" class="form_item">
             <img src="@/assets/images/key.png" alt="">
-            <el-input v-model="loginForm.password" :type="passwordType" placeholder="密码" tabindex="2"></el-input>
+            <el-input v-model="loginForm.password" type="text" placeholder="密码" tabindex="2"></el-input>
           </el-form-item>
           <el-button class="sendBtn" type="info">登录</el-button>
         </el-form>
@@ -37,18 +37,18 @@
           <!-- 账号 -->
           <el-form-item prop="username" class="form_item">
             <img src="@/assets/images/user.png" alt="">
-            <el-input v-model="forgetForm.username" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
+            <el-input v-model="forgetForm.username" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
           </el-form-item>
           <!-- 验证码 -->
           <el-form-item prop="code" class="form_item">
             <img src="@/assets/images/key.png" alt="">
-            <el-input v-model="forgetForm.code" maxlength="6" placeholder="短信验证码" tabindex="2"></el-input>
+            <el-input v-model="forgetForm.code" type="number" maxlength="6" placeholder="短信验证码" tabindex="2"></el-input>
             <el-button class="get_code" type="primary" :disabled="disabled" @click="get_code">{{codeMsg}}</el-button>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password" class="form_item">
             <img src="@/assets/images/key.png" alt="">
-            <el-input v-model="forgetForm.password" :type="passwordType" placeholder="请输入新密码" tabindex="2"></el-input>
+            <el-input v-model="forgetForm.password" type="text" placeholder="请输入新密码" tabindex="2"></el-input>
           </el-form-item>
           <el-button class="sendBtn" type="info">确定</el-button>
         </el-form>
