@@ -61,9 +61,9 @@
 
 <script lang="ts">
 import { login } from "../../api/user/user.api";
-import { reactive, ref } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import loginRules from "./loginRuls";
-export default {
+export default defineComponent({
   setup() {
     // 定义登录数据
     const loginForm = reactive({
@@ -119,7 +119,7 @@ export default {
       get_code, //返回点击事件
     };
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

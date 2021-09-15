@@ -1,21 +1,35 @@
 <template>
-    <div>
-        输出页
-    </div>
+  <el-container>
+    <el-container>
+      <el-aside>
+        <Aside />
+      </el-aside>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
+import Aside from "../../components/Aside/Aside.vue";
 
 export default defineComponent({
-    setup () {
-        
-
-        return {}
-    }  
-})
+  components: {
+    Aside,
+  },
+  setup() {
+    return {};
+  },
+});
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.el-aside {
+  width: 280px;
+}
+.el-main {
+  padding: 30px;
+}
 </style>

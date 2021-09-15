@@ -8,6 +8,7 @@ import '@/assets/css/element-variables.scss'
 import '@/assets/css/element.scss'
 import '@/assets/css/common.scss'
 import '@/assets/css/index.scss'
+import '@/assets/font/iconfont.css'
 
 
 const app = createApp(App)

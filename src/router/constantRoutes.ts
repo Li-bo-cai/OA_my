@@ -28,5 +28,5 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         path: '/login',
         name: '登录',
         component: () => import('../views/Login/Login.vue')
-    }
+    },
 ]

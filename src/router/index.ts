@@ -15,7 +15,7 @@ export function createNewRouter(routes: Array<RouteRecordRaw>) {
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes: constantRoutes
+  routes: [...constantRoutes, ...asyncRoutes]
 })
 
 // router.beforeEach((to, from, next) => {

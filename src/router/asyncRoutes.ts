@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
-import Layout from '../views/Layout/Layout.vue'
+import Layout from '@/views/Layout/Layout.vue'
 
 export const asyncRoutes: Array<RouteRecordRaw> = [{
     // 集团组织架构管理
@@ -24,25 +24,26 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     children: [
         {
             path: 'post-manage',
-            component: () => import('../views/PersonnelMatters/PostManage.vue'),
+            component: () => import('@/views/PersonnelMatters/PostManage/PostManage.vue'),
             name: 'post-manage',
             meta: { title: '岗位管理' }
         },
         {
             path: 'employee-manage',
-            component: () => import('../views/PersonnelMatters/employeeManage.vue'),
+            component: () => import('@/views/PersonnelMatters/employeeManage/employeeManage.vue'),
             name: 'employee-manage',
             meta: { title: '员工管理' }
         },
         {
             path: 'attendance-manage',
-            component: () => import('../views/PersonnelMatters/AttendanceManage.vue'),
+            component: () => import('@/views/PersonnelMatters/AttendanceManage/AttendanceManage.vue'),
             name: 'attendance-manage',
             meta: { title: '考勤管理' }
         },
         {
             path: 'holiday-manage',
-            component: () => import('../views/PersonnelMatters/HolidayManage.vue')
+            component: () => import('@/views/PersonnelMatters/HolidayManage/HolidayManage.vue'),
+            meta: { title: '休假管理' }
         }
     ]
 },
@@ -54,7 +55,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     children: [
         {
             path: 'external-manage',
-            component: () => import('../views/External/ExternalManage.vue'),
+            component: () => import('@/views/External/ExternalManage.vue'),
             name: 'external-manage',
             meta: { title: '外部资源管理', icon: 'el-icon-link' }
         }
@@ -68,7 +69,9 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     children: [
         {
             path: 'companyList',
-            component: () => import('../views/CompanyAnnounce/CompanyList.vue')
+            component: () => import('@/views/CompanyAnnounce/CompanyList.vue'),
+            name: 'company-announce',
+            meta: { title: '公司公告', icon: 'el-icon-link' }
         }
     ]
 },
@@ -80,7 +83,9 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     children: [
         {
             path: 'dynamics-list',
-            component: () => import('../views/GroupDynamics/DynamicList.vue')
+            component: () => import('@/views/GroupDynamics/DynamicList.vue'),
+            name: 'group-dynamics',
+            meta: { title: '集团动态', icon: 'el-icon-link' }
         }
     ]
 },
@@ -92,7 +97,9 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     children: [
         {
             path: 'document-list',
-            component: () => import('../views/DocumentCenter/DocumentList.vue')
+            component: () => import('@/views/DocumentCenter/DocumentList.vue'),
+            name: 'document',
+            meta: { title: '文档中心', icon: 'el-icon-link' }
         }
     ]
 },
@@ -104,7 +111,9 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     children: [
         {
             path: 'message-center',
-            component: () => import('../views/MessageCenter/MessageCenter.vue')
+            component: () => import('@/views/MessageCenter/MessageCenter.vue'),
+            name: 'message',
+            meta: { title: '消息中心', icon: 'el-icon-link' }
         }
     ]
 },]

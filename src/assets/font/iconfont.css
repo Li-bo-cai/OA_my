@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 2798732 */
+  src: url('iconfont.woff2?t=1631091768004') format('woff2'),
+       url('iconfont.woff?t=1631091768004') format('woff'),
+       url('iconfont.ttf?t=1631091768004') format('truetype');
+}
+
+*[class^='sell-'] {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sell-a-11tuichu:before {
+  content: "\e61a";
+}
+
+.sell-a-10anquan:before {
+  content: "\e619";
+}
+
+.sell-a-09ziliao:before {
+  content: "\e618";
+}
+
+.sell-a-08:before {
+  content: "\e616";
+}
+
+.sell-a-07:before {
+  content: "\e614";
+}
+
+.sell-a-06:before {
+  content: "\e612";
+}
+
+.sell-a-05:before {
+  content: "\e611";
+}
+
+.sell-a-04:before {
+  content: "\e610";
+}
+
+.sell-a-03:before {
+  content: "\e60f";
+}
+
+.sell-a-02:before {
+  content: "\e60e";
+}
+
+.sell-a-01:before {
+  content: "\e60d";
+}
+
