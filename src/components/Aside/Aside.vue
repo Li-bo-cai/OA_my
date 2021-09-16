@@ -3,9 +3,9 @@
     <div class="user_header">
       <AsideHeader />
     </div>
-    <div>
+    <el-scrollbar class="menu_scroll">
       <AsideMenu />
-    </div>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -29,7 +29,10 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
 }
-.user_header{
-    margin-bottom: 30px;
+.user_header {
+  margin-bottom: 30px;
+}
+.menu_scroll {
+  height: calc(100vh - 60px);
 }
 </style>

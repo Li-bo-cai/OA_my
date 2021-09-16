@@ -6,10 +6,10 @@
     margin-bottom: 25px;
     font-size: 16px;
 }
+// 输入框样式
 .el-input__inner:hover{
     border: 1px solid #409eff;
 }
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
@@ -17,7 +17,12 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield !important;
 }
+// 按钮样式
 .el-button{
     min-height: 36px;
     height: 36px;
+}
+// element 滚动条 
+deep .el-scrollbar__wrap {
+  overflow-x:hidden !important
 }

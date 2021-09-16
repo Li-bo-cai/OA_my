@@ -1,19 +1,19 @@
 import { RouteRecordRaw } from 'vue-router'
-import Layout from '../views/Layout/Layout.vue'
 
 export const constantRoutes: Array<RouteRecordRaw> = [
     {
         // 首页
         path: '/',
         name: 'Home',
-        component: Layout,
+        component: ()=>import('@/views/Layout/Layout.vue'),
         redirect: '/home',
+        meta: { title: '首页', icon: 'sell-a-01', hasChild: false },
         children: [
             {
                 path: 'home',
                 component: () => import('../views/Home/Home.vue'),
                 name: 'home',
-                meta: { title: '首页', icon: 'el-icon-house' }
+                meta: { title: '首页' }
             }
         ]
     },

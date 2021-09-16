@@ -1,81 +1,26 @@
 <template>
   <el-menu text-color="#232323" :router="true">
-    <el-menu-item index="/">
-      <template v-slot:title>
-        <i class="sell-a-01"></i>
-        <span>首页</span>
-      </template>
-    </el-menu-item>
-
-    <el-menu-item index="/organization">
-      <template #title>
-        <i class="sell-a-02"></i>
-        <span>集团组织架构管理</span>
-      </template>
-    </el-menu-item>
-
-    <el-submenu index="/personnelMatters">
-      <template #title>
-        <i class="sell-a-03"></i>
-        <span>人事管理</span>
-      </template>
-      <el-menu-item index="/personnelMatters/post-manage">
+    <template v-for="item in Routes">
+      <el-menu-item :key="item.name" v-if="item.meta && !item.meta.hasChild" :index="item.path">
         <template #title>
-          <span>岗位管理</span>
-        </template>
-      </el-menu-item>
-      <el-menu-item index="/personnelMatters/employee-manage">
-        <template #title>
-          <span>员工管理</span>
-        </template>
-      </el-menu-item>
-      <el-menu-item index="/personnelMatters/attendance-manage">
-        <template #title>
-          <span>考勤管理</span>
-        </template>
-      </el-menu-item>
-      <el-menu-item index="/personnelMatters/holiday-manage">
-        <template #title>
-          <span>休假管理</span>
-        </template>
-      </el-menu-item>
-    </el-submenu>
-
-    <el-menu-item index="/external">
-      <template #title>
-        <i class="sell-a-04"></i>
-        <span>外部资源管理</span>
-      </template>
-    </el-menu-item>
-
-    <el-submenu index="/companyAnnounce">
-      <template #title>
-        <i class="sell-a-05"></i>
-        <span>公司公告</span>
-      </template>
-
-      <el-menu-item index="/groupDynamics">
-        <template #title>
-          <i class="sell-a-06"></i>
-          <span>集团动态</span>
+          <i :class="item.meta.icon"></i>
+          <span>{{ item.meta.title }}</span>
         </template>
       </el-menu-item>
 
-      <el-menu-item index="/document">
+      <el-sub-menu v-else-if="item.meta && item.meta.hasChild" :key="item.name" :index="item.path">
         <template #title>
-          <i class="sell-a-07"></i>
-          <span>文档中心</span>
+          <i :class="item.meta.icon"></i>
+          <span>{{ item.meta.title }}</span>
         </template>
-      </el-menu-item>
+        <el-menu-item v-for="_item in item.children" :key="_item.name" :index="`${item.path}/${_item.path}`">
+          <template #title>
+            <span>{{ _item.meta.title }}</span>
+          </template>
+        </el-menu-item>
 
-      <el-menu-item index="/message">
-        <template #title>
-          <i class="sell-a-08"></i>
-          <span>消息中心</span>
-        </template>
-      </el-menu-item>
-    </el-submenu>
-
+      </el-sub-menu>
+    </template>
   </el-menu>
 </template>
 
@@ -86,13 +31,21 @@ import { asyncRoutes } from "@/router/asyncRoutes";
 
 export default defineComponent({
   setup() {
-    const Router = [...constantRoutes, ...asyncRoutes];
+    const Routes = [...constantRoutes, ...asyncRoutes];
+    console.log(Routes);
+
     return {
-      Router,
+      Routes,
     };
   },
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+i {
+  margin-right: 20px;
+}
+.el-menu {
+  border-right: none;
+}
 </style>

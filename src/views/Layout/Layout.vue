@@ -27,7 +27,8 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .el-aside {
-  width: 280px;
+  width: 260px;
+  border-right: 2px solid #ccc;
 }
 .el-main {
   padding: 30px;
