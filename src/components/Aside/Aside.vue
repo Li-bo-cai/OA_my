@@ -30,9 +30,10 @@ export default defineComponent({
   flex-direction: column;
 }
 .user_header {
-  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
 }
 .menu_scroll {
-  height: calc(100vh - 60px);
+  height: calc(100vh - 180px);
 }
 </style>

@@ -25,6 +25,7 @@
             <img src="@/assets/images/key.png" alt="">
             <el-input v-model="loginForm.password" type="text" placeholder="密码" tabindex="2"></el-input>
           </el-form-item>
+          <div class="hint">密码为8-16位大小写字母、数字其中两种组合，不可包含空格、中文，特殊符号等字符</div>
           <el-button class="sendBtn" type="info">登录</el-button>
         </el-form>
         <p @click="forget_pwd">忘记密码？</p>
@@ -50,6 +51,7 @@
             <img src="@/assets/images/key.png" alt="">
             <el-input v-model="forgetForm.password" type="text" placeholder="请输入新密码" tabindex="2"></el-input>
           </el-form-item>
+          <div class="hint">密码为8-16位大小写字母、数字其中两种组合， 不可包含空格、中文，特殊符号等字符</div>
           <el-button class="sendBtn" type="info">确定</el-button>
         </el-form>
         <p @click="go_login">返回登录</p>
@@ -146,6 +148,11 @@ export default defineComponent({
     }
   }
 }
+.hint {
+  font-size: 14px;
+  padding: 0 25px;
+  color: rgba(0, 0, 0, 0.2);
+}
 .tab-right {
   flex: 2;
   padding: 30px;
@@ -190,7 +197,7 @@ export default defineComponent({
   padding-left: 40px;
 }
 .sendBtn {
-  margin: 80px 0 30px 0;
+  margin: 30px 0 30px 0;
 }
 .el-button {
   width: 100%;

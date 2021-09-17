@@ -32,7 +32,7 @@ import { asyncRoutes } from "@/router/asyncRoutes";
 export default defineComponent({
   setup() {
     const Routes = [...constantRoutes, ...asyncRoutes];
-    console.log(Routes);
+    // console.log(Routes);
 
     return {
       Routes,
