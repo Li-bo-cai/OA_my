@@ -1,6 +1,6 @@
 .el-input .el-input__inner{
-    height: 36px;
-    line-height: 36px;
+    height: 46px;
+    line-height: 46px;
 }
 .el-form-item{
     margin-bottom: 25px;
@@ -19,10 +19,30 @@ input[type='number'] {
 }
 // 按钮样式
 .el-button{
-    min-height: 36px;
-    height: 36px;
+    min-height: 42px;
+    height: 42px;
 }
+//全局 primary 样式修改
+.el-button--primary.is-active,
+.el-button--primary:active{
+  background: #5777e7;
+  border: 0;
+}
+.el-button--primary:focus,
+.el-button--primary:hover{
+  background: #4b6ce4;
+  border: 0;
+}
+.el-button--primary{
+  background: #5777e7;
+  border: 0;
+}
+
 // element 滚动条 
 deep .el-scrollbar__wrap {
   overflow-x:hidden !important
+}
+// dialog圆角修饰
+.el-dialog{
+  border-radius: 10px;
 }
