@@ -1,7 +1,7 @@
 <template>
-  <el-menu text-color="#232323" :router="true">
+  <el-menu text-color="#232323" :default-active="route.path" :router="true">
     <template v-for="item in Routes">
-      <el-menu-item :key="item.name" v-if="item.meta && !item.meta.hasChild" :index="item.path">
+      <el-menu-item v-if="item.meta && !item.meta.hasChild" :index="item.path" :key="item.name">
         <template #title>
           <i :class="item.meta.icon"></i>
           <span>{{ item.meta.title }}</span>
@@ -18,8 +18,8 @@
             <span>{{ _item.meta.title }}</span>
           </template>
         </el-menu-item>
-
       </el-sub-menu>
+
     </template>
   </el-menu>
 </template>
@@ -28,14 +28,17 @@
 import { defineComponent } from "vue";
 import { constantRoutes } from "@/router/constantRoutes";
 import { asyncRoutes } from "@/router/asyncRoutes";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   setup() {
-    const Routes = [...constantRoutes, ...asyncRoutes];
+    const Routes = [...constantRoutes, ...asyncRoutes]; //全部路由
+    const route = useRoute();
     // console.log(Routes);
 
     return {
       Routes,
+      route,
     };
   },
 });

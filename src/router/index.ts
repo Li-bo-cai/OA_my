@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router'
 import { constantRoutes } from './constantRoutes'
 import { asyncRoutes } from './asyncRoutes'
 
 // const routes = [...constantRoutes, ...asyncRoutes]
 
-export function createNewRouter(routes: Array<RouteRecordRaw>) {
+export function createNewRouter(routes: Array<RouteRecordRaw>): Router {
   return createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes: routes

@@ -1,24 +1,33 @@
 <template>
 
-  <el-breadcrumb separator-class="el-icon-arrow-right" class="o-breadcrumb">
-    <el-breadcrumb-item v-for="route in breadList" :key="route.path" separator="/" :to="route.path">{{ route.meta.title }}</el-breadcrumb-item>
-  </el-breadcrumb>
+  <div class="title_bread">
+    <el-breadcrumb separator-class="el-icon-arrow-right" class="o-breadcrumb">
+      <el-breadcrumb-item v-for="route in breadList" :key="route.path" separator="/" :to="route.path">{{ route.meta.title }}</el-breadcrumb-item>
+    </el-breadcrumb>
+    <div class="back_to_home" @click="back_home">
+      <span>返回首页</span>
+    </div>
+  </div>
 
 </template>
 
 <script lang="ts">
 import { ref, defineComponent, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 export default defineComponent({
   setup() {
     const route = useRoute();
-    // console.log(route);
+    const router = useRouter();
+    console.log(route);
 
     let breadList = ref<any>([]);
     const getBreadcrumb = () => {
       breadList.value = [];
       breadList.value = route.matched;
-      console.log(111);
+    };
+
+    const back_home = () => {
+      router.push("/");
     };
 
     onMounted(() => {
@@ -27,10 +36,30 @@ export default defineComponent({
 
     return {
       breadList,
+      back_home,
     };
   },
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.title_bread {
+  display: flex;
+  align-items: center;
+}
+.el-breadcrumb {
+  font-size: 18px;
+}
+.back_to_home {
+  span {
+    display: inline-block;
+    width: 102px;
+    height: 32px;
+    line-height: 32px;
+    margin-left: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+}
 </style>
