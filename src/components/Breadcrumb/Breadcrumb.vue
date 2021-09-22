@@ -1,28 +1,33 @@
 <template>
 
-  <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-    <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-    <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+  <el-breadcrumb separator-class="el-icon-arrow-right" class="o-breadcrumb">
+    <el-breadcrumb-item v-for="route in breadList" :key="route.path" separator="/" :to="route.path">{{ route.meta.title }}</el-breadcrumb-item>
   </el-breadcrumb>
 
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { ref, defineComponent, onMounted } from "vue";
 import { useRoute } from "vue-router";
 export default defineComponent({
   setup() {
     const route = useRoute();
-    console.log(route);
+    // console.log(route);
+
+    let breadList = ref<any>([]);
+    const getBreadcrumb = () => {
+      breadList.value = [];
+      breadList.value = route.matched;
+      console.log(111);
+    };
 
     onMounted(() => {
-      const id = route.params.id;
-      console.log(id);
+      getBreadcrumb();
     });
 
-    return {};
+    return {
+      breadList,
+    };
   },
 });
 </script>
