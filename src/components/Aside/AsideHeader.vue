@@ -110,7 +110,7 @@ export default defineComponent({
   display: none;
   position: fixed;
   top: 35px;
-  left: 260px;
+  left: 270px;
   z-index: 999;
 }
 </style>

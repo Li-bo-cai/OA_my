@@ -1,25 +1,21 @@
 <template>
-    <div>
-消息中心
-    </div>
+  <div>
+    <Breadcrumb />
+  </div>
 </template>
 
-<script>
-import { reactive, toRefs } from 'vue'
-
-export default {
-    setup () {
-        const state = reactive({
-            count: 0,
-        })
-    
-        return {
-            ...toRefs(state),
-        }
-    }
-}
+<script lang="ts">
+import { defineComponent } from "vue";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb.vue";
+export default defineComponent({
+  components: {
+    Breadcrumb,
+  },
+  setup() {
+    return {};
+  },
+});
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
 </style>

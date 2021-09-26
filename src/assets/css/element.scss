@@ -1,3 +1,4 @@
+//表单样式
 .el-input .el-input__inner{
     height: 46px;
     line-height: 46px;
@@ -45,4 +46,42 @@ deep .el-scrollbar__wrap {
 // dialog圆角修饰
 .el-dialog{
   border-radius: 10px;
+}
+
+//菜单栏样式
+.el-menu-item,
+.el-sub-menu__title{
+  background: #fff;
+  padding: 0;
+  margin: 0 20px;
+  border-radius: 16px;
+}
+.el-menu{
+  .is-active{
+    background: #fff;
+    color: #fff;
+    &:not(.el-sub-menu){
+      background-color: rgb(182, 160, 243);
+    }
+  }
+}
+
+// 分页器
+.el-pagination {
+  .el-pagination__total{
+    height: 40px !important;
+    line-height: 40px !important;
+  }
+  li,button{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+  }
+  .el-input .el-input__inner {
+    height: 40px;
+    line-height: 40px;
+  }
+  .el-input__suffix{
+    line-height: 40px;
+  }
 }
