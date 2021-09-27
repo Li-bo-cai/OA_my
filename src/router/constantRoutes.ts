@@ -14,6 +14,12 @@ export const constantRoutes: Array<RouteRecordRaw> = [
                 component: () => import('../views/Home/Home.vue'),
                 name: 'home',
                 meta: { title: '首页' }
+            },
+            {
+                path:'userInfo',
+                component:()=>import('../views/UserInfo/UserInfo.vue'),
+                name:'userInfo',
+                meta:{title:'用户信息'}
             }
         ]
     },

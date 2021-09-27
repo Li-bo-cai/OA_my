@@ -55,14 +55,21 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   setup() {
+    const router = useRouter()
     const dialog = ref<boolean>(false);
     const dialog1 = ref<boolean>(false);
+
+    const editInfo = () => {
+      router.push('/userInfo')
+    };
     return {
       dialog,
       dialog1,
+      editInfo
     };
   },
 });
