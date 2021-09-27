@@ -4,8 +4,11 @@
     line-height: 46px;
 }
 .el-form-item{
-    margin-bottom: 25px;
     font-size: 16px;
+    margin-bottom: 0;
+    .el-form-item__label{
+      line-height: 46px;
+    }
 }
 // 输入框样式
 .el-input__inner:hover{
@@ -20,8 +23,10 @@ input[type='number'] {
 }
 // 按钮样式
 .el-button{
-    min-height: 42px;
-    height: 42px;
+  width: 116px;
+  min-height: 40px;
+  height: 40px;
+  border-radius: 8px;
 }
 //全局 primary 样式修改
 .el-button--primary.is-active,

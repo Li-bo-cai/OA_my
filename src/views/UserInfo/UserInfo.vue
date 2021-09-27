@@ -45,11 +45,27 @@
           </div>
         </div>
         <div class="plate">
-          <p class="all_title">紧急联系人</p>
+          <p class="all_title">职工入职来源</p>
           <div class="form_col">
-            <el-form-item label="姓  名：">张三</el-form-item>
-            <el-form-item label="关  系：" prop="gender">男</el-form-item>
-            <el-form-item label="手机号：" prop="phone">18111726632</el-form-item>
+            <el-form-item label="应聘渠道：">BOSS直聘</el-form-item>
+            <el-form-item label="介绍人：">张三</el-form-item>
+          </div>
+        </div>
+        <div class="plate">
+          <p class="all_title">岗位信息</p>
+          <div class="form_col">
+            <el-form-item label="所属部门：">运营部</el-form-item>
+            <el-form-item label="岗位名称：">运营专员</el-form-item>
+          </div>
+          <div class="form_col">
+            <el-form-item label="入职时间：">2021-02-23</el-form-item>
+            <el-form-item label="是否签订合同：">是</el-form-item>
+            <el-form-item label="合同签订时间：">运营专员</el-form-item>
+            <el-form-item label="合同截止时间：">2021-02-23</el-form-item>
+          </div>
+          <div class="form_col">
+            <el-form-item label="当前状态：">正式员工</el-form-item>
+            <el-form-item label="当前状态：">试用期</el-form-item>
           </div>
         </div>
       </el-form>
@@ -76,7 +92,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .userInfo_body {
   padding: 0 20px;
-  .plate{
+  .plate {
     margin-bottom: 50px;
   }
   .all_title {
