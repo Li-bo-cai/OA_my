@@ -1,5 +1,36 @@
+import { ref } from "vue";
+import {  get_phone_code } from "../../api/user/user.api";
+
 // 自定义表单校验
 export default () => {
+    const codeMsg = ref<string>("获取验证码");
+    const disabled = ref<boolean>(false);
+
+    let time = 60;
+     //倒计时事件
+     const count_down = () => {
+        const timer = setInterval(() => {
+          if (time > 1) {
+            time--;
+            codeMsg.value = `重新获取(${time})`;
+          } else {
+            clearInterval(timer);
+            codeMsg.value = "获取验证码";
+            disabled.value = false;
+          }
+        //   console.log(time);
+        }, 1000);
+      };
+  // 获取验证码
+    const get_code = () => {
+      disabled.value = true;
+      get_phone_code().then((res:any) => {
+        console.log(res);
+      });
+      count_down();
+    };
+
+
     // 自定义规则
     const allInput = (rule: any, value: string, callback: any) => {
         const reg = /(\s[\u4E00-\u9FA5]+)|([\u4E00-\u9FA5]+\s)/
@@ -72,5 +103,9 @@ export default () => {
 
     return {
         loginRules,  //登录规则
+        codeMsg, //按钮文本
+        disabled, //按钮状态
+        get_code, //返回点击事件
+        count_down
     }
 }

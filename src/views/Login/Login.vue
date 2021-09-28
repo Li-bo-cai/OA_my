@@ -18,7 +18,7 @@
           <!-- 账号 -->
           <el-form-item prop="username" class="form_item">
             <img src="@/assets/images/user.png" alt="">
-            <el-input v-model="loginForm.username" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
+            <el-input v-model="loginForm.account" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password" class="form_item">
@@ -26,7 +26,7 @@
             <el-input v-model="loginForm.password" type="text" placeholder="密码" tabindex="2"></el-input>
           </el-form-item>
           <div class="hint">密码为8-16位大小写字母、数字其中两种组合，不可包含空格、中文，特殊符号等字符</div>
-          <el-button class="sendBtn" type="info">登录</el-button>
+          <el-button class="sendBtn" type="info" @click="handleLogin">登录</el-button>
         </el-form>
         <p @click="forget_pwd">忘记密码？</p>
       </template>
@@ -62,16 +62,18 @@
 </template>
 
 <script lang="ts">
-import { login } from "../../api/user/user.api";
+import { login, insideLogin, get_phone_code } from "../../api/user/user.api";
 import { defineComponent, reactive, ref } from "vue";
 import loginRules from "./loginRuls";
 export default defineComponent({
   setup() {
     // 定义登录数据
-    const loginForm = reactive({
-      username: "",
+    let a!: number;
+    const loginForm: insideLogin = reactive({
+      account: a,
       password: "",
     });
+
     // 定义忘记密码数据
     const forgetForm = reactive({
       username: "",
@@ -80,45 +82,31 @@ export default defineComponent({
     });
     // 切换登录与忘记密码
     let state = ref<boolean>(true);
-    let codeMsg = ref<string>("获取验证码");
-    let disabled = ref<boolean>(false);
-    let time = 60;
+    
     // 方法
+    // 忘记密码
     const forget_pwd = () => {
       state.value = false;
     };
+    // 去登录
     const go_login = () => {
       state.value = true;
     };
-    const get_code = () => {
-      disabled.value = true;
-      count_down();
+    // 点击登录
+    const handleLogin = () => {
+      login(loginForm).then((res) => {
+        console.log(res);
+      });
     };
-    //倒计时事件
-    const count_down = () => {
-      let timer = setInterval(() => {
-        if (time > 0) {
-          time--;
-          codeMsg.value = `重新获取(${time})`;
-        } else {
-          clearInterval(timer);
-          codeMsg.value = "获取验证码";
-          disabled.value = false;
-        }
-        console.log(time);
-      }, 1000);
-    };
+    // 获取验证码
 
     return {
       ...loginRules(), //引入规则
       state, //状态
-      codeMsg, //按钮文本
-      disabled, //按钮状态
       loginForm,
       forgetForm,
       forget_pwd, //忘记密码
       go_login, //返回登录
-      get_code, //返回点击事件
     };
   },
 });

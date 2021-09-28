@@ -100,7 +100,9 @@
 </template>
 
 <script lang="ts">
+import homefunc from "./Home";
 import { defineComponent } from "@vue/runtime-core";
+import { polymerization } from "@/api/home/home.api";
 import { ref } from "vue";
 
 export default defineComponent({
@@ -115,17 +117,12 @@ export default defineComponent({
     let showVive4_1 = ref<boolean>(false);
     let showVive5 = ref<boolean>(false);
     let showVive5_1 = ref<boolean>(false);
+
+    const homeInfo = polymerization().then((res: any) => {
+      console.log(res);
+    });
     return {
-      dialogVisible,
-      showVive,
-      showVive2,
-      showVive2_1,
-      showVive3,
-      showVive3_1,
-      showVive4,
-      showVive4_1,
-      showVive5,
-      showVive5_1,
+      homefunc,
     };
   },
 });

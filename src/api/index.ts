@@ -5,7 +5,7 @@ import { ElMessageBox, ElMessage } from 'element-plus'
 const header: any = null
 // 创建一个axios服务
 const instance = axios.create({
-    baseURL: process.env.VUE_APP_BASE_API,
+    baseURL: '/oa',
     timeout: 20 * 1000
 })
 
