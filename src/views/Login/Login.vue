@@ -38,18 +38,18 @@
           <!-- 账号 -->
           <el-form-item prop="username" class="form_item">
             <img src="@/assets/images/user.png" alt="">
-            <el-input v-model="forgetForm.username" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
+            <el-input v-model="forgetForm.key" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
           </el-form-item>
           <!-- 验证码 -->
           <el-form-item prop="code" class="form_item">
             <img src="@/assets/images/key.png" alt="">
-            <el-input v-model="forgetForm.code" type="number" maxlength="6" placeholder="短信验证码" tabindex="2"></el-input>
+            <el-input v-model="forgetForm.phone_code" type="number" maxlength="6" placeholder="短信验证码" tabindex="2"></el-input>
             <el-button class="get_code" type="primary" :disabled="disabled" @click="get_code">{{codeMsg}}</el-button>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password" class="form_item">
             <img src="@/assets/images/key.png" alt="">
-            <el-input v-model="forgetForm.password" type="text" placeholder="请输入新密码" tabindex="2"></el-input>
+            <el-input v-model="forgetForm.pass" type="text" placeholder="请输入新密码" tabindex="2"></el-input>
           </el-form-item>
           <div class="hint">密码为8-16位大小写字母、数字其中两种组合， 不可包含空格、中文，特殊符号等字符</div>
           <el-button class="sendBtn" type="info">确定</el-button>
@@ -62,11 +62,19 @@
 </template>
 
 <script lang="ts">
-import { login, insideLogin, get_phone_code } from "../../api/user/user.api";
-import { defineComponent, reactive, ref } from "vue";
+import { insideLogin } from "@/api/user/user.api";
+import { defineComponent, getCurrentInstance, reactive, ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import loginRules from "./loginRuls";
 export default defineComponent({
   setup() {
+    // 获取输入数据
+    const store = useStore();
+    const router = useRouter();
+    const { proxy }: any = getCurrentInstance();
+    const usVuex = proxy.usVuex;
+
     // 定义登录数据
     let a!: number;
     const loginForm: insideLogin = reactive({
@@ -75,14 +83,19 @@ export default defineComponent({
     });
 
     // 定义忘记密码数据
-    const forgetForm = reactive({
-      username: "",
-      code: "",
-      password: "",
+    interface insideforget {
+      key: string;
+      phone_code: string;
+      pass: string;
+    }
+    const forgetForm: insideforget = reactive({
+      key: "",
+      phone_code: "",
+      pass: "",
     });
     // 切换登录与忘记密码
     let state = ref<boolean>(true);
-    
+
     // 方法
     // 忘记密码
     const forget_pwd = () => {
@@ -93,18 +106,24 @@ export default defineComponent({
       state.value = true;
     };
     // 点击登录
-    const handleLogin = () => {
-      login(loginForm).then((res) => {
-        console.log(res);
-      });
+    const handleLogin = async () => {
+      await usVuex.useActions("loginMoudle", "GET_LOGIN", loginForm);
+      // router.push({
+      //   path: "/",
+      // });
     };
     // 获取验证码
+    const get_code = () => {
+      usVuex.useActions("loginMoudle", "GET_PHONE_CODE");
+    };
 
     return {
       ...loginRules(), //引入规则
       state, //状态
       loginForm,
       forgetForm,
+      handleLogin, //点击登录
+      get_code, //获取验证码
       forget_pwd, //忘记密码
       go_login, //返回登录
     };

@@ -6,29 +6,29 @@ export default () => {
     const codeMsg = ref<string>("获取验证码");
     const disabled = ref<boolean>(false);
 
-    let time = 60;
-     //倒计时事件
-     const count_down = () => {
-        const timer = setInterval(() => {
-          if (time > 1) {
-            time--;
-            codeMsg.value = `重新获取(${time})`;
-          } else {
-            clearInterval(timer);
-            codeMsg.value = "获取验证码";
-            disabled.value = false;
-          }
-        //   console.log(time);
-        }, 1000);
-      };
-  // 获取验证码
-    const get_code = () => {
-      disabled.value = true;
-      get_phone_code().then((res:any) => {
-        console.log(res);
-      });
-      count_down();
-    };
+//     let time = 60;
+//      //倒计时事件
+//      const count_down = () => {
+//         const timer = setInterval(() => {
+//           if (time > 1) {
+//             time--;
+//             codeMsg.value = `重新获取(${time})`;
+//           } else {
+//             clearInterval(timer);
+//             codeMsg.value = "获取验证码";
+//             disabled.value = false;
+//           }
+//         //   console.log(time);
+//         }, 1000);
+//       };
+//   // 获取验证码
+//     const get_code = () => {
+//       disabled.value = true;
+//       get_phone_code().then((res:any) => {
+//         console.log(res);
+//       });
+//       count_down();
+//     };
 
 
     // 自定义规则
@@ -40,14 +40,14 @@ export default () => {
             callback()
         }
     }
-    const validPassword = (rule: any, value: string, callback: any) => {
-        const reg = /((?=.*[a-z])(?=.*\d)|(?=[a-z])(?=.*[#@!~%^&*])|(?=.*\d)(?=.*[#@!~%^&*]))[a-z\d#@!~%^&*]{8,12}/
-        if (!reg.test(value)) {
-            callback(new Error('密码组合错误'))
-        } else {
-            callback()
-        }
-    };
+    // const validPassword = (rule: any, value: string, callback: any) => {
+    //     const reg = /((?=.*[a-z])(?=.*\d)|(?=[a-z])(?=.*[#@!~%^&*])|(?=.*\d)(?=.*[#@!~%^&*]))[a-z\d#@!~%^&*]{8,12}/
+    //     if (!reg.test(value)) {
+    //         callback(new Error('密码组合错误'))
+    //     } else {
+    //         callback()
+    //     }
+    // };
     // 规则
     const loginRules = {
         username: [
@@ -95,7 +95,7 @@ export default () => {
                 trigger: "blur",
             },
             {
-                validator: validPassword,
+                // validator: validPassword,
                 trigger: "blur"
             }
         ],
@@ -105,7 +105,7 @@ export default () => {
         loginRules,  //登录规则
         codeMsg, //按钮文本
         disabled, //按钮状态
-        get_code, //返回点击事件
-        count_down
+        // get_code, //返回点击事件
+        // count_down
     }
 }

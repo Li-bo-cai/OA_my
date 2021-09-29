@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import usVuex from './utils/usVuex'
+
 
 import ElementPlus from 'element-plus'
 import '@/assets/css/element-variables.scss'
@@ -15,4 +17,5 @@ const app = createApp(App)
 app.use(ElementPlus, { zIndex: 3000 })
 app.use(store)
 app.use(router)
+app.config.globalProperties.usVuex = usVuex;
 app.mount('#app')

@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router'
 import { constantRoutes } from './constantRoutes'
 import { asyncRoutes } from './asyncRoutes'
+import {useStore} from 'vuex'
+const store = useStore()
 
 // const routes = [...constantRoutes, ...asyncRoutes]
 
@@ -19,7 +21,7 @@ const router = createRouter({
 })
 
 // router.beforeEach((to, from, next) => {
-//   let token = storage.token
+//   const token = store.state.loginMoudle.token
 //   if (token) {
 //     next()
 //   } else {

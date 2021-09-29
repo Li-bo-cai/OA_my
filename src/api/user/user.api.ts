@@ -10,7 +10,7 @@ export interface insideLogin {
     account: number,
     password: string
 }
-export function login(params: insideLogin):Promise<AxiosResponse<any>> {
+export function login(params:insideLogin):Promise<AxiosResponse<any>> {
     return axios.post('/inside/login', params)
 }
 
@@ -18,8 +18,11 @@ export function login(params: insideLogin):Promise<AxiosResponse<any>> {
  * 获取验证码  /api/sms/get_phone_code
  * @returns 
  */
-export function get_phone_code():Promise<AxiosResponse<any>>{
-    return axios.post('/api/sms/get_phone_code')
+export interface insideKey{
+    key:number
+}
+export function get_phone_code(params:insideKey):Promise<AxiosResponse<any>>{
+    return axios.post('/api/sms/get_phone_code',params)
 }
 
 /**
