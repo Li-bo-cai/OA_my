@@ -15,7 +15,7 @@ import '@/assets/font/iconfont.css'
 
 const app = createApp(App)
 app.use(ElementPlus, { zIndex: 3000 })
-app.use(store)
 app.use(router)
+app.use(store)
 app.config.globalProperties.usVuex = usVuex;
 app.mount('#app')

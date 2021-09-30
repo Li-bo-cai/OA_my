@@ -102,7 +102,6 @@
 <script lang="ts">
 import homefunc from "./Home";
 import { defineComponent } from "@vue/runtime-core";
-import { polymerization, message_todo } from "@/api/home/home.api";
 import { ref } from "vue";
 
 export default defineComponent({
@@ -117,13 +116,6 @@ export default defineComponent({
     let showVive4_1 = ref<boolean>(false);
     let showVive5 = ref<boolean>(false);
     let showVive5_1 = ref<boolean>(false);
-
-    // const homeInfo = polymerization().then((res: any) => {
-    //   console.log(res);
-    // });
-    const messageTodo = message_todo().then((res: any) => {
-      console.log(res);
-    });
     return {
       homefunc,
     };

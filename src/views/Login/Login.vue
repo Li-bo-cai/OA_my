@@ -38,7 +38,7 @@
           <!-- 账号 -->
           <el-form-item prop="username" class="form_item">
             <img src="@/assets/images/user.png" alt="">
-            <el-input v-model="forgetForm.key" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
+            <el-input v-model="forgetForm.account" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
           </el-form-item>
           <!-- 验证码 -->
           <el-form-item prop="code" class="form_item">
@@ -67,6 +67,7 @@ import { defineComponent, getCurrentInstance, reactive, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import loginRules from "./loginRuls";
+import { ElMessage } from "element-plus";
 export default defineComponent({
   setup() {
     // 获取输入数据
@@ -84,12 +85,12 @@ export default defineComponent({
 
     // 定义忘记密码数据
     interface insideforget {
-      key: string;
+      account: string;
       phone_code: string;
       pass: string;
     }
     const forgetForm: insideforget = reactive({
-      key: "",
+      account: "",
       phone_code: "",
       pass: "",
     });
@@ -108,13 +109,17 @@ export default defineComponent({
     // 点击登录
     const handleLogin = async () => {
       await usVuex.useActions("loginMoudle", "GET_LOGIN", loginForm);
-      // router.push({
-      //   path: "/",
-      // });
+      router.push({
+        path: "/",
+      });
     };
     // 获取验证码
     const get_code = () => {
-      usVuex.useActions("loginMoudle", "GET_PHONE_CODE");
+      if (forgetForm.account) {
+        usVuex.useActions("loginMoudle", "GET_PHONE_CODE", forgetForm.account);
+      } else {
+        ElMessage.error("请先输入手机号或员工信息");
+      }
     };
 
     return {

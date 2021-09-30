@@ -32,8 +32,9 @@ const loginMoudle: Module<ICountState, IRootState> ={
     },
     actions:{
         // 获取验证码
-        GET_PHONE_CODE({state}){
-            get_phone_code().then((res:any)=>{
+        GET_PHONE_CODE({state},code_key){
+            const {key} = code_key
+            get_phone_code({key}).then((res:any)=>{
                 if(res.code==1){
                     const timer = setInterval(() => {
                         if (state.time > 1) {

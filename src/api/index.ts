@@ -1,7 +1,5 @@
 import axios from 'axios'
 import { ElMessageBox, ElMessage } from 'element-plus'
-import { useStore } from 'vuex';
-const store = useStore()
 
 const pending:any[]=[]; //声明一个数组用于存储每个ajax请求的取消函数和ajax标识
 // const CancelToken:any = axios.CancelToken
@@ -30,7 +28,6 @@ const instance = axios.create({
     baseURL:'/api',
     timeout: 20 * 1000
 })
-
 // 添加请求拦截器
 instance.interceptors.request.use( config => {
     //neverCancel  允许多个请求
@@ -40,9 +37,8 @@ instance.interceptors.request.use( config => {
     //     })
     // }
     // 在发送请求之前做些什么
-    if (sessionStorage.getItem('Admin Token')) {
-        const token = store.state.loginMoudle.token
-        // const token = sessionStorage.getItem('Admin Token')
+    if (sessionStorage.getItem('Token')) {
+        const token = sessionStorage.getItem('Token')
         config.headers['Authorization'] = `Bearer ${token}`
     }
     return config
@@ -66,9 +62,8 @@ instance.interceptors.response.use(response => {
                 cancelButtonText: '取消',
                 type: 'error'
               }).then(() => {
-                store.dispatch('loginMoudle/GET_CLEAR_TOKEN')
-                // sessionStorage.setItem('Admin Token','')
-                // location.reload()
+                sessionStorage.setItem('Token','')
+                location.reload()
               }) 
         }
     }else{

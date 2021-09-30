@@ -1,8 +1,9 @@
-import { createStore } from 'vuex'
+import { useStore as baseUseStore, createStore } from 'vuex'
 import loginMoudle from './modules/login'
+import homeMoudle from './modules/home'
 
 
-export default createStore({
+export const store = createStore({
   state: {
   },
   mutations: {
@@ -11,5 +12,8 @@ export default createStore({
   },
   modules: {
     loginMoudle,//登录模块
+    homeMoudle, //首页模块
   }
 })
+
+export default store

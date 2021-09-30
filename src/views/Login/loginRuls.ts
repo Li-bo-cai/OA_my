@@ -50,7 +50,7 @@ export default () => {
     // };
     // 规则
     const loginRules = {
-        username: [
+        account: [
             {
                 required: true,
                 message: "手机号/用户工号不能为空",

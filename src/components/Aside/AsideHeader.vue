@@ -28,18 +28,43 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
 import Popup from "./compontent/Popup.vue";
-
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  onMounted,
+  reactive,
+} from "vue";
+import { useStore } from "vuex";
 export default defineComponent({
   components: {
     Popup,
   },
   setup() {
-    const showPoup = ref<boolean>(false);
+    const { proxy }: any = getCurrentInstance();
+    const usVuex = proxy.usVuex;
+    const store = useStore();
+    console.log(store);
 
+    const showHeadUpload = () => {
+      console.log(123);
+    };
+    let self_message = reactive({});
+
+    self_message = computed(() => {
+      console.log("我先运行了");
+      return usVuex.useState("homeMoudle", "self_message");
+    });
+    console.log(self_message);
+
+    onMounted(() => {
+      usVuex.useActions("homeMoudle", "GET_USER_INFO");
+      // usVuex.useActions("homeMoudle", "GET_WORK_TODO");
+    });
     return {
-      showPoup,
+      self_message,
+      showHeadUpload,
     };
   },
 });
@@ -48,7 +73,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .userInfo {
   display: flex;
-    justify-content: space-around;
+  justify-content: space-around;
   margin: 40px 0px 35px 20px;
   .userImg {
     .imgUrl {
