@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="home">
     <div class="header">
       <p>渝万传媒OA云办公系统 V1.0</p>
-      <p class="header_name"><span>今天是我们相伴的第 {{ so_time }} 天，感谢我们共同成长。</span></p>
+      <p class="header_name"><span>今天是我们相伴的第 {{ myTime }} 天，感谢我们共同成长。</span></p>
     </div>
 
     <div class="content_used">
@@ -15,7 +15,7 @@
           <p>我的考勤</p>
         </div>
         <div class="content_used_fist">
-          <div class="function2" @click="leave_application">
+          <div class="function2" @click="leave_request">
             <img src="../../assets/images/qingjia@2x.png" alt="" />
           </div>
           <p>请假申请</p>
@@ -31,31 +31,36 @@
 
     <div class="content_used_work">
       <div class="content_used_dispose">
-        <p class="tit" @click="get_pending_work">待处理工作
-          <span v-if="stayHandle_count!==0" class="circular" @click="get_pending_work">{{ stayHandle_count }}</span>
+        <p class="tit">待处理工作
+          <span v-if="work_todo.count" class="circular" @click="get_pending_work">{{ work_todo.count }}</span>
         </p>
-        <p v-if="showVive2_1" style="color: #999">暂无待处理工作</p>
-        <div class="dispose" v-for="item in stayHandle" :key="item.id">
-          <div class="dispose1">
-            <p>{{ item.message }}</p>
-            <p>{{ item.created_at}}</p>
+        <p v-if="!work_todo.count" style="color: #999">暂无待处理工作</p>
+        <template v-else>
+          <div class="dispose" v-for="item in work_todo" :key="item.id">
+            <div class="dispose1">
+              <p>{{ item.message }}</p>
+              <p>{{ item.created_at}}</p>
+            </div>
+            <div class="dispose2">
+              <p @click="go_handle(item)">去处理 ></p>
+            </div>
           </div>
-          <div class="dispose2">
-            <div @click="go_handle(item)">去处理 ></div>
-          </div>
-        </div>
-        <div v-if="showVive2" class="more more_work" @click="get_pending_work">···</div>
+          <div v-if="showVive2" class="more more_work" @click="get_pending_work">···</div>
+        </template>
       </div>
       <div class="content_used_announcement">
-        <p class="tit">企业公告</p>
-        <p v-if="showVive3_1" style="color: #999">暂无企业公告</p>
+        <p class="tit">公司公告</p>
+        <p v-if="notice&&notice.length==0" style="color: #999">暂无公司公告</p>
         <div class="announcement" v-for="item in notice" :key="item.id">
           <div class="announcement1">
-            <p>{{ item.title }}</p>
+            <p>{{ item.title}}</p>
             <p>{{ item.release_time}}</p>
           </div>
           <div class="announcement2">
-            <div @click="go_notice(item)"> ></div>
+            <!-- <el-icon size="20" color="#5777E7" @click="go_notice(item)">
+              <arrow-right-bold />
+            </el-icon> -->
+            <p @click="go_notice(item)"> ></p>
           </div>
         </div>
         <div v-if="showVive3" class="more more_work" @click="go_notice_page">···</div>
@@ -64,66 +69,72 @@
 
     <div class="content_job">
       <p class="tit">文件资源中心</p>
-      <p v-if="showVive4_1" style="color: #999">暂无入职必读</p>
-
-      <div class="job" v-for="item in document" :key="item.id">
-        <div class="icon" @click="go_document(item)">
+      <p v-if="word_file&&word_file.length==0" style="color: #999">暂无入职必读</p>
+      <div class="job">
+        <div class="job_detail" v-for="item in word_file" :key="item.id" @click="go_document(item)">
           <img src="../../assets/images/world@2x.png" alt="" />
-        </div>
-        <div class="text" @click="go_document(item)">
-          <p>{{ item.file_name }}</p>
-          <p>{{ item.file_name }}</p>
+          <div class="text">
+            <p>{{ item.file_name }}</p>
+          </div>
         </div>
       </div>
-
       <div v-if="showVive4" class="more" @click="go_document_page">···</div>
     </div>
 
     <div class="content_dynamic">
       <p class="tit">集团动态</p>
-      <p v-if="showVive5_1" style="color: #999">暂无集团动态</p>
-
-      <div class="dynamic" v-for="item in dynamic" :key="item.id">
-        <div class="icon" @click="go_dynamic_page(item)">
+      <p v-if="dynamic&&dynamic.length==0" style="color: #999">暂无集团动态</p>
+      <div class="dynamic">
+        <div class="dynamic_detail" v-for="item in dynamic" :key="item.id" @click="go_dynamic(item)">
           <img :src="item.title_picture" alt="" />
-        </div>
-        <div class="text" @click="go_dynamic_page(item)">
-          <p>{{ item.title[0] }}</p>
-          <p>{{ item.release_time}}</p>
-          <p v-html="item.content"> </p>
+          <div class="text">
+            <p>{{item.title[0]}}</p>
+            <p>{{item.release_time}}</p>
+            <p>{{item.title[1]}}</p>
+          </div>
         </div>
       </div>
 
     </div>
-    <div v-if="showVive5" class="more" @click="go_dynamic">···</div>
+    <div v-if="showVive5" class="more" @click="go_dynamic_page">···</div>
   </div>
 </template>
 
 <script lang="ts">
 import homefunc from "./Home";
-import { defineComponent } from "@vue/runtime-core";
-import { ref } from "vue";
-
+import { computed, defineComponent, toRefs } from "@vue/runtime-core";
+import { getCurrentInstance, onBeforeMount, onMounted } from "vue";
 export default defineComponent({
   setup() {
-    let dialogVisible = ref<boolean>(false);
-    let showVive = ref<boolean>(false);
-    let showVive2 = ref<boolean>(false);
-    let showVive2_1 = ref<boolean>(false);
-    let showVive3 = ref<boolean>(false);
-    let showVive3_1 = ref<boolean>(false);
-    let showVive4 = ref<boolean>(false);
-    let showVive4_1 = ref<boolean>(false);
-    let showVive5 = ref<boolean>(false);
-    let showVive5_1 = ref<boolean>(false);
+    const { proxy }: any = getCurrentInstance();
+    const usVuex = proxy.usVuex;
+    onMounted(() => {
+      console.log("我刷新了");
+      usVuex.useActions("homeMoudle", "GET_USER_INFO");
+      usVuex.useActions("homeMoudle", "GET_WORK_TODO");
+    });
+    // 从仓库获取所有模块下的变量
+    let all = computed(() => {
+      return usVuex.useState("homeMoudle");
+    });
+    const { myTime, dynamic, notice, word_file, work_todo } = toRefs(all.value);
+
     return {
-      homefunc,
+      ...homefunc(), //方法调用
+      myTime,
+      dynamic,
+      notice,
+      word_file,
+      work_todo, //所有数据
     };
   },
 });
 </script>
 
 <style scoped lang="scss">
+.home {
+  padding-right: 66px;
+}
 .header {
   p:nth-of-type(1) {
     color: #969699;
@@ -183,12 +194,6 @@ export default defineComponent({
   display: flex;
   .content_used_dispose {
     flex: 1;
-    .tit {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 30px;
-      cursor: pointer;
-    }
     .circular {
       display: inline-block;
       width: 34px;
@@ -222,7 +227,7 @@ export default defineComponent({
       }
       .dispose2 {
         margin-right: 50px;
-        div {
+        p {
           font-weight: 400;
           color: #5777e7;
           cursor: pointer;
@@ -232,18 +237,16 @@ export default defineComponent({
   }
 
   .content_used_announcement {
-    position: relative;
+    // position: relative;
     flex: 1;
-    .tit {
-      font-size: 20px;
-      font-weight: 600;
-    }
     .announcement {
-      width: 580px;
       display: flex;
       justify-content: space-between;
-
+      border-bottom: 1px solid #edeef2;
       .announcement1 {
+        p {
+          margin-bottom: 14px;
+        }
         p:nth-child(1) {
           font-weight: 400;
           overflow: hidden;
@@ -257,11 +260,15 @@ export default defineComponent({
         }
       }
       .announcement2 {
-        margin-right: 50px;
-        div {
-          margin-top: 13px;
+        width: 30px;
+        height: 30px;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 5px;
+        p {
           color: #5777e7;
           cursor: pointer;
+          text-align: center;
+          line-height: 30px;
         }
       }
     }
@@ -278,101 +285,93 @@ export default defineComponent({
   border-radius: 5px;
   cursor: pointer;
 }
-
+.tit {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  // cursor: pointer;
+}
 .content_job {
   margin-bottom: 55px;
-  .tit {
-    height: 52px;
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 30px;
-  }
   .job {
-    width: 20%;
-    float: left;
     display: flex;
-    margin-right: 40px;
-    .icon {
-      margin-right: 16px;
+    .job_detail {
+      display: flex;
+      width: 20%;
+      cursor: pointer;
       img {
         width: 48px;
         height: 52px;
         border-radius: 6px;
-        cursor: pointer;
+        margin-right: 16px;
       }
-    }
-    .text {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      p:nth-child(1) {
-        width: 100px;
-        font-weight: 600;
-        cursor: pointer;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-      p:nth-child(2) {
-        width: 160px;
-        font-weight: bold;
-        color: #969699;
-        cursor: pointer;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+      .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        p:nth-child(1) {
+          width: 100px;
+          font-weight: 600;
+          cursor: pointer;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        p:nth-child(2) {
+          width: 160px;
+          font-weight: bold;
+          color: #969699;
+          cursor: pointer;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
     }
   }
 }
 
 .content_dynamic {
-  .tit {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 30px;
-  }
-
   .dynamic {
-    width: 30%;
     display: flex;
     flex-wrap: wrap;
-    margin-right: 30px;
-    .icon {
+    .dynamic_detail {
+      display: flex;
+      width: 33%;
+      margin-bottom: 30px;
       cursor: pointer;
-      margin-right: 20px;
       img {
         width: 72px;
         height: 72px;
         border-radius: 20px;
-      }
-    }
-    .text {
-      cursor: pointer;
-      width: 70%;
-      p:nth-child(1) {
-        margin: 8px 0 6px 0;
-        font-weight: 600;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        margin-right: 20px;
       }
 
-      p:nth-child(2) {
-        margin: 8px 0 6px 0;
-        font-size: 14px;
-        font-weight: 400;
-        color: #969699;
-      }
-
-      p:nth-child(3) {
-        margin: 8px 0 6px 0;
-        font-size: 14px;
-        font-weight: 400;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
+      .text {
+        cursor: pointer;
+        width: 70%;
+        p:nth-child(1) {
+          margin: 8px 0 6px 0;
+          font-weight: 600;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        p:nth-child(2) {
+          margin: 8px 0 6px 0;
+          font-size: 14px;
+          font-weight: 400;
+          color: #969699;
+        }
+        p:nth-child(3) {
+          margin: 8px 0 6px 0;
+          font-size: 14px;
+          font-weight: 400;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+        }
       }
     }
   }

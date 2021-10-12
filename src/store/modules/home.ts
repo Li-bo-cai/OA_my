@@ -6,6 +6,8 @@ interface ICountState {
     notice:any,
     word_file:any,
     work_todo:any,
+    myTime:number,
+    num:number
 }
 interface IRootState {
     [key: string]: any
@@ -19,14 +21,16 @@ const homeMoudle :Module<ICountState,IRootState>={
             notice:'', //公司公告
             word_file:'',  //文件资源中心
             work_todo:'',  //待处理事件
+            myTime:0,//时间
+            num:0, //加载次数
         }
     },
     getters:{
-
     },
     mutations:{
         // 设置个人信息
         SET_SELF_MESSAGE(state,payload){
+            state.num = 1;
             state.self_message = payload
         },
         // 设置集团动态
@@ -41,6 +45,10 @@ const homeMoudle :Module<ICountState,IRootState>={
         SET_WORK_FILE(state,payload){
             state.word_file = payload
         },
+        //设置工作时间
+        SET_MY_TIME(state,payload){
+            state.myTime = payload
+        },
         // 设置待处理事件
         SET_WORK_TODO(state,payload){
             state.work_todo = payload
@@ -54,15 +62,16 @@ const homeMoudle :Module<ICountState,IRootState>={
                     commit('SET_SELF_MESSAGE',res.data.data.self_message)
                     commit('SET_DYNAMIC',res.data.data.dynamic)
                     commit('SET_NOTICE',res.data.data.notice)
-                    commit('SET_WORK_FILE',res.data.data.work_file)
-                    console.log(res);
+                    commit('SET_WORK_FILE',res.data.data.word_file)
+                    commit('SET_MY_TIME',res.data.data.myTime)
+                    // console.log(res);
                 }
             })
         },
         // 获取待处理
         GET_WORK_TODO({commit}){
             message_todo().then((res:any)=>{
-                console.log(res);
+                // console.log(res);
                 if(res.data.code == 1){
                     commit('SET_WORK_TODO',res.data)
                 }

@@ -1,9 +1,9 @@
 <template>
-  <div v-if="!route.meta.hasChild" class="title_bread_only">
+  <div v-if="!route.meta.breadCrub" class="title_bread_only">
     <span>{{ route.meta.title }}</span>
   </div>
 
-  <div v-if="route.meta.hasChild" class="title_bread">
+  <div v-if="route.meta.breadCrub" class="title_bread">
     <el-breadcrumb separator-class="el-icon-arrow-right" class="o-breadcrumb">
       <el-breadcrumb-item v-for="route in breadList" :key="route.path" separator="/" :to="route.path">{{ route.meta.title }}</el-breadcrumb-item>
     </el-breadcrumb>

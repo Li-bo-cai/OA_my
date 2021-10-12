@@ -12,7 +12,6 @@ import '@/assets/css/common.scss'
 import '@/assets/css/index.scss'
 import '@/assets/font/iconfont.css'
 
-
 const app = createApp(App)
 app.use(ElementPlus, { zIndex: 3000 })
 app.use(router)

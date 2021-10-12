@@ -3,15 +3,15 @@
     <!-- 用户信息 -->
     <div class="userInfo">
       <div class="userImg">
-        <img class="imgUrl" :src="require('@/assets/images/Logo.png')" alt="" />
+        <img class="imgUrl" :src="self_message.staff_picture?self_message.staff_picture:require('@/assets/images/Logo.png')" />
         <div class="imgZ" @click="showHeadUpload">修改头像</div>
         <!-- <HeadUpload class="uploadImg" v-model="dialogVisible" /> -->
       </div>
       <div class="editarea">
         <div class="userTxt">
-          <p>看，灰机~</p>
-          <p>888888880</p>
-          <p>技术部</p>
+          <p>{{self_message.name}}</p>
+          <p>{{self_message.number}}</p>
+          <p>{{self_message.department}}</p>
         </div>
         <div class="zankai_img">
           <img style="width:14px;height:14px;margin-top:20px" src="@/assets/images/zankai.png" alt="">
@@ -34,9 +34,8 @@ import {
   defineComponent,
   getCurrentInstance,
   onMounted,
-  reactive,
+  ref,
 } from "vue";
-import { useStore } from "vuex";
 export default defineComponent({
   components: {
     Popup,
@@ -44,26 +43,29 @@ export default defineComponent({
   setup() {
     const { proxy }: any = getCurrentInstance();
     const usVuex = proxy.usVuex;
-    const store = useStore();
-    console.log(store);
 
+    let dialogVisible = ref<boolean>(false);
+    // 修改头像事件
     const showHeadUpload = () => {
       console.log(123);
     };
-    let self_message = reactive({});
 
-    self_message = computed(() => {
-      console.log("我先运行了");
-      return usVuex.useState("homeMoudle", "self_message");
-    });
-    console.log(self_message);
-
+    // 从仓库获取当前状态值  为0时首页不刷新 为1时首页刷新
+    // const num = computed(() => {
+    //   return usVuex.useState("homeMoudle", "num");
+    // });
     onMounted(() => {
       usVuex.useActions("homeMoudle", "GET_USER_INFO");
-      // usVuex.useActions("homeMoudle", "GET_WORK_TODO");
+    });
+    /**
+     *  注意此处是否需要响应式绑定  这里暂没用上
+     */
+    let self_message = computed(() => {
+      return usVuex.useState("homeMoudle", "self_message");
     });
     return {
-      self_message,
+      dialogVisible, //弹窗
+      self_message, //个人信息
       showHeadUpload,
     };
   },

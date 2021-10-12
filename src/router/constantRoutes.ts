@@ -7,7 +7,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         name: 'Home',
         component: ()=>import('@/views/Layout/Layout.vue'),
         redirect: '/home',
-        meta: { title: '首页', icon: 'sell-a-01', hasChild: false },
+        meta: { title: '首页', icon: 'sell-a-01', hasChild: false, breadCrub: true },
         children: [
             {
                 path: 'home',
@@ -20,7 +20,41 @@ export const constantRoutes: Array<RouteRecordRaw> = [
                 component:()=>import('../views/UserInfo/UserInfo.vue'),
                 name:'userInfo',
                 meta:{title:'用户信息'}
-            }
+            },
+            {
+                path:'my-attendance',
+                component:()=>import('../views/Attendance/MyAttendance.vue'),
+                name:'my-attendance',
+                meta:{title:'我的考勤', breadCrub: true },
+                children:[
+                    {
+                        path:'attendancep-list',
+                        component:()=>import('../views/Attendance/AttendanceList.vue'),
+                        name:'attendancep-list',
+                        meta:{title:'修正列表'}
+                    },
+                ]
+            },
+            {
+                path:'PendingWork',
+                component:()=>import('../views/Pending/PendingWork.vue'),
+                name:'PendingWork',
+                meta:{title:'待处理的工作', breadCrub: true },
+                children:[
+                    {
+                        path:'ToPending',
+                        component:()=>import('../views/Pending/ToPending.vue'),
+                        name:'ToPending',
+                        meta:{title:'去处理'}
+                    },
+                ]
+            },
+            {
+                path:'leave_request',
+                component:()=>import('../views/Leave/LeaveRequest.vue'),
+                name:'leave_request',
+                meta:{title:'请假申请'}
+            },
         ]
     },
     {

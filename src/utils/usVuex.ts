@@ -1,29 +1,28 @@
-// import store from '../store'
-import { useStore } from "vuex";
-// const store = useStore();
+import store from '../store'
+const stores:any = store
 
 // State方法
 const useState = function (moudleName: string, mapper: string):void {
-    const store = useStore();
-    return store.state[moudleName][mapper];
+    if(mapper){
+        return stores.state[moudleName][mapper];
+    }else{
+        return stores.state[moudleName]
+    }
 }
 
 // Getters方法
 const useGetters = function (nameModule: string, mapper: string):void {
-    const store = useStore();
-    return store.getters[nameModule + '/' + mapper]
+    return stores.getters[nameModule + '/' + mapper]
 }
 
 // Mutsations方法
 const useMutations = function (nameModule: string, mapper: string, payload: any):void {
-    const store = useStore();
-    return store.commit(`${nameModule}/${mapper}`, payload)
+    return stores.commit(`${nameModule}/${mapper}`, payload)
 }
 
 //Actions方法
 const useActions = function (nameModule: string, mapper: string,payload: any):Promise<any> {
-    const store = useStore();
-    return store.dispatch(`${nameModule}/${mapper}`,payload)
+    return stores.dispatch(`${nameModule}/${mapper}`,payload)
 }
 
 export default {

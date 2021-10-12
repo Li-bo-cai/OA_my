@@ -9,6 +9,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
         title: '集团组织架构管理',
         icon: 'sell-a-02',
         hasChild: false,
+        breadCrub: false
     },
     children: [
         {
@@ -24,7 +25,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     path: '/personnelMatters',
     component: ()=>import('@/views/Layout/Layout.vue'),
     redirect: '/personnelMatters/post-manage',
-    meta: { title: '人事管理', icon: 'sell-a-03', hasChild: true, },
+    meta: { title: '人事管理', icon: 'sell-a-03', hasChild: true, breadCrub: true },
     children: [
         {
             path: 'post-manage',
@@ -56,7 +57,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     path: '/external',
     component: ()=>import('@/views/Layout/Layout.vue'),
     redirect: '/external/external-manage',
-    meta: { title: '外部资源管理', icon: 'sell-a-04', hasChild: false },
+    meta: { title: '外部资源管理', icon: 'sell-a-04', hasChild: false, breadCrub: false },
     children: [
         {
             path: 'external-manage',
@@ -71,7 +72,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     path: '/companyAnnounce',
     component: ()=>import('@/views/Layout/Layout.vue'),
     redirect: '/companyAnnounce/company-list',
-    meta: { title: '公司公告', icon: 'sell-a-05', hasChild: false },
+    meta: { title: '公司公告', icon: 'sell-a-05', hasChild: false, breadCrub: false },
     children: [
         {
             path: 'company-list',
@@ -86,7 +87,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     path: '/groupDynamics',
     component: ()=>import('@/views/Layout/Layout.vue'),
     redirect: '/groupDynamics/dynamics-list',
-    meta: { title: '集团动态', icon: 'sell-a-06', hasChild: false },
+    meta: { title: '集团动态', icon: 'sell-a-06', hasChild: false, breadCrub: false },
     children: [
         {
             path: 'dynamics-list',
@@ -101,7 +102,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     path: '/document',
     component: ()=>import('@/views/Layout/Layout.vue'),
     redirect: '/document/document-list',
-    meta: { title: '文档中心', icon: 'sell-a-07', hasChild: false },
+    meta: { title: '文档中心', icon: 'sell-a-07', hasChild: false, breadCrub: false },
     children: [
         {
             path: 'document-list',
@@ -116,7 +117,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     path: '/message',
     component: ()=>import('@/views/Layout/Layout.vue'),
     redirect: '/message/message-center',
-    meta: { title: '消息中心', icon: 'sell-a-08', hasChild: false },
+    meta: { title: '消息中心', icon: 'sell-a-08', hasChild: false, breadCrub: false },
     children: [
         {
             path: 'message-center',
