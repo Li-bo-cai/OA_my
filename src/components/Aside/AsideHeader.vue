@@ -52,16 +52,16 @@ export default defineComponent({
 
     // 从仓库获取当前状态值  为0时首页不刷新 为1时首页刷新
     // const num = computed(() => {
-    //   return usVuex.useState("homeMoudle", "num");
+    //   return usVuex.useState("homeModule", "num");
     // });
     onMounted(() => {
-      usVuex.useActions("homeMoudle", "GET_USER_INFO");
+      usVuex.useActions("homeModule", "GET_USER_INFO");
     });
     /**
      *  注意此处是否需要响应式绑定  这里暂没用上
      */
     let self_message = computed(() => {
-      return usVuex.useState("homeMoudle", "self_message");
+      return usVuex.useState("homeModule", "self_message");
     });
     return {
       dialogVisible, //弹窗

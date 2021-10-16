@@ -9,7 +9,7 @@ interface IRootState {
     [key: string]: any
 }
 
-const loginMoudle: Module<ICountState, IRootState> ={
+const loginModule: Module<ICountState, IRootState> ={
     namespaced:true,
     state() {
         return{
@@ -66,4 +66,4 @@ const loginMoudle: Module<ICountState, IRootState> ={
         }
     },
 }
-export default loginMoudle
+export default loginModule

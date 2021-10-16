@@ -56,6 +56,8 @@
           <div class="form_col">
             <el-form-item label="所属部门：">运营部</el-form-item>
             <el-form-item label="岗位名称：">运营专员</el-form-item>
+            <el-form-item label="岗位职级：">p10</el-form-item>
+            <el-form-item label="短号：">9527</el-form-item>
           </div>
           <div class="form_col">
             <el-form-item label="入职时间：">2021-02-23</el-form-item>

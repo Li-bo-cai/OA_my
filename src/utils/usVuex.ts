@@ -2,11 +2,11 @@ import store from '../store'
 const stores:any = store
 
 // State方法
-const useState = function (moudleName: string, mapper: string):void {
+const useState = function (ModuleName: string, mapper: string):void {
     if(mapper){
-        return stores.state[moudleName][mapper];
+        return stores.state[ModuleName][mapper];
     }else{
-        return stores.state[moudleName]
+        return stores.state[ModuleName]
     }
 }
 

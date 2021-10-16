@@ -1,7 +1,7 @@
 import { useStore as baseUseStore, createStore } from 'vuex'
-import loginMoudle from './modules/login'
-import homeMoudle from './modules/home'
-import organzationMoudle from './modules/organization'
+import loginModule from './modules/login'
+import homeModule from './modules/home'
+import organzationModule from './modules/organization'
 
 export const store = createStore({
   state: {
@@ -11,9 +11,9 @@ export const store = createStore({
   actions: {
   },
   modules: {
-    loginMoudle,//登录模块
-    homeMoudle, //首页模块
-    organzationMoudle,//集团组织架构
+    loginModule,//登录模块
+    homeModule, //首页模块
+    organzationModule,//集团组织架构
   }
 })
 

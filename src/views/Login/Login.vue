@@ -108,7 +108,7 @@ export default defineComponent({
     };
     // 点击登录
     const handleLogin = async () => {
-      await usVuex.useActions("loginMoudle", "GET_LOGIN", loginForm);
+      await usVuex.useActions("loginModule", "GET_LOGIN", loginForm);
       router.push({
         path: "/",
       });
@@ -116,7 +116,7 @@ export default defineComponent({
     // 获取验证码
     const get_code = () => {
       if (forgetForm.account) {
-        usVuex.useActions("loginMoudle", "GET_PHONE_CODE", forgetForm.account);
+        usVuex.useActions("loginModule", "GET_PHONE_CODE", forgetForm.account);
       } else {
         ElMessage.error("请先输入手机号或员工信息");
       }

@@ -17,7 +17,5 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-    // .el-pagination{
-    //     background: rgb(243, 243, 243);
-    // }
+
 </style>

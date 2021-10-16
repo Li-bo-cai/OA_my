@@ -103,19 +103,19 @@
 <script lang="ts">
 import homefunc from "./Home";
 import { computed, defineComponent, toRefs } from "@vue/runtime-core";
-import { getCurrentInstance, onBeforeMount, onMounted } from "vue";
+import { getCurrentInstance, onMounted } from "vue";
 export default defineComponent({
   setup() {
     const { proxy }: any = getCurrentInstance();
     const usVuex = proxy.usVuex;
     onMounted(() => {
       console.log("我刷新了");
-      usVuex.useActions("homeMoudle", "GET_USER_INFO");
-      usVuex.useActions("homeMoudle", "GET_WORK_TODO");
+      usVuex.useActions("homeModule", "GET_USER_INFO");
+      usVuex.useActions("homeModule", "GET_WORK_TODO");
     });
     // 从仓库获取所有模块下的变量
     let all = computed(() => {
-      return usVuex.useState("homeMoudle");
+      return usVuex.useState("homeModule");
     });
     const { myTime, dynamic, notice, word_file, work_todo } = toRefs(all.value);
 
