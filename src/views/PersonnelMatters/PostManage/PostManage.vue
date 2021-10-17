@@ -28,14 +28,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, getCurrentInstance, onMounted } from "vue";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb.vue";
+import { mapState } from "vuex";
 export default defineComponent({
   components: {
     Breadcrumb,
   },
+  computed: {
 
+  },
   setup() {
+    const { proxy }: any = getCurrentInstance();
+    const usVuex = proxy.usVuex;
+    const tableData: any = [];
+    onMounted(() => {
+      // usVuex.useMutations("postModule", "GET_NAME", "王五");
+      // usVuex.useActions("postModule", "SET_NAME");
+    });
     const handleEdit = (item: any) => {
       console.log(123);
     };

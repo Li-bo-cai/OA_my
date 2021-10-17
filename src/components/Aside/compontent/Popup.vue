@@ -17,12 +17,14 @@
 
   <!-- 退出登录提示框 -->
   <template>
-    <el-dialog append-to-body v-model="dialog" width="373px">
-      <div class="dialog_tit_tit">是否退出登录?</div>
-      <div class="dialog-footer_btn">
-        <el-button @click="dialog = false">取 消</el-button>
-        <el-button type="primary" @click="logout">确 定</el-button>
-      </div>
+    <el-dialog append-to-body v-model="dialog" width="373px" center>
+      <span class="dialog_tit_tit">是否退出登录?</span>
+      <template #footer>
+        <span class="dialog_footer_btn">
+          <el-button @click="dialog = false">取 消</el-button>
+          <el-button type="primary" @click="logout">确 定</el-button>
+        </span>
+      </template>
     </el-dialog>
   </template>
   <!-- 安全中心提示框 -->
@@ -40,8 +42,7 @@
         <el-input show-password type="text" onfocus="this.type='password'" autocomplete="off" placeholder="请输入新密码" v-model="input1" @input="passwordInput"></el-input>
       </div>
       <div class="bulletin">
-        <p class="bulletin_text">密码为8-16位大小写字母、特殊符号等字符、数字至少两种组合，
-          不可包含空格、中文</p>
+        <p class="bulletin_text">密码为8-16位大小写字母、数字、特殊符号至少两种 组合，不可包含空格、中文等字符。</p>
       </div>
       <template #footer>
         <span class="dialog-footer">
@@ -59,17 +60,17 @@ import { useRouter } from "vue-router";
 
 export default defineComponent({
   setup() {
-    const router = useRouter()
+    const router = useRouter();
     const dialog = ref<boolean>(false);
     const dialog1 = ref<boolean>(false);
 
     const editInfo = () => {
-      router.push('/userInfo')
+      router.push("/userInfo");
     };
     return {
       dialog,
       dialog1,
-      editInfo
+      editInfo,
     };
   },
 });
@@ -102,33 +103,29 @@ export default defineComponent({
     color: #323233;
   }
 }
-
 .dialog_tit_tit {
+  display: block;
   text-align: center;
   font-size: 20px;
-  color: #2a2a2a;
-  font-weight: bold;
-  opacity: 0.8;
+  font-weight: 500;
 }
-
-.dialog-footer {
-  .el-button:nth-child(1) {
-    width: 120px;
-    height: 42px;
-    border: 1px solid #999;
-    border-radius: 5px;
-  }
-  .el-button:nth-child(2) {
-    width: 120px;
-    height: 42px;
-  }
-  .el-button:nth-child(1):hover {
-    background: #fff;
-    color: #000;
-    border: 1px solid #000;
-  }
-}
-
+// .dialog-footer {
+//   .el-button:nth-child(1) {
+//     width: 120px;
+//     height: 42px;
+//     border: 1px solid #999;
+//     border-radius: 5px;
+//   }
+//   .el-button:nth-child(2) {
+//     width: 120px;
+//     height: 42px;
+//   }
+//   .el-button:nth-child(1):hover {
+//     background: #fff;
+//     color: #000;
+//     border: 1px solid #000;
+//   }
+// }
 .input1_idx {
   display: flex;
   justify-content: center;

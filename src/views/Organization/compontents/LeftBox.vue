@@ -22,7 +22,11 @@ import {
   ref,
 } from "vue";
 import { insideCheck } from "@/api/organization/organization.api";
+import { mapState } from "vuex";
 export default defineComponent({
+  computed: {
+    ...mapState("organzationModule", ["tree"]), //获取部门公司树
+  },
   setup() {
     const { proxy }: any = getCurrentInstance();
     const usVuex = proxy.usVuex;
@@ -36,6 +40,10 @@ export default defineComponent({
     const switchImgUrl = ref("");
     const leaderText = ref("");
 
+    onMounted(() => {
+      usVuex.useActions("organzationModule", "GET_TREE");
+    });
+    
     const handleTreeClick = (data: any, node: any) => {
       leaderText.value = node.id;
       staffInfo.depart_id = node.data.id;
@@ -47,26 +55,17 @@ export default defineComponent({
       staffInfo.per_page = Info.value;
       usVuex.useMutations("organzationModule", "SET_DEPART_ID", node.data.id);
       usVuex.useMutations("organzationModule", "SET_PRINCIPAL", node.data.name);
-      usVuex.useMutations("organzationModule","SET_DEPART_name",node.data.depart_name);
+      usVuex.useMutations(
+        "organzationModule",
+        "SET_DEPART_name",
+        node.data.depart_name
+      );
       usVuex.useActions("organzationModule", "GET_STAFF", staffInfo);
     };
-
-    // 获取部门公司树
-    const tree = ref(
-      computed(() => {
-        return usVuex.useState("organzationModule", "tree");
-      })
-    );
-
-    onMounted(() => {
-      usVuex.useActions("organzationModule", "GET_TREE");
-    });
-
     const defaultProps = reactive({
       label: "depart_name",
       children: "children",
     });
-
     const openLayer = (item: any) => {
       console.log("123");
     };
@@ -74,7 +73,7 @@ export default defineComponent({
     return {
       leaderText,
       switchImgUrl,
-      tree,
+      // tree,
       defaultProps,
       handleTreeClick,
       openLayer,

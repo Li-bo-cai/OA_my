@@ -57,9 +57,6 @@
             <p>{{ item.release_time}}</p>
           </div>
           <div class="announcement2">
-            <!-- <el-icon size="20" color="#5777E7" @click="go_notice(item)">
-              <arrow-right-bold />
-            </el-icon> -->
             <p @click="go_notice(item)"> ></p>
           </div>
         </div>
@@ -187,7 +184,6 @@ export default defineComponent({
     }
   }
 }
-
 .content_used_work {
   margin-bottom: 55px;
   width: 100%;
@@ -206,7 +202,6 @@ export default defineComponent({
       line-height: 20px;
       cursor: pointer;
     }
-
     .dispose {
       display: flex;
       justify-content: space-between;
@@ -235,7 +230,6 @@ export default defineComponent({
       }
     }
   }
-
   .content_used_announcement {
     // position: relative;
     flex: 1;
@@ -274,7 +268,6 @@ export default defineComponent({
     }
   }
 }
-
 .more {
   width: 30px;
   height: 30px;
@@ -330,7 +323,6 @@ export default defineComponent({
     }
   }
 }
-
 .content_dynamic {
   .dynamic {
     display: flex;
@@ -346,7 +338,6 @@ export default defineComponent({
         border-radius: 20px;
         margin-right: 20px;
       }
-
       .text {
         cursor: pointer;
         width: 70%;

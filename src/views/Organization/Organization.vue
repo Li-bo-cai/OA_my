@@ -8,7 +8,7 @@
       <div class="left_box">
         <!-- 左上盒子 -->
         <div class="letf_top_box">
-          <el-button type="primary">新增公司</el-button>
+          <el-button type="primary" @click="showAddCompany=true">新增公司</el-button>
         </div>
         <!-- 左下盒子 -->
         <div class="left_botton_box">
@@ -34,12 +34,35 @@
         </div>
       </div>
     </div>
-    <Pagination />
+    <div class="origanization_footer">
+      <Pagination />
+    </div>
+    <el-dialog v-model="showAddCompany" width="548px">
+      <span class="dialog_tit_tit">新增公司</span>
+      <div class="dialog_body">
+        <div class="input_company">
+          <div><span style="color:red">*</span>公司名称</div>
+          <el-input placeholder="请输入公司名称"></el-input>
+        </div>
+        <div class="change_principal">
+          <div>负责人</div>
+          <el-autocomplete v-model="principal_state" :fetch-suggestions="querySearchAsync" placeholder="请输入负责人" @select="handleSelect" />
+        </div>
+        <div class="dialog_footer_btn">
+          <el-button type="primary" @click="logout">确 定</el-button>
+          <el-button @click="showAddCompany = false">取 消</el-button>
+        </div>
+      </div>
+      <div>
+
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, getCurrentInstance, ref } from "vue";
+import { defineComponent, getCurrentInstance, ref } from "vue";
+import { mapState } from "vuex";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb.vue";
 import Pagination from "../../components/Pagination/Pagination.vue";
 import LeftBox from "./compontents/LeftBox.vue";
@@ -51,23 +74,16 @@ export default defineComponent({
     LeftBox,
     RightBox,
   },
+  computed: {
+    ...mapState("organzationModule", ["principal", "depart_name"]),
+  },
   setup() {
     const { proxy }: any = getCurrentInstance();
     const usVuex = proxy.usVuex;
+    let showAddCompany = ref<boolean>(false); //展示新增公司弹窗
 
-    const principal = ref(
-      computed(() => {
-        return usVuex.useState("organzationModule", "principal");
-      })
-    );
-    const depart_name = ref(
-      computed(() => {
-        return usVuex.useState("organzationModule", "depart_name");
-      })
-    );
     return {
-      principal,
-      depart_name,
+      showAddCompany,
     };
   },
 });
@@ -111,6 +127,35 @@ export default defineComponent({
   }
   .left_botton_box {
     // border-bottom: 1px solid #edeef2;
+  }
+}
+::v-deep .el-dialog__body {
+  padding: 30px 38px;
+  padding-top: 0;
+}
+.dialog_tit_tit {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  padding-bottom: 25px;
+}
+.dialog_body {
+  .input_company,
+  .change_principal {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    & > div:first-child {
+      min-width: 72px;
+      margin-right: 20px;
+    }
+  }
+  .dialog_footer_btn {
+    display: flex;
+    flex-direction: row-reverse;
+    .el-button:nth-child(2){
+      margin-right: 20px;
+    }
   }
 }
 </style>

@@ -1,5 +1,4 @@
 import { ref } from "vue";
-import {  get_phone_code } from "../../api/user/user.api";
 
 // 自定义表单校验
 export default () => {
@@ -29,7 +28,6 @@ export default () => {
 //       });
 //       count_down();
 //     };
-
 
     // 自定义规则
     const allInput = (rule: any, value: string, callback: any) => {
@@ -105,7 +103,5 @@ export default () => {
         loginRules,  //登录规则
         codeMsg, //按钮文本
         disabled, //按钮状态
-        // get_code, //返回点击事件
-        // count_down
     }
 }
