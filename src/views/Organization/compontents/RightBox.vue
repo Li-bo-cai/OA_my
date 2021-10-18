@@ -20,7 +20,7 @@
       </el-table>
     </div>
     <div class="pagin_ation">
-      <el-pagination background :hide-on-single-page="true" :page-sizes="[10, 15, 20, 25]" :page-size="10" layout="total, prev, pager, next, sizes" :total="staff.total" @size-change="handleSizeChange" @current-change="handleCurrentChange">
+      <el-pagination background :hide-on-single-page="true" :page-sizes="[10, 15, 20, 25]" layout="total, prev, pager, next, sizes" :total="staff.total" @size-change="handleSizeChange" @current-change="handleCurrentChange">
       </el-pagination>
     </div>
 
@@ -53,7 +53,7 @@ export default defineComponent({
       usVuex.useMutations("organzationModule", "SET_PER_PAGE", num);
       usVuex.useActions("organzationModule", "GET_STAFF", {
         depart_id: depart_id.value,
-        page: page.value,
+        page: 1,
         per_page: num,
       });
     };
