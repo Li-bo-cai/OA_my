@@ -32,6 +32,6 @@ export default defineComponent({
   border-right: 2px solid #ccc;
 }
 .el-main {
-  padding: 30px;
+  padding: 36px 50px;
 }
 </style>

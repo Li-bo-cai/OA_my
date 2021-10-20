@@ -12,26 +12,32 @@
         <el-button>导出数据</el-button>
       </div>
       <!-- 搜索部分 -->
-      <el-form ref="form" :model="formSearch">
-        <div class="search">
-          <el-form-item label="搜索条件">
-            <el-input v-model="formSearch.name" placeholder="请输入员工姓名/工号"></el-input>
-          </el-form-item>
-          <el-form-item label="所属部门">
-            <el-input v-model="formSearch.name" placeholder="请输入员工姓名/工号"></el-input>
-          </el-form-item>
-          <el-form-item label="岗位">
-            <el-input v-model="formSearch.name" placeholder="请输入员工姓名/工号"></el-input>
-          </el-form-item>
-          <el-form-item label="状态">
-            <el-input v-model="formSearch.name" placeholder="请输入员工姓名/工号"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button>重置</el-button>
-            <el-button type="primary">筛选</el-button>
-          </el-form-item>
-        </div>
-      </el-form>
+      <div class="search_box">
+        <EmployeeSeach />
+      </div>
+      <!-- 表格部分 -->
+      <div class="table_box">
+        <el-table :data="employee_tableData" :stripe="true" empty-text="暂无数据">
+          <el-table-column label="序号" type="index" width="100" />
+          <el-table-column label="员工工号" prop="number" min-width="100" align="center" />
+          <el-table-column label="姓名" prop="name" min-width="126" align="center" />
+          <el-table-column label="性别" prop="gender_text" min-width="60" align="center" />
+          <el-table-column label="身份证号" prop="card" min-width="170" align="center" />
+          <el-table-column label="手机号" prop="phone" min-width="140" align="center" />
+          <el-table-column label="所属部门" prop="depart_name" min-width="200" align="center" />
+          <el-table-column label="岗位名称" prop="role_name" width="180" align="center" />
+          <el-table-column label="当前状态" prop="state_text" width="100" align="center" />
+          <el-table-column label="操作" min-width="240" align="center">
+            <template #default="scope">
+              <div class="table_btn">
+                <p @click="handleEdit(scope.row)">编辑</p>
+                <p @click="handleSee(scope.row)">查看</p>
+                <p @click="handleMachine(scope.row)">录入考情机</p>
+              </div>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </div>
   </div>
 </template>
@@ -39,14 +45,20 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb.vue";
+import EmployeeSeach from "./EmployeeSeach.vue";
 export default defineComponent({
   components: {
     Breadcrumb,
+    EmployeeSeach,
   },
   setup() {
-    const formSearch = ref({});
+    const formSearch = ref({
+      name: "",
+    });
+    const employee_tableData = ref([]);
     return {
       formSearch,
+      employee_tableData,
     };
   },
 });
@@ -66,17 +78,6 @@ export default defineComponent({
     }
     .el-button {
       margin-right: 50px;
-    }
-  }
-  .search {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    @media screen and (max-width: 1980px) {
-      flex-wrap: wrap;
-      .el-form-item{
-        margin-bottom: 20px;
-      }
     }
   }
 }

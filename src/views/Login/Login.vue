@@ -107,11 +107,8 @@ export default defineComponent({
       state.value = true;
     };
     // 点击登录
-    const handleLogin = async () => {
-      await usVuex.useActions("loginModule", "GET_LOGIN", loginForm);
-      router.push({
-        path: "/",
-      });
+    const handleLogin = () => {
+      usVuex.useActions("loginModule", "GET_LOGIN", loginForm);
     };
     // 获取验证码
     const get_code = () => {

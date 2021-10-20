@@ -35,7 +35,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
         },
         {
             path: 'employee-manage',
-            component: () => import('@/views/PersonnelMatters/employeeManage/employeeManage.vue'),
+            component: () => import('@/views/PersonnelMatters/EmployeeManage/EmployeeManage.vue'),
             name: 'employee-manage',
             meta: { title: '员工管理' }
         },

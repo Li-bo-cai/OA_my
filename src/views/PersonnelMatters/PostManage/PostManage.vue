@@ -16,7 +16,7 @@
         </el-table-column> -->
         <el-table-column label="序号" type="index" width="100" />
         <el-table-column label="岗位名称" min-width="400" prop="title" />
-        <el-table-column label="操作" prop="date" min-width="100">
+        <el-table-column label="操作" prop="date" width="300">
           <template #default="scope">
             <div class="table_btn">
               <p @click="handleEdit(scope.row)">编辑</p>

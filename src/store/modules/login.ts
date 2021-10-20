@@ -1,5 +1,6 @@
 import { Module } from "vuex";
 import { login,get_phone_code } from "@/api/user/user.api";
+import router from "@/router";
 interface ICountState {
     token: string
     roles: any,
@@ -54,6 +55,9 @@ const loginModule: Module<ICountState, IRootState> ={
                 if(res.data.code == 1){
                     commit('SET_TOKEN',res.data.data.access_token)   //token 存储再vuex中
                     sessionStorage.setItem('Token',res.data.data.access_token)   //token 存储在临时存储中
+                    router.push({
+                        path: "/",
+                      });
                 }
             })
         },
