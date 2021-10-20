@@ -22,11 +22,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    return {};
+    const formSearch = ref({
+      name: "",
+    });
+    return {
+      formSearch,
+    };
   },
 });
 </script>

@@ -5,7 +5,7 @@ import axios from '../index'
  * 获取集团组织架构 /department/com_show2
  * @param 
 */
-export function department_com_show2():Promise<AxiosResponse<any>>{
+export function department_com_show2(): Promise<AxiosResponse<any>> {
     return axios.post('/inside/department/com_show2')
 }
 /**
@@ -17,14 +17,14 @@ export function department_com_show2():Promise<AxiosResponse<any>>{
  * @param page 页数
  * @param per_page 每页数据条数
 */
-export interface insideCheck{
-    content?:string,
-    depart_id?:number,
-    post?:string,
-    state?:number,
-    page:number,
-    per_page:number
+export interface insideCheck {
+    content?: string,
+    depart_id?: number,
+    post?: string,
+    state?: number,
+    page: number,
+    per_page: number
 }
-export function staff_check2(params:insideCheck):Promise<AxiosResponse<any>>{
-    return axios.post('/inside/staff/check2',params)
+export function staff_check2(params: insideCheck): Promise<AxiosResponse<any>> {
+    return axios.post('/inside/staff/check2', params)
 }

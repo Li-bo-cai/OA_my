@@ -4,7 +4,7 @@
       <img src="@/assets/images/bumenrenyuan@3x.png" alt=""><span>部门人员</span>
     </div>
     <div class="safft_table">
-      <el-table :header-cell-style="{backgroundColor:'#f7f8fa'}" :data="staff.data" empty-text="暂无数据">
+      <el-table :header-cell-style="{backgroundColor:'#f7f8fa'}" :data="staff_data" empty-text="暂无数据">
         <el-table-column prop="number" label="员工工号">
         </el-table-column>
         <el-table-column prop="name" label="姓名">
@@ -20,7 +20,7 @@
       </el-table>
     </div>
     <div class="pagin_ation">
-      <el-pagination background :hide-on-single-page="true" :page-sizes="[10, 15, 20, 25]" layout="total, prev, pager, next, sizes" :total="staff.total" @size-change="handleSizeChange" @current-change="handleCurrentChange">
+      <el-pagination background :hide-on-single-page="true" :page-sizes="[10, 15, 20, 25]" layout="total, prev, pager, next, sizes" :total="total" @size-change="handleSizeChange" @current-change="handleCurrentChange">
       </el-pagination>
     </div>
 
@@ -28,47 +28,28 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  getCurrentInstance,
-  ref,
-  toRefs,
-} from "vue";
+import { defineComponent, getCurrentInstance } from "vue";
+import { mapState } from "vuex";
 
 export default defineComponent({
+  computed: {
+    ...mapState("organzationModule", ["staff_data", "total"]),
+  },
   setup() {
     const { proxy }: any = getCurrentInstance();
     const usVuex = proxy.usVuex;
-
-    const RightBoxInfo = ref(
-      computed(() => {
-        return usVuex.useState("organzationModule");
-      })
-    );
-    let { staff, depart_id, page, per_page } = toRefs(RightBoxInfo.value);
-
     // 改变页面数量
     const handleSizeChange = (num: number) => {
+      usVuex.useMutations("organzationModule", "SET_PAGE", 1);
       usVuex.useMutations("organzationModule", "SET_PER_PAGE", num);
-      usVuex.useActions("organzationModule", "GET_STAFF", {
-        depart_id: depart_id.value,
-        page: 1,
-        per_page: num,
-      });
+      usVuex.useActions("organzationModule", "GET_STAFF");
     };
     // 改变页数
     const handleCurrentChange = (num: number) => {
       usVuex.useMutations("organzationModule", "SET_PAGE", num);
-      usVuex.useActions("organzationModule", "GET_STAFF", {
-        depart_id: depart_id.value,
-        page: num,
-        per_page: per_page.value,
-      });
+      usVuex.useActions("organzationModule", "GET_STAFF");
     };
-
     return {
-      staff,
       handleSizeChange,
       handleCurrentChange,
     };

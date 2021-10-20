@@ -21,7 +21,6 @@ import {
   reactive,
   ref,
 } from "vue";
-import { insideCheck } from "@/api/organization/organization.api";
 import { mapState } from "vuex";
 export default defineComponent({
   computed: {
@@ -31,36 +30,18 @@ export default defineComponent({
     const { proxy }: any = getCurrentInstance();
     const usVuex = proxy.usVuex;
 
-    let a!: number;
-    let staffInfo: insideCheck = reactive({
-      depart_id: a,
-      page: 1,
-      per_page: a,
-    });
     const switchImgUrl = ref("");
     const leaderText = ref("");
 
     onMounted(() => {
       usVuex.useActions("organzationModule", "GET_TREE");
     });
-    
     const handleTreeClick = (data: any, node: any) => {
       leaderText.value = node.id;
-      staffInfo.depart_id = node.data.id;
-      const Info = ref(
-        computed(() => {
-          return usVuex.useState("organzationModule", "per_page");
-        })
-      );
-      staffInfo.per_page = Info.value;
       usVuex.useMutations("organzationModule", "SET_DEPART_ID", node.data.id);
       usVuex.useMutations("organzationModule", "SET_PRINCIPAL", node.data.name);
-      usVuex.useMutations(
-        "organzationModule",
-        "SET_DEPART_name",
-        node.data.depart_name
-      );
-      usVuex.useActions("organzationModule", "GET_STAFF", staffInfo);
+      usVuex.useMutations("organzationModule","SET_DEPART_NAME", node.data.depart_name);
+      usVuex.useActions("organzationModule", "GET_STAFF");
     };
     const defaultProps = reactive({
       label: "depart_name",
@@ -73,7 +54,6 @@ export default defineComponent({
     return {
       leaderText,
       switchImgUrl,
-      // tree,
       defaultProps,
       handleTreeClick,
       openLayer,
