@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb.vue";
 import EmployeeSeach from "./compontent/EmployeeSeach.vue";
 import EmployeeTable from "./compontent/EmployeeTable.vue";
@@ -55,6 +55,9 @@ export default defineComponent({
     .el-button {
       margin-right: 50px;
     }
+  }
+  .search_box{
+    margin-bottom: 55px;
   }
 }
 </style>

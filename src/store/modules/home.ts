@@ -60,11 +60,26 @@ const homeMoudle :Module<ICountState,IRootState>={
             polymerization().then((res:any)=>{
                 if(res.data.code==1){
                     commit('SET_SELF_MESSAGE',res.data.data.self_message)
-                    commit('SET_DYNAMIC',res.data.data.dynamic)
-                    commit('SET_NOTICE',res.data.data.notice)
-                    commit('SET_WORK_FILE',res.data.data.word_file)
-                    commit('SET_MY_TIME',res.data.data.myTime)
-                    // console.log(res);
+                    if(res.data.data.dynamic.length>5){
+                        commit('SET_DYNAMIC',res.data.data.dynamic.slice(0,5))
+                    }else{
+                        commit('SET_DYNAMIC',res.data.data.dynamic)
+                    }
+                    if(res.data.data.notice.length>5){
+                        commit('SET_NOTICE',res.data.data.notice.slice(0,5))
+                    }else{
+                        commit('SET_NOTICE',res.data.data.notice)
+                    }
+                    if(res.data.data.word_file.length>5){
+                        commit('SET_WORK_FILE',res.data.data.word_file.slice(0,5))
+                    }else{
+                        commit('SET_WORK_FILE',res.data.data.word_file)
+                    }
+                    if(res.data.data.myTime.length>6){
+                        commit('SET_MY_TIME',res.data.data.myTime.slice(0,6))
+                    }else{
+                        commit('SET_MY_TIME',res.data.data.myTime)
+                    }
                 }
             })
         },

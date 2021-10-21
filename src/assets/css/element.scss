@@ -7,6 +7,7 @@
     font-size: 16px;
     margin-bottom: 0;
     .el-form-item__label{
+      font-size: 16px;
       line-height: 46px;
     }
 }
@@ -95,4 +96,35 @@ deep .el-scrollbar__wrap {
 .el-table{
   border: 1px solid #edeef2;
   border-radius: 8px 8px 0px 0px;
+  th>.cell{
+    font-weight: 500;
+  }
+  .el-table__body{
+    .cell{
+      font-size: 14px;
+      color:#646466;
+      div{
+        color:#646466;
+      }
+    }
+  }
+}
+
+// tab样式
+.el-tabs__item{
+  font-size: 16px;
+  font-weight: 500;
+  color: #646466;
+  &:hover{
+    color: #5777E7;
+  }
+}
+.el-tabs__item.is-active{
+  color: #5777E7;
+}
+.el-tabs__active-bar{
+  background-color: #5777E7;
+}
+.el-tab-pane{
+  padding: 30px 0;
 }

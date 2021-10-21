@@ -20,7 +20,7 @@
       </el-table>
     </div>
     <div class="pagin_ation">
-      <el-pagination background :hide-on-single-page="true" :page-sizes="[10, 15, 20, 25]" layout="total, prev, pager, next, sizes" :total="total" @size-change="handleSizeChange" @current-change="handleCurrentChange">
+      <el-pagination background :hide-on-single-page="true" :current-page="staffInfo.page" :page-sizes="[10, 15, 20, 25]" layout="total, prev, pager, next, sizes" :total="total" @size-change="handleSizeChange" @current-change="handleCurrentChange">
       </el-pagination>
     </div>
 
@@ -33,7 +33,7 @@ import { mapState } from "vuex";
 
 export default defineComponent({
   computed: {
-    ...mapState("organzationModule", ["staff_data", "total"]),
+    ...mapState("organzationModule", ["staff_data", "total", "staffInfo"]),
   },
   setup() {
     const { proxy }: any = getCurrentInstance();

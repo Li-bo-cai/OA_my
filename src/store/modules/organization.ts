@@ -12,7 +12,7 @@ interface ICountState {
 interface IRootState {
     [key: string]: any
 }
-let a!: number
+let a: number 
 const organzationModule: Module<ICountState, IRootState> = {
     namespaced: true,
     state() {
