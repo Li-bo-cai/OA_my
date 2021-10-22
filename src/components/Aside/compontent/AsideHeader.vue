@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import Popup from "./compontent/Popup.vue";
+import Popup from "./Popup.vue";
 import {
   computed,
   defineComponent,
@@ -137,7 +137,7 @@ export default defineComponent({
   display: none;
   position: fixed;
   top: 35px;
-  left: 270px;
+  left: 220px;
   z-index: 999;
 }
 </style>

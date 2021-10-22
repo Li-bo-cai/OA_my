@@ -27,7 +27,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .el-aside {
-  width: 285px;
+  width: auto;
   height: 100vh;
   border-right: 2px solid #ccc;
 }

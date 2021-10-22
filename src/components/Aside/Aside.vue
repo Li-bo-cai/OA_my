@@ -3,16 +3,16 @@
     <div class="user_header">
       <AsideHeader />
     </div>
-    <el-scrollbar class="menu_scroll">
+    <div class="menu_content">
       <AsideMenu />
-    </el-scrollbar>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AsideHeader from "./AsideHeader.vue";
-import AsideMenu from "./AsideMenu.vue";
+import AsideHeader from "./compontent/AsideHeader.vue";
+import AsideMenu from "./compontent/AsideMenu.vue";
 export default defineComponent({
   components: {
     AsideHeader,
@@ -28,12 +28,12 @@ export default defineComponent({
 .aside_box {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .user_header {
   padding-bottom: 20px;
-  border-bottom: 1px solid #ccc;
-}
-.menu_scroll {
-  height: calc(100vh - 180px);
+  position: absolute;
+  top: 0;
+  width: 240px;
 }
 </style>
