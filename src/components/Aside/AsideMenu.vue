@@ -8,7 +8,7 @@
         </template>
       </el-menu-item>
 
-      <el-sub-menu v-else-if="item.meta && item.meta.hasChild" :key="item.name" :index="item.path">
+      <el-sub-menu v-else-if="item.meta && item.meta.hasChild" :index="item.path" :key="item.name">
         <template #title>
           <i :class="item.meta.icon"></i>
           <span>{{ item.meta.title }}</span>

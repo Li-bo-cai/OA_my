@@ -3,14 +3,9 @@ import { RouteRecordRaw } from 'vue-router'
 export const asyncRoutes: Array<RouteRecordRaw> = [{
     // 集团组织架构管理
     path: '/organization',
-    component: ()=>import('@/views/Layout/Layout.vue'),
+    component: () => import('@/views/Layout/Layout.vue'),
     redirect: '/organization/organization',
-    meta: {
-        title: '集团组织架构管理',
-        icon: 'sell-a-02',
-        hasChild: false,
-        breadCrub: false
-    },
+    meta: { title: '集团组织架构管理', icon: 'sell-a-02', hasChild: false, breadCrub: false },
     children: [
         {
             path: 'organization',
@@ -23,7 +18,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
 {
     // 人事管理
     path: '/personnelMatters',
-    component: ()=>import('@/views/Layout/Layout.vue'),
+    component: () => import('@/views/Layout/Layout.vue'),
     redirect: '/personnelMatters/post-manage',
     meta: { title: '人事管理', icon: 'sell-a-03', hasChild: true, breadCrub: true },
     children: [
@@ -48,6 +43,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
         {
             path: 'holiday-manage',
             component: () => import('@/views/PersonnelMatters/HolidayManage/HolidayManage.vue'),
+            name: 'holiday-manage',
             meta: { title: '休假管理' }
         }
     ]
@@ -55,7 +51,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
 {
     //外部资源管理
     path: '/external',
-    component: ()=>import('@/views/Layout/Layout.vue'),
+    component: () => import('@/views/Layout/Layout.vue'),
     redirect: '/external/external-manage',
     meta: { title: '外部资源管理', icon: 'sell-a-04', hasChild: false, breadCrub: false },
     children: [
@@ -70,7 +66,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
 {
     // 公司公告
     path: '/companyAnnounce',
-    component: ()=>import('@/views/Layout/Layout.vue'),
+    component: () => import('@/views/Layout/Layout.vue'),
     redirect: '/companyAnnounce/company-list',
     meta: { title: '公司公告', icon: 'sell-a-05', hasChild: false, breadCrub: false },
     children: [
@@ -85,7 +81,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
 {
     // 集团动态
     path: '/groupDynamics',
-    component: ()=>import('@/views/Layout/Layout.vue'),
+    component: () => import('@/views/Layout/Layout.vue'),
     redirect: '/groupDynamics/dynamics-list',
     meta: { title: '集团动态', icon: 'sell-a-06', hasChild: false, breadCrub: false },
     children: [
@@ -100,7 +96,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
 {
     // 文档中心
     path: '/document',
-    component: ()=>import('@/views/Layout/Layout.vue'),
+    component: () => import('@/views/Layout/Layout.vue'),
     redirect: '/document/document-list',
     meta: { title: '文档中心', icon: 'sell-a-07', hasChild: false, breadCrub: false },
     children: [
@@ -115,7 +111,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
 {
     // 消息中心
     path: '/message',
-    component: ()=>import('@/views/Layout/Layout.vue'),
+    component: () => import('@/views/Layout/Layout.vue'),
     redirect: '/message/message-center',
     meta: { title: '消息中心', icon: 'sell-a-08', hasChild: false, breadCrub: false },
     children: [
