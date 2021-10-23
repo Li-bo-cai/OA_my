@@ -7,7 +7,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         name: 'Home',
         component: () => import('@/views/Layout/Layout.vue'),
         redirect: '/home',
-        meta: { title: '首页', icon: 'sell-a-01', hasChild: true, breadCrub: true },
+        meta: { title: '工作台', icon: 'sell-a-01', hasChild: true, breadCrub: true },
         children: [
             {
                 path: 'home',
@@ -39,7 +39,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
                 path: 'PendingWork',
                 component: () => import('../views/Pending/PendingWork.vue'),
                 name: 'PendingWork',
-                meta: { title: '待处理的工作', breadCrub: true },
+                meta: { title: '待处理工作', breadCrub: true },
                 children: [
                     {
                         path: 'ToPending',

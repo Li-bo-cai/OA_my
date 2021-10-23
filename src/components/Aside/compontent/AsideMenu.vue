@@ -5,10 +5,10 @@
       <el-scrollbar class="menu_scroll">
         <el-menu text-color="#232323" :default-active="route.path" :router="true">
           <template v-for="item in Routes">
-            <el-menu-item v-if="item.meta" :index="item.path" :key="item.name" @select="showSecendRoutes">
+            <el-menu-item v-if="item.meta" :index="item.path" :key="item.name" @click="showSecendRoutes(item)">
               <template #title>
                 <i :class="item.meta.icon"></i>
-                <span>{{ item.meta.title }}{{showRightBox}}</span>
+                <span>{{ item.meta.title }}</span>
               </template>
             </el-menu-item>
           </template>
@@ -22,7 +22,7 @@
       </div>
       <el-scrollbar class="menu_scroll">
         <el-menu text-color="#232323" :default-active="route.path" :collapse="!isCollapse" @open="handleOpen" @close="handleClose" :router="true">
-          <template v-for="item in SecendRoutes">
+          <template v-for="item in SecendRoutes" :key="item.name">
             <el-menu-item v-if="item.meta" :index="item.path" :key="item.name">
               <template #title>
                 <span>{{ item.meta.title }}</span>
@@ -54,33 +54,24 @@ import { useRoute } from "vue-router";
 
 export default defineComponent({
   setup() {
-    const Routes = ref([...constantRoutes, ...asyncRoutes]); //全部路由
-    var route = ref(useRoute());
-    const SecendRoutes = ref([]);
+    const Routes = ref<any[]>([...constantRoutes, ...asyncRoutes]); //全部路由
+    var route = ref<any>(useRoute());
+    const SecendRoutes = ref<any[]>([]);
     const showRightBox = ref<boolean>(false);
 
     const isCollapse = ref(true);
     const changeText = ref("关闭");
     onMounted(() => {
       console.log(123);
-      showSecendRoutes();
     });
     // 二级路由获取
-    const showSecendRoutes = () => {
-      showRightBox.value = false;
-      SecendRoutes.value = [];
-      route.value = useRoute();
-      console.log(route.value.name);
-      Routes.value.forEach((item: any) => {
-        if (item.meta && item.meta.hasChild) {
-          item.children.forEach((_item: any) => {
-            if (_item.name == route.value.name) {
-              SecendRoutes.value = item.children;
-              showRightBox.value = true;
-            }
-          });
-        }
-      });
+    const showSecendRoutes = (val: any) => {
+      if (val.meta && val.meta.hasChild) {
+        SecendRoutes.value = val.children;
+        showRightBox.value = true;
+      } else {
+        showRightBox.value = false;
+      }
     };
     // 二级路由开关
     const changeTextBtn = (val: boolean) => {
@@ -132,6 +123,9 @@ i {
   border-bottom: 1px solid #ccc;
   .showBtn {
     margin-bottom: 20px;
+  }
+  .el-menu-item {
+    padding: 0 20px;
   }
 }
 .menu_scroll {

@@ -290,7 +290,7 @@ export default defineComponent({
     display: flex;
     .job_detail {
       display: flex;
-      width: 20%;
+      width: 25%;
       cursor: pointer;
       img {
         width: 48px;
