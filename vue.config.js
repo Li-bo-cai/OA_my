@@ -5,7 +5,8 @@ module.exports = {
   devServer: {
       proxy: {
           '/api': {
-              target: 'https://oa.413club.cn',
+              // target: 'https://oa.413club.cn',
+              target: 'https://oa-dev.413club.cn',
               changeOrigin: true,
               ws: true,
               pathRewrite: {

@@ -1,18 +1,15 @@
 <template>
   <div>
-    <div class="origanization_head">
-      <Breadcrumb />
-    </div>
-    <div class="origanization_body">
+    <div class="postManage_body">
       <!-- 左边部分 -->
       <div class="left_box">
         <!-- 左上盒子 -->
         <div class="letf_top_box">
-          <el-button type="primary" @click="showAddCompany=true">新增公司</el-button>
+          <el-button type="primary" @click="showAddCompany=true">新增岗位</el-button>
         </div>
         <!-- 左下盒子 -->
         <div class="left_botton_box">
-          <LeftBox />
+          <PostLeftBox />
         </div>
       </div>
       <!-- 右边部分 -->
@@ -20,25 +17,24 @@
         <!-- 右上盒子 -->
         <div class="right_top_box">
           <div class="Info">
-            <p>部门：{{depart_name}}</p>
-            <p>负责人: <span>{{principal?principal:'暂无'}}</span></p>
+            <p>暂无数据{{depart_name}}</p>
+            <p>岗位描述:<span>{{principal?principal:'暂无数据'}}</span></p>
           </div>
           <div class="edit">
-            <el-button type="primary">编辑</el-button>
-            <el-button type="danger">删除</el-button>
+            <el-switch v-model="ruleForm.state" active-text="启用该岗位" />
+            <el-button type="text">编辑权限</el-button>
+            <el-button type="text">编辑权限</el-button>
+            <el-button type="text">编辑权限</el-button>
           </div>
         </div>
         <!-- 右下盒子 -->
         <div class="right_botton_box">
-          <RightBox />
+          <PostRightBox />
         </div>
       </div>
     </div>
-    <div class="origanization_footer">
-      <Pagination />
-    </div>
     <el-dialog v-model="showAddCompany" width="548px">
-      <span class="dialog_tit_tit">新增公司</span>
+      <span class="dialog_tit_tit">新增岗位</span>
       <div class="dialog_body">
         <div class="input_company">
           <div><span style="color:red">*</span>公司名称</div>
@@ -61,18 +57,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, ref } from "vue";
+import { defineComponent, getCurrentInstance, reactive, ref } from "vue";
 import { mapState } from "vuex";
-import Breadcrumb from "../../components/Breadcrumb/Breadcrumb.vue";
-import Pagination from "../../components/Pagination/Pagination.vue";
-import LeftBox from "./compontents/LeftBox.vue";
-import RightBox from "./compontents/RightBox.vue";
+import PostLeftBox from "./compontents/PostLeftBox.vue";
+import PostRightBox from "./compontents/postRightBox.vue";
 export default defineComponent({
   components: {
-    Breadcrumb,
-    Pagination,
-    LeftBox,
-    RightBox,
+    PostLeftBox,
+    PostRightBox,
   },
   computed: {
     ...mapState("organzationModule", ["principal", "depart_name"]),
@@ -80,9 +72,13 @@ export default defineComponent({
   setup() {
     const { proxy }: any = getCurrentInstance();
     const usVuex = proxy.usVuex;
-    let showAddCompany = ref<boolean>(false); //展示新增公司弹窗
+    const ruleForm = reactive({
+      status: "",
+    });
+    const showAddCompany = ref<boolean>(false); //展示新增公司弹窗
 
     return {
+      ruleForm,
       showAddCompany,
     };
   },
@@ -90,7 +86,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.origanization_body {
+.postManage_body {
   display: flex;
   width: 100%;
   overflow: hidden;
@@ -114,6 +110,14 @@ export default defineComponent({
       .Info {
         p:first-child {
           margin-bottom: 10px;
+        }
+      }
+      .edit {
+        display: flex;
+        align-items: center;
+        .el-button {
+          width: 60px;
+          margin-left: 10px;
         }
       }
     }
@@ -153,7 +157,7 @@ export default defineComponent({
   .dialog_footer_btn {
     display: flex;
     flex-direction: row-reverse;
-    .el-button:nth-child(2){
+    .el-button:nth-child(2) {
       margin-right: 20px;
     }
   }

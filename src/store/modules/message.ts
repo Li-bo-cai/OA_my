@@ -1,5 +1,5 @@
 import { Module } from "vuex";
-import { post_show } from '@/api/post/post.api'
+import {  } from '@/api/post/post.api'
 interface ICountState {
     [key: string]: any
 }

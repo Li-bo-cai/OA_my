@@ -5,7 +5,11 @@
         <Aside />
       </el-aside>
       <el-main>
-        <router-view></router-view>
+        <el-scrollbar class="menu_scroll">
+          <div class="outBox">
+            <router-view></router-view>
+          </div>
+        </el-scrollbar>
       </el-main>
     </el-container>
   </el-container>
@@ -32,6 +36,14 @@ export default defineComponent({
   border-right: 2px solid #ccc;
 }
 .el-main {
-  padding: 36px 50px;
+  width: 100%;
+  padding: 0px;
+  .menu_scroll {
+    height: 100vh;
+    .outBox {
+      min-width: 1000px;
+      padding: 20px;
+    }
+  }
 }
 </style>

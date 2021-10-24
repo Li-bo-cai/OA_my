@@ -2,62 +2,82 @@ import { AxiosResponse } from 'axios'
 import axios from '../index'
 
 /**
- * 岗位展示
- * @url /inside/role/post_show
+ * 岗位展示 下拉菜单
+ * @url /inside/group
 */
-export interface insidePostShow{
-    page?:number,
-    per_page?:number
-}
-export function post_show(params:insidePostShow):Promise<AxiosResponse<any>>{
-    return axios.post('/inside/role/post_show',params)
+export function group(): Promise<AxiosResponse<any>> {
+    return axios.post('/inside/group')
 }
 
 /**
  * 岗位选择
- * @url /inside/role/depart_choose
+ * @url /inside/group/get_role_group
 */
-export function depart_choose():Promise<AxiosResponse<any>>{
-    return axios.get('/inside/role/depart_choose')
-}
-/**
- * 岗位选择（员工添加处）
- * @url /inside/role/post_chose
-*/
-export function post_chose():Promise<AxiosResponse<any>>{
-    return axios.get('/inside/role/post_chose')
+export function get_role_group(): Promise<AxiosResponse<any>> {
+    return axios.post('/inside/group/get_role_group')
 }
 
 /**
- * 创建岗位
- * @url /inside/role/post_set
+ * 获取岗位下的员工
+ * @url /inside/new_role/get_role_staff
 */
-export interface insidePostShow{
-    post:string
-}
-export function post_set(params:insidePostShow):Promise<AxiosResponse<any>>{
-    return axios.post('/inside/role/post_set',params)
+export function get_role_staff(params: number): Promise<AxiosResponse<any>> {
+    return axios.post('/inside/new_role/get_role_staff', params)
 }
 
 /**
- * 岗位编辑
- * @url /inside/role/post_delete
+ * 岗位创建或编辑
+ * @url /inside/new_role/create_or_edit
 */
-export interface insidePostEdit{
-    id:number,
-    title:string
+export interface insideCreateOrEdit {
+    group_id: number, //岗位分组ID
+    title: string, //岗位名称  
+    status: number, //岗位状态 1--岗位关闭   2--岗位开启   默认开启
+    desc: string, //岗位描述
+    role_id?: number //岗位ID  编辑岗位传入岗位ID 
 }
-export function post_edit(params:insidePostEdit):Promise<AxiosResponse<any>>{
-    return axios.post('/inside/role/post_edit',params)
+export function create_or_edit(params: insideCreateOrEdit): Promise<AxiosResponse<any>> {
+    return axios.post('/inside/new_role/create_or_edit', params)
 }
+
 /**
  * 岗位删除
- * @url /inside/role/post_delete
+ * @url /inside/new_role/delete_role
 */
-export interface insidePostDelete{
-    id:number,
-}
-export function post_delete(params:insidePostDelete):Promise<AxiosResponse<any>>{
-    return axios.post('/inside/role/post_delete',params)
+export function delete_role(params: number): Promise<AxiosResponse<any>> {
+    return axios.post('/inside/new_role/delete_role', params)
 }
 
+
+/**
+ * 从岗位移除员工(包括批量移除)
+ * @url /inside/new_role/remove_staff
+ */
+export interface insideRemoveStaff {
+    role_id: number,  //岗位id
+    staff_ids: number[] | number, //单个移除 staff_ids  int   批量一次 staff_ids 数组
+}
+export function remove_staff(params: insideRemoveStaff): Promise<AxiosResponse<any>> {
+    return axios.post('/inside/new_role/remove_staff', params)
+}
+
+/**
+ * 添加员工到岗位
+ * @url /inside/new_role/build_staff
+ */
+export function build_staff(params: insideRemoveStaff): Promise<AxiosResponse<any>> {
+    return axios.post('/inside/new_role/build_staff', params)
+}
+
+/** 
+ * 岗位添加成员列表
+ * @url /inside/new_role/show_staff
+*/
+interface insideShowStaff {
+    role_id: number, //岗位ID
+    depart_id: number,//部门ID
+    keyword: string, //搜索关键词
+}
+export function show_staff(params: insideShowStaff): Promise<AxiosResponse<any>> {
+    return axios.post('/inside/new_role/show_staff', params)
+}

@@ -14,7 +14,6 @@
 
 <script lang="ts">
 import {
-  computed,
   defineComponent,
   getCurrentInstance,
   onMounted,

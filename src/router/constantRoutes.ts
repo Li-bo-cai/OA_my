@@ -4,7 +4,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     {
         // 首页
         path: '/',
-        name: 'Home',
+        name: 'workbench',
         component: () => import('@/views/Layout/Layout.vue'),
         redirect: '/home',
         meta: { title: '工作台', icon: 'sell-a-01', hasChild: true, breadCrub: true },

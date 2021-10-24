@@ -129,9 +129,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.home {
-  padding-right: 66px;
-}
 .header {
   p:nth-of-type(1) {
     color: #969699;

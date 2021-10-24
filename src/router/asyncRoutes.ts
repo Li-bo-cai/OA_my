@@ -5,29 +5,29 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
     path: '/organization',
     component: () => import('@/views/Layout/Layout.vue'),
     redirect: '/organization/organization',
-    meta: { title: '集团组织架构管理', icon: 'sell-a-02', hasChild: false, breadCrub: false },
+    meta: { title: '集团组织架构管理', icon: 'sell-a-02', hasChild: true, breadCrub: false },
     children: [
         {
             path: 'organization',
-            component: () => import('@/views/Organization/Organization.vue'),
+            component: () => import('@/views/Groups/Organization/Organization.vue'),
             name: 'organization',
-            meta: { title: '集团组织架构管理' }
-        }
+            meta: { title: '组织架构管理' }
+        },
+        {
+            path: 'post-manage',
+            component: () => import('@/views/Groups/PostManage/PostManage.vue'),
+            name: 'post-manage',
+            meta: { title: '岗位管理' }
+        },
     ]
 },
 {
     // 人事管理
     path: '/personnelMatters',
     component: () => import('@/views/Layout/Layout.vue'),
-    redirect: '/personnelMatters/post-manage',
+    redirect: '/personnelMatters/employee-manage',
     meta: { title: '人事管理', icon: 'sell-a-03', hasChild: true, breadCrub: true },
     children: [
-        {
-            path: 'post-manage',
-            component: () => import('@/views/PersonnelMatters/PostManage/PostManage.vue'),
-            name: 'post-manage',
-            meta: { title: '岗位管理' }
-        },
         {
             path: 'employee-manage',
             component: () => import('@/views/PersonnelMatters/EmployeeManage/EmployeeManage.vue'),

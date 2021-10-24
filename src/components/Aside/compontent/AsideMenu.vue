@@ -33,17 +33,6 @@
       </el-scrollbar>
     </div>
   </div>
-  <!-- <el-sub-menu v-else-if="item.meta && item.meta.hasChild" :index="item.path" :key="item.name">
-            <template #title>
-              <i :class="item.meta.icon"></i>
-              <span>{{ item.meta.title }}</span>
-            </template>
-            <el-menu-item v-for="_item in item.children" :key="_item.name" :index="`${item.path}/${_item.path}`">
-              <template #title>
-                <span>{{ _item.meta.title }}</span>
-              </template>
-            </el-menu-item>
-          </el-sub-menu> -->
 </template>
 
 <script lang="ts">
@@ -55,14 +44,23 @@ import { useRoute } from "vue-router";
 export default defineComponent({
   setup() {
     const Routes = ref<any[]>([...constantRoutes, ...asyncRoutes]); //全部路由
-    var route = ref<any>(useRoute());
+    var route = useRoute();
     const SecendRoutes = ref<any[]>([]);
-    const showRightBox = ref<boolean>(false);
+    const showRightBox = ref<boolean>(false); //二级菜单展示
 
     const isCollapse = ref(true);
     const changeText = ref("关闭");
     onMounted(() => {
-      console.log(123);
+      Routes.value.forEach((item: any) => {
+        if (item.meta && item.meta.hasChild) {
+          item.children.forEach((_item: any) => {
+            if (_item.name == route.name) {
+              SecendRoutes.value = item.children;
+              showRightBox.value = true;
+            }
+          });
+        }
+      });
     });
     // 二级路由获取
     const showSecendRoutes = (val: any) => {
@@ -123,6 +121,7 @@ i {
   border-bottom: 1px solid #ccc;
   .showBtn {
     margin-bottom: 20px;
+    padding: 10px 10px;
   }
   .el-menu-item {
     padding: 0 20px;
