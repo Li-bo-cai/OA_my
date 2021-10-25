@@ -5,7 +5,7 @@
       <div class="left_box">
         <!-- 左上盒子 -->
         <div class="letf_top_box">
-          <el-button type="primary" @click="showAddCompany=true">新增岗位</el-button>
+          <el-button type="primary" @click="add_post">新增岗位</el-button>
         </div>
         <!-- 左下盒子 -->
         <div class="left_botton_box">
@@ -17,11 +17,11 @@
         <!-- 右上盒子 -->
         <div class="right_top_box">
           <div class="Info">
-            <p>暂无数据{{depart_name}}</p>
-            <p>岗位描述:<span>{{principal?principal:'暂无数据'}}</span></p>
+            <p>暂无数据</p>
+            <p>岗位描述:<span>{{ruleForm.desc?ruleForm.desc:'暂无数据'}}</span></p>
           </div>
           <div class="edit">
-            <el-switch v-model="ruleForm.state" active-text="启用该岗位" />
+            <el-switch v-model="ruleForm.state" active-text="启用该岗位" :active-value="2" :inactive-value="1" />
             <el-button type="text">编辑权限</el-button>
             <el-button type="text">编辑权限</el-button>
             <el-button type="text">编辑权限</el-button>
@@ -33,19 +33,23 @@
         </div>
       </div>
     </div>
-    <el-dialog v-model="showAddCompany" width="548px">
-      <span class="dialog_tit_tit">新增岗位</span>
+    <el-dialog :title="title" v-model="showAddCompany" width="548px">
       <div class="dialog_body">
-        <div class="input_company">
-          <div><span style="color:red">*</span>公司名称</div>
-          <el-input placeholder="请输入公司名称"></el-input>
-        </div>
-        <div class="change_principal">
-          <div>负责人</div>
-          <el-autocomplete v-model="principal_state" :fetch-suggestions="querySearchAsync" placeholder="请输入负责人" @select="handleSelect" />
-        </div>
+        <el-form :model="ruleForm" :rules="addPostRules" ref="ruleForm">
+          <el-form-item label="岗位名称" prop="title" class="input_company">
+            <el-input placeholder="请输入公司名称"></el-input>
+          </el-form-item>
+          <el-form-item label="所属分组" prop="group_id">
+            <el-select v-model="ruleForm.group_id" placeholder="请选择所属分组">
+              <el-option v-for="item in post_options" :key="item.id" :label="item.group_name" :value="item.id" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="岗位描述" prop="desc">
+            <el-input type="textarea" v-model="ruleForm.desc" placeholder="请输入岗位描述" />
+          </el-form-item>
+        </el-form>
         <div class="dialog_footer_btn">
-          <el-button type="primary" @click="logout">确 定</el-button>
+          <el-button type="primary" @click="defineClick('ruleForm')">确 定</el-button>
           <el-button @click="showAddCompany = false">取 消</el-button>
         </div>
       </div>
@@ -57,8 +61,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, reactive, ref } from "vue";
+import {
+  defineComponent,
+  getCurrentInstance,
+  onMounted,
+  reactive,
+  ref,
+} from "vue";
 import { mapState } from "vuex";
+import addPostRules from "./postManage";
 import PostLeftBox from "./compontents/PostLeftBox.vue";
 import PostRightBox from "./compontents/postRightBox.vue";
 export default defineComponent({
@@ -67,19 +78,33 @@ export default defineComponent({
     PostRightBox,
   },
   computed: {
-    ...mapState("organzationModule", ["principal", "depart_name"]),
+    ...mapState("postModule", ["post_options"]),
   },
   setup() {
+    let a!: number;
     const { proxy }: any = getCurrentInstance();
     const usVuex = proxy.usVuex;
     const ruleForm = reactive({
       status: "",
+      group_id: a,
+      desc: "",
+      state: 2,
     });
-    const showAddCompany = ref<boolean>(false); //展示新增公司弹窗
+
+    onMounted(() => {
+      usVuex.useActions("postModule", "GET_POST_TREE");
+      usVuex.useActions("postModule", "GET_POST_OPTIONS");
+    });
+
+    const defineClick = (val: string) => {
+      console.log(123);
+    };
 
     return {
+      ...addPostRules(),
+
       ruleForm,
-      showAddCompany,
+      defineClick,
     };
   },
 });
@@ -144,16 +169,6 @@ export default defineComponent({
   padding-bottom: 25px;
 }
 .dialog_body {
-  .input_company,
-  .change_principal {
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-    & > div:first-child {
-      min-width: 72px;
-      margin-right: 20px;
-    }
-  }
   .dialog_footer_btn {
     display: flex;
     flex-direction: row-reverse;

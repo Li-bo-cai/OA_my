@@ -4,31 +4,6 @@ import { ref } from "vue";
 export default () => {
     const codeMsg = ref<string>("获取验证码");
     const disabled = ref<boolean>(false);
-
-//     let time = 60;
-//      //倒计时事件
-//      const count_down = () => {
-//         const timer = setInterval(() => {
-//           if (time > 1) {
-//             time--;
-//             codeMsg.value = `重新获取(${time})`;
-//           } else {
-//             clearInterval(timer);
-//             codeMsg.value = "获取验证码";
-//             disabled.value = false;
-//           }
-//         //   console.log(time);
-//         }, 1000);
-//       };
-//   // 获取验证码
-//     const get_code = () => {
-//       disabled.value = true;
-//       get_phone_code().then((res:any) => {
-//         console.log(res);
-//       });
-//       count_down();
-//     };
-
     // 自定义规则
     const allInput = (rule: any, value: string, callback: any) => {
         const reg = /(\s[\u4E00-\u9FA5]+)|([\u4E00-\u9FA5]+\s)/

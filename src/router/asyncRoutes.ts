@@ -19,6 +19,12 @@ export const asyncRoutes: Array<RouteRecordRaw> = [{
             name: 'post-manage',
             meta: { title: '岗位管理' }
         },
+        {
+            path: 'public-power',
+            component: () => import('@/views/Groups/PostManage/PostManage.vue'),
+            name: 'public-power',
+            meta: { title: '公共权限管理' }
+        },
     ]
 },
 {

@@ -194,7 +194,6 @@ export default defineComponent({
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 25px;
 }
 .form_item img {
   position: absolute;
