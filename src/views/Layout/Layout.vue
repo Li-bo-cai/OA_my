@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-container>
-      <el-aside>
+      <el-aside class="menu">
         <Aside />
       </el-aside>
       <el-main>
@@ -11,17 +11,22 @@
           </div>
         </el-scrollbar>
       </el-main>
+      <el-aside class="short_cut">
+        <ShortCut />
+      </el-aside>
     </el-container>
   </el-container>
 </template>
 
 <script lang="ts">
+import Aside from "@/components/Aside/Aside.vue";
+import ShortCut from "@/components/ShortCut/ShortCut.vue";
 import { defineComponent } from "vue";
-import Aside from "../../components/Aside/Aside.vue";
 
 export default defineComponent({
   components: {
     Aside,
+    ShortCut,
   },
   setup() {
     return {};
@@ -30,7 +35,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.el-aside {
+.menu {
   width: auto;
   height: 100vh;
   border-right: 2px solid #ccc;
@@ -45,5 +50,9 @@ export default defineComponent({
       padding: 20px;
     }
   }
+}
+.short_cut {
+  width: auto;
+  height: 100vh;
 }
 </style>
