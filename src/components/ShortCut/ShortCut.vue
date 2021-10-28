@@ -1,5 +1,5 @@
 <template>
-  <div class="short_cut_box">
+  <div class="short_cut_box" ref="shortCutBox">
     <div class="top">
       <ShortTop />
     </div>
@@ -32,5 +32,6 @@ export default defineComponent({
   justify-content: space-between;
   height: calc(100vh - 20px);
   padding: 10px 0;
+  border-left: 1px solid #ccc;
 }
 </style>

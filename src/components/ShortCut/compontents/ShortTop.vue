@@ -12,10 +12,17 @@ export default {};
 
 <style scoped lang="scss">
 .shrink_box {
+  text-align: center;
   i {
-    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 40px;
     cursor: pointer;
   }
-  margin: 0 20px;
 }
 </style>

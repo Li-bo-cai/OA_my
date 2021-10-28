@@ -18,7 +18,7 @@
           <!-- 账号 -->
           <el-form-item prop="username" class="form_item">
             <img src="@/assets/images/user.png" alt="">
-            <el-input v-model="loginForm.account" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
+            <el-input v-model="loginForm.account" type="text" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password" class="form_item">
