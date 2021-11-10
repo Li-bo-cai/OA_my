@@ -30,8 +30,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100vh - 20px);
-  padding: 10px 0;
-  border-left: 1px solid #ccc;
+  height: 100%;
 }
 </style>

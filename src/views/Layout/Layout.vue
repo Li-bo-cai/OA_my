@@ -1,5 +1,8 @@
 <template>
   <el-container>
+    <el-header class="head">
+      <Header />
+    </el-header>
     <el-container>
       <el-aside class="menu">
         <Aside />
@@ -19,12 +22,14 @@
 </template>
 
 <script lang="ts">
+import Header from "@/components/Header/index.vue";
 import Aside from "@/components/Aside/Aside.vue";
 import ShortCut from "@/components/ShortCut/ShortCut.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   components: {
+    Header,
     Aside,
     ShortCut,
   },
@@ -35,16 +40,21 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+.head {
+  height: 40px;
+  border-bottom: 1px solid #ccc;
+}
 .menu {
-  width: auto;
-  height: 100vh;
+  width: 260px;
+  height: calc(100vh - 40px);
+  padding-bottom: 40px;
   border-right: 2px solid #ccc;
 }
 .el-main {
   width: 100%;
   padding: 0px;
   .menu_scroll {
-    height: 100vh;
+    height: calc(100vh - 40px);
     .outBox {
       min-width: 1000px;
       padding: 20px;
@@ -53,6 +63,8 @@ export default defineComponent({
 }
 .short_cut {
   width: auto;
-  height: 100vh;
+  height: calc(100vh - 40px);
+  padding: 10px;
+  border-left: 1px solid #ccc;
 }
 </style>
