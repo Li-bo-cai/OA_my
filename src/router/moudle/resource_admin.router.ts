@@ -12,7 +12,7 @@ export const resource_admin: Array<RouteRecordRaw> = [
         children: [
             {
                 path: 'home',
-                component: () => import('@/views/Home/Home.vue'),
+                component: () => import('@/views/work_bench/Home/Home.vue'),
                 name: 'home',
                 meta: { title: '首页' }
             }

@@ -10,13 +10,13 @@
       <div style="display:flex">
         <div class="content_used_fist">
           <div class="function1" @click="go_attendance">
-            <img src="../../assets/images/kaoqing@2x.png" alt="" />
+            <!-- <img src="../../assets/images/kaoqing@2x.png" alt="" /> -->
           </div>
           <p>我的考勤</p>
         </div>
         <div class="content_used_fist">
           <div class="function2" @click="leave_request">
-            <img src="../../assets/images/qingjia@2x.png" alt="" />
+            <!-- <img src="../../assets/images/qingjia@2x.png" alt="" /> -->
           </div>
           <p>请假申请</p>
         </div>
@@ -69,7 +69,7 @@
       <p v-if="word_file&&word_file.length==0" style="color: #999">暂无入职必读</p>
       <div class="job">
         <div class="job_detail" v-for="item in word_file" :key="item.id" @click="go_document(item)">
-          <img src="../../assets/images/world@2x.png" alt="" />
+          <!-- <img src="../../assets/images/world@2x.png" alt="" /> -->
           <div class="text">
             <p>{{ item.file_name }}</p>
           </div>

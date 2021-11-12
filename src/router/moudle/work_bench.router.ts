@@ -10,12 +10,12 @@ export const work_bench: Array<RouteRecordRaw> = [
         redirect: '/home',
         meta: { title: '工作台', icon: 'icon-tubiao_gongzuotai', hasChild: true, breadCrub: true },
         children: [
-            {
-                path: 'home',
-                component: () => import('@/views/Home/Home.vue'),
-                name: 'home',
-                meta: { title: '首页' }
-            }
         ]
     },
+    {
+        path: '/home',
+        component: () => import('@/views/work_bench/Home/Home.vue'),
+        name: 'home',
+        meta: { title: '首页' }
+    }
 ]
