@@ -1,20 +1,12 @@
-import { createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import { constantRoutes } from './constantRoutes'
 import { asyncRoutes } from './asyncRoutes'
-
-export function createNewRouter(routes: Array<RouteRecordRaw>): Router {
-  return createRouter({
-    history: createWebHistory(process.env.BASE_URL),
-    routes: routes
-  })
-}
-
-
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes: [...constantRoutes, ...asyncRoutes]
 })
+
 
 router.beforeEach((to, from, next) => {
   const token = sessionStorage.getItem('Token')

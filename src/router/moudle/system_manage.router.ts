@@ -1,6 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
-const Layout = import('@/views/Layout/Layout.vue')
-
+const Layout = (): unknown => import('@/views/Layout/Layout.vue')
 export const system_manage: Array<RouteRecordRaw> = [
 
 
@@ -8,7 +7,7 @@ export const system_manage: Array<RouteRecordRaw> = [
     {
         path: '/system_manage',
         name: 'system_manage',
-        component: () => Layout,
+        component: Layout,
         redirect: '/home',
         meta: { title: '运营管理', icon: 'icon-tubiao_shezhi', hasChild: true, breadCrub: true },
         children: [
