@@ -1,86 +1,142 @@
 {
-  "id": "2798732",
+  "id": "2898951",
   "name": "渝万OA",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
     {
-      "icon_id": "24209283",
-      "name": "11tuichu",
-      "font_class": "a-11tuichu",
-      "unicode": "e61a",
-      "unicode_decimal": 58906
+      "icon_id": "22451589",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e856",
+      "unicode_decimal": 59478
     },
     {
-      "icon_id": "24209281",
-      "name": "10anquan",
-      "font_class": "a-10anquan",
-      "unicode": "e619",
-      "unicode_decimal": 58905
+      "icon_id": "25245537",
+      "name": "图标_动态",
+      "font_class": "tubiao_dongtai",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
     },
     {
-      "icon_id": "24209277",
-      "name": "09ziliao",
-      "font_class": "a-09ziliao",
-      "unicode": "e618",
-      "unicode_decimal": 58904
+      "icon_id": "25245538",
+      "name": "图标_数据看板",
+      "font_class": "tubiao_shujukanban",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
     },
     {
-      "icon_id": "24208953",
-      "name": "08",
-      "font_class": "a-08",
-      "unicode": "e616",
-      "unicode_decimal": 58902
+      "icon_id": "25245539",
+      "name": "图标_项目管理",
+      "font_class": "tubiao_xiangmuguanli",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
     },
     {
-      "icon_id": "24208927",
-      "name": "07",
-      "font_class": "a-07",
-      "unicode": "e614",
-      "unicode_decimal": 58900
+      "icon_id": "25245540",
+      "name": "图标_行政管理",
+      "font_class": "tubiao_hangzhengguanli",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
     },
     {
-      "icon_id": "24208860",
-      "name": "06",
-      "font_class": "a-06",
-      "unicode": "e612",
-      "unicode_decimal": 58898
-    },
-    {
-      "icon_id": "24208855",
-      "name": "05",
-      "font_class": "a-05",
-      "unicode": "e611",
-      "unicode_decimal": 58897
-    },
-    {
-      "icon_id": "24208853",
-      "name": "04",
-      "font_class": "a-04",
-      "unicode": "e610",
-      "unicode_decimal": 58896
-    },
-    {
-      "icon_id": "24208847",
-      "name": "03",
-      "font_class": "a-03",
-      "unicode": "e60f",
-      "unicode_decimal": 58895
-    },
-    {
-      "icon_id": "24208798",
-      "name": "02",
-      "font_class": "a-02",
+      "icon_id": "25245541",
+      "name": "图标_OA审批",
+      "font_class": "tubiao_OAshenpi",
       "unicode": "e60e",
       "unicode_decimal": 58894
     },
     {
-      "icon_id": "24208795",
-      "name": "01",
-      "font_class": "a-01",
-      "unicode": "e60d",
-      "unicode_decimal": 58893
+      "icon_id": "25245542",
+      "name": "图标_财务",
+      "font_class": "tubiao_caiwu",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "25245543",
+      "name": "图标_法务管理",
+      "font_class": "tubiao_fawuguanli",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "25245544",
+      "name": "图标_用户中心",
+      "font_class": "tubiao_yonghuzhongxin",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "25245545",
+      "name": "图标_集团组织架构管理",
+      "font_class": "tubiao_jituanzuzhijiagouguanli",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "25245546",
+      "name": "图标_待办",
+      "font_class": "tubiao_daiban",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "25245547",
+      "name": "图标_运营管理",
+      "font_class": "tubiao_yunyingguanli",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "25245548",
+      "name": "图标_工作台",
+      "font_class": "tubiao_gongzuotai",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "25245549",
+      "name": "图标_客户管理",
+      "font_class": "tubiao_kehuguanli",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "25245550",
+      "name": "图标_设置",
+      "font_class": "tubiao_shezhi",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "25245551",
+      "name": "图标_工作汇报",
+      "font_class": "tubiao_gongzuohuibao",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "25245552",
+      "name": "图标_日程",
+      "font_class": "tubiao_richeng",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "25245553",
+      "name": "图标_人事管理",
+      "font_class": "tubiao_renshiguanli",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "25245554",
+      "name": "图标_资源管理",
+      "font_class": "tubiao_ziyuanguanli",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
     }
   ]
 }

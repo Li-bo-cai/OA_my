@@ -1,7 +1,7 @@
 <template>
   <div class="right_box">
     <div class="title">
-      <img src="@/assets/images/bumenrenyuan@3x.png" alt=""><span>部门人员</span>
+      <!-- <img src="@/assets/images/bumenrenyuan@3x.png" alt=""><span>部门人员</span> -->
     </div>
     <div class="safft_table">
       <el-table :header-cell-style="{backgroundColor:'#f7f8fa'}" :data="staff_data" empty-text="暂无数据">

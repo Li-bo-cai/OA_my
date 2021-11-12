@@ -5,7 +5,7 @@
         <span :class="{tr:data.attribute==1,tr2:data.attribute==2,selectText:leaderText==node.id}">{{node.label}}</span>
         <span style="font-size: 14px;color: #969699;margin-left: 10px;" :class="{selectText:leaderText==node.id}">({{ data.number }})</span>
         <span style="display:inblick">
-          <img class="imgStyle" :src="switchImgUrl==node.id?require('@/assets/images/s-add.png'):require('@/assets/images/add.png')" @click.stop="openLayer(node)" />
+          <!-- <img class="imgStyle" :src="switchImgUrl==node.id?require('@/assets/images/s-add.png'):require('@/assets/images/add.png')" @click.stop="openLayer(node)" /> -->
         </span>
       </template>
     </el-tree>
@@ -39,7 +39,11 @@ export default defineComponent({
       leaderText.value = node.id;
       usVuex.useMutations("organzationModule", "SET_DEPART_ID", node.data.id);
       usVuex.useMutations("organzationModule", "SET_PRINCIPAL", node.data.name);
-      usVuex.useMutations("organzationModule","SET_DEPART_NAME", node.data.depart_name);
+      usVuex.useMutations(
+        "organzationModule",
+        "SET_DEPART_NAME",
+        node.data.depart_name
+      );
       usVuex.useActions("organzationModule", "GET_STAFF");
     };
     const defaultProps = reactive({

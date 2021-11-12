@@ -17,12 +17,12 @@
         <el-form :model="loginForm" :rules="loginRules" ref="ruleForm">
           <!-- 账号 -->
           <el-form-item prop="username" class="form_item">
-            <img src="@/assets/images/user.png" alt="">
+            <!-- <img src="@/assets/images/user.png" alt=""> -->
             <el-input v-model="loginForm.account" type="text" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password" class="form_item">
-            <img src="@/assets/images/key.png" alt="">
+            <!-- <img src="@/assets/images/key.png" alt=""> -->
             <el-input v-model="loginForm.password" type="text" placeholder="密码" tabindex="2"></el-input>
           </el-form-item>
           <div class="hint">密码为8-16位大小写字母、数字其中两种组合，不可包含空格、中文，特殊符号等字符</div>
@@ -37,18 +37,18 @@
         <el-form :model="forgetForm" :rules="loginRules" ref="ruleForm">
           <!-- 账号 -->
           <el-form-item prop="username" class="form_item">
-            <img src="@/assets/images/user.png" alt="">
+            <!-- <img src="@/assets/images/user.png" alt=""> -->
             <el-input v-model="forgetForm.account" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
           </el-form-item>
           <!-- 验证码 -->
           <el-form-item prop="code" class="form_item">
-            <img src="@/assets/images/key.png" alt="">
+            <!-- <img src="@/assets/images/key.png" alt=""> -->
             <el-input v-model="forgetForm.phone_code" type="number" maxlength="6" placeholder="短信验证码" tabindex="2"></el-input>
             <el-button class="get_code" type="primary" :disabled="disabled" @click="get_code">{{codeMsg}}</el-button>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password" class="form_item">
-            <img src="@/assets/images/key.png" alt="">
+            <!-- <img src="@/assets/images/key.png" alt=""> -->
             <el-input v-model="forgetForm.pass" type="text" placeholder="请输入新密码" tabindex="2"></el-input>
           </el-form-item>
           <div class="hint">密码为8-16位大小写字母、数字其中两种组合， 不可包含空格、中文，特殊符号等字符</div>

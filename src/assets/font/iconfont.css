@@ -1,11 +1,11 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 2798732 */
-  src: url('iconfont.woff2?t=1631091768004') format('woff2'),
-       url('iconfont.woff?t=1631091768004') format('woff'),
-       url('iconfont.ttf?t=1631091768004') format('truetype');
+  font-family: "iconfont"; /* Project id 2898951 */
+  src: url('iconfont.woff2?t=1636706787069') format('woff2'),
+       url('iconfont.woff?t=1636706787069') format('woff'),
+       url('iconfont.ttf?t=1636706787069') format('truetype');
 }
 
-*[class^='sell-'] {
+.iconfont {
   font-family: "iconfont" !important;
   font-size: 16px;
   font-style: normal;
@@ -13,47 +13,79 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.sell-a-11tuichu:before {
-  content: "\e61a";
+.icon-xiaoxi:before {
+  content: "\e856";
 }
 
-.sell-a-10anquan:before {
-  content: "\e619";
+.icon-tubiao_dongtai:before {
+  content: "\e60a";
 }
 
-.sell-a-09ziliao:before {
-  content: "\e618";
+.icon-tubiao_shujukanban:before {
+  content: "\e60b";
 }
 
-.sell-a-08:before {
-  content: "\e616";
+.icon-tubiao_xiangmuguanli:before {
+  content: "\e60c";
 }
 
-.sell-a-07:before {
-  content: "\e614";
+.icon-tubiao_hangzhengguanli:before {
+  content: "\e60d";
 }
 
-.sell-a-06:before {
-  content: "\e612";
-}
-
-.sell-a-05:before {
-  content: "\e611";
-}
-
-.sell-a-04:before {
-  content: "\e610";
-}
-
-.sell-a-03:before {
-  content: "\e60f";
-}
-
-.sell-a-02:before {
+.icon-tubiao_OAshenpi:before {
   content: "\e60e";
 }
 
-.sell-a-01:before {
-  content: "\e60d";
+.icon-tubiao_caiwu:before {
+  content: "\e60f";
+}
+
+.icon-tubiao_fawuguanli:before {
+  content: "\e610";
+}
+
+.icon-tubiao_yonghuzhongxin:before {
+  content: "\e611";
+}
+
+.icon-tubiao_jituanzuzhijiagouguanli:before {
+  content: "\e612";
+}
+
+.icon-tubiao_daiban:before {
+  content: "\e613";
+}
+
+.icon-tubiao_yunyingguanli:before {
+  content: "\e614";
+}
+
+.icon-tubiao_gongzuotai:before {
+  content: "\e615";
+}
+
+.icon-tubiao_kehuguanli:before {
+  content: "\e616";
+}
+
+.icon-tubiao_shezhi:before {
+  content: "\e617";
+}
+
+.icon-tubiao_gongzuohuibao:before {
+  content: "\e618";
+}
+
+.icon-tubiao_richeng:before {
+  content: "\e619";
+}
+
+.icon-tubiao_renshiguanli:before {
+  content: "\e61a";
+}
+
+.icon-tubiao_ziyuanguanli:before {
+  content: "\e61b";
 }
 
