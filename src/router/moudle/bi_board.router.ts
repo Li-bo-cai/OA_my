@@ -6,13 +6,13 @@ export const bi_board: Array<RouteRecordRaw> = [
         path: '/bi_board',
         name: 'bi_board',
         component: Layout,
-        redirect: '/home',
+        redirect: '/board',
         meta: { title: 'BI数据看板', icon: 'icon-tubiao_shujukanban', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/bi_board/board/index.vue'),
-                name: 'home',
+                path: 'board',
+                component: () => import('@/views/Bi_board/board/index.vue'),
+                name: 'board',
                 meta: { title: '首页' }
             }
         ]

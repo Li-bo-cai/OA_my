@@ -6,13 +6,13 @@ export const financial_manage: Array<RouteRecordRaw> = [
         path: '/financial_manage',
         name: 'financial_manage',
         component: Layout,
-        redirect: '/home',
+        redirect: '/financial',
         meta: { title: '财务管理', icon: 'icon-tubiao_caiwu', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'financial',
+                component: () => import('@/views/Financial_manage/Financial/index.vue'),
+                name: 'financial',
                 meta: { title: '首页' }
             }
         ]

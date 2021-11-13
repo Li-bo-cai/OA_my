@@ -6,13 +6,13 @@ export const dynamic: Array<RouteRecordRaw> = [
         path: '/dynamic',
         name: 'dynamic',
         component: Layout,
-        redirect: '/home',
+        redirect: '/group_dynamic',
         meta: { title: '动态', icon: 'icon-tubiao_dongtai', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'group_dynamic',
+                component: () => import('@/views/Dynamic/GroupDynamics/index.vue'),
+                name: 'group_dynamic',
                 meta: { title: '首页' }
             }
         ]

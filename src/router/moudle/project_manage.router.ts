@@ -6,13 +6,13 @@ export const project_manage: Array<RouteRecordRaw> = [
         path: '/project_manage',
         name: 'project_manage',
         component: Layout,
-        redirect: '/home',
+        redirect: '/project',
         meta: { title: '运营管理', icon: 'icon-tubiao_xiangmuguanli', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'project',
+                component: () => import('@/views/Project_manage/Project/index.vue'),
+                name: 'project',
                 meta: { title: '首页' }
             }
         ]

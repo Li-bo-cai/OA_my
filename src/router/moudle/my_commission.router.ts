@@ -6,13 +6,13 @@ export const my_commission: Array<RouteRecordRaw> = [
         path: '/my_commission',
         name: 'my_commission',
         component: Layout,
-        redirect: '/home',
+        redirect: '/pending',
         meta: { title: '我的代办', icon: 'icon-tubiao_daiban', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/my_commission/Pending/index.vue'),
-                name: 'home',
+                path: 'pending',
+                component: () => import('@/views/My_commission/Pending/index.vue'),
+                name: 'pending',
                 meta: { title: '首页' }
             }
         ]

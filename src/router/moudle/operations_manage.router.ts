@@ -6,13 +6,13 @@ export const operations_manage: Array<RouteRecordRaw> = [
         path: '/operations_manage',
         name: 'operations_manage',
         component: Layout,
-        redirect: '/home',
+        redirect: '/operations',
         meta: { title: '运营管理', icon: 'icon-tubiao_yunyingguanli', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'operations',
+                component: () => import('@/views/Operations_manage/Operations/index.vue'),
+                name: 'operations',
                 meta: { title: '首页' }
             }
         ]

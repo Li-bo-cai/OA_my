@@ -6,13 +6,13 @@ export const oa_approve: Array<RouteRecordRaw> = [
         path: '/oa_approve',
         name: 'oa_approve',
         component: Layout,
-        redirect: '/home',
+        redirect: '/all',
         meta: { title: 'OA审批', icon: 'icon-tubiao_OAshenpi', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'all',
+                component: () => import('@/views/Oa_approve/All/index.vue'),
+                name: 'all',
                 meta: { title: '首页' }
             }
         ]

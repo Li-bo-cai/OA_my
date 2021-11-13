@@ -6,13 +6,13 @@ export const schedule: Array<RouteRecordRaw> = [
         path: '/schedule',
         name: 'schedule',
         component: Layout,
-        redirect: '/home',
+        redirect: '/day',
         meta: { title: '日程', icon: 'icon-tubiao_richeng', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'day',
+                component: () => import('@/views/Schedule/Day/index.vue'),
+                name: 'day',
                 meta: { title: '首页' }
             }
         ]

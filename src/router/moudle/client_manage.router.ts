@@ -6,13 +6,13 @@ export const client_manage: Array<RouteRecordRaw> = [
         path: '/client_manage',
         name: 'client_manage',
         component: Layout,
-        redirect: '/home',
+        redirect: '/clientent',
         meta: { title: '运营管理', icon: 'icon-tubiao_yunyingguanli', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'clientent',
+                component: () => import('@/views/Client_manage/clientent/index.vue'),
+                name: 'clientent',
                 meta: { title: '首页' }
             }
         ]

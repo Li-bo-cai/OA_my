@@ -6,13 +6,13 @@ export const user_center: Array<RouteRecordRaw> = [
         path: '/user_center',
         name: 'user_center',
         component: Layout,
-        redirect: '/home',
+        redirect: '/userInfo',
         meta: { title: '用户中心', icon: 'icon-tubiao_yonghuzhongxin', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'userInfo',
+                component: () => import('@/views/User_center/UserInfo/index.vue'),
+                name: 'userInfo',
                 meta: { title: '首页' }
             }
         ]

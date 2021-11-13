@@ -6,13 +6,13 @@ export const legal_manage: Array<RouteRecordRaw> = [
         path: '/legal_manage',
         name: 'legal_manage',
         component: Layout,
-        redirect: '/home',
+        redirect: '/leagal',
         meta: { title: '法务管理', icon: 'icon-tubiao_fawuguanli', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'leagal',
+                component: () => import('@/views/Legal_manage/Leagal/index.vue'),
+                name: 'leagal',
                 meta: { title: '首页' }
             }
         ]

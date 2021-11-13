@@ -8,13 +8,13 @@ export const system_manage: Array<RouteRecordRaw> = [
         path: '/system_manage',
         name: 'system_manage',
         component: Layout,
-        redirect: '/home',
+        redirect: '/system',
         meta: { title: '运营管理', icon: 'icon-tubiao_shezhi', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'system',
+                component: () => import('@/views/System_manage/System/index.vue'),
+                name: 'system',
                 meta: { title: '首页' }
             }
         ]

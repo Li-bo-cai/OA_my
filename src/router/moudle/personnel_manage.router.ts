@@ -6,14 +6,14 @@ export const personnel_manage: Array<RouteRecordRaw> = [
         path: '/personnel_manage',
         name: 'personnel_manage',
         component: Layout,
-        redirect: '/home',
+        redirect: '/employeeManage',
         meta: { title: '人事管理', icon: 'icon-tubiao_renshiguanli', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
-                meta: { title: '首页' }
+                path: 'employeeManage',
+                component: () => import('@/views/Personnel_manage/EmployeeManage/index.vue'),
+                name: 'employeeManage',
+                meta: { title: '人事管理' }
             }
         ]
     },

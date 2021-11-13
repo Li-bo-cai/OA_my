@@ -6,13 +6,13 @@ export const administrat_manage: Array<RouteRecordRaw> = [
         path: '/administrat_manage',
         name: 'administrat_manage',
         component: Layout,
-        redirect: '/home',
+        redirect: '/administration',
         meta: { title: '行政管理', icon: 'icon-tubiao_hangzhengguanli', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/administrat_manage/administration/index.vue'),
-                name: 'home',
+                path: 'administration',
+                component: () => import('@/views/Administrat_manage/administration/index.vue'),
+                name: 'administration',
                 meta: { title: '首页' }
             }
         ]

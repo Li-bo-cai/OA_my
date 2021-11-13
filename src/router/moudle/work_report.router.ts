@@ -6,13 +6,13 @@ export const work_report: Array<RouteRecordRaw> = [
         path: '/work_report',
         name: 'work_report',
         component: Layout,
-        redirect: '/home',
+        redirect: '/report',
         meta: { title: '工作汇报', icon: 'icon-tubiao_gongzuohuibao', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'report',
+                component: () => import('@/views/Work_report/Report/index.vue'),
+                name: 'report',
                 meta: { title: '首页' }
             }
         ]

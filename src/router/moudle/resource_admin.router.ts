@@ -6,13 +6,13 @@ export const resource_admin: Array<RouteRecordRaw> = [
         path: '/resource_admin',
         name: 'resource_admin',
         component: Layout,
-        redirect: '/home',
+        redirect: '/resource',
         meta: { title: '资源管理（CMS）', icon: 'icon-tubiao_ziyuanguanli', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'resource',
+                component: () => import('@/views/Resource_admin/Resource/index.vue'),
+                name: 'resource',
                 meta: { title: '首页' }
             }
         ]

@@ -6,13 +6,13 @@ export const organizat_manage: Array<RouteRecordRaw> = [
         path: '/organizat_manage',
         name: 'organizat_manage',
         component: Layout,
-        redirect: '/home',
+        redirect: '/organization',
         meta: { title: '集团组织架构管理', icon: 'icon-tubiao_jituanzuzhijiagouguanli', hasChild: true, breadCrub: true },
         children: [
             {
-                path: 'home',
-                component: () => import('@/views/work_bench/Home/Home.vue'),
-                name: 'home',
+                path: 'organization',
+                component: () => import('@/views/Organizat_manage/Organization/index.vue'),
+                name: 'organization',
                 meta: { title: '首页' }
             }
         ]
