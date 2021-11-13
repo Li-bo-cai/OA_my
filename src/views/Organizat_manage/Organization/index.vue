@@ -122,7 +122,7 @@ export default defineComponent({
     // border-bottom: 1px solid #edeef2;
   }
 }
-::v-deep .el-dialog__body {
+::deep .el-dialog__body {
   padding: 30px 38px;
   padding-top: 0;
 }

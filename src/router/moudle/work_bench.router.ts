@@ -14,7 +14,7 @@ export const work_bench: Array<RouteRecordRaw> = [
                 path: '/home',
                 component: () => import('@/views/Work_bench/Home/Home.vue'),
                 name: 'home',
-                meta: { title: '首页' }
+                meta: { title: '首页', hasChild: false }
             }
         ]
     },

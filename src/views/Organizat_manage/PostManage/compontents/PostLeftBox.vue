@@ -38,24 +38,24 @@ export default defineComponent({
   .selectText {
     color: #5777e7;
   }
-  ::v-deep .el-tree-node__content {
+  ::deep .el-tree-node__content {
     display: block;
     padding: 9px 0;
     height: auto;
   }
-  ::v-deep .el-tree-node:focus > .el-tree-node__content {
+  ::deep .el-tree-node:focus > .el-tree-node__content {
     background-color: #f2f5ff !important;
   }
-  ::v-deep .el-tree-node__content:hover {
+  ::deep .el-tree-node__content:hover {
     background-color: #f2f5ff !important;
   }
-  ::v-deep .el-table--fit {
+  ::deep .el-table--fit {
     border-right: 1px solid #edeef2;
     border-left: 1px solid #edeef2;
     border-top: 1px solid #edeef2;
     border-radius: 8px 8px 0px 0px;
   }
-  ::v-deep .el-autocomplete-suggestion__wrap .el-scrollbar__wrap {
+  ::deep .el-autocomplete-suggestion__wrap .el-scrollbar__wrap {
     margin-bottom: 0 !important;
   }
 }

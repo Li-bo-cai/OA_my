@@ -41,12 +41,12 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .head {
-  height: 40px;
+  height: 50px;
   border-bottom: 1px solid #ccc;
 }
 .menu {
-  width: 260px;
-  height: calc(100vh - 40px);
+  width: auto;
+  height: calc(100vh - 50px);
   padding-bottom: 40px;
   border-right: 2px solid #ccc;
 }
@@ -54,7 +54,7 @@ export default defineComponent({
   width: 100%;
   padding: 0px;
   .menu_scroll {
-    height: calc(100vh - 40px);
+    height: calc(100vh - 50px);
     .outBox {
       min-width: 1000px;
       padding: 20px;
@@ -63,7 +63,7 @@ export default defineComponent({
 }
 .short_cut {
   width: auto;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 50px);
   padding: 10px;
   border-left: 1px solid #ccc;
 }

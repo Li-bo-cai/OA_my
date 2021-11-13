@@ -11,6 +11,9 @@ import employeeModule from './modules/employee'
 import externalModule from './modules/external'
 import holidayModule from './modules/holiday'
 import messageModule from './modules/message'
+/* ------------------------------------------------------- */
+import routesMoudle from './modules/routes'
+
 
 export const store = createStore({
   state: {
@@ -20,6 +23,9 @@ export const store = createStore({
   actions: {
   },
   modules: {
+    routesMoudle,  //路由模块
+
+
     loginModule,//登录模块
     homeModule, //首页模块
     organzationModule,//集团组织架构

@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb.vue";
+import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.vue";
 import EmployeeSeach from "./compontent/EmployeeSeach.vue";
 import EmployeeTable from "./compontent/EmployeeTable.vue";
 export default defineComponent({

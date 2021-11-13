@@ -77,7 +77,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import Breadcrumb from "../../components/Breadcrumb/Breadcrumb.vue";
+import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.vue";
 export default defineComponent({
   components: {
     Breadcrumb,

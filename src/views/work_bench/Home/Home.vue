@@ -116,7 +116,6 @@ export default defineComponent({
     const { proxy }: any = getCurrentInstance();
     const usVuex = proxy.usVuex;
     onMounted(() => {
-      console.log("我刷新了");
       usVuex.useActions("homeModule", "GET_USER_INFO");
       usVuex.useActions("homeModule", "GET_WORK_TODO");
     });
