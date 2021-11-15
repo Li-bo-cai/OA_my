@@ -10,7 +10,7 @@
       <el-main>
         <el-scrollbar class="menu_scroll">
           <div class="outBox">
-            <router-view></router-view>
+            <Tags />
           </div>
         </el-scrollbar>
       </el-main>
@@ -25,6 +25,7 @@
 import Header from "@/components/Header/index.vue";
 import Aside from "@/components/Aside/Aside.vue";
 import ShortCut from "@/components/ShortCut/ShortCut.vue";
+import Tags from "@/views/Tagsout/Tags.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -32,6 +33,7 @@ export default defineComponent({
     Header,
     Aside,
     ShortCut,
+    Tags,
   },
   setup() {
     return {};
@@ -57,7 +59,7 @@ export default defineComponent({
     height: calc(100vh - 50px);
     .outBox {
       min-width: 1000px;
-      padding: 20px;
+      padding: 30px;
     }
   }
 }

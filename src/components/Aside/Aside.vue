@@ -67,6 +67,7 @@ export default defineComponent({
   top: 5px;
   right: 0;
   font-size: 20px;
+  line-height: 20px;
   border: 1px solid #ccc;
   border-radius: 50%;
   cursor: pointer;
@@ -76,6 +77,7 @@ export default defineComponent({
   top: 55px;
   left: 0;
   font-size: 20px;
+  line-height: 20px;
   border: 1px solid #ccc;
   border-radius: 50%;
   cursor: pointer;
