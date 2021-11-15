@@ -1,7 +1,7 @@
 <template>
   <div class="aside_box" ref="AsideMenuDom">
     <el-scrollbar class="menu_scroll">
-      <AsideMenu :Routes="Routes" v-show="icon_btn" />
+      <AsideMenu :Routes="Routes" />
     </el-scrollbar>
     <div class="shrink_btn" v-show="icon_btn" @click="show_shrink_btn">
       <i title="点击收缩菜单栏" class="el-icon-back"></i>
@@ -27,10 +27,11 @@ export default defineComponent({
     let AsideMenuDom = ref<HTMLDivElement | null>(null);
 
     const show_shrink_btn = () => {
-      (AsideMenuDom.value as HTMLDivElement).style.width = "10px";
-      // icon_btn.value = false;
+      (AsideMenuDom.value as HTMLDivElement).style.width = "0";
+      icon_btn.value = false;
     };
     const show_pop_btn = () => {
+      (AsideMenuDom.value as HTMLDivElement).style.width = "auto";
       icon_btn.value = true;
     };
 
@@ -79,8 +80,5 @@ export default defineComponent({
   border-radius: 50%;
   cursor: pointer;
   z-index: 999;
-}
-@keyframes move {
-
 }
 </style>
