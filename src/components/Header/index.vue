@@ -38,11 +38,16 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .head_top {
+  display: flex;
+  align-items: center;
   .left_box {
     width: 70%;
   }
   .cros_menu {
     margin: 10px 0;
+  }
+  .right_box {
+    width: 30%;
   }
 }
 </style>

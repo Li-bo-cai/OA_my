@@ -65,8 +65,5 @@ export default defineComponent({
 }
 .short_cut {
   width: auto;
-  height: calc(100vh - 50px);
-  padding: 10px;
-  border-left: 1px solid #ccc;
 }
 </style>

@@ -1,11 +1,20 @@
 <template>
-  <div>
-    <!-- <img src="@/assets/images/user.png" alt=""> -->
+  <div class="user_info">
+    <img :src="require('@/assets/images/1.jpg')" alt="">
   </div>
 </template>
 
 <script setup lang="ts">
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.user_info {
+  display: flex;
+  flex-direction: row-reverse;
+}
+img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
 </style>

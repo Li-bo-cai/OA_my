@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance } from "vue";
+import { defineComponent, getCurrentInstance, onMounted } from "vue";
 import { asyncRoutes } from "@/router/asyncRoutes";
 import { constantRoutes } from "@/router/constantRoutes";
 import { useRoute } from "vue-router";
@@ -26,6 +26,14 @@ export default defineComponent({
 
     const Routes = [...constantRoutes, ...asyncRoutes]; //全部路由
     const route = useRoute();
+
+    onMounted(() => {
+      Routes.forEach((item) => {
+        if (item.path == "/") {
+          usVuex.useMutations("routesMoudle", "SET_ITEM_ROUTES", item);
+        }
+      });
+    });
 
     const shwoLeftMenu = (indexPath: any) => {
       console.log(indexPath);
