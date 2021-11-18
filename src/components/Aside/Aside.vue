@@ -31,7 +31,7 @@ export default defineComponent({
       icon_btn.value = false;
     };
     const show_pop_btn = () => {
-      (AsideMenuDom.value as HTMLDivElement).style.width = "auto";
+      (AsideMenuDom.value as HTMLDivElement).style.width = "140px";
       icon_btn.value = true;
     };
 
@@ -58,6 +58,8 @@ export default defineComponent({
 .aside_box {
   height: 100%;
   position: relative;
+  width: 140px;
+  transition: width 1s;
 }
 .menu_scroll {
   height: calc(100vh - 60px);

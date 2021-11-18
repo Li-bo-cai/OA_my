@@ -57,7 +57,9 @@
             <p>{{ item.release_time}}</p>
           </div>
           <div class="announcement2">
-            <p @click="go_notice(item)"> ></p>
+            <p @click="go_notice(item)">
+              <i class="el-icon-arrow-right"></i>
+            </p>
           </div>
         </div>
         <div v-if="showVive3" class="more more_work" @click="go_notice_page">···</div>

@@ -48,7 +48,8 @@ export default defineComponent({
     text-align: center;
     cursor: pointer;
     margin-bottom: 20px;
-    padding: 0 15px;
+    padding: 0 10px;
+    background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
     &:hover {
