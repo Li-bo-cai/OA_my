@@ -41,9 +41,6 @@
               <p>{{ item.message }}</p>
               <p>{{ item.created_at}}</p>
             </div>
-            <div class="dispose2">
-              <p @click="go_handle(item)">去处理 ></p>
-            </div>
           </div>
           <div v-if="showVive2" class="more more_work" @click="get_pending_work">···</div>
         </template>
@@ -55,11 +52,6 @@
           <div class="announcement1">
             <p>{{ item.title}}</p>
             <p>{{ item.release_time}}</p>
-          </div>
-          <div class="announcement2">
-            <p @click="go_notice(item)">
-              <i class="el-icon-arrow-right"></i>
-            </p>
           </div>
         </div>
         <div v-if="showVive3" class="more more_work" @click="go_notice_page">···</div>
