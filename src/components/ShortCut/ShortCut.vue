@@ -15,8 +15,8 @@
           <span>聊天</span>
         </li>
       </ul>
-      <Message />
     </div>
+    <Message />
   </div>
 </template>
 

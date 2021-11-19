@@ -14,6 +14,8 @@ import '@/assets/font/iconfont.css'
 
 import SocketIO from '@/utils/socket'
 
+import drag from '@/utils/drag'
+
 const app = createApp(App)
 
 app.use(SocketIO, {
@@ -27,4 +29,5 @@ app.use(router)
 app.use(store)
 app.config.globalProperties.usVuex = usVuex;
 app.provide('usVuex', usVuex)
+app.directive("drag", drag)
 app.mount('#app')
