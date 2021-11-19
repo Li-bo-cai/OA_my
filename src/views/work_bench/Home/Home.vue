@@ -94,7 +94,7 @@
 <script lang="ts">
 import homefunc from "./Home";
 import { defineComponent } from "@vue/runtime-core";
-import { getCurrentInstance, onMounted } from "vue";
+import { inject, onMounted } from "vue";
 import { mapState } from "vuex";
 export default defineComponent({
   computed: {
@@ -107,8 +107,8 @@ export default defineComponent({
     ]),
   },
   setup() {
-    const { proxy }: any = getCurrentInstance();
-    const usVuex = proxy.usVuex;
+    const usVuex: any = inject("usVuex");
+
     onMounted(() => {
       usVuex.useActions("homeModule", "GET_USER_INFO");
       usVuex.useActions("homeModule", "GET_WORK_TODO");

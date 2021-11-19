@@ -12,11 +12,19 @@ import '@/assets/css/common.scss'
 import '@/assets/css/index.scss'
 import '@/assets/font/iconfont.css'
 
+import SocketIO from '@/utils/socket'
+
 const app = createApp(App)
 
+app.use(SocketIO, {
+    connection: "ws://oms.dev.175.run:6699",
+    options: {
+        transports: ['websocket', 'post']
+    }
+})
 app.use(ElementPlus, { zIndex: 3000 })
-
 app.use(router)
 app.use(store)
 app.config.globalProperties.usVuex = usVuex;
+app.provide('usVuex', usVuex)
 app.mount('#app')

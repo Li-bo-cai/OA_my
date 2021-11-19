@@ -15,16 +15,19 @@
           <span>聊天</span>
         </li>
       </ul>
-
+      <Message />
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import Message from "./compontents/Message.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  components: {},
+  components: {
+    Message,
+  },
   setup() {
     return {};
   },
