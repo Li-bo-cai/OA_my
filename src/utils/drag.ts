@@ -4,6 +4,7 @@ function drag(vm: any) {
     return {
         mounted(el: any, binding: any) {
             const oDiv = el; //获取当前元素
+            debugger
             oDiv.onmousedown = function (e: any) {
                 //鼠标按下，计算当前元素距离可视区的距离
                 const disX: number = e.clientX - oDiv.offsetLeft;
