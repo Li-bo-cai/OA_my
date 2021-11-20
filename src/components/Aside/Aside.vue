@@ -13,15 +13,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, getCurrentInstance, ref } from "vue";
+import { computed, defineComponent, ref, inject } from "vue";
 import AsideMenu from "./compontent/AsideMenu.vue";
 export default defineComponent({
   components: {
     AsideMenu,
   },
   setup() {
-    const { proxy }: any = getCurrentInstance();
-    const usVuex = proxy.usVuex;
+    const usVuex: any = inject("usVuex");
 
     const icon_btn = ref<boolean>(true);
     let AsideMenuDom = ref<HTMLDivElement | null>(null);

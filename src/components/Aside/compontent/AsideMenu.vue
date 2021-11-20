@@ -37,7 +37,7 @@ export default defineComponent({
   border-right: none;
   width: 140px;
   padding-top: 30px;
-  .el-menu-item{
+  .el-menu-item {
     height: 35px;
     line-height: 35px;
   }

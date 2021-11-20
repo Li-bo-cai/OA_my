@@ -14,34 +14,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, inject } from "vue";
+import { defineComponent } from "vue";
 import { asyncRoutes } from "@/router/asyncRoutes";
 import { constantRoutes } from "@/router/constantRoutes";
 import { useRoute } from "vue-router";
 
 export default defineComponent({
   setup() {
-    const usVuex: any = inject("usVuex");
-
     const Routes = [...constantRoutes, ...asyncRoutes]; //全部路由
     const route = useRoute();
-
-    onMounted(() => {
-      Routes.forEach((item) => {
-        if (item.path == "/") {
-          usVuex.useMutations("routesMoudle", "SET_ITEM_ROUTES", item);
-        }
-      });
-      console.log(route);
-    });
-
-    // Routes.forEach((item) => {
-    //   if (item.path == ) {
-    //     console.log(item);
-    //     usVuex.useMutations("routesMoudle", "SET_ITEM_ROUTES", item);
-    //   }
-    // });
-
     return {
       Routes,
       route,

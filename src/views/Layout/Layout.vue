@@ -9,7 +9,7 @@
       </el-aside>
       <el-main>
         <el-scrollbar class="menu_scroll">
-          <div class="outBox">
+          <div id="outBox">
             <router-view></router-view>
           </div>
         </el-scrollbar>
@@ -55,8 +55,9 @@ export default defineComponent({
   padding: 0px;
   .menu_scroll {
     height: calc(100vh - 50px);
-    .outBox {
+    #outBox {
       min-width: 1000px;
+      height: calc(100vh - 30px);
       padding: 30px;
     }
   }

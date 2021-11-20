@@ -1,55 +1,53 @@
-import { defineComponent } from '@vue/runtime-dom';
+import { App } from 'vue';
 
-function drag(vm: any) {
-    return {
-        mounted(el: any, binding: any) {
-            const oDiv = el; //获取当前元素
-            debugger
-            oDiv.onmousedown = function (e: any) {
-                //鼠标按下，计算当前元素距离可视区的距离
-                const disX: number = e.clientX - oDiv.offsetLeft;
-                const disY: number = e.clientY - oDiv.offsetTop;
-                document.onmousemove = function (e) {
-                    //通过事件委托，计算移动的距离 
-                    const l: number = e.clientX - disX;
-                    const t: number = e.clientY - disY;
-                    //移动当前元素 
-                    oDiv.style.left = l + 'px';
-                    oDiv.style.top = t + 'px';
-                    //将此时的位置传出去
-                    binding.value({ x: e.pageX, y: e.pageY })
+export default {
+    install(Vue: App<Element>) {
+        Vue.directive('drag', {
+            mounted(el: HTMLElement, bind) {
+                el.onmousedown = (e) => {
+                    const elLeft = el.offsetLeft;
+                    const elTop = el.offsetTop;
+                    const dom = <HTMLElement>e.target;
+                    if (dom.classList.contains('drag-target')) {
+                        const x = e.clientX;
+                        const y = e.clientY;
+                        document.onmousemove = (move: MouseEvent) => {
+                            // const bodyW = (document.querySelector('#outBox') as HTMLDivElement).clientWidth;
+                            const bodyW = document.body.clientWidth;
+                            const bodyH = document.body.clientHeight;
+
+                            let left = elLeft - (x - move.clientX);
+                            if (left < 0) {
+                                left = 0;
+                            }
+                            if (left > bodyW - el.offsetWidth) {
+                                left = bodyW - el.offsetWidth;
+                            }
+                            el.style.left = left + 'px'
+                            let top = elTop - (y - move.clientY);
+                            if (top < 0) {
+                                top = 0;
+                            }
+                            if (top > bodyH - el.offsetHeight) {
+                                top = bodyH - el.offsetHeight
+                            }
+                            el.style.top = top + 'px'
+
+                            document.onmouseup = (up: MouseEvent) => {
+                                document.onmousemove = null;
+                                document.onmouseup = null
+                            }
+                            if (window.getSelection()) {
+                                window.getSelection()?.removeAllRanges()
+                            }
+                        }
+                    }
                 }
-                document.onmouseup = function (e: any) {
-                    document.onmousemove = null;
-                    document.onmouseup = null;
-                }
+            },
+            unmounted(el, bind) {
+                el.onmousedown = null;
             }
-        }
+
+        })
     }
 }
-
-const vm = defineComponent({
-    setup() {
-        const el = '#box'
-        const val = '123'
-        const style = {
-            width: '100px',
-            height: '100px',
-            background: 'aqua',
-            position: 'absolute',
-            right: '30px',
-            top: 0
-        }
-        //接受传来的位置数据，并将数据绑定给data下的val
-        const greet = (val: any) => {
-            vm.val = val;
-        }
-        return {
-            el,
-            val,
-            style,
-            greet
-        };
-    },
-});
-export default drag(vm)
