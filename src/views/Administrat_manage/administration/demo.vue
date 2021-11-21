@@ -10,7 +10,9 @@ import { defineComponent, reactive } from "vue";
 
 export default defineComponent({
   setup() {
-    return {};
+    return {
+      
+    };
   },
 });
 </script>

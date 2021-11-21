@@ -2,34 +2,62 @@
   <div class="short_cut_box" ref="shortCutBox">
     <div class="quick_icon">
       <ul>
-        <li>
+        <li @click="showMessageCard" @dblclick="recover">
           <i class="iconfont icon-tubiao_renshiguanli"></i>
           <span>消息</span>
         </li>
-        <li>
+        <li @click="showPendingCard">
           <i class="iconfont icon-tubiao_renshiguanli"></i>
           <span>代办</span>
         </li>
-        <li>
+        <li @click="showChatCard">
           <i class="iconfont icon-tubiao_renshiguanli"></i>
           <span>聊天</span>
         </li>
       </ul>
     </div>
-    <Message />
+    <Message v-show="MessagedialogVisible" />
   </div>
 </template>
 
 <script lang="ts">
 import Message from "./compontents/Message.vue";
-import { defineComponent } from "vue";
+import { defineComponent, ref, inject } from "vue";
+import { mapState } from "vuex";
 
 export default defineComponent({
   components: {
     Message,
   },
+  computed: {
+    ...mapState("shortCutModule", [
+      "MessagedialogVisible",
+      "PendingdialogVisible",
+      "ChatdialogVisible",
+    ]),
+  },
   setup() {
-    return {};
+    const usVuex: any = inject("usVuex");
+
+    const showMessageCard = () => {
+      // console.log("我是展示弹窗");
+      usVuex.useMutations("shortCutModule", "SET_MESSAGE_DIALOG", true);
+    };
+    const showPendingCard = () => {
+      console.log("我是展示弹窗");
+    };
+    const showChatCard = () => {
+      console.log("我是展示弹窗");
+    };
+    const recover = () => {
+      usVuex.useMutations("shortCutModule", "SET_STYLE");
+    };
+    return {
+      showMessageCard,
+      showPendingCard,
+      showChatCard,
+      recover,
+    };
   },
 });
 </script>
@@ -46,6 +74,7 @@ export default defineComponent({
   ul li {
     position: relative;
     right: -35px;
+    z-index: 999;
     transition: right 1s;
     width: 40px;
     text-align: center;
@@ -57,6 +86,7 @@ export default defineComponent({
     border-radius: 4px;
     &:hover {
       right: 0px;
+      background: rgb(102, 186, 255);
     }
   }
 }

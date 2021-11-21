@@ -10,9 +10,9 @@ import dynamicsModule from './modules/dynamics'
 import employeeModule from './modules/employee'
 import externalModule from './modules/external'
 import holidayModule from './modules/holiday'
-import messageModule from './modules/message'
 /* ------------------------------------------------------- */
 import routesMoudle from './modules/routes'
+import shortCutModule from './modules/shortCut'
 
 
 export const store = createStore({
@@ -24,9 +24,10 @@ export const store = createStore({
   },
   modules: {
     routesMoudle,  //路由模块
-
-
     loginModule,//登录模块
+    shortCutModule,//快捷信息模块
+
+
     homeModule, //首页模块
     organzationModule,//集团组织架构
     postModule,//岗位管理
@@ -37,7 +38,6 @@ export const store = createStore({
     companyModule,//公司公告模块
     dynamicsModule,//集团动态模块
     documentModule,//文档中心模块
-    messageModule,//消息中心模块
   }
 })
 

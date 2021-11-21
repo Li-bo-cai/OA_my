@@ -47,7 +47,6 @@ export default {
             unmounted(el, bind) {
                 el.onmousedown = null;
             }
-
         })
     }
 }
