@@ -42,6 +42,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .head {
   height: 50px;
+  padding: 0;
   border-bottom: 1px solid #ccc;
 }
 .menu {

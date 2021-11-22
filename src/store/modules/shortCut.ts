@@ -10,10 +10,6 @@ const shortCutModule: Module<ICountState, IRootState> = {
     namespaced: true,
     state() {
         return {
-            style: {
-                right: 0,
-                bottom: 0,
-            }, //弹出框位置对象
             MessagedialogVisible: false,
             PendingdialogVisible: false,
             ChatdialogVisible: false
@@ -23,10 +19,8 @@ const shortCutModule: Module<ICountState, IRootState> = {
     mutations: {
         // 设置弹窗位置属性
         SET_STYLE(state, payload) {
-            state.style = Object.assign({}, {
-                right: 0,
-                bottom: 0,
-            })
+            state.style = Object.assign({}, payload)
+            console.log(state.style);
         },
         // 设置message弹窗
         SET_MESSAGE_DIALOG(state, payload) {

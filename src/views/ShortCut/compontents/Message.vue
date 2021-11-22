@@ -1,5 +1,5 @@
 <template>
-  <div class="drag-target" v-drag :style="style">
+  <div class="drag-target" v-drag>
     <div class="message_body">
 
     </div>
@@ -17,9 +17,9 @@ export default defineComponent({
   },
   setup() {
     const usVuex: any = inject("usVuex");
+
     // 关闭弹窗
     const close_window = () => {
-      // console.log("弹窗关闭");
       usVuex.useMutations("shortCutModule", "SET_MESSAGE_DIALOG", false);
     };
     return {
@@ -32,6 +32,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .drag-target {
   position: fixed;
+  right: 5px;
+  bottom: 5px;
   z-index: 9;
   width: 600px;
   height: 400px;

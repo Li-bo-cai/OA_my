@@ -8,18 +8,18 @@
       </el-scrollbar>
     </div>
     <div class="right_box">
-      <UserHeader />
+      <UserFunc />
     </div>
   </div>
 </template>
 
 <script>
-import UserHeader from "./compontent/UserHeader.vue";
+import UserFunc from "./compontent/UserFunc.vue";
 import HeaderMenu from "./compontent/HeaderMenu.vue";
 import { defineComponent, ref } from "vue";
 export default defineComponent({
   components: {
-    UserHeader,
+    UserFunc,
     HeaderMenu,
   },
   setup() {

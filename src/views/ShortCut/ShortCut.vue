@@ -2,32 +2,41 @@
   <div class="short_cut_box" ref="shortCutBox">
     <div class="quick_icon">
       <ul>
-        <li @click="showMessageCard" @dblclick="recover">
+        <li @dblclick="showMessageCard" @click="recover('msg')">
           <i class="iconfont icon-tubiao_renshiguanli"></i>
           <span>消息</span>
         </li>
-        <li @click="showPendingCard">
+        <li @dblclick="showPendingCard" @click="recover('pend')">
           <i class="iconfont icon-tubiao_renshiguanli"></i>
           <span>代办</span>
         </li>
-        <li @click="showChatCard">
+        <li @dblclick="showChatCard" @click="recover('chat')">
           <i class="iconfont icon-tubiao_renshiguanli"></i>
           <span>聊天</span>
         </li>
       </ul>
     </div>
-    <Message v-show="MessagedialogVisible" />
+    <Message v-show="MessagedialogVisible" ref="msg" />
+    <Pending ref="pend" />
+    <Chat ref="chat" />
   </div>
 </template>
 
 <script lang="ts">
 import Message from "./compontents/Message.vue";
+import Pending from "./compontents/Pending.vue";
+import Chat from "./compontents/Chat.vue";
 import { defineComponent, ref, inject } from "vue";
 import { mapState } from "vuex";
 
+type MessageType = InstanceType<typeof Message>;
+type PendingType = InstanceType<typeof Pending>;
+type ChatType = InstanceType<typeof Chat>;
 export default defineComponent({
   components: {
     Message,
+    Pending,
+    Chat,
   },
   computed: {
     ...mapState("shortCutModule", [
@@ -39,8 +48,11 @@ export default defineComponent({
   setup() {
     const usVuex: any = inject("usVuex");
 
+    const msg = ref<MessageType | null>(null);
+    const pend = ref<MessageType | null>(null);
+    const chat = ref<MessageType | null>(null);
+
     const showMessageCard = () => {
-      // console.log("我是展示弹窗");
       usVuex.useMutations("shortCutModule", "SET_MESSAGE_DIALOG", true);
     };
     const showPendingCard = () => {
@@ -49,10 +61,30 @@ export default defineComponent({
     const showChatCard = () => {
       console.log("我是展示弹窗");
     };
-    const recover = () => {
-      usVuex.useMutations("shortCutModule", "SET_STYLE");
+    const recover = (val: string) => {
+      if (val == "msg") {
+        (msg.value as MessageType).$el.style.left =
+          document.body.clientWidth - 650 + "px";
+        (msg.value as MessageType).$el.style.top =
+          document.body.clientHeight - 450 + "px";
+      }
+      if (val == "pend") {
+        (pend.value as MessageType).$el.style.left =
+          document.body.clientWidth - 650 + "px";
+        (pend.value as MessageType).$el.style.top =
+          document.body.clientHeight - 450 + "px";
+      }
+      if (val == "chat") {
+        (chat.value as MessageType).$el.style.left =
+          document.body.clientWidth - 650 + "px";
+        (chat.value as MessageType).$el.style.top =
+          document.body.clientHeight - 450 + "px";
+      }
     };
     return {
+      msg,
+      pend,
+      chat,
       showMessageCard,
       showPendingCard,
       showChatCard,
@@ -73,13 +105,17 @@ export default defineComponent({
   flex-direction: column;
   ul li {
     position: relative;
-    right: -35px;
+    right: -40px;
     z-index: 999;
-    transition: right 1s;
-    width: 40px;
+    transition: right 0.8s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50px;
+    font-size: 14px;
     text-align: center;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 0 10px;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -87,10 +123,11 @@ export default defineComponent({
     &:hover {
       right: 0px;
       background: rgb(102, 186, 255);
+      color: #fff;
     }
   }
 }
 i {
-  font-size: 28px;
+  font-size: 22px;
 }
 </style>
