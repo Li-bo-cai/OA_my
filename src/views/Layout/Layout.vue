@@ -58,7 +58,7 @@ export default defineComponent({
     height: calc(100vh - 50px);
     #outBox {
       min-width: 1000px;
-      height: calc(100vh - 30px);
+      // height: calc(100vh - 60px);
       padding: 30px;
     }
   }
