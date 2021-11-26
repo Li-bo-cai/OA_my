@@ -6,7 +6,7 @@
         <div class="img_shade">切换<br />头像</div>
       </div>
       <div class="log_out">
-        <span>切换账号 <i class="iconfont icon-qiehuan" title="切换账号"></i></span>
+        <span>蒋竺娟<br />(yw***0)</span>
         <span>注销</span>
       </div>
     </div>
@@ -70,12 +70,16 @@
 .log_out {
   flex: 1;
   font-size: 12px;
-  color: #ccc;
   i {
     font-size: 12px;
   }
   span {
+    display: inline-block;
+    text-align: center;
     padding: 5px;
+  }
+  span:last-child {
+    color: #ccc;
     cursor: pointer;
     &:hover {
       color: #5777e7;
