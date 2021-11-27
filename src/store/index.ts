@@ -13,6 +13,7 @@ import holidayModule from './modules/holiday'
 /* ------------------------------------------------------- */
 import routesMoudle from './modules/routes'
 import shortCutModule from './modules/shortCut'
+import oa_approveMoudle from './modules/oa_approve'
 
 
 export const store = createStore({
@@ -26,7 +27,7 @@ export const store = createStore({
     routesMoudle,  //路由模块
     loginModule,//登录模块
     shortCutModule,//快捷信息模块
-
+    oa_approveMoudle,//oa模块
 
     homeModule, //首页模块
     organzationModule,//集团组织架构

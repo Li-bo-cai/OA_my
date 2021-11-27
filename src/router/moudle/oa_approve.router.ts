@@ -44,6 +44,12 @@ export const oa_approve: Array<RouteRecordRaw> = [
                 component: () => import('@/views/Oa_approve/WorkFlow/index.vue'),
                 name: 'work_flow',
                 meta: { title: '流程配置' }
+            },
+            {
+                path: 'oa_approve/graph',
+                component: () => ('@/views/Oa_approve/WorkFlow/GraphView.vue'),
+                name: 'graph',
+                meta: { title: 'g6流程' }
             }
         ]
     },
