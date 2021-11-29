@@ -4,25 +4,22 @@
       <span>流程设计器名称</span>
     </template>
     <div class="flow_chat">
-      <!-- 左侧按钮 -->
-      <ItemPanel />
-      <!-- 挂载节点 -->
-      <div id="canvasPanel" ref="canvasPanel"></div>
-      <!-- 配置面板 -->
-      <ConfigurePanel />
+      <el-tabs type="border-card">
+        <el-tab-pane label="流程设计">
+
+        </el-tab-pane>
+        <el-tab-pane label="流程设置"></el-tab-pane>
+        <el-tab-pane label="流程规则"></el-tab-pane>
+        <el-tab-pane label="流程记录"></el-tab-pane>
+      </el-tabs>
     </div>
   </el-dialog>
 </template>
 
 <script lang="ts">
-import ItemPanel from "./compontents/ItemPanel.vue";
-import ConfigurePanel from "./compontents/ConfigurePanel.vue";
-import { computed, defineComponent, inject, ref } from "vue";
+import { computed, defineComponent, inject, nextTick, ref } from "vue";
 export default defineComponent({
-  components: {
-    ItemPanel,
-    ConfigurePanel,
-  },
+  components: {},
   setup() {
     const usVuex: any = inject("usVuex");
     const ItemPanelDialogVisible = ref(
@@ -34,6 +31,10 @@ export default defineComponent({
     const closeDialod = () => {
       usVuex.useMutations("oa_approveModule", "SET_ITEMPANEL", false);
     };
+
+    nextTick(() => {
+      console.log(12);
+    });
     return {
       ItemPanelDialogVisible,
       closeDialod,
@@ -44,7 +45,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .flow_chat {
-  display: flex;
-  height: calc(100vh - 103px) ;
+  // display: flex;
+  height: calc(100vh - 103px);
 }
 </style>

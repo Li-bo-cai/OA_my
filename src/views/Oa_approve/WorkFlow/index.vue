@@ -59,12 +59,12 @@ export default defineComponent({
       },
     ];
 
-    const edit_btn = () => {
+    const design_btn = () => {
       usVuex.useMutations("oa_approveModule", "SET_ITEMPANEL", true);
     };
 
     return {
-      edit_btn,
+      design_btn,
       tableData,
     };
   },
