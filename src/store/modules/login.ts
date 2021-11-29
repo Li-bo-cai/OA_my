@@ -24,10 +24,10 @@ const loginModule: Module<ICountState, IRootState> = {
     },
     mutations: {
         // 设置token
-        SET_TOKEN: (state, payload) => {
+        SET_TOKEN(state, payload) {
             state.token = payload
         },
-        SET_ROLES: (state, payload) => {
+        SET_ROLES(state, payload) {
             state.roles = payload
         }
     },

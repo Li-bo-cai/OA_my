@@ -1,94 +1,94 @@
 import { Module } from "vuex";
-import {polymerization,message_todo} from '@/api/home/home.api'
+import { polymerization, message_todo } from '@/api/home/home.api'
 interface ICountState {
-    self_message:any,
-    dynamic:any,
-    notice:any,
-    word_file:any,
-    work_todo:any,
-    myTime:number,
-    num:number
+    self_message: any,
+    dynamic: any,
+    notice: any,
+    word_file: any,
+    work_todo: any,
+    myTime: number,
+    num: number
 }
 interface IRootState {
     [key: string]: any
 }
-const homeMoudle :Module<ICountState,IRootState>={
-    namespaced:true,
-    state(){
-        return{
-            self_message:'', //个人信息
-            dynamic:[],  //集团动态
-            notice:'', //公司公告
-            word_file:'',  //文件资源中心
-            work_todo:'',  //待处理事件
-            myTime:0,//时间
-            num:0, //加载次数
+const homeMoudle: Module<ICountState, IRootState> = {
+    namespaced: true,
+    state() {
+        return {
+            self_message: '', //个人信息
+            dynamic: [],  //集团动态
+            notice: '', //公司公告
+            word_file: '',  //文件资源中心
+            work_todo: '',  //待处理事件
+            myTime: 0,//时间
+            num: 0, //加载次数
         }
     },
-    getters:{
+    getters: {
     },
-    mutations:{
+    mutations: {
         // 设置个人信息
-        SET_SELF_MESSAGE(state,payload){
+        SET_SELF_MESSAGE(state, payload) {
             state.num = 1;
             state.self_message = payload
         },
         // 设置集团动态
-        SET_DYNAMIC(state,payload){
+        SET_DYNAMIC(state, payload) {
             state.dynamic = [...payload]
         },
         // 设置公司公告
-        SET_NOTICE(state,payload){
+        SET_NOTICE(state, payload) {
             state.notice = payload
         },
         // 设置文件资源中心
-        SET_WORK_FILE(state,payload){
+        SET_WORK_FILE(state, payload) {
             state.word_file = payload
         },
         //设置工作时间
-        SET_MY_TIME(state,payload){
+        SET_MY_TIME(state, payload) {
             state.myTime = payload
         },
         // 设置待处理事件
-        SET_WORK_TODO(state,payload){
+        SET_WORK_TODO(state, payload) {
             state.work_todo = payload
         }
     },
-    actions:{
+    actions: {
         // 获取首页信息
-        GET_USER_INFO({commit}){
-            polymerization().then((res:any)=>{
-                if(res.data.code==1){
-                    commit('SET_SELF_MESSAGE',res.data.data.self_message)
-                    if(res.data.data.dynamic.length>5){
-                        commit('SET_DYNAMIC',res.data.data.dynamic.slice(0,5))
-                    }else{
-                        commit('SET_DYNAMIC',res.data.data.dynamic)
+        GET_USER_INFO({ commit }) {
+            polymerization().then((res: any) => {
+                if (res.data.code == 1) {
+                    commit('SET_SELF_MESSAGE', res.data.data.self_message)
+                    if (res.data.data.dynamic.length > 5) {
+                        commit('SET_DYNAMIC', res.data.data.dynamic.slice(0, 5))
+                    } else {
+                        commit('SET_DYNAMIC', res.data.data.dynamic)
                     }
-                    if(res.data.data.notice.length>5){
-                        commit('SET_NOTICE',res.data.data.notice.slice(0,5))
-                    }else{
-                        commit('SET_NOTICE',res.data.data.notice)
+                    if (res.data.data.notice.length > 5) {
+                        commit('SET_NOTICE', res.data.data.notice.slice(0, 5))
+                    } else {
+                        commit('SET_NOTICE', res.data.data.notice)
                     }
-                    if(res.data.data.word_file.length>5){
-                        commit('SET_WORK_FILE',res.data.data.word_file.slice(0,5))
-                    }else{
-                        commit('SET_WORK_FILE',res.data.data.word_file)
+                    if (res.data.data.word_file.length > 5) {
+                        commit('SET_WORK_FILE', res.data.data.word_file.slice(0, 5))
+                    } else {
+                        commit('SET_WORK_FILE', res.data.data.word_file)
                     }
-                    if(res.data.data.myTime.length>6){
-                        commit('SET_MY_TIME',res.data.data.myTime.slice(0,6))
-                    }else{
-                        commit('SET_MY_TIME',res.data.data.myTime)
+                    if (res.data.data.myTime.length > 6) {
+                        commit('SET_MY_TIME', res.data.data.myTime.slice(0, 6))
+                    } else {
+                        commit('SET_MY_TIME', res.data.data.myTime)
                     }
                 }
             })
         },
         // 获取待处理
-        GET_WORK_TODO({commit}){
-            message_todo().then((res:any)=>{
+        GET_WORK_TODO({ commit }) {
+            message_todo().then((res: any) => {
                 // console.log(res);
-                if(res.data.code == 1){
-                    commit('SET_WORK_TODO',res.data)
+                if (res.data.code == 1) {
+                    commit('SET_WORK_TODO', res.data)
                 }
             })
         }

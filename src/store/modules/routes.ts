@@ -15,7 +15,7 @@ const routesMoudle: Module<ICountState, IRootState> = {
     },
     mutations: {
         // 设置routers
-        SET_ITEM_ROUTES: (state, payload) => {
+        SET_ITEM_ROUTES(state, payload) {
             state.ItemRoutes = payload
         }
     }

@@ -23,7 +23,16 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
+  setup() {
+    const input3 = null;
+    return {
+      input3,
+    };
+  },
+});
 </script>
 
 <style scoped lang="scss">

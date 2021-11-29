@@ -60,7 +60,7 @@ export default defineComponent({
     ];
 
     const edit_btn = () => {
-      usVuex.useMutations("oa_approveMoudle", "SET_ITEMPANEL", true);
+      usVuex.useMutations("oa_approveModule", "SET_ITEMPANEL", true);
     };
 
     return {
