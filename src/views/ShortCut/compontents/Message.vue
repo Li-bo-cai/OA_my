@@ -1,7 +1,7 @@
 <template>
   <div class="drag-target" v-drag>
     <div class="message_body">
-
+      {{message}}
     </div>
     <i class="el-icon-close close_pop" @click="close_window"></i>
   </div>
@@ -17,12 +17,18 @@ export default defineComponent({
   },
   setup() {
     const usVuex: any = inject("usVuex");
+    const socket: any = inject("socket");
+    console.log(socket.io);
 
+    const message = socket.on("connect", (res: any) => {
+      console.log("#connection: ", res);
+    });
     // 关闭弹窗
     const close_window = () => {
       usVuex.useMutations("shortCutModule", "SET_MESSAGE_DIALOG", false);
     };
     return {
+      message,
       close_window,
     };
   },

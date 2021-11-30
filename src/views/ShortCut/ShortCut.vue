@@ -5,6 +5,7 @@
         <li @dblclick="showMessageCard" @click="recover('msg')">
           <i class="iconfont icon-tubiao_renshiguanli"></i>
           <span>消息</span>
+          {{message}}
         </li>
         <li @dblclick="showPendingCard" @click="recover('pend')">
           <i class="iconfont icon-tubiao_renshiguanli"></i>
@@ -49,8 +50,8 @@ export default defineComponent({
     const usVuex: any = inject("usVuex");
 
     const msg = ref<MessageType | null>(null);
-    const pend = ref<MessageType | null>(null);
-    const chat = ref<MessageType | null>(null);
+    const pend = ref<PendingType | null>(null);
+    const chat = ref<ChatType | null>(null);
 
     const showMessageCard = () => {
       usVuex.useMutations("shortCutModule", "SET_MESSAGE_DIALOG", true);
@@ -81,6 +82,8 @@ export default defineComponent({
           document.body.clientHeight - 450 + "px";
       }
     };
+
+    
     return {
       msg,
       pend,
