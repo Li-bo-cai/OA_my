@@ -6,7 +6,6 @@
     <div class="flow_chat">
       <el-tabs type="border-card">
         <el-tab-pane label="流程设计">
-
         </el-tab-pane>
         <el-tab-pane label="流程设置"></el-tab-pane>
         <el-tab-pane label="流程规则"></el-tab-pane>
@@ -33,7 +32,7 @@ export default defineComponent({
     };
 
     nextTick(() => {
-      console.log(12);
+      // console.log(12);
     });
     return {
       ItemPanelDialogVisible,

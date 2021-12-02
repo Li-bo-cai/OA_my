@@ -21,13 +21,16 @@ const app = createApp(App)
 app.use(SocketIO, {
     connection: "ws://oms.dev.175.run:6699",
     options: {
-        transports: ['post', 'websocket',]
+        transports: ['websocket', 'post'],
+        autoConnect: true,  //是否自动打开
+        transportOptions: {
+            polling: {
+                extraHeaders: {
+                    'socket': '1234'
+                }
+            }
+        }
     },
-    // vuex: {
-    //     store,
-    //     mutationPrefix: "SOCKET_",
-    //     actionPrefix: "SOCKET_"
-    // }
 })
 
 app.use(ElementPlus, { zIndex: 3000 })
