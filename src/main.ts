@@ -21,6 +21,7 @@ const app = createApp(App)
 app.use(SocketIO, {
     connection: "ws://oms.dev.175.run:6699",
     options: {
+        path: '',
         transports: ['websocket', 'post'],
         autoConnect: true,  //是否自动打开
         transportOptions: {

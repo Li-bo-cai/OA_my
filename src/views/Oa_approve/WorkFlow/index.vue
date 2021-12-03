@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="tableData" style="width: 100%" :header-cell-style="{'text-align':'center'}">
+    <el-table :data="tableData" style="width: 100%" highlight-current-row :header-cell-style="{'text-align':'center'}">
       <el-table-column prop="date" label="日期"> </el-table-column>
       <el-table-column prop="name" label="姓名"> </el-table-column>
       <el-table-column prop="name" label="姓名"> </el-table-column>

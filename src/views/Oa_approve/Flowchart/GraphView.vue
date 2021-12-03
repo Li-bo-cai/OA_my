@@ -4,12 +4,13 @@
       <span>流程设计器名称</span>
     </template>
     <div class="flow_chat">
-      <el-tabs type="border-card">
-        <el-tab-pane label="流程设计">
+      <el-tabs v-model="activeName" type="border-card">
+        <el-tab-pane label="流程设计" name="design_flow">
+          <DesignFlow />
         </el-tab-pane>
-        <el-tab-pane label="流程设置"></el-tab-pane>
-        <el-tab-pane label="流程规则"></el-tab-pane>
-        <el-tab-pane label="流程记录"></el-tab-pane>
+        <el-tab-pane label="流程设置" name="design_edit"></el-tab-pane>
+        <el-tab-pane label="流程规则" name="design_rule"></el-tab-pane>
+        <el-tab-pane label="流程记录" name="design_log"></el-tab-pane>
       </el-tabs>
     </div>
   </el-dialog>
@@ -17,10 +18,15 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject, nextTick, ref } from "vue";
+import DesignFlow from "./components/DesignFlow/index.vue";
 export default defineComponent({
-  components: {},
+  components: {
+    DesignFlow,
+  },
   setup() {
     const usVuex: any = inject("usVuex");
+
+    const activeName = ref<string>("design_flow");
     const ItemPanelDialogVisible = ref(
       computed(() => {
         return usVuex.useState("oa_approveModule", "ItemPanelDialogVisible");
@@ -36,6 +42,7 @@ export default defineComponent({
     });
     return {
       ItemPanelDialogVisible,
+      activeName,
       closeDialod,
     };
   },
@@ -46,5 +53,11 @@ export default defineComponent({
 .flow_chat {
   // display: flex;
   height: calc(100vh - 103px);
+  .el-tabs {
+    height: 100%;
+  }
+  .el-tab-pane {
+    padding: 0;
+  }
 }
 </style>

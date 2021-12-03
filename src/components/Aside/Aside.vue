@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, inject } from "vue";
-import AsideMenu from "./compontent/AsideMenu.vue";
+import AsideMenu from "./component/AsideMenu.vue";
 export default defineComponent({
   components: {
     AsideMenu,
