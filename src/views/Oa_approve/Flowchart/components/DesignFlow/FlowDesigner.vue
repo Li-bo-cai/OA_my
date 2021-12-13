@@ -2,7 +2,7 @@
   <div class="root">
     <!-- 左侧盒子 -->
     <div class="graph_box">
-
+      <Graph />
     </div>
     <!-- 右侧盒子 -->
     <div class="graph_info">
@@ -12,9 +12,13 @@
 </template>
 
 <script lang="ts">
+import Graph from "./component/graph.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  components: {
+    Graph,
+  },
   setup() {
     return {};
   },

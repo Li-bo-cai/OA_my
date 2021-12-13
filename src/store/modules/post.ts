@@ -1,5 +1,5 @@
 import { Module } from "vuex";
-import { group, get_role_group, insideCreateOrEdit, get_role_staff, create_or_edit, delete_role, remove_staff, build_staff, show_staff } from '@/api/post/post.api'
+import { group, get_role_group, insideCreateOrEdit } from '@/api/post/post.api'
 interface ICountState {
     post_tableData: any[],
     post_tree: any[],
@@ -35,11 +35,11 @@ const postModule: Module<ICountState, IRootState> = {
     getters: {},
     mutations: {
         //设置岗位树状
-        SET_POST_TREE(state,payload){
+        SET_POST_TREE(state, payload) {
             state.post_tree = [...payload]
         },
         //设置岗位下拉选择
-        SET_POST_OPTIONS(state,payload){
+        SET_POST_OPTIONS(state, payload) {
             state.post_options = [...payload]
         },
         //设置岗位数据
@@ -61,18 +61,18 @@ const postModule: Module<ICountState, IRootState> = {
     },
     actions: {
         //获取岗位下拉分组信息
-        GET_POST_TREE({commit}){
-            group().then((res:any)=>{
-                if(res.data.code == 1){
-                    commit('SET_POST_TREE',res.data.data)
+        GET_POST_TREE({ commit }) {
+            group().then((res: any) => {
+                if (res.data.code == 1) {
+                    commit('SET_POST_TREE', res.data.data)
                 }
             })
         },
         // 获取岗位下拉选择
-        GET_POST_OPTIONS({commit}){
-            get_role_group().then((res:any)=>{
-                if(res.data.code == 1){
-                    commit('SET_POST_OPTIONS',res.data.data)
+        GET_POST_OPTIONS({ commit }) {
+            get_role_group().then((res: any) => {
+                if (res.data.code == 1) {
+                    commit('SET_POST_OPTIONS', res.data.data)
                 }
             })
         },

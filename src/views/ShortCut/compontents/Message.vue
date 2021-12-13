@@ -1,14 +1,13 @@
 <template>
   <div class="drag-target" v-drag>
     <div class="message_body">
-      <!-- {{message}} -->
     </div>
     <i class="el-icon-close close_pop" @click="close_window"></i>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted } from "vue";
+import { defineComponent, inject } from "vue";
 import { mapState } from "vuex";
 
 export default defineComponent({
@@ -19,27 +18,11 @@ export default defineComponent({
     const usVuex: any = inject("usVuex");
     const socket: any = inject("socket");
 
-    onMounted(() => {
-      socket.connect();
-      console.log(socket);
-
-      socket.on("connect", (res: any) => {
-        console.log("#connect: ", res);
-      });
-      socket.on("message", (res: any) => {
-        console.log("#message: ", res);
-      });
-      socket.on("disconnect", () => {
-        console.log("断开连接");
-      });
-    });
-
     // 关闭弹窗
     const close_window = () => {
       usVuex.useMutations("shortCutModule", "SET_MESSAGE_DIALOG", false);
     };
     return {
-      // message,
       close_window,
     };
   },

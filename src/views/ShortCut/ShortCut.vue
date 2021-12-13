@@ -5,7 +5,6 @@
         <li @dblclick="showMessageCard" @click="recover('msg')">
           <i class="iconfont icon-tubiao_renshiguanli"></i>
           <span>消息</span>
-          {{message}}
         </li>
         <li @dblclick="showPendingCard" @click="recover('pend')">
           <i class="iconfont icon-tubiao_renshiguanli"></i>

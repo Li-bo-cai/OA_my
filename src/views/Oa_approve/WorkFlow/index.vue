@@ -13,11 +13,11 @@
       <el-table-column label="操作" width="300px">
         <template #default="scope">
           <div class="operate_btn">
-            <el-button type="primary" size="mini" plain icon="el-icon-edit" @click="edit_btn(scope.$index, scope.row)">编辑</el-button>
-            <el-button type="warning" size="mini" plain icon="el-icon-setting" @click="design_btn(scope.$index, scope.row)">设计</el-button>
-            <el-button type="success" size="mini" plain icon="el-icon-position" @click="realease_btn(scope.$index, scope.row)">发布</el-button>
-            <el-button type="primary" size="mini" plain icon="el-icon-view" @click="examine_btn(scope.$index, scope.row)">查看</el-button>
-            <el-button type="danger" size="mini" plain icon="el-icon-delete" @click="delete_btn(scope.$index, scope.row)">删除</el-button>
+            <el-button type="primary" size="mini" plain icon="el-icon-edit" @click="edit_btn(scope.row)">编辑</el-button>
+            <el-button type="warning" size="mini" plain icon="el-icon-setting" @click="design_btn(scope.row)">设计</el-button>
+            <el-button type="success" size="mini" plain icon="el-icon-position" @click="realease_btn(scope.row)">发布</el-button>
+            <el-button type="primary" size="mini" plain icon="el-icon-view" @click="examine_btn(scope.row)">查看</el-button>
+            <el-button type="danger" size="mini" plain icon="el-icon-delete" @click="delete_btn(scope.row)">删除</el-button>
           </div>
         </template>
       </el-table-column>
@@ -58,12 +58,15 @@ export default defineComponent({
         address: "上海市普陀区金沙江路 1516 弄",
       },
     ];
-
+    const edit_btn = () => {
+      console.log(123);
+    };
     const design_btn = () => {
       usVuex.useMutations("oa_approveModule", "SET_ITEMPANEL", true);
     };
 
     return {
+      edit_btn,
       design_btn,
       tableData,
     };

@@ -7,11 +7,22 @@
 
 <script lang="ts">
 import G6 from "@antv/g6";
-import { defineComponent, nextTick } from "vue";
+import {
+  ComponentInternalInstance,
+  defineComponent,
+  getCurrentInstance,
+  nextTick,
+} from "vue";
 
 export default defineComponent({
   setup() {
-    nextTick(() => {});
+    const { proxy } = getCurrentInstance() as ComponentInternalInstance;
+    console.log(proxy);
+
+    nextTick(() => {
+      createGraphic();
+    });
+
     const createGraphic = () => {
       const grid = new G6.Grid();
       const menu = new G6.Menu({
@@ -27,12 +38,18 @@ export default defineComponent({
         },
         handleMenuClick(target, item) {
           const { id } = target;
-          if (id) {
-            [id](item);
-          }
+          // if (id) {
+          //   proxy[id](item);
+          // }
         },
       });
+      const minimap = new G6.Minimap({
+        size: [200, 100],
+      });
+      // const cfg = registerFactory()
     };
+    // const
+
     return {};
   },
 });

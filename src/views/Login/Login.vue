@@ -63,18 +63,14 @@
 
 <script lang="ts">
 import { insideLogin } from "@/api/user/user.api";
-import { defineComponent, getCurrentInstance, reactive, ref } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { defineComponent, inject, reactive, ref } from "vue";
 import loginRules from "./loginRuls";
 import { ElMessage } from "element-plus";
 export default defineComponent({
   setup() {
     // 获取输入数据
-    const store = useStore();
-    const router = useRouter();
-    const { proxy }: any = getCurrentInstance();
-    const usVuex = proxy.usVuex;
+    const usVuex: any = inject("usVuex");
+    const socket: any = inject("socket");
 
     // 定义登录数据
     let a!: number;
@@ -109,6 +105,13 @@ export default defineComponent({
     // 点击登录
     const handleLogin = () => {
       usVuex.useActions("loginModule", "GET_LOGIN", loginForm);
+      socket.emit({
+        action: "/api/message/bind",
+        receive: "/api/message/bind",
+        data: { number: loginForm.account },
+      });
+      console.log(1234);
+      
     };
     // 获取验证码
     const get_code = () => {

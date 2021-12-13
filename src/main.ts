@@ -27,7 +27,7 @@ app.use(SocketIO, {
         transportOptions: {
             polling: {
                 extraHeaders: {
-                    'socket': '1234'
+                    'token': sessionStorage.getItem('socketToken') || ''
                 }
             }
         }
