@@ -30,8 +30,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .design_flow {
   height: 100%;
-  .scroll {
-    height: 100%;
+  .design_scroll {
+    height: calc(100vh - 161px);
   }
 }
 </style>
