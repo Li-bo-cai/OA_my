@@ -58,16 +58,28 @@ export default defineComponent({
         address: "上海市普陀区金沙江路 1516 弄",
       },
     ];
-    const edit_btn = () => {
+    const edit_btn = (val: any) => {
       console.log(123);
     };
-    const design_btn = () => {
+    const design_btn = (val: any) => {
       usVuex.useMutations("oa_approveModule", "SET_ITEMPANEL", true);
+    };
+    const realease_btn = (val: any) => {
+      console.log(123);
+    };
+    const examine_btn = (val: any) => {
+      console.log(123);
+    };
+    const delete_btn = (val: any) => {
+      console.log(123);
     };
 
     return {
       edit_btn,
       design_btn,
+      realease_btn,
+      examine_btn,
+      delete_btn,
       tableData,
     };
   },

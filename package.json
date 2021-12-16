@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@antv/g6": "^4.5.0",
+    "@antv/x6": "^1.28.1",
     "@formily/core": "^2.0.5",
     "@formily/vue": "^2.0.5",
     "axios": "^0.21.1",

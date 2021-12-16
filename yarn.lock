@@ -2,262 +2,17 @@
 # yarn lockfile v1
 
 
-"@ant-design/colors@^4.0.5":
-  version "4.0.5"
-  resolved "https://registry.nlark.com/@ant-design/colors/download/@ant-design/colors-4.0.5.tgz#d7d100d7545cca8f624954604a6892fc48ba5aae"
-  integrity sha1-19EA11Rcyo9iSVRgSmiS/Ei6Wq4=
+"@antv/x6@^1.28.1":
+  version "1.28.1"
+  resolved "https://registry.npmmirror.com/@antv/x6/download/@antv/x6-1.28.1.tgz#67bb31ec45869e4e2c7a4d9c7492c08ea19aa2d2"
+  integrity sha1-Z7sx7EWGnk4sek2cdJLAjqGaotI=
   dependencies:
-    tinycolor2 "^1.4.1"
-
-"@antv/algorithm@^0.1.8":
-  version "0.1.13"
-  resolved "https://registry.npmmirror.com/@antv/algorithm/download/@antv/algorithm-0.1.13.tgz#f6258d999c658249dbc4fab8df3b3b774db282c0"
-  integrity sha1-9iWNmZxlgknbxPq43zs7d02ygsA=
-  dependencies:
-    "@antv/util" "^2.0.13"
-    tslib "^2.0.0"
-
-"@antv/dom-util@^2.0.1", "@antv/dom-util@^2.0.2":
-  version "2.0.3"
-  resolved "https://registry.npmmirror.com/@antv/dom-util/download/@antv/dom-util-2.0.3.tgz?cache=0&sync_timestamp=1636458900516&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40antv%2Fdom-util%2Fdownload%2F%40antv%2Fdom-util-2.0.3.tgz#cbd158b1c88e0e8a4d865871a5969b1190554ff5"
-  integrity sha1-y9FYsciODopNhlhxpZabEZBVT/U=
-  dependencies:
-    tslib "^2.0.3"
-
-"@antv/event-emitter@^0.1.1", "@antv/event-emitter@~0.1.0":
-  version "0.1.2"
-  resolved "https://registry.nlark.com/@antv/event-emitter/download/@antv/event-emitter-0.1.2.tgz#a17b7cb86e6d071880dc6bfb232756f88624ecbc"
-  integrity sha1-oXt8uG5tBxiA3Gv7IydW+IYk7Lw=
-
-"@antv/g-base@^0.5.1", "@antv/g-base@^0.5.3":
-  version "0.5.9"
-  resolved "https://registry.npmmirror.com/@antv/g-base/download/@antv/g-base-0.5.9.tgz#58d0e11d85157ada1408fbdf24f4f468f40e59cd"
-  integrity sha1-WNDhHYUVetoUCPvfJPT0aPQOWc0=
-  dependencies:
-    "@antv/event-emitter" "^0.1.1"
-    "@antv/g-math" "^0.1.6"
-    "@antv/matrix-util" "^3.1.0-beta.1"
-    "@antv/path-util" "~2.0.5"
-    "@antv/util" "~2.0.0"
-    "@types/d3-timer" "^2.0.0"
-    d3-ease "^1.0.5"
-    d3-interpolate "^1.3.2"
-    d3-timer "^1.0.9"
-    detect-browser "^5.1.0"
-    tslib "^2.0.3"
-
-"@antv/g-canvas@^0.5.2":
-  version "0.5.12"
-  resolved "https://registry.npmmirror.com/@antv/g-canvas/download/@antv/g-canvas-0.5.12.tgz?cache=0&sync_timestamp=1637223767855&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40antv%2Fg-canvas%2Fdownload%2F%40antv%2Fg-canvas-0.5.12.tgz#2fc40dced6994f074f22341e65d56f7bbd5275f7"
-  integrity sha1-L8QNztaZTwdPIjQeZdVve71Sdfc=
-  dependencies:
-    "@antv/g-base" "^0.5.3"
-    "@antv/g-math" "^0.1.6"
-    "@antv/matrix-util" "^3.1.0-beta.1"
-    "@antv/path-util" "~2.0.5"
-    "@antv/util" "~2.0.0"
-    gl-matrix "^3.0.0"
-    tslib "^2.0.3"
-
-"@antv/g-math@^0.1.1", "@antv/g-math@^0.1.6":
-  version "0.1.7"
-  resolved "https://registry.npmmirror.com/@antv/g-math/download/@antv/g-math-0.1.7.tgz#6ec2769269f7ccb67e58140d5739df74046cc04e"
-  integrity sha1-bsJ2kmn3zLZ+WBQNVznfdARswE4=
-  dependencies:
-    "@antv/util" "~2.0.0"
-    gl-matrix "^3.0.0"
-
-"@antv/g-svg@^0.5.1", "@antv/g-svg@^0.5.2":
-  version "0.5.6"
-  resolved "https://registry.npmmirror.com/@antv/g-svg/download/@antv/g-svg-0.5.6.tgz?cache=0&sync_timestamp=1637225463869&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40antv%2Fg-svg%2Fdownload%2F%40antv%2Fg-svg-0.5.6.tgz#70b2fa980c431b39ad3c5b4b53e36a1d60957d65"
-  integrity sha1-cLL6mAxDGzmtPFtLU+NqHWCVfWU=
-  dependencies:
-    "@antv/g-base" "^0.5.3"
-    "@antv/g-math" "^0.1.6"
-    "@antv/util" "~2.0.0"
-    detect-browser "^5.0.0"
-    tslib "^2.0.3"
-
-"@antv/g-webgpu-core@^0.5.5", "@antv/g-webgpu-core@^0.5.6":
-  version "0.5.6"
-  resolved "https://registry.nlark.com/@antv/g-webgpu-core/download/@antv/g-webgpu-core-0.5.6.tgz#68cde0b5d0b44b5794371c2523682f4734da3c6c"
-  integrity sha1-aM3gtdC0S1eUNxwlI2gvRzTaPGw=
-  dependencies:
-    eventemitter3 "^4.0.0"
-    gl-matrix "^3.1.0"
-    inversify "^5.0.1"
-    inversify-inject-decorators "^3.1.0"
-    probe.gl "^3.1.1"
-    reflect-metadata "^0.1.13"
-
-"@antv/g-webgpu-engine@^0.5.5":
-  version "0.5.6"
-  resolved "https://registry.nlark.com/@antv/g-webgpu-engine/download/@antv/g-webgpu-engine-0.5.6.tgz#be7c1bf8e4b1822d72a302d628034345e0577bbd"
-  integrity sha1-vnwb+OSxgi1yowLWKANDReBXe70=
-  dependencies:
-    "@antv/g-webgpu-core" "^0.5.6"
-    "@webgpu/glslang" "^0.0.15"
-    "@webgpu/types" "^0.0.31"
-    gl-matrix "^3.1.0"
-    hammerjs "^2.0.8"
-    inversify "^5.0.1"
-    inversify-inject-decorators "^3.1.0"
-    probe.gl "^3.1.1"
-    reflect-metadata "^0.1.13"
-    regl "^1.3.11"
-
-"@antv/g-webgpu@0.5.5":
-  version "0.5.5"
-  resolved "https://registry.nlark.com/@antv/g-webgpu/download/@antv/g-webgpu-0.5.5.tgz#003d411453ed03e7dd916bd6c6db26a2b53d1991"
-  integrity sha1-AD1BFFPtA+fdkWvWxtsmorU9GZE=
-  dependencies:
-    "@antv/g-webgpu-core" "^0.5.5"
-    "@antv/g-webgpu-engine" "^0.5.5"
-    "@webgpu/types" "^0.0.31"
-    gl-matrix "^3.1.0"
-    gl-vec2 "^1.3.0"
-    hammerjs "^2.0.8"
-    inversify "^5.0.1"
-    inversify-inject-decorators "^3.1.0"
-    polyline-miter-util "^1.0.1"
-    polyline-normals "^2.0.2"
-    probe.gl "^3.1.1"
-    reflect-metadata "^0.1.13"
-
-"@antv/g6-core@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.npmmirror.com/@antv/g6-core/download/@antv/g6-core-0.5.0.tgz#c3292d8dc789d5e06817d17b56ec983ed82d3d94"
-  integrity sha512-tBfd0moxWzDIVD1CRlEoEFVps7bQsps5JB0LBtvobNT0a0Y8Kd2Rdxv0hRGrnlQgKYC93NrCftkRcxCIvTQO1A==
-  dependencies:
-    "@antv/algorithm" "^0.1.8"
-    "@antv/dom-util" "^2.0.1"
-    "@antv/event-emitter" "~0.1.0"
-    "@antv/g-base" "^0.5.1"
-    "@antv/g-math" "^0.1.1"
-    "@antv/matrix-util" "^3.1.0-beta.3"
-    "@antv/path-util" "^2.0.3"
-    "@antv/util" "~2.0.5"
-    ml-matrix "^6.5.0"
-    tslib "^2.1.0"
-
-"@antv/g6-element@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.npmmirror.com/@antv/g6-element/download/@antv/g6-element-0.5.0.tgz#5d267facf77658b1896c3cdcbd4ac13f0b83f8b5"
-  integrity sha512-WkhFwHmFLMPeJ1tUhxpnuIuVPEtn4OkYAKfnoVlyiBZnGG2jqkHAG03Ll7YoF0A40EUy+a/x2GukBhLEm/kuJw==
-  dependencies:
-    "@antv/g-base" "^0.5.1"
-    "@antv/g6-core" "0.5.0"
-    "@antv/util" "~2.0.5"
-
-"@antv/g6-pc@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.npmmirror.com/@antv/g6-pc/download/@antv/g6-pc-0.5.0.tgz#1b259e6f9b16617504c47b745df8502eb14f62af"
-  integrity sha512-/yeIymYQ2GpULwDDxn3RadhzxRemS8o9oTYCVTuPPt9pvJ0XJ7P3nB3z2gwnIoRjoNF6qvlmFWgW9DBbfNzeiw==
-  dependencies:
-    "@ant-design/colors" "^4.0.5"
-    "@antv/algorithm" "^0.1.8"
-    "@antv/dom-util" "^2.0.1"
-    "@antv/event-emitter" "~0.1.0"
-    "@antv/g-base" "^0.5.1"
-    "@antv/g-canvas" "^0.5.2"
-    "@antv/g-math" "^0.1.1"
-    "@antv/g-svg" "^0.5.1"
-    "@antv/g6-core" "0.5.0"
-    "@antv/g6-element" "0.5.0"
-    "@antv/g6-plugin" "0.5.0"
-    "@antv/hierarchy" "^0.6.7"
-    "@antv/layout" "0.1.19-beta.5"
-    "@antv/matrix-util" "^3.1.0-beta.3"
-    "@antv/path-util" "^2.0.3"
-    "@antv/util" "~2.0.5"
-    color "^3.1.3"
-    d3-force "^2.0.1"
-    dagre "^0.8.5"
-    insert-css "^2.0.0"
-    ml-matrix "^6.5.0"
-
-"@antv/g6-plugin@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.npmmirror.com/@antv/g6-plugin/download/@antv/g6-plugin-0.5.0.tgz?cache=0&sync_timestamp=1637336732081&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40antv%2Fg6-plugin%2Fdownload%2F%40antv%2Fg6-plugin-0.5.0.tgz#3500fee9e945f7311e81656a4692edec9cbefcb8"
-  integrity sha512-Fxv2G6QYkuluGxbK4gH6PInvWZGwx0GEELmuRkw/Owqn1nw43N37+iDlDA+JgdyDxts3pqC+JQKeHGO270Uo0w==
-  dependencies:
-    "@antv/dom-util" "^2.0.2"
-    "@antv/g-base" "^0.5.1"
-    "@antv/g-canvas" "^0.5.2"
-    "@antv/g-svg" "^0.5.2"
-    "@antv/g6-core" "0.5.0"
-    "@antv/matrix-util" "^3.1.0-beta.3"
-    "@antv/scale" "^0.3.4"
-    "@antv/util" "^2.0.9"
-    insert-css "^2.0.0"
-
-"@antv/g6@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.npmmirror.com/@antv/g6/download/@antv/g6-4.5.0.tgz#2ef1e5dd8eedc74800b1862d0e6de05acddea1f4"
-  integrity sha512-d6lVmbQP+12JwIqvyZ5iuJg7Xq77JANFn9SLJjn8cZCjsQ9Ns1aYXzY66siPICn3Zqj286V3JdurwNHoQqmcyg==
-  dependencies:
-    "@antv/g6-pc" "0.5.0"
-
-"@antv/hierarchy@^0.6.7":
-  version "0.6.8"
-  resolved "https://registry.nlark.com/@antv/hierarchy/download/@antv/hierarchy-0.6.8.tgz#b77c490a9c2dd6da186cbacee0e7887b8c1b3fa4"
-  integrity sha1-t3xJCpwt1toYbLrO4OeIe4wbP6Q=
-  dependencies:
-    "@antv/util" "^2.0.7"
-
-"@antv/layout@0.1.19-beta.5":
-  version "0.1.19-beta.5"
-  resolved "https://registry.npmmirror.com/@antv/layout/download/@antv/layout-0.1.19-beta.5.tgz#41b31ae55ae50a9d72ad8efab253fb8b40049337"
-  integrity sha1-QbMa5VrlCp1yrY76slP7i0AEkzc=
-  dependencies:
-    "@antv/g-webgpu" "0.5.5"
-    d3-force "^2.0.1"
-    dagrejs "^0.2.1"
-    ml-matrix "^6.5.0"
-
-"@antv/matrix-util@^3.0.4":
-  version "3.0.4"
-  resolved "https://registry.npmmirror.com/@antv/matrix-util/download/@antv/matrix-util-3.0.4.tgz?cache=0&sync_timestamp=1636459202141&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40antv%2Fmatrix-util%2Fdownload%2F%40antv%2Fmatrix-util-3.0.4.tgz#ea13f158aa2fb4ba2fb8d6b6b561ec467ea3ac20"
-  integrity sha1-6hPxWKovtLovuNa2tWHsRn6jrCA=
-  dependencies:
-    "@antv/util" "^2.0.9"
-    gl-matrix "^3.3.0"
-    tslib "^2.0.3"
-
-"@antv/matrix-util@^3.1.0-beta.1", "@antv/matrix-util@^3.1.0-beta.3":
-  version "3.1.0-beta.3"
-  resolved "https://registry.npmmirror.com/@antv/matrix-util/download/@antv/matrix-util-3.1.0-beta.3.tgz?cache=0&sync_timestamp=1636459202141&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40antv%2Fmatrix-util%2Fdownload%2F%40antv%2Fmatrix-util-3.1.0-beta.3.tgz#e061de8fa7be04605a155c69cc5ce9082eedddee"
-  integrity sha1-4GHej6e+BGBaFVxpzFzpCC7t3e4=
-  dependencies:
-    "@antv/util" "^2.0.9"
-    gl-matrix "^3.4.3"
-    tslib "^2.0.3"
-
-"@antv/path-util@^2.0.3", "@antv/path-util@~2.0.5":
-  version "2.0.15"
-  resolved "https://registry.npmmirror.com/@antv/path-util/download/@antv/path-util-2.0.15.tgz?cache=0&sync_timestamp=1636459182664&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40antv%2Fpath-util%2Fdownload%2F%40antv%2Fpath-util-2.0.15.tgz#a6f691dfc8b7bce5be7f0aabb5bd614964325631"
-  integrity sha1-pvaR38i3vOW+fwqrtb1hSWQyVjE=
-  dependencies:
-    "@antv/matrix-util" "^3.0.4"
-    "@antv/util" "^2.0.9"
-    tslib "^2.0.3"
-
-"@antv/scale@^0.3.4":
-  version "0.3.14"
-  resolved "https://registry.npmmirror.com/@antv/scale/download/@antv/scale-0.3.14.tgz#0718f8651368e5c98db5612065132a8c8bbcde48"
-  integrity sha1-Bxj4ZRNo5cmNtWEgZRMqjIu83kg=
-  dependencies:
-    "@antv/util" "~2.0.3"
-    fecha "~4.2.0"
-    tslib "^2.0.0"
-
-"@antv/util@^2.0.13", "@antv/util@^2.0.7", "@antv/util@^2.0.9", "@antv/util@~2.0.0", "@antv/util@~2.0.3", "@antv/util@~2.0.5":
-  version "2.0.17"
-  resolved "https://registry.npmmirror.com/@antv/util/download/@antv/util-2.0.17.tgz?cache=0&sync_timestamp=1636447902105&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40antv%2Futil%2Fdownload%2F%40antv%2Futil-2.0.17.tgz#e8ef42aca7892815b229269f3dd10c6b3c7597a9"
-  integrity sha1-6O9CrKeJKBWyKSafPdEMazx1l6k=
-  dependencies:
-    csstype "^3.0.8"
-    tslib "^2.0.3"
+    csstype "^3.0.3"
+    jquery "^3.5.1"
+    jquery-mousewheel "^3.1.13"
+    lodash-es "^4.17.15"
+    mousetrap "^1.6.5"
+    utility-types "^3.10.0"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.14.5", "@babel/code-frame@^7.8.3":
   version "7.14.5"
@@ -1126,13 +881,6 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/runtime@^7.0.0":
-  version "7.16.3"
-  resolved "https://registry.npmmirror.com/@babel/runtime/download/@babel/runtime-7.16.3.tgz?cache=0&sync_timestamp=1636495247319&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.16.3.tgz#b86f0db02a04187a3c17caa77de69840165d42d5"
-  integrity sha512-WBwekcqacdY2e9AF/Q7WLFUWmdJGJTkbjqTjoMDgXkVZ3ZRUvOPsLb5KdwISoQVsbP+DQzVZW4Zhci0DvpbNTQ==
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
 "@babel/runtime@^7.11.0", "@babel/runtime@^7.8.4":
   version "7.15.3"
   resolved "https://registry.nlark.com/@babel/runtime/download/@babel/runtime-7.15.3.tgz#2e1c2880ca118e5b2f9988322bd8a7656a32502b"
@@ -1329,13 +1077,6 @@
   resolved "https://registry.nlark.com/@popperjs/core/download/@popperjs/core-2.10.1.tgz?cache=0&sync_timestamp=1630647381721&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40popperjs%2Fcore%2Fdownload%2F%40popperjs%2Fcore-2.10.1.tgz#728ecd95ab207aab8a9a4e421f0422db329232be"
   integrity sha1-co7NlasgequKmk5CHwQi2zKSMr4=
 
-"@probe.gl/stats@3.4.1":
-  version "3.4.1"
-  resolved "https://registry.npmmirror.com/@probe.gl/stats/download/@probe.gl/stats-3.4.1.tgz#5bc0ec5f87ae3195c22a98363e9c15031fbfe8e8"
-  integrity sha1-W8DsX4euMZXCKpg2PpwVAx+/6Og=
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-
 "@socket.io/component-emitter@~3.0.0":
   version "3.0.0"
   resolved "https://registry.npmmirror.com/@socket.io/component-emitter/download/@socket.io/component-emitter-3.0.0.tgz#8863915676f837d9dad7b76f50cb500c1e9422e9"
@@ -1409,11 +1150,6 @@
   version "2.8.12"
   resolved "https://registry.npmmirror.com/@types/cors/download/@types/cors-2.8.12.tgz#6b2c510a7ad7039e98e7b8d3d6598f4359e5c080"
   integrity sha1-ayxRCnrXA56Y57jT1lmPQ1nlwIA=
-
-"@types/d3-timer@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.npmmirror.com/@types/d3-timer/download/@types/d3-timer-2.0.1.tgz#ffb6620d290624f3726aa362c0c8a4b44c8d7200"
-  integrity sha1-/7ZiDSkGJPNyaqNiwMiktEyNcgA=
 
 "@types/estree@^0.0.48":
   version "0.0.48"
@@ -2266,16 +2002,6 @@
     "@webassemblyjs/ast" "1.9.0"
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
-
-"@webgpu/glslang@^0.0.15":
-  version "0.0.15"
-  resolved "https://registry.nlark.com/@webgpu/glslang/download/@webgpu/glslang-0.0.15.tgz#f5ccaf6015241e6175f4b90906b053f88483d1f2"
-  integrity sha1-9cyvYBUkHmF19LkJBrBT+ISD0fI=
-
-"@webgpu/types@^0.0.31":
-  version "0.0.31"
-  resolved "https://registry.npmmirror.com/@webgpu/types/download/@webgpu/types-0.0.31.tgz#c05ec6e60024bf1836f31236ecd7677a969a2a2c"
-  integrity sha1-wF7G5gAkvxg28xI27NdnepaaKiw=
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -3318,7 +3044,7 @@ color-string@^1.6.0:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
 
-color@^3.0.0, color@^3.1.3:
+color@^3.0.0:
   version "3.2.1"
   resolved "https://registry.nlark.com/color/download/color-3.2.1.tgz#3544dc198caf4490c3ecc9a790b54fe9ff45e164"
   integrity sha1-NUTcGYyvRJDD7MmnkLVP6f9F4WQ=
@@ -3794,7 +3520,7 @@ csstype@^2.6.8:
   resolved "https://registry.nlark.com/csstype/download/csstype-2.6.17.tgz#4cf30eb87e1d1a005d8b6510f95292413f6a1c0e"
   integrity sha1-TPMOuH4dGgBdi2UQ+VKSQT9qHA4=
 
-csstype@^3.0.8:
+csstype@^3.0.3:
   version "3.0.10"
   resolved "https://registry.npmmirror.com/csstype/download/csstype-3.0.10.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcsstype%2Fdownload%2Fcsstype-3.0.10.tgz#2ad3a7bed70f35b965707c092e5f30b327c290e5"
   integrity sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==
@@ -3803,68 +3529,6 @@ cyclist@^1.0.1:
   version "1.0.1"
   resolved "https://registry.nlark.com/cyclist/download/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
-
-d3-color@1:
-  version "1.4.1"
-  resolved "https://registry.nlark.com/d3-color/download/d3-color-1.4.1.tgz#c52002bf8846ada4424d55d97982fef26eb3bc8a"
-  integrity sha1-xSACv4hGraRCTVXZeYL+8m6zvIo=
-
-"d3-dispatch@1 - 2":
-  version "2.0.0"
-  resolved "https://registry.nlark.com/d3-dispatch/download/d3-dispatch-2.0.0.tgz#8a18e16f76dd3fcaef42163c97b926aa9b55e7cf"
-  integrity sha1-ihjhb3bdP8rvQhY8l7kmqptV588=
-
-d3-ease@^1.0.5:
-  version "1.0.7"
-  resolved "https://registry.nlark.com/d3-ease/download/d3-ease-1.0.7.tgz#9a834890ef8b8ae8c558b2fe55bd57f5993b85e2"
-  integrity sha1-moNIkO+LiujFWLL+Vb1X9Zk7heI=
-
-d3-force@^2.0.1:
-  version "2.1.1"
-  resolved "https://registry.nlark.com/d3-force/download/d3-force-2.1.1.tgz#f20ccbf1e6c9e80add1926f09b51f686a8bc0937"
-  integrity sha1-8gzL8ebJ6ArdGSbwm1H2hqi8CTc=
-  dependencies:
-    d3-dispatch "1 - 2"
-    d3-quadtree "1 - 2"
-    d3-timer "1 - 2"
-
-d3-interpolate@^1.3.2:
-  version "1.4.0"
-  resolved "https://registry.nlark.com/d3-interpolate/download/d3-interpolate-1.4.0.tgz#526e79e2d80daa383f9e0c1c1c7dcc0f0583e987"
-  integrity sha1-Um554tgNqjg/ngwcHH3MDwWD6Yc=
-  dependencies:
-    d3-color "1"
-
-"d3-quadtree@1 - 2":
-  version "2.0.0"
-  resolved "https://registry.nlark.com/d3-quadtree/download/d3-quadtree-2.0.0.tgz#edbad045cef88701f6fee3aee8e93fb332d30f9d"
-  integrity sha1-7brQRc74hwH2/uOu6Ok/szLTD50=
-
-"d3-timer@1 - 2":
-  version "2.0.0"
-  resolved "https://registry.nlark.com/d3-timer/download/d3-timer-2.0.0.tgz#055edb1d170cfe31ab2da8968deee940b56623e6"
-  integrity sha1-BV7bHRcM/jGrLaiWje7pQLVmI+Y=
-
-d3-timer@^1.0.9:
-  version "1.0.10"
-  resolved "https://registry.nlark.com/d3-timer/download/d3-timer-1.0.10.tgz#dfe76b8a91748831b13b6d9c793ffbd508dd9de5"
-  integrity sha1-3+dripF0iDGxO22ceT/71QjdneU=
-
-dagre@^0.8.5:
-  version "0.8.5"
-  resolved "https://registry.nlark.com/dagre/download/dagre-0.8.5.tgz#ba30b0055dac12b6c1fcc247817442777d06afee"
-  integrity sha1-ujCwBV2sErbB/MJHgXRCd30Gr+4=
-  dependencies:
-    graphlib "^2.1.8"
-    lodash "^4.17.15"
-
-dagrejs@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.nlark.com/dagrejs/download/dagrejs-0.2.1.tgz#1d5738c17fe7989ff90983ce845c74599bae6786"
-  integrity sha1-HVc4wX/nmJ/5CYPOhFx0WZuuZ4Y=
-  dependencies:
-    graphlib "^2.1.8"
-    lodash "^4.17.19"
 
 dashdash@^1.12.0:
   version "1.14.1"
@@ -4022,11 +3686,6 @@ destroy@~1.0.4:
   version "1.0.4"
   resolved "https://registry.nlark.com/destroy/download/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
   integrity sha1-l4hXRCxEdJ5CBmE+N5RiBYJqvYA=
-
-detect-browser@^5.0.0, detect-browser@^5.1.0:
-  version "5.2.1"
-  resolved "https://registry.nlark.com/detect-browser/download/detect-browser-5.2.1.tgz?cache=0&sync_timestamp=1631836857749&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdetect-browser%2Fdownload%2Fdetect-browser-5.2.1.tgz#b884f8d84e8f33bb874ffed10b4beea26133fcd1"
-  integrity sha1-uIT42E6PM7uHT/7RC0vuomEz/NE=
 
 detect-node@^2.0.4:
   version "2.1.0"
@@ -4788,11 +4447,6 @@ faye-websocket@^0.11.3:
   dependencies:
     websocket-driver ">=0.5.1"
 
-fecha@~4.2.0:
-  version "4.2.1"
-  resolved "https://registry.nlark.com/fecha/download/fecha-4.2.1.tgz#0a83ad8f86ef62a091e22bb5a039cd03d23eecce"
-  integrity sha1-CoOtj4bvYqCR4iu1oDnNA9I+7M4=
-
 figgy-pudding@^3.5.1:
   version "3.5.2"
   resolved "https://registry.nlark.com/figgy-pudding/download/figgy-pudding-3.5.2.tgz#b4eee8148abb01dcf1d1ac34367d59e12fa61d6e"
@@ -5131,16 +4785,6 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-gl-matrix@^3.0.0, gl-matrix@^3.1.0, gl-matrix@^3.3.0, gl-matrix@^3.4.3:
-  version "3.4.3"
-  resolved "https://registry.npmmirror.com/gl-matrix/download/gl-matrix-3.4.3.tgz#fc1191e8320009fd4d20e9339595c6041ddc22c9"
-  integrity sha1-/BGR6DIACf1NIOkzlZXGBB3cIsk=
-
-gl-vec2@^1.0.0, gl-vec2@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.nlark.com/gl-vec2/download/gl-vec2-1.3.0.tgz#83d472ed46034de8e09cbc857123fb6c81c51199"
-  integrity sha1-g9Ry7UYDTejgnLyFcSP7bIHFEZk=
-
 glob-parent@^3.1.0:
   version "3.1.0"
   resolved "https://registry.nlark.com/glob-parent/download/glob-parent-3.1.0.tgz#9e6af6299d8d3bd2bd40430832bd113df906c5ae"
@@ -5239,13 +4883,6 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   resolved "https://registry.nlark.com/graceful-fs/download/graceful-fs-4.2.8.tgz?cache=0&sync_timestamp=1628194007768&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fgraceful-fs%2Fdownload%2Fgraceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha1-5BK40z9eAGWTy9PO5t+fLOu+gCo=
 
-graphlib@^2.1.8:
-  version "2.1.8"
-  resolved "https://registry.npmmirror.com/graphlib/download/graphlib-2.1.8.tgz#5761d414737870084c92ec7b5dbcb0592c9d35da"
-  integrity sha1-V2HUFHN4cAhMkux7XbywWSydNdo=
-  dependencies:
-    lodash "^4.17.15"
-
 gzip-size@^5.0.0:
   version "5.1.1"
   resolved "https://registry.nlark.com/gzip-size/download/gzip-size-5.1.1.tgz#cb9bee692f87c0612b232840a873904e4c135274"
@@ -5253,11 +4890,6 @@ gzip-size@^5.0.0:
   dependencies:
     duplexer "^0.1.1"
     pify "^4.0.1"
-
-hammerjs@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.nlark.com/hammerjs/download/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
-  integrity sha1-BO93hiz/K7edMPdpIJWTAiK/YPE=
 
 handle-thing@^2.0.0:
   version "2.0.1"
@@ -5721,11 +5353,6 @@ inquirer@^7.0.0, inquirer@^7.1.0:
     strip-ansi "^6.0.0"
     through "^2.3.6"
 
-insert-css@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.nlark.com/insert-css/download/insert-css-2.0.0.tgz#eb5d1097b7542f4c79ea3060d3aee07d053880f4"
-  integrity sha1-610Ql7dUL0x56jBg067gfQU4gPQ=
-
 internal-ip@^4.3.0:
   version "4.3.0"
   resolved "https://registry.nlark.com/internal-ip/download/internal-ip-4.3.0.tgz#845452baad9d2ca3b69c635a137acb9a0dad0907"
@@ -5742,16 +5369,6 @@ internal-slot@^1.0.3:
     get-intrinsic "^1.1.0"
     has "^1.0.3"
     side-channel "^1.0.4"
-
-inversify-inject-decorators@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.nlark.com/inversify-inject-decorators/download/inversify-inject-decorators-3.1.0.tgz#d9941080bad77cec8a65ee29d905e4d5d73e1e95"
-  integrity sha1-2ZQQgLrXfOyKZe4p2QXk1dc+HpU=
-
-inversify@^5.0.1:
-  version "5.1.1"
-  resolved "https://registry.npmmirror.com/inversify/download/inversify-5.1.1.tgz#6fbd668c591337404e005a1946bfe0d802c08730"
-  integrity sha1-b71mjFkTN0BOAFoZRr/g2ALAhzA=
 
 ip-regex@^2.1.0:
   version "2.1.0"
@@ -5791,11 +5408,6 @@ is-accessor-descriptor@^1.0.0:
   integrity sha1-FpwvbT3x+ZJhgHI2XJsOofaHhlY=
   dependencies:
     kind-of "^6.0.0"
-
-is-any-array@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.npmmirror.com/is-any-array/download/is-any-array-1.0.1.tgz#05fedec1a4dced1854bd279b2ec5df431e5bea9e"
-  integrity sha1-Bf7ewaTc7RhUvSebLsXfQx5b6p4=
 
 is-arguments@^1.0.4:
   version "1.1.1"
@@ -6126,6 +5738,16 @@ javascript-stringify@^2.0.1:
   resolved "https://registry.npm.taobao.org/javascript-stringify/download/javascript-stringify-2.1.0.tgz#27c76539be14d8bd128219a2d731b09337904e79"
   integrity sha1-J8dlOb4U2L0Sghmi1zGwkzeQTnk=
 
+jquery-mousewheel@^3.1.13:
+  version "3.1.13"
+  resolved "https://registry.nlark.com/jquery-mousewheel/download/jquery-mousewheel-3.1.13.tgz#06f0335f16e353a695e7206bf50503cb523a6ee5"
+  integrity sha1-BvAzXxbjU6aV5yBr9QUDy1I6buU=
+
+jquery@^3.5.1:
+  version "3.6.0"
+  resolved "https://registry.nlark.com/jquery/download/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
+  integrity sha1-xyoJ8Vwb3OFC9J2/EXC9+K2sJHA=
+
 js-message@1.0.7:
   version "1.0.7"
   resolved "https://registry.nlark.com/js-message/download/js-message-1.0.7.tgz#fbddd053c7a47021871bb8b2c95397cc17c20e47"
@@ -6363,6 +5985,11 @@ locate-path@^5.0.0:
   integrity sha1-Gvujlq/WdqbUJQTQpno6frn2KqA=
   dependencies:
     p-locate "^4.1.0"
+
+lodash-es@^4.17.15:
+  version "4.17.21"
+  resolved "https://registry.nlark.com/lodash-es/download/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+  integrity sha1-Q+YmxG5lkbd1C+srUBFzkMYJ4+4=
 
 lodash.camelcase@^4.3.0:
   version "4.3.0"
@@ -6710,35 +6337,10 @@ mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@^0.5.5, mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.5"
 
-ml-array-max@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.nlark.com/ml-array-max/download/ml-array-max-1.2.3.tgz#92d1ffef667432d1451d35817a7276c528635e64"
-  integrity sha1-ktH/72Z0MtFFHTWBenJ2xShjXmQ=
-  dependencies:
-    is-any-array "^1.0.0"
-
-ml-array-min@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.nlark.com/ml-array-min/download/ml-array-min-1.2.2.tgz#abd68512a57fe8499513e6f2265533807e2bbe6b"
-  integrity sha1-q9aFEqV/6EmVE+byJlUzgH4rvms=
-  dependencies:
-    is-any-array "^1.0.0"
-
-ml-array-rescale@^1.3.6:
-  version "1.3.6"
-  resolved "https://registry.nlark.com/ml-array-rescale/download/ml-array-rescale-1.3.6.tgz?cache=0&sync_timestamp=1630485037748&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fml-array-rescale%2Fdownload%2Fml-array-rescale-1.3.6.tgz#060d1c636fbb5f877265f4fcc4e0e157521d615a"
-  integrity sha1-Bg0cY2+7X4dyZfT8xODhV1IdYVo=
-  dependencies:
-    is-any-array "^1.0.0"
-    ml-array-max "^1.2.3"
-    ml-array-min "^1.2.2"
-
-ml-matrix@^6.5.0:
-  version "6.8.2"
-  resolved "https://registry.npmmirror.com/ml-matrix/download/ml-matrix-6.8.2.tgz#79849c909afa114f8227c5b52a2040e2e5381daf"
-  integrity sha512-5o2gVLFyieDSgsStEU5mqty4MZqfeytYA/gJqBSw5/Xuob0X2UrFX/k7FDh+YAwjzG/1l8nYa0oDaJ0sGs/RlA==
-  dependencies:
-    ml-array-rescale "^1.3.6"
+mousetrap@^1.6.5:
+  version "1.6.5"
+  resolved "https://registry.nlark.com/mousetrap/download/mousetrap-1.6.5.tgz#8a766d8c272b08393d5f56074e0b5ec183485bf9"
+  integrity sha1-inZtjCcrCDk9X1YHTgtewYNIW/k=
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -7479,20 +7081,6 @@ pnp-webpack-plugin@^1.6.4:
   dependencies:
     ts-pnp "^1.1.6"
 
-polyline-miter-util@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.nlark.com/polyline-miter-util/download/polyline-miter-util-1.0.1.tgz#b693f2389ea0ded36a6bcf5ecd2ece4b6917d957"
-  integrity sha1-tpPyOJ6g3tNqa89ezS7OS2kX2Vc=
-  dependencies:
-    gl-vec2 "^1.0.0"
-
-polyline-normals@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.nlark.com/polyline-normals/download/polyline-normals-2.0.2.tgz#a1737e75d8c0dccb1a591f9cb27f09eef4b7d135"
-  integrity sha1-oXN+ddjA3MsaWR+csn8J7vS30TU=
-  dependencies:
-    polyline-miter-util "^1.0.1"
-
 portfinder@^1.0.26:
   version "1.0.28"
   resolved "https://registry.nlark.com/portfinder/download/portfinder-1.0.28.tgz#67c4622852bd5374dd1dd900f779f53462fac778"
@@ -7914,14 +7502,6 @@ pretty-error@^2.0.2:
     lodash "^4.17.20"
     renderkid "^2.0.4"
 
-probe.gl@^3.1.1:
-  version "3.4.1"
-  resolved "https://registry.npmmirror.com/probe.gl/download/probe.gl-3.4.1.tgz#88d8629fbac5a627049d6fdc6b8c364d56f00815"
-  integrity sha1-iNhin7rFpicEnW/ca4w2TVbwCBU=
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-    "@probe.gl/stats" "3.4.1"
-
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.nlark.com/process-nextick-args/download/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -8138,11 +7718,6 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-reflect-metadata@^0.1.13:
-  version "0.1.13"
-  resolved "https://registry.nlark.com/reflect-metadata/download/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
-  integrity sha1-Z648pXyXKiqhZCsQ/jY/4y1J3Ag=
-
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"
   resolved "https://registry.nlark.com/regenerate-unicode-properties/download/regenerate-unicode-properties-8.2.0.tgz#e5de7111d655e7ba60c057dbe9ff37c87e65cdec"
@@ -8216,11 +7791,6 @@ regjsparser@^0.6.4:
   integrity sha1-tInu98mizkNydicBFCnPgzpxg+Y=
   dependencies:
     jsesc "~0.5.0"
-
-regl@^1.3.11:
-  version "1.7.0"
-  resolved "https://registry.nlark.com/regl/download/regl-1.7.0.tgz#0d185431044a356bf80e9b775b11b935ef2746d3"
-  integrity sha1-DRhUMQRKNWv4Dpt3WxG5Ne8nRtM=
 
 relateurl@0.2.x:
   version "0.2.7"
@@ -9265,11 +8835,6 @@ timsort@^0.3.0:
   resolved "https://registry.npm.taobao.org/timsort/download/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
-tinycolor2@^1.4.1:
-  version "1.4.2"
-  resolved "https://registry.nlark.com/tinycolor2/download/tinycolor2-1.4.2.tgz#3f6a4d1071ad07676d7fa472e1fac40a719d8803"
-  integrity sha1-P2pNEHGtB2dtf6Ry4frECnGdiAM=
-
 tmp@^0.0.33:
   version "0.0.33"
   resolved "https://registry.npm.taobao.org/tmp/download/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
@@ -9363,7 +8928,7 @@ tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.nlark.com/tslib/download/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
 
-tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0:
+tslib@^2.0.3:
   version "2.3.1"
   resolved "https://registry.nlark.com/tslib/download/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha1-6KM1rdXOrlGqJh0ypJAVjvBC7wE=
@@ -9661,6 +9226,11 @@ utila@~0.4:
   version "0.4.0"
   resolved "https://registry.npm.taobao.org/utila/download/utila-0.4.0.tgz#8a16a05d445657a3aea5eecc5b12a4fa5379772c"
   integrity sha1-ihagXURWV6Oupe7MWxKk+lN5dyw=
+
+utility-types@^3.10.0:
+  version "3.10.0"
+  resolved "https://registry.nlark.com/utility-types/download/utility-types-3.10.0.tgz#ea4148f9a741015f05ed74fd615e1d20e6bed82b"
+  integrity sha1-6kFI+adBAV8F7XT9YV4dIOa+2Cs=
 
 utils-merge@1.0.1:
   version "1.0.1"
