@@ -23,12 +23,12 @@ export default defineComponent({
     const graph_box = ref<HTMLDivElement | null>(null);
     let pWidth = ref<number | null>(null);
     let pHeight = ref<number | null>(null);
-    onMounted(() => {
-      pWidth = (graph_box.value as HTMLDivElement).clientWidth;
-      pHeight =
-        (document.querySelector(".el-tabs__content") as HTMLDivElement)
-          .clientHeight - 30;
-    });
+    // onMounted(() => {
+    //   pWidth = (graph_box.value as HTMLDivElement).clientWidth;
+    //   pHeight =
+    //     (document.querySelector(".el-tabs__content") as HTMLDivElement)
+    //       .clientHeight - 30;
+    // });
     return {
       graph_box,
       pWidth,
