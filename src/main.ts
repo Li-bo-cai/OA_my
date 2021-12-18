@@ -19,7 +19,7 @@ import DragDirective from '@/utils/drag'
 const app = createApp(App)
 
 app.use(SocketIO, {
-    connection: "ws://oms.dev.175.run:6699",
+    connection: "wss://oms.dev.175.run",
     options: {
         path: '',
         transports: ['websocket', 'post'],

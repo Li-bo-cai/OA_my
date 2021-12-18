@@ -11,10 +11,7 @@ import graphData from "./graph";
 import { defineComponent, onMounted } from "vue";
 
 export default defineComponent({
-  props: ["pWidth", "pHeight"],
-  setup(props) {
-    console.log(props);
-
+  setup() {
     onMounted(() => {
       new Graph({
         container: document.getElementById("container") as HTMLElement,

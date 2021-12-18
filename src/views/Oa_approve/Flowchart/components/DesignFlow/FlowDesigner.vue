@@ -2,7 +2,7 @@
   <div class="root">
     <!-- 左侧盒子 -->
     <div class="graph_box" ref="graph_box">
-      <Graph :pWidth="pWidth" :pHeight="pHeight" />
+      <Graph />
     </div>
     <!-- 右侧盒子 -->
     <div class=" graph_info">
@@ -13,26 +13,41 @@
 
 <script lang="ts">
 import Graph from "./component/graph.vue";
-import { defineComponent, nextTick, onMounted, ref } from "vue";
+import { defineComponent, onMounted, reactive, ref, watch } from "vue";
 
 export default defineComponent({
   components: {
     Graph,
   },
   setup() {
+    interface insiseGview {
+      gWidth: number;
+      gHeight: number;
+    }
     const graph_box = ref<HTMLDivElement | null>(null);
-    let pWidth = ref<number | null>(null);
-    let pHeight = ref<number | null>(null);
-    onMounted(() => {
-      pWidth = (graph_box.value as HTMLDivElement).clientWidth;
-      pHeight =
+    let a!: number;
+    let gView: insiseGview = reactive({
+      gWidth: a,
+      gHeight: a,
+    });
+    watch(
+      gView,
+      (newVal, oldVal) => {
+        console.log(newVal);
+      },
+      {
+        deep: true,
+        immediate: true, //立即执行
+      }
+    );
+    watch(graph_box, () => {
+      gView.gWidth = (graph_box.value as HTMLDivElement).clientWidth;
+      gView.gHeight =
         (document.querySelector(".el-tabs__content") as HTMLDivElement)
           .clientHeight - 30;
     });
     return {
       graph_box,
-      pWidth,
-      pHeight,
     };
   },
 });
