@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import usVuex from './utils/usVuex'
 
+// import Antd from 'ant-design-vue'
 
 import ElementPlus from 'element-plus'
 import '@/assets/css/element-variables.scss'
