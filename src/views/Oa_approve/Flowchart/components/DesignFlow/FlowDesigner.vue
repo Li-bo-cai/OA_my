@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import Graph from "./component/graph.vue";
-import { defineComponent, onMounted, reactive, ref, watch } from "vue";
+import { defineComponent, reactive, ref, watch } from "vue";
 
 export default defineComponent({
   components: {

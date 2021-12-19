@@ -8,15 +8,28 @@
 <script lang="ts">
 import { Graph, Shape } from "@antv/x6";
 import graphData from "./graph";
-import { defineComponent, onMounted } from "vue";
+import {
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  reactive,
+  ref,
+} from "vue";
 
 export default defineComponent({
   setup() {
-    onMounted(() => {
-      new Graph({
+    const createGraphic = () => {
+      return new Graph({
+        panning: {
+          enabled: true,
+          modifiers: "shift",
+        },
         container: document.getElementById("container") as HTMLElement,
         width: 800,
         height: 600,
+        interacting: {
+          nodeMovable: true, //是否允许节点移动
+        },
         background: {
           color: "#fff", // 设置画布背景颜色
         },
@@ -24,7 +37,16 @@ export default defineComponent({
           size: 10, // 网格大小 10px
           visible: true, // 渲染网格背景
         },
-      }).fromJSON(graphData);
+      });
+    };
+    let graph = reactive<any>(null);
+    onMounted(() => {
+      graph = createGraphic(); //画布被创建
+      graph.fromJSON(graphData);
+      // graph.centerContent(); //画布居中
+    });
+    onBeforeUnmount(() => {
+      graph.dispose(); //画布被销毁
     });
     return {};
   },
