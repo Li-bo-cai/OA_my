@@ -8,13 +8,7 @@
 <script lang="ts">
 import { Graph, Shape } from "@antv/x6";
 import graphData from "./graph";
-import {
-  defineComponent,
-  onBeforeUnmount,
-  onMounted,
-  reactive,
-  ref,
-} from "vue";
+import { defineComponent, onBeforeUnmount, onMounted, reactive } from "vue";
 
 export default defineComponent({
   setup() {
@@ -57,5 +51,19 @@ export default defineComponent({
 .graph {
   width: 100%;
   height: 100%;
+}
+.graph {
+  font-family: sans-serif;
+  padding: 0;
+  display: flex;
+  padding: 16px 8px;
+}
+
+#container {
+  flex: 1;
+  height: 280px;
+  margin-left: 8px;
+  margin-right: 8px;
+  box-shadow: 0 0 10px 1px #e9e9e9;
 }
 </style>

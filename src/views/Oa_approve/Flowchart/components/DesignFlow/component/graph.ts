@@ -8,18 +8,30 @@ const graphData = {
             width: 80,   // Number，可选，节点大小的 width 值
             height: 40,  // Number，可选，节点大小的 height 值
             label: 'hello', // String，节点标签
-            // attrs: {
-            //     body: {
-            //         fill: '#2ECC71',
-            //         stroke: '#000',
-            //         strokeDasharray: '10,2',
-            //     },
-            //     label: {
-            //         text: 'Hello',
-            //         fill: '#333',
-            //         fontSize: 13,
-            //     }
-            // }
+            attrs: {
+                body: {
+                    fill: '#2ECC71',
+                    stroke: '#000',
+                    strokeDasharray: '10,2',
+                },
+                label: {
+                    text: 'Hello',
+                    fill: '#333',
+                    fontSize: 13,
+                }
+            },
+            ports: [
+                {
+                    id: 'port1',
+                    tagName: 'circle',
+                    selector: 'circle',
+                    attrs: {
+                        r: 10,
+                        fill: '#fff',
+                        stroke: '#000',
+                    },
+                },
+            ]
         },
         {
             id: 'node2', // String，节点的唯一标识
@@ -28,21 +40,21 @@ const graphData = {
             width: 80,   // Number，可选，节点大小的 width 值
             height: 40,  // Number，可选，节点大小的 height 值
             label: 'world', // String，节点标签
-            // attrs: {
-            //     body: {
-            //         fill: '#F39C12',
-            //         stroke: '#000',
-            //         rx: 16,
-            //         ry: 16,
-            //     },
-            //     label: {
-            //         text: 'World',
-            //         fill: '#333',
-            //         fontSize: 18,
-            //         fontWeight: 'bold',
-            //         fontVariant: 'small-caps',
-            //     },
-            // },
+            attrs: {
+                body: {
+                    fill: '#F39C12',
+                    stroke: '#000',
+                    rx: 16,
+                    ry: 16,
+                },
+                label: {
+                    text: 'World',
+                    fill: '#333',
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    fontVariant: 'small-caps',
+                },
+            },
         },
     ],
     // 边
