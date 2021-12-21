@@ -16,6 +16,7 @@ import shortCutModule from './modules/shortCut'
 import oa_approveModule from './modules/oa_approve'
 import messageModule from './modules/message'
 import socketModule from './modules/socket'
+import graphModule from './modules/graph'
 
 
 export const store = createStore({
@@ -32,6 +33,7 @@ export const store = createStore({
     oa_approveModule,//oa模块
     messageModule,//消息模块
     socketModule, //socket 消息传递模块
+    graphModule, //流程传递模块
 
     homeModule, //首页模块
     organzationModule,//集团组织架构

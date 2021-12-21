@@ -10,7 +10,7 @@ const graphData = {
             label: 'hello', // String，节点标签
             attrs: {
                 body: {
-                    fill: '#2ECC71',
+                    fill: '#F39C12',
                     stroke: '#000',
                     strokeDasharray: '10,2',
                 },
@@ -20,18 +20,6 @@ const graphData = {
                     fontSize: 13,
                 }
             },
-            ports: [
-                {
-                    id: 'port1',
-                    tagName: 'circle',
-                    selector: 'circle',
-                    attrs: {
-                        r: 10,
-                        fill: '#fff',
-                        stroke: '#000',
-                    },
-                },
-            ]
         },
         {
             id: 'node2', // String，节点的唯一标识
@@ -58,12 +46,10 @@ const graphData = {
         },
     ],
     // 边
-    edges: [
-        {
-            source: 'node1', // String，必须，起始节点 id
-            target: 'node2', // String，必须，目标节点 id
-        },
-    ],
+    edges: [{
+        source: 'node1', // String，必须，起始节点 id
+        target: 'node2', // String，必须，目标节点 id
+    }],
 };
 
 export default graphData

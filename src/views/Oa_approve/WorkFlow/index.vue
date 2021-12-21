@@ -1,16 +1,16 @@
 <template>
   <div>
     <el-table :data="tableData" style="width: 100%" highlight-current-row :header-cell-style="{'text-align':'center'}">
-      <el-table-column prop="date" label="日期"> </el-table-column>
-      <el-table-column prop="name" label="姓名"> </el-table-column>
-      <el-table-column prop="name" label="姓名"> </el-table-column>
-      <el-table-column prop="name" label="姓名"> </el-table-column>
-      <el-table-column prop="name" label="姓名"> </el-table-column>
-      <el-table-column prop="name" label="姓名"> </el-table-column>
-      <el-table-column prop="name" label="姓名"> </el-table-column>
-      <el-table-column prop="name" label="姓名"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
-      <el-table-column label="操作" width="300px">
+      <el-table-column prop="date" label="日期"></el-table-column>
+      <el-table-column prop="name" label="姓名"></el-table-column>
+      <el-table-column prop="name" label="姓名"></el-table-column>
+      <el-table-column prop="name" label="姓名"></el-table-column>
+      <el-table-column prop="name" label="姓名"></el-table-column>
+      <el-table-column prop="name" label="姓名"></el-table-column>
+      <el-table-column prop="name" label="姓名"></el-table-column>
+      <el-table-column prop="name" label="姓名"></el-table-column>
+      <el-table-column prop="address" label="地址"></el-table-column>
+      <el-table-column label="操作" width="440">
         <template #default="scope">
           <div class="operate_btn">
             <el-button type="primary" size="mini" plain icon="el-icon-edit" @click="edit_btn(scope.row)">编辑</el-button>
@@ -88,6 +88,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .operate_btn {
-  display: flex;
+  // display: flex;
 }
 </style>

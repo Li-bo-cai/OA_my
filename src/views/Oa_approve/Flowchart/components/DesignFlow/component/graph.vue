@@ -8,17 +8,24 @@
 <script lang="ts">
 import { Graph, Shape } from "@antv/x6";
 import graphData from "./graph";
-import { defineComponent, onBeforeUnmount, onMounted, reactive } from "vue";
+import {
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  reactive,
+  ref,
+} from "vue";
 
 export default defineComponent({
   setup() {
+    let container = ref<HTMLDivElement | null>(null);
     const createGraphic = () => {
       return new Graph({
         panning: {
           enabled: true,
           modifiers: "shift",
         },
-        container: document.getElementById("container") as HTMLElement,
+        container: container.value as HTMLDivElement,
         width: 800,
         height: 600,
         interacting: {
@@ -37,12 +44,26 @@ export default defineComponent({
     onMounted(() => {
       graph = createGraphic(); //画布被创建
       graph.fromJSON(graphData);
-      // graph.centerContent(); //画布居中
+      graph.centerContent(); //画布居中
+      graph.on("node:mouseenter", ({ node }: any) => {
+        node.attr("body", {
+          stroke: "orange",
+          fill: "orange",
+        });
+      });
+      graph.on("node:mouseleave", ({ node }: any) => {
+        node.attr("body", {
+          stroke: "#000",
+          fill: "#F39C12",
+        });
+      });
     });
     onBeforeUnmount(() => {
       graph.dispose(); //画布被销毁
     });
-    return {};
+    return {
+      container,
+    };
   },
 });
 </script>
@@ -51,14 +72,10 @@ export default defineComponent({
 .graph {
   width: 100%;
   height: 100%;
-}
-.graph {
   font-family: sans-serif;
   padding: 0;
   display: flex;
-  padding: 16px 8px;
 }
-
 #container {
   flex: 1;
   height: 280px;

@@ -1,16 +1,10 @@
 //表单样式
-.el-input .el-input__inner {
-  height: 46px;
-  line-height: 46px;
-}
-
 .el-form-item {
   font-size: 16px;
   margin-bottom: 25px;
 
   .el-form-item__label {
     font-size: 16px;
-    line-height: 46px;
   }
 }
 
@@ -29,39 +23,39 @@ input[type='number'] {
 }
 
 // 按钮样式
-.el-button {
-  width: 116px;
-  height: 40px;
-  height: 40px;
-  border-radius: 8px;
-}
+// .el-button {
+//   width: 116px;
+//   height: 40px;
+//   height: 40px;
+//   border-radius: 8px;
+// }
 
-.el-button--mini {
-  width: 72px !important;
-  height: 26px !important;
-  // padding: 7px 15px !important;
-  padding: 0px !important;
-  font-size: 12px !important;
-  border-radius: 3px !important;
-}
+// .el-button--mini {
+//   width: 72px !important;
+//   height: 26px !important;
+//   // padding: 7px 15px !important;
+//   padding: 0px !important;
+//   font-size: 12px !important;
+//   border-radius: 3px !important;
+// }
 
 //全局 primary 样式修改
-.el-button--primary.is-active,
-.el-button--primary:active {
-  background: #5777e7;
-  border: 0;
-}
+// .el-button--primary.is-active,
+// .el-button--primary:active {
+//   background: #5777e7;
+//   border: 0;
+// }
 
-.el-button--primary:focus,
-.el-button--primary:hover {
-  background: #4b6ce4;
-  border: 0;
-}
+// .el-button--primary:focus,
+// .el-button--primary:hover {
+//   background: #4b6ce4;
+//   border: 0;
+// }
 
-.el-button--primary {
-  background: #5777e7;
-  border: 0;
-}
+// .el-button--primary {
+//   background: #5777e7;
+//   border: 0;
+// }
 
 // element 滚动条 
 deep .el-scrollbar__wrap {

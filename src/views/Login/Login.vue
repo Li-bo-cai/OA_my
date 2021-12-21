@@ -17,13 +17,11 @@
         <el-form :model="loginForm" :rules="loginRules" ref="ruleForm">
           <!-- 账号 -->
           <el-form-item prop="username" class="form_item">
-            <!-- <img src="@/assets/images/user.png" alt=""> -->
-            <el-input v-model="loginForm.account" type="text" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
+            <el-input prefix-icon="el-icon-user" v-model="loginForm.account" type="text" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password" class="form_item">
-            <!-- <img src="@/assets/images/key.png" alt=""> -->
-            <el-input v-model="loginForm.password" type="text" placeholder="密码" tabindex="2"></el-input>
+            <el-input prefix-icon="el-icon-lock" v-model="loginForm.password" type="text" placeholder="密码" tabindex="2"></el-input>
           </el-form-item>
           <div class="hint">密码为8-16位大小写字母、数字其中两种组合，不可包含空格、中文，特殊符号等字符</div>
           <el-button class="sendBtn" type="info" @click="handleLogin">登录</el-button>
@@ -37,19 +35,18 @@
         <el-form :model="forgetForm" :rules="loginRules" ref="ruleForm">
           <!-- 账号 -->
           <el-form-item prop="username" class="form_item">
-            <!-- <img src="@/assets/images/user.png" alt=""> -->
-            <el-input v-model="forgetForm.account" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
+            <el-input prefix-icon="el-icon-user" v-model="forgetForm.account" type="number" placeholder="手机号/员工工号" ref="ruleForm" tabindex="2"></el-input>
           </el-form-item>
           <!-- 验证码 -->
           <el-form-item prop="code" class="form_item">
-            <!-- <img src="@/assets/images/key.png" alt=""> -->
-            <el-input v-model="forgetForm.phone_code" type="number" maxlength="6" placeholder="短信验证码" tabindex="2"></el-input>
-            <el-button class="get_code" type="primary" :disabled="disabled" @click="get_code">{{codeMsg}}</el-button>
+            <div class="note">
+              <el-input prefix-icon="el-icon-message" v-model="forgetForm.phone_code" type="number" maxlength="6" placeholder="短信验证码" tabindex="2"></el-input>
+              <el-button class="get_code" type="primary" :disabled="disabled" @click="get_code">{{codeMsg}}</el-button>
+            </div>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password" class="form_item">
-            <!-- <img src="@/assets/images/key.png" alt=""> -->
-            <el-input v-model="forgetForm.pass" type="text" placeholder="请输入新密码" tabindex="2"></el-input>
+            <el-input prefix-icon="el-icon-lock" v-model="forgetForm.pass" type="text" placeholder="请输入新密码" tabindex="2"></el-input>
           </el-form-item>
           <div class="hint">密码为8-16位大小写字母、数字其中两种组合， 不可包含空格、中文，特殊符号等字符</div>
           <el-button class="sendBtn" type="info">确定</el-button>
@@ -110,8 +107,6 @@ export default defineComponent({
         receive: "/api/message/bind",
         data: { number: loginForm.account },
       });
-      console.log(1234);
-      
     };
     // 获取验证码
     const get_code = () => {
@@ -189,27 +184,15 @@ export default defineComponent({
     margin-bottom: 30px;
   }
   .get_code {
-    // width: 100px;
+    width: 200px;
     margin-left: 30px;
   }
 }
-:deep .form_item .el-form-item__content {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-.form_item img {
-  position: absolute;
-  left: 4px;
-  width: 25px;
-  height: 25px;
-  z-index: 9;
-}
-:deep .el-input__inner {
-  padding-left: 40px;
-}
 .sendBtn {
-  margin: 30px 0 30px 0;
+  margin: 30px 0;
+}
+.note {
+  display: flex;
 }
 .el-button {
   width: 100%;
