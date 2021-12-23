@@ -1,55 +1,46 @@
-const graphData = {
-    // 节点
-    nodes: [
-        {
-            id: 'node1', // String，可选，节点的唯一标识
-            x: 40,       // Number，必选，节点位置的 x 值
-            y: 40,       // Number，必选，节点位置的 y 值
-            width: 80,   // Number，可选，节点大小的 width 值
-            height: 40,  // Number，可选，节点大小的 height 值
-            label: 'hello', // String，节点标签
-            attrs: {
-                body: {
-                    fill: '#F39C12',
-                    stroke: '#000',
-                    strokeDasharray: '10,2',
-                },
-                label: {
-                    text: 'Hello',
-                    fill: '#333',
-                    fontSize: 13,
-                }
-            },
+import { Graph, Shape } from "@antv/x6";
+
+export const createGraphic = () => {
+    return new Graph({
+        panning: {
+            enabled: true,
+            modifiers: "shift",
         },
-        {
-            id: 'node2', // String，节点的唯一标识
-            x: 160,      // Number，必选，节点位置的 x 值
-            y: 180,      // Number，必选，节点位置的 y 值
-            width: 80,   // Number，可选，节点大小的 width 值
-            height: 40,  // Number，可选，节点大小的 height 值
-            label: 'world', // String，节点标签
-            attrs: {
-                body: {
-                    fill: '#F39C12',
-                    stroke: '#000',
-                    rx: 16,
-                    ry: 16,
-                },
-                label: {
-                    text: 'World',
-                    fill: '#333',
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                    fontVariant: 'small-caps',
+        container: document.querySelector('#container') as HTMLDivElement,
+        width: 800,
+        height: 600,
+        interacting: {
+            nodeMovable: false, //是否允许节点移动
+        },
+        background: {
+            color: "#fff", // 设置画布背景颜色
+        },
+        grid: {
+            size: 10, // 网格大小 10px
+            visible: true, // 渲染网格背景
+        },
+        minimap: {
+            enabled: true,
+            container: document.querySelector('.map') as HTMLDivElement,
+            width: 150,
+            height: 80,
+            padding: 10,
+            graphOptions: {
+                async: true,
+                // getCellView(cell) {
+                //   // 用指定的 View 替换节点默认的 View
+                //   if (cell.isNode()) {
+                //     return SimpleNodeView;
+                //   }
+                // },
+                createCellView(cell) {
+                    // 在小地图中不渲染边
+                    if (cell.isEdge()) {
+                        return null;
+                    }
                 },
             },
         },
-    ],
-    // 边
-    edges: [{
-        source: 'node1', // String，必须，起始节点 id
-        target: 'node2', // String，必须，目标节点 id
-    }],
+    });
 };
 
-export default graphData
