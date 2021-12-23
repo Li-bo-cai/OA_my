@@ -10,6 +10,7 @@ import { Graph, Shape } from "@antv/x6";
 import graphData from "./graph";
 import {
   defineComponent,
+  nextTick,
   onBeforeUnmount,
   onMounted,
   reactive,
@@ -42,19 +43,21 @@ export default defineComponent({
     };
     let graph = reactive<any>(null);
     onMounted(() => {
-      graph = createGraphic(); //画布被创建
-      graph.fromJSON(graphData);
-      graph.centerContent(); //画布居中
-      graph.on("node:mouseenter", ({ node }: any) => {
-        node.attr("body", {
-          stroke: "orange",
-          fill: "orange",
+      nextTick(() => {
+        graph = createGraphic(); //画布被创建
+        graph.fromJSON(graphData);
+        graph.centerContent(); //画布居中
+        graph.on("node:mouseenter", ({ node }: any) => {
+          node.attr("body", {
+            stroke: "orange",
+            fill: "orange",
+          });
         });
-      });
-      graph.on("node:mouseleave", ({ node }: any) => {
-        node.attr("body", {
-          stroke: "#000",
-          fill: "#F39C12",
+        graph.on("node:mouseleave", ({ node }: any) => {
+          node.attr("body", {
+            stroke: "#000",
+            fill: "#F39C12",
+          });
         });
       });
     });
