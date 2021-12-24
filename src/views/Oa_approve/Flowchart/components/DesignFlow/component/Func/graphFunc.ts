@@ -1,4 +1,5 @@
 const graphFunc = (graph: any) => {
+    graph.centerContent(); //画布居中
     graph.on("node:mouseenter", ({ node }: any) => {
         node.attr("body", {
             stroke: "orange",

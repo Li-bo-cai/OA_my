@@ -25,7 +25,6 @@ export default defineComponent({
       nextTick(() => {
         graph = createGraphic(); //画布被创建
         graph.fromJSON(graphData);
-        graph.centerContent(); //画布居中
         graphFunc(graph); //调用方法
       });
     });
