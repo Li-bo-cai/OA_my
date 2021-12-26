@@ -12,11 +12,13 @@ const graphFunc = (graph: any) => {
             fill: "#F39C12",
         });
     });
-    graph.on("node:click ", ({ node }: any) => {
-        node.attr("body", {
-            stroke: "#ccc",
-            fill: "#ccc",
-        });
+    graph.on("node:delete", ({ node,e }: any) => {
+        e.stopPropagation()
+        node.cell.remove()
+        // node.attr("body", {
+        //     stroke: "#000",
+        //     fill: "#F39C12",
+        // });
     });
 }
 
