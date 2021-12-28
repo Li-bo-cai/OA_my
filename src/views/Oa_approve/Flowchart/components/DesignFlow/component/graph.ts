@@ -1,4 +1,4 @@
-import { Graph, Shape } from "@antv/x6";
+import { Graph, Shape, } from "@antv/x6";
 
 export const createGraphic = () => {
     return new Graph({

@@ -1,16 +1,20 @@
 <template>
   <div class="graph">
+    <dndWrap />
     <!-- 挂载节点 创建画布 -->
     <div id="container" ref="container"></div>
+    <!-- 迷你地图 -->
     <div class="map" ref="minimapContainer"></div>
   </div>
 </template>
 
 <script lang="ts">
-import graphData from "./Node/graphNode";
 import { createGraphic } from "./graph";
+import graphData from "./Node/graphNode";
 import graphFunc from "./Func/graphFunc";
+import dndWrap from "./dndWrap.vue";
 import {
+  defineAsyncComponent,
   defineComponent,
   nextTick,
   onBeforeUnmount,
@@ -19,6 +23,10 @@ import {
 } from "vue";
 
 export default defineComponent({
+  components: {
+    dndWrap: defineAsyncComponent(() => import("./dndWrap.vue")),
+    // dndWrap,
+  },
   setup() {
     let graph = reactive<any>(null);
     onMounted(() => {
