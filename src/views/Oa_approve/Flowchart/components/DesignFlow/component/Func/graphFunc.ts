@@ -12,7 +12,7 @@ const graphFunc = (graph: any) => {
             fill: "#F39C12",
         });
     });
-    graph.on("node:delete", ({ view,e }: any) => {
+    graph.on("node:delete", ({ view, e }: any) => {
         e.stopPropagation()
         view.cell.remove()
         // node.attr("body", {
@@ -20,13 +20,13 @@ const graphFunc = (graph: any) => {
         //     fill: "#F39C12",
         // });
     });
-    graph.on("node:click", ({ node,e }: any) => {
-        // node.attr("body", {
-        //     stroke: "#000",
-        //     fill: "#F39C12",
-        // });
+    graph.on("node:click", ({ node, e }: any) => {
+        node.attr("body", {
+            stroke: "#000",
+            fill: "#F39C12",
+        });
         console.log('1234');
-        
+
     });
 }
 

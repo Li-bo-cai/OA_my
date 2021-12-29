@@ -30,13 +30,13 @@ export default defineComponent({
   },
   setup() {
     let graph = reactive<any>(null);
+    let dnd = reactive<any>(null);
     onMounted(() => {
       nextTick(() => {
         graph = createGraphic(); //画布被创建
         graph.fromJSON(graphData); //数据被加载
         graphFunc(graph); //调用方法
-
-        const dnd = creatednd(graph);
+        dnd = creatednd(graph);
       });
     });
     onBeforeUnmount(() => {
