@@ -12,7 +12,8 @@
 import { createGraphic } from "./graph";
 import graphData from "./Node/graphNode";
 import graphFunc from "./Func/graphFunc";
-import dndWrap from "./dndWrap.vue";
+import { creatednd } from "./dnd";
+// import dndWrap from "./dndWrap.vue";
 import {
   defineAsyncComponent,
   defineComponent,
@@ -32,8 +33,10 @@ export default defineComponent({
     onMounted(() => {
       nextTick(() => {
         graph = createGraphic(); //画布被创建
-        graph.fromJSON(graphData);
+        graph.fromJSON(graphData); //数据被加载
         graphFunc(graph); //调用方法
+
+        const dnd = creatednd(graph);
       });
     });
     onBeforeUnmount(() => {

@@ -22,11 +22,9 @@ export const creatednd = (graph:any)=>{
               })
             : true;
         },
-      });
-      
+      });  
 }
-
-export const startDrag = (e: any,graph:any,dnd:any) => {
+const startDrag = (e: any, graph: any, dnd: any) => {
     const target = e.currentTarget;
     const type = target.getAttribute("data-type");
     const node =
@@ -63,6 +61,5 @@ export const startDrag = (e: any,graph:any,dnd:any) => {
               return wrap;
             },
           });
-
     dnd.start(node, e.nativeEvent as any);
   };
