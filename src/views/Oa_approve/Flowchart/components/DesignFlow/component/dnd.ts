@@ -1,6 +1,7 @@
 import {Dom,Addon} from '@antv/x6'
 
-export const creatednd = (graph:any)=>{
+
+export const creatednd = ()=>{
     const { Dnd } = Addon
     return new Dnd({
         target: graph,

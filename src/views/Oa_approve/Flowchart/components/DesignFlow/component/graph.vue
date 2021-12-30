@@ -10,18 +10,8 @@
 
 <script lang="ts">
 import { createGraphic } from "./graph";
-import graphData from "./Node/graphNode";
-import graphFunc from "./Func/graphFunc";
-import { creatednd } from "./dnd";
 // import dndWrap from "./dndWrap.vue";
-import {
-  defineAsyncComponent,
-  defineComponent,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  reactive,
-} from "vue";
+import { defineAsyncComponent, defineComponent, nextTick, reactive } from "vue";
 
 export default defineComponent({
   components: {
@@ -29,18 +19,9 @@ export default defineComponent({
     // dndWrap,
   },
   setup() {
-    let graph = reactive<any>(null);
-    let dnd = reactive<any>(null);
-    onMounted(() => {
-      nextTick(() => {
-        graph = createGraphic(); //画布被创建
-        graph.fromJSON(graphData); //数据被加载
-        graphFunc(graph); //调用方法
-        dnd = creatednd(graph);
-      });
-    });
-    onBeforeUnmount(() => {
-      graph.dispose(); //画布被销毁
+
+    nextTick(() => {
+      // graph = createGraphic(); //画布被创建
     });
     return {};
   },

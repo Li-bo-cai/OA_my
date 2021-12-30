@@ -12,11 +12,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, nextTick, reactive } from "vue";
+import { createGraphic } from "./graph";
 
 export default defineComponent({
   setup() {
-    const startDrag = (e: any, graph: any, dnd: any) => {
+    let graph = reactive<any>(null);
+    let dnd = reactive<any>(null);
+
+    nextTick(() => {
+      dnd = createGraphic();
+    });
+
+    const startDrag = (e: any) => {
       const target = e.currentTarget;
       const type = target.getAttribute("data-type");
       const node =
@@ -53,22 +61,9 @@ export default defineComponent({
                 return wrap;
               },
             });
-      // const node = graph.createNode({
-      //   width: 100,
-      //   height: 40,
-      //   attrs: {
-      //     label: {
-      //       text: "Rect",
-      //       fill: "#6a6c8a",
-      //     },
-      //     body: {
-      //       stroke: "#31d0c6",
-      //       strokeWidth: 2,
-      //     },
-      //   },
-      // });
-      dnd.start(node, e.nativeEvent as any);
+      dnd.start(node, e);
     };
+
     return { startDrag };
   },
 });

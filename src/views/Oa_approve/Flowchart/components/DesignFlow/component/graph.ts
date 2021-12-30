@@ -1,7 +1,11 @@
-import { Graph, Shape, } from "@antv/x6";
+import { Graph, Shape,Dom,Addon } from "@antv/x6";
+import { nextTick, onBeforeUnmount, reactive } from "vue";
+import graphData from "./Node/graphNode";
+import graphFunc from "./Func/graphFunc";
 
 export const createGraphic = () => {
-    return new Graph({
+
+    const graph:Graph = new Graph({
         panning: {
             enabled: true,
             modifiers: "shift",
@@ -42,6 +46,45 @@ export const createGraphic = () => {
             },
         },
     });
+    let dnd:Addon.Dnd =reactive<any>(null)
+
+    const creatednd = (graph:Graph)=>{
+        const { Dnd } = Addon
+        return new Dnd({
+            target: graph,
+            scaled: false,
+            animation: true,
+            validateNode(droppingNode, options) {
+                return droppingNode.shape === "html"
+                ? new Promise<boolean>((resolve) => {
+                    const { draggingNode, draggingGraph } = options;
+                    const view = draggingGraph.findView(draggingNode)!;
+                    const contentElem = view.findOne(
+                        );
+                     Dom.addClass(contentElem, "validating");
+                     setTimeout(() => {
+                         Dom.removeClass(contentElem, "validating");
+                         resolve(true);
+                     }, 3000);
+                     })
+                 : true;
+             },
+    
+        })
+    }
+
+    nextTick(()=>{
+        graph.fromJSON(graphData); //数据被加载
+        graphFunc(graph); //调用方法
+        dnd = creatednd(graph)
+
+    })
+    onBeforeUnmount(() => {
+        graph.dispose(); //画布被销毁
+      });
+
+    return {
+        graph,
+        dnd
+    }
 };
-
-
