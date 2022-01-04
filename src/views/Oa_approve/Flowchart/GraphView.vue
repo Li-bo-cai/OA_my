@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="ItemPanelDialogVisible" width="100%" destroy-on-close center :close-on-click-modal="false" :fullscreen="true" :before-close="closeDialod">
+  <el-dialog v-model="ItemPanelDialogVisible" width="100%" center :append-to-body="true" :close-on-click-modal="false" :fullscreen="true" :before-close="closeDialod">
     <template #title>
       <span>流程设计器名称</span>
     </template>
@@ -17,7 +17,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, nextTick, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  inject,
+  nextTick,
+  onBeforeUnmount,
+  ref,
+} from "vue";
 import DesignFlow from "./components/DesignFlow/index.vue";
 export default defineComponent({
   components: {
@@ -39,6 +46,9 @@ export default defineComponent({
 
     nextTick(() => {
       // console.log(12);
+    });
+    onBeforeUnmount(() => {
+      console.log("被销毁了");
     });
     return {
       ItemPanelDialogVisible,

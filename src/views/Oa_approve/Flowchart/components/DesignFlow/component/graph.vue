@@ -1,6 +1,6 @@
 <template>
   <div class="graph">
-    <dndWrap />
+    <dndWrap v-if="showCmpt" />
     <!-- 挂载节点 创建画布 -->
     <div id="container" ref="container"></div>
     <!-- 迷你地图 -->
@@ -9,21 +9,43 @@
 </template>
 
 <script lang="ts">
-import { createGraphic } from "./graph";
 // import dndWrap from "./dndWrap.vue";
-import { defineAsyncComponent, defineComponent, nextTick, reactive } from "vue";
+import {
+  defineAsyncComponent,
+  defineComponent,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+} from "vue";
 
 export default defineComponent({
   components: {
-    dndWrap: defineAsyncComponent(() => import("./dndWrap.vue")),
+    dndWrap: defineAsyncComponent(() => {
+      return new Promise((resolve: any, reject) => {
+        resolve(import("./dndWrap.vue"));
+      });
+    }),
     // dndWrap,
   },
   setup() {
-
+    let showCmpt = ref(false);
+    onMounted(() => {
+      if (document.querySelector("#container") as HTMLDivElement) {
+        showCmpt.value = true;
+      }
+    });
     nextTick(() => {
+      // console.log("我是graph页面");
+      // console.log(document.querySelector("#container") as HTMLDivElement);
       // graph = createGraphic(); //画布被创建
     });
-    return {};
+    onBeforeUnmount(() => {
+      // console.log("被销毁了");
+    });
+    return {
+      showCmpt,
+    };
   },
 });
 </script>

@@ -22,16 +22,21 @@
         </template>
       </el-table-column>
     </el-table>
-    <FlowChartDialog />
+    {{ItemPanelDialogVisible}}
+    <FlowChartDialog v-if="ItemPanelDialogVisible"/>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, inject } from "vue";
 import FlowChartDialog from "@/views/Oa_approve/Flowchart/GraphView.vue";
+import { mapState } from "vuex";
 export default defineComponent({
   components: {
     FlowChartDialog,
+  },
+  computed: {
+    ...mapState("oa_approveModule", ["ItemPanelDialogVisible"]),
   },
   setup() {
     const usVuex: any = inject("usVuex");
