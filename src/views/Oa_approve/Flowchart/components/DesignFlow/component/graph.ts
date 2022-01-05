@@ -14,7 +14,7 @@ export const createGraphic = () => {
         width: 800,
         height: 600,
         interacting: {
-            nodeMovable: false, //是否允许节点移动
+            nodeMovable: true, //是否允许节点移动
         },
         background: {
             color: "#fff", // 设置画布背景颜色
@@ -51,8 +51,8 @@ export const createGraphic = () => {
                     ? new Promise<boolean>((resolve) => {
                         const { draggingNode, draggingGraph } = options;
                         const view = draggingGraph.findView(draggingNode)!;
-                        const contentElem = view.findOne(
-                        );
+                        const contentElem = view.findOne('foreignObject > body > div');
+                        // console.log(Dom,contentElem);
                         Dom.addClass(contentElem, "validating");
                         setTimeout(() => {
                             Dom.removeClass(contentElem, "validating");
@@ -69,39 +69,127 @@ export const createGraphic = () => {
     })
     let nodeRect = reactive<any>(null)
     let nodeCircle = reactive<any>(null)
+    let nodeCopy = reactive<any>(null)
+
     nodeRect = graph.createNode({
-        width: 100,
+        width: 80,
         height: 40,
         attrs: {
             label: {
-                text: "Rect",
-                fill: "#6a6c8a",
+                text: "审批人",
+                fill: '#333',
             },
             body: {
-                stroke: "#31d0c6",
+                fill: '#F39C12',
+                stroke: '#F39C12',
                 strokeWidth: 2,
             },
         },
         shape:'custom-node',
+        ports:{
+            groups:{
+              out:{
+                position: 'bottom',    // 链接桩位置
+                attrs: {
+                  circle: {
+                    r: 6,
+                    magnet: true,
+                    stroke: '#31d0c6',
+                    strokeWidth: 2,
+                    fill: '#fff',
+                  },
+                },
+              } 
+            },
+            items:[{
+                id: 'port1',
+                group: 'out',
+              }]
+          }
     })
+
+    nodeCopy = graph.createNode({
+        width: 80,
+        height: 40,
+        attrs: {
+            label: {
+                text: "抄送人",
+                fill: '#333',
+            },
+            body: {
+                fill: '#F39C12',
+                stroke: '#F39C12',
+                strokeWidth: 2,
+            },
+        },
+        shape:'custom-node',
+        ports:{
+            groups:{
+              out:{
+                position: 'bottom',    // 链接桩位置
+                attrs: {
+                  circle: {
+                    r: 6,
+                    magnet: true,
+                    stroke: '#31d0c6',
+                    strokeWidth: 2,
+                    fill: '#fff',
+                  },
+                },
+              } 
+            },
+            items:[{
+                id: 'port1',
+                group: 'out',
+              }]
+          }
+    })
+
     nodeCircle = graph.createNode({
         width: 60,
         height: 60,
-        shape: "html",
-        html: () => {
-            const wrap = document.createElement("div");
-            wrap.style.width = "100%";
-            wrap.style.height = "100%";
-            wrap.style.display = "flex";
-            wrap.style.alignItems = "center";
-            wrap.style.justifyContent = "center";
-            wrap.style.border = "2px solid rgb(49, 208, 198)";
-            wrap.style.background = "#fff";
-            wrap.style.borderRadius = "100%";
-            wrap.innerText = "Circle";
-            return wrap;
+        attrs:{
+            body: {
+                rx:30,
+                ry:30,
+                fill: '#F39C12',
+                stroke: '#F39C12',
+            },
+            label: {
+                text: '结束',
+                fill: '#333',
+                fontSize: 13,
+                cursor: 'pointer',
+            }
         },
-    });
+
+        shape:'custom-node',
+    })
+
+    // nodeCircle = graph.createNode({
+    //     width: 60,
+    //     height: 60,
+    //     attrs:{
+    //         body: {
+    //             rx: 60,
+    //             ry: 60,
+    //         },
+    //     },
+    //     shape: "html",
+    //     html: () => {
+    //         const wrap = document.createElement("div");
+    //         wrap.style.width = "58px";
+    //         wrap.style.height = "58px";
+    //         wrap.style.display = "flex";
+    //         wrap.style.alignItems = "center";
+    //         wrap.style.justifyContent = "center";
+    //         wrap.style.border = "1px solid rgb(49, 208, 198)";
+    //         wrap.style.background = "#fff";
+    //         wrap.style.borderRadius = "50%";
+    //         wrap.innerText = "Circle";
+    //         return wrap;
+    //     },
+    // });
 
     onBeforeUnmount(() => {
         graph.dispose(); //画布被销毁
@@ -111,6 +199,7 @@ export const createGraphic = () => {
         graph,
         dnd,
         nodeRect,
+        nodeCopy,
         nodeCircle
     }
 };

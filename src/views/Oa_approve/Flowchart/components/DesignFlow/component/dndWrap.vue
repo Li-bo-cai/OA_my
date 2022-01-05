@@ -2,10 +2,13 @@
   <div>
     <div className="dnd-wrap">
       <div data-type="rect" className="dnd-rect" @mousedown="startDrag">
-        Rect
+        审批人
+      </div>
+      <div data-type="copy" className="dnd-rect" @mousedown="startDrag">
+        抄送人
       </div>
       <div data-type="circle" className="dnd-circle" @mousedown="startDrag">
-        Circle
+        结束
       </div>
     </div>
   </div>
@@ -17,18 +20,24 @@ import { createGraphic } from "./graph";
 
 export default defineComponent({
   setup() {
-    const { dnd, graph, nodeRect, nodeCircle } = createGraphic();
+    const { dnd, graph, nodeRect, nodeCopy, nodeCircle } = createGraphic();
     // console.log(dnd, graph, nodeRect, nodeCircle);
 
     nextTick(() => {
-      console.log("我是dnd-wrap页面");
+      // console.log("我是dnd-wrap页面");
     });
     const startDrag = (e: any) => {
       const target = e.currentTarget;
       const type = target.getAttribute("data-type");
-      const node = type === "rect" ? nodeRect : nodeCircle;
-      // console.log(dnd);
-
+      // const node = type === "rect" ? nodeRect : nodeCircle;
+      let node: any;
+      if (type == "rect") {
+        node = nodeRect;
+      } else if (type == "copy") {
+        node = nodeCopy;
+      } else if (type == "circle") {
+        node = nodeCircle;
+      }
       dnd.start(node, e);
     };
 
@@ -58,6 +67,16 @@ export default defineComponent({
   cursor: move;
 }
 
+.dnd-copy {
+  width: 100px;
+  height: 40px;
+  border: 2px solid #31d0c6;
+  text-align: center;
+  line-height: 40px;
+  margin: 16px;
+  cursor: move;
+}
+
 .dnd-circle {
   width: 60px;
   height: 60px;
@@ -67,5 +86,14 @@ export default defineComponent({
   line-height: 60px;
   margin: 16px;
   cursor: move;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

@@ -72,4 +72,21 @@ export default defineComponent({
   bottom: 0;
   z-index: 9;
 }
+.validating {
+  position: relative;
+}
+
+.validating:after {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  content: " ";
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 6px solid #873bf4;
+  border-color: #873bf4 transparent #873bf4 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
 </style>

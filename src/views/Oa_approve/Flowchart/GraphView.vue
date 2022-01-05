@@ -48,7 +48,7 @@ export default defineComponent({
       // console.log(12);
     });
     onBeforeUnmount(() => {
-      console.log("被销毁了");
+      // console.log("被销毁了");
     });
     return {
       ItemPanelDialogVisible,
