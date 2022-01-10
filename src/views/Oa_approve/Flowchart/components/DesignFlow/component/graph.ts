@@ -41,129 +41,31 @@ export const createGraphic = () => {
         },
     });
     // let dnd: Addon.Dnd = reactive<any>(null)
-    const { Dnd } = Addon
-    const dnd: Addon.Dnd= new Dnd({
-            target: graph,
-            scaled: false,
-            animation: true,
-            validateNode(droppingNode, options) {
-                return droppingNode.shape === "html"
-                    ? new Promise<boolean>((resolve) => {
-                        const { draggingNode, draggingGraph } = options;
-                        const view = draggingGraph.findView(draggingNode)!;
-                        const contentElem = view.findOne('foreignObject > body > div');
-                        // console.log(Dom,contentElem);
-                        Dom.addClass(contentElem, "validating");
-                        setTimeout(() => {
-                            Dom.removeClass(contentElem, "validating");
-                            resolve(true);
-                        }, 3000);
-                    })
-                    : true;
-            },
-        })
+    const { Dnd } = Addon 
+    const dnd = new Dnd({
+        target: graph,
+        scaled: false,
+        animation: true,
+        validateNode(droppingNode, options) {
+            return droppingNode.shape === "html"
+                ? new Promise<boolean>((resolve) => {
+                    const { draggingNode, draggingGraph } = options;
+                    const view = draggingGraph.findView(draggingNode)!;
+                    const contentElem = view.findOne('foreignObject > body > div');
+                    // console.log(Dom,contentElem);
+                    Dom.addClass(contentElem, "validating");
+                    setTimeout(() => {
+                        Dom.removeClass(contentElem, "validating");
+                        resolve(true);
+                    }, 3000);
+                })
+                : true;
+        },
+    })
 
     nextTick(() => {
         graph.fromJSON(graphData); //数据被加载
         graphFunc(graph); //调用方法
-    })
-    let nodeRect = reactive<any>(null)
-    let nodeCircle = reactive<any>(null)
-    let nodeCopy = reactive<any>(null)
-
-    nodeRect = graph.createNode({
-        width: 80,
-        height: 40,
-        attrs: {
-            label: {
-                text: "审批人",
-                fill: '#333',
-            },
-            body: {
-                fill: '#F39C12',
-                stroke: '#F39C12',
-                strokeWidth: 2,
-            },
-        },
-        shape:'custom-node',
-        ports:{
-            groups:{
-              out:{
-                position: 'bottom',    // 链接桩位置
-                attrs: {
-                  circle: {
-                    r: 6,
-                    magnet: true,
-                    stroke: '#31d0c6',
-                    strokeWidth: 2,
-                    fill: '#fff',
-                  },
-                },
-              } 
-            },
-            items:[{
-                id: 'port1',
-                group: 'out',
-              }]
-          }
-    })
-
-    nodeCopy = graph.createNode({
-        width: 80,
-        height: 40,
-        attrs: {
-            label: {
-                text: "抄送人",
-                fill: '#333',
-            },
-            body: {
-                fill: '#F39C12',
-                stroke: '#F39C12',
-                strokeWidth: 2,
-            },
-        },
-        shape:'custom-node',
-        ports:{
-            groups:{
-              out:{
-                position: 'bottom',    // 链接桩位置
-                attrs: {
-                  circle: {
-                    r: 6,
-                    magnet: true,
-                    stroke: '#31d0c6',
-                    strokeWidth: 2,
-                    fill: '#fff',
-                  },
-                },
-              } 
-            },
-            items:[{
-                id: 'port1',
-                group: 'out',
-              }]
-          }
-    })
-
-    nodeCircle = graph.createNode({
-        width: 60,
-        height: 60,
-        attrs:{
-            body: {
-                rx:30,
-                ry:30,
-                fill: '#F39C12',
-                stroke: '#F39C12',
-            },
-            label: {
-                text: '结束',
-                fill: '#333',
-                fontSize: 13,
-                cursor: 'pointer',
-            }
-        },
-
-        shape:'custom-node',
     })
 
     // nodeCircle = graph.createNode({
@@ -198,8 +100,5 @@ export const createGraphic = () => {
     return {
         graph,
         dnd,
-        nodeRect,
-        nodeCopy,
-        nodeCircle
     }
 };

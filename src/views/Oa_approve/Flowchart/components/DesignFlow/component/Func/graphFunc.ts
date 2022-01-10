@@ -57,6 +57,7 @@ const graphFunc = (graph: Graph) => {
     graph.on('node:click', ({ node }: any) => {
         reset()
         node.attr('body/stroke', 'black')
+        console.log(node);
     })
     // 边的单击事件
     graph.on('edge:click', ({ view, edge }: any) => {
@@ -77,11 +78,23 @@ const graphFunc = (graph: Graph) => {
             },
         })
     })
-    // 边的双击事件
-    graph.on('edge:dblclick', ({ view, edge }: any) => {
-        view.cell.remove()
+    // 边的移入
+    graph.on('edge:mouseenter', ({ edge }) => {
+        edge.addTools([
+            'source-arrowhead',
+            'target-arrowhead',
+            {
+                name: 'button-remove',
+                args: {
+                    distance: -30,
+                },
+            },
+        ])
     })
-
+    //   边的移出
+    graph.on('edge:mouseleave', ({ edge }) => {
+        edge.removeTools()
+    })
     function reset() {
         graph.drawBackground({ color: '#fff' })
         const nodes = graph.getNodes()

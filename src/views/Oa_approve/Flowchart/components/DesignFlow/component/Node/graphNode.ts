@@ -67,6 +67,20 @@ Graph.registerNode('custom-node', {
 },
   true,
 )
+// 注册边
+Graph.registerEdge(
+  'bpmn-edge',
+  {
+    inherit: 'edge',
+    attrs: {
+      line: {
+        stroke: '#A2B1C3',
+        strokeWidth: 2,
+      },
+    },
+  },
+  true,
+)
 const graphData = {
   // 节点
   nodes: [
