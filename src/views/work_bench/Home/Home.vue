@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="content_used_work">
+    <!-- <div class="content_used_work">
       <div class="content_used_dispose">
         <p class="tit">待处理工作
           <span v-if="work_todo.count" class="circular" @click="get_pending_work">{{ work_todo.count }}</span>
@@ -56,23 +56,22 @@
         </div>
         <div v-if="showVive3" class="more more_work" @click="go_notice_page">···</div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="content_job">
+    <!-- <div class="content_job">
       <p class="tit">文件资源中心</p>
       <p v-if="word_file&&word_file.length==0" style="color: #999">暂无入职必读</p>
       <div class="job">
         <div class="job_detail" v-for="item in word_file" :key="item.id" @click="go_document(item)">
-          <!-- <img src="../../assets/images/world@2x.png" alt="" /> -->
           <div class="text">
             <p>{{ item.file_name }}</p>
           </div>
         </div>
       </div>
       <div v-if="showVive4" class="more" @click="go_document_page">···</div>
-    </div>
+    </div> -->
 
-    <div class="content_dynamic">
+    <!-- <div class="content_dynamic">
       <p class="tit">集团动态</p>
       <p v-if="dynamic&&dynamic.length==0" style="color: #999">暂无集团动态</p>
       <div class="dynamic">
@@ -85,9 +84,8 @@
           </div>
         </div>
       </div>
-
-    </div>
-    <div v-if="showVive5" class="more" @click="go_dynamic_page">···</div>
+    </div> -->
+    <!-- <div v-if="showVive5" class="more" @click="go_dynamic_page">···</div> -->
   </div>
 </template>
 

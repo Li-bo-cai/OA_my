@@ -44,6 +44,7 @@ export default defineComponent({
   }
   .graph_info {
     flex: 1;
+    padding: 20px;
   }
 }
 </style>

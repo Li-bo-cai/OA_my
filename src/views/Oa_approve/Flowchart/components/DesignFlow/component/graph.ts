@@ -1,5 +1,5 @@
 import { Graph, Shape, Dom, Addon } from "@antv/x6";
-import { nextTick, onBeforeUnmount, reactive } from "vue";
+import { inject, nextTick, onBeforeUnmount, reactive } from "vue";
 import graphData from "./Node/graphNode";
 import graphFunc from "./Func/graphFunc";
 
@@ -67,31 +67,6 @@ export const createGraphic = () => {
         graph.fromJSON(graphData); //数据被加载
         graphFunc(graph); //调用方法
     })
-
-    // nodeCircle = graph.createNode({
-    //     width: 60,
-    //     height: 60,
-    //     attrs:{
-    //         body: {
-    //             rx: 60,
-    //             ry: 60,
-    //         },
-    //     },
-    //     shape: "html",
-    //     html: () => {
-    //         const wrap = document.createElement("div");
-    //         wrap.style.width = "58px";
-    //         wrap.style.height = "58px";
-    //         wrap.style.display = "flex";
-    //         wrap.style.alignItems = "center";
-    //         wrap.style.justifyContent = "center";
-    //         wrap.style.border = "1px solid rgb(49, 208, 198)";
-    //         wrap.style.background = "#fff";
-    //         wrap.style.borderRadius = "50%";
-    //         wrap.innerText = "Circle";
-    //         return wrap;
-    //     },
-    // });
 
     onBeforeUnmount(() => {
         graph.dispose(); //画布被销毁

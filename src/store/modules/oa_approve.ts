@@ -8,7 +8,6 @@ interface IRootState {
     [key: string]: any
 }
 
-
 const oa_approveModule: Module<ICountState, IRootState> = {
     namespaced: true,
     state() {

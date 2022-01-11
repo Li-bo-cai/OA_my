@@ -1,4 +1,5 @@
-import { createStore } from 'vuex'
+import { createStore  } from 'vuex'
+
 import loginModule from './modules/login'
 import homeModule from './modules/home'
 import organzationModule from './modules/organization'
@@ -17,7 +18,6 @@ import oa_approveModule from './modules/oa_approve'
 import messageModule from './modules/message'
 import socketModule from './modules/socket'
 import graphModule from './modules/graph'
-
 
 export const store = createStore({
   state: {

@@ -1,70 +1,113 @@
 import { Graph } from '@antv/x6'
-// 节点注册
-Graph.registerNode('custom-node', {
-  markup: [
-    {
-      tagName: 'rect',
-      selector: 'body',
-    },
-    {
-      tagName: 'text',
-      selector: 'label',
-    },
-    {
-      tagName: 'g',
-      children: [
-        {
-          tagName: 'text',
-          selector: 'btnText',
+
+const ports = {
+  groups: {
+    top: {
+      position: 'top',
+      attrs: {
+        circle: {
+          r: 4,
+          magnet: true,
+          stroke: '#5F95FF',
+          strokeWidth: 1,
+          fill: '#fff',
+          style: {
+            visibility: 'hidden',
+          },
         },
-        {
-          tagName: 'rect',
-          selector: 'btn',
+      },
+    },
+    right: {
+      position: 'right',
+      attrs: {
+        circle: {
+          r: 4,
+          magnet: true,
+          stroke: '#5F95FF',
+          strokeWidth: 1,
+          fill: '#fff',
+          style: {
+            visibility: 'hidden',
+          },
         },
-      ],
-    }
-  ],
-  attrs: {
-    btn: {
-      refX: '100%',
-      refX2: -20,     //左右偏移量
-      y: 3,           //上下偏移量
-      width: 16,      //宽度
-      height: 16,     //高度
-      rx: 10,         //画圆 半径
-      ry: 10,
-      fill: 'rgba(255,255,0,0.01)',  //透明度
-      stroke: 'red',
-      cursor: 'pointer',
-      event: 'node:delete',
+      },
     },
-    btnText: {
-      fontSize: 14,
-      fill: 'red',
-      text: 'x',
-      refX: '100%',
-      refX2: -15,
-      y: 15,
-      cursor: 'pointer',
-      pointerEvent: 'none',
+    bottom: {
+      position: 'bottom',
+      attrs: {
+        circle: {
+          r: 4,
+          magnet: true,
+          stroke: '#5F95FF',
+          strokeWidth: 1,
+          fill: '#fff',
+          style: {
+            visibility: 'hidden',
+          },
+        },
+      },
     },
-    body: {
-      fill: '#ffffff',
-      stroke: '#333333',
-      strokeWidth: 2,
-      refWidth: '100%',
-      refHeight: '100%',
-    },
-    label: {
-      fontSize: 14,
-      fill: '#333333',
-      refX: '50%',
-      refY: '50%',
-      textAnchor: 'middle',
-      textVerticalAnchor: 'middle',
+    left: {
+      position: 'left',
+      attrs: {
+        circle: {
+          r: 4,
+          magnet: true,
+          stroke: '#5F95FF',
+          strokeWidth: 1,
+          fill: '#fff',
+          style: {
+            visibility: 'hidden',
+          },
+        },
+      },
     },
   },
-},
+  items: [
+    {
+      group: 'top',
+    },
+    {
+      group: 'right',
+    },
+    {
+      group: 'bottom',
+    },
+    {
+      group: 'left',
+    },
+  ],
+}
+// 节点注册
+Graph.registerNode(
+  'custom-polygon',
+  {
+    inherit: 'polygon',
+    width: 66,
+    height: 36,
+    attrs: {
+      body: {
+        strokeWidth: 1,
+        stroke: '#5F95FF',
+        fill: '#EFF4FF',
+      },
+      text: {
+        fontSize: 12,
+        fill: '#262626',
+      },
+    },
+    ports: {
+      ...ports,
+      items: [
+        {
+          group: 'top',
+        },
+        {
+          group: 'bottom',
+        },
+      ],
+    },
+  },
   true,
 )
 // 注册边
@@ -91,7 +134,7 @@ const graphData = {
       width: 80,   // Number，可选，节点大小的 width 值
       height: 40,  // Number，可选，节点大小的 height 值
       label: 'begin', // String，节点标签
-      // shape:'custom-node',
+      type:0,
       event: 'none',
       attrs: {
         body: {

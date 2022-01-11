@@ -1,12 +1,11 @@
 <template>
   <div class="graph">
-    <!-- <dndWrap v-if="showCmpt" /> -->
     <div className="dnd-wrap">
       <div data-type="rect" className="dnd-rect" @mousedown="startDrag">
-        审批人
+        人员选择
       </div>
-      <div data-type="copy" className="dnd-rect" @mousedown="startDrag">
-        抄送人
+      <div data-type="copy" className="dnd-copy" @mousedown="startDrag">
+        条件分支
       </div>
       <div data-type="circle" className="dnd-circle" @mousedown="startDrag">
         结束
@@ -22,31 +21,34 @@
 <script lang="ts">
 import { createGraphic } from "./graph";
 import createNode from "./Node/graphCreateNode";
-import { defineComponent, nextTick, onBeforeUnmount, ref } from "vue";
+import { defineComponent, nextTick, onBeforeUnmount, reactive } from "vue";
+import { Addon, Graph } from "@antv/x6";
 
 export default defineComponent({
   setup() {
-    let startDrag = ref<any>("");
+    let dnd: Addon.Dnd = reactive<any>(null);
+    let graph: Graph = reactive<any>(null);
+
     nextTick(() => {
-      const { dnd, graph } = createGraphic();
-
-      const { nodeRect, nodeCopy, nodeCircle } = createNode(graph);
-
-      startDrag = (e: any) => {
-        const target = e.currentTarget;
-        const type = target.getAttribute("data-type");
-        // const node = type === "rect" ? nodeRect : nodeCircle;
-        let node: any;
-        if (type == "rect") {
-          node = nodeRect;
-        } else if (type == "copy") {
-          node = nodeCopy;
-        } else if (type == "circle") {
-          node = nodeCircle;
-        }
-        dnd.start(node, e);
-      };
+      const all = createGraphic();
+      graph = all.graph;
+      dnd = all.dnd;
     });
+
+    const startDrag = (e: any) => {
+      const { nodeRect, nodeCopy, nodeCircle } = createNode(graph);
+      const target = e.currentTarget;
+      const type = target.getAttribute("data-type");
+      let node: any;
+      if (type == "rect") {
+        node = nodeRect;
+      } else if (type == "copy") {
+        node = nodeCopy;
+      } else if (type == "circle") {
+        node = nodeCircle;
+      }
+      dnd.start(node, e);
+    };
     onBeforeUnmount(() => {
       // console.log("被销毁了");
     });
@@ -118,11 +120,11 @@ export default defineComponent({
 }
 
 .dnd-copy {
-  width: 100px;
-  height: 40px;
-  border: 2px solid #31d0c6;
-  text-align: center;
-  line-height: 40px;
+  width: 60px;
+  height: 60px;
+  border: 1px solid #31d0c6;
+  transform: rotateZ(45deg) skew(30deg, 3deg);
+  overflow: hidden;
   margin: 16px;
   cursor: move;
 }

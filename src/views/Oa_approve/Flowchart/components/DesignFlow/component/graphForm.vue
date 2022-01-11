@@ -1,52 +1,39 @@
 <template>
-  <div>
-    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="120px" class="demo-ruleForm" :size="formSize">
+  <div class="form">
+    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" class="demo-ruleForm" size="" :disabled="disabled">
+      <el-form-item label="节点Id" prop="id">
+        <el-input size="mini" v-model="ruleForm.id"></el-input>
+      </el-form-item>
       <el-form-item label="节点名称" prop="name">
-        <el-input v-model="ruleForm.name"></el-input>
+        <el-input size="mini" v-model="ruleForm.name"></el-input>
+      </el-form-item>
+      <el-form-item label="节点类型" prop="type">
+        <el-select v-model="ruleForm.type" placeholder="Activity zone">
+          <el-option label="Zone one" value="shanghai"></el-option>
+          <el-option label="Zone two" value="beijing"></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm(ruleFormRef)">确定</el-button>
+        <el-button size="mini" type="primary" @click="submitForm(ruleFormRef)">确定</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
-import type { ElForm } from "element-plus";
-
+import { defineComponent } from "vue";
+import graphForm from "./graphForm";
 export default defineComponent({
   setup() {
-    const formSize = ref("");
-    const ruleFormRef = ref<InstanceType<typeof ElForm>>();
-
-    const ruleForm = reactive({
-      name: "",
-      region: "",
-      date1: "",
-      date2: "",
-      delivery: false,
-      type: [],
-      resource: "",
-      desc: "",
-    });
-
-    const rules = reactive({});
-
-    const submitForm = (val: any) => {
-      console.log(123);
-    };
-
     return {
-      rules,
-      formSize,
-      ruleForm,
-      ruleFormRef,
-      submitForm,
+      ...graphForm(),
     };
   },
 });
 </script>
 
 <style scoped lang="scss">
+.form {
+  // height: 600px;
+}
 </style>

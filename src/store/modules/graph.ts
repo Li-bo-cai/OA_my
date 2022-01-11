@@ -1,12 +1,15 @@
 import { Module } from "vuex";
 
 interface ICountState {
-    gView: insiseGview
+    gForm: insiseGraphForm
+    disabled:boolean
     [key: string]: any
 }
-export interface insiseGview {
-    gWidth: number;
-    gHeight: number;
+
+export interface insiseGraphForm {
+    id:string,
+    name: string,
+    type:number
 }
 interface IRootState {
     [key: string]: any
@@ -15,19 +18,22 @@ const graphModule: Module<ICountState, IRootState> = {
     namespaced: true,
     state() {
         return {
-            gView: {
-                gWidth: 0,
-                gHeight: 0,
+            disabled:true,
+            gForm: {
+                id: '',
+                name: '',
+                type: 1
             }
         }
     },
     mutations: {
-        // 设置宽高
-        SET_GVIEW(state, payload) {
-            state.gView = payload
-            console.log("state.gView:", state.gView);
-
+        // 设置节点信息
+        SET_GFORM(state, payload) {
+            state.gForm = payload
         },
+        SET_DISABLED(state,payload){
+            state.disabled = payload
+        }
     },
     actions: {}
 }

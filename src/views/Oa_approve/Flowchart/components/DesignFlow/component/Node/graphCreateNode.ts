@@ -1,10 +1,35 @@
+
+const tools = [{
+    name: 'button-remove',
+    args: {
+        x: '100%',
+        y: 0,
+        offset: { x: -10, y: 10 },
+    },
+}]
+
+const group = {
+    out: {
+        position: 'bottom',    // 链接桩位置
+        attrs: {
+            circle: {
+                r: 6,
+                magnet: true,
+                stroke: '#31d0c6',
+                strokeWidth: 2,
+                fill: '#fff',
+            },
+        },
+    }
+}
+
 const createNode = (graph: any) => {
-    const nodeCopy = graph.createNode({
+    const nodeRect = graph.createNode({
         width: 80,
         height: 40,
         attrs: {
             label: {
-                text: "抄送人",
+                text: "人员选择",
                 fill: '#333',
             },
             body: {
@@ -13,22 +38,37 @@ const createNode = (graph: any) => {
                 strokeWidth: 2,
             },
         },
-        shape: 'custom-node',
+        tools: tools,
+        type: 1,
         ports: {
-            groups: {
-                out: {
-                    position: 'bottom',    // 链接桩位置
-                    attrs: {
-                        circle: {
-                            r: 6,
-                            magnet: true,
-                            stroke: '#31d0c6',
-                            strokeWidth: 2,
-                            fill: '#fff',
-                        },
-                    },
-                }
+            groups: group,
+            items: [{
+                id: 'port1',
+                group: 'out',
+            }]
+        }
+    })
+
+    const nodeCopy = graph.createNode({
+        width: 80,
+        height: 60,
+        attrs: {
+            label: {
+                text: "条件分支",
+                fill: '#333',
             },
+            body: {
+                fill: '#F39C12',
+                stroke: '#F39C12',
+                strokeWidth: 2,
+                refPoints: '0,10 10,0 20,10 10,20',
+            },
+        },
+        shape: 'custom-polygon',
+        tools: tools,
+        type: 4,
+        ports: {
+            groups: group,
             items: [{
                 id: 'port1',
                 group: 'out',
@@ -39,10 +79,9 @@ const createNode = (graph: any) => {
     const nodeCircle = graph.createNode({
         width: 60,
         height: 60,
+        shape: 'circle',
         attrs: {
             body: {
-                rx: 30,
-                ry: 30,
                 fill: '#F39C12',
                 stroke: '#F39C12',
             },
@@ -53,46 +92,34 @@ const createNode = (graph: any) => {
                 cursor: 'pointer',
             }
         },
-
-        shape: 'custom-node',
+        tools: tools,
+        // shape: 'custom-node',
     })
 
-    const nodeRect = graph.createNode({
-        width: 80,
-        height: 40,
-        attrs: {
-            label: {
-                text: "审批人",
-                fill: '#333',
-            },
-            body: {
-                fill: '#F39C12',
-                stroke: '#F39C12',
-                strokeWidth: 2,
-            },
-        },
-        shape: 'custom-node',
-        ports: {
-            groups: {
-                out: {
-                    position: 'bottom',    // 链接桩位置
-                    attrs: {
-                        circle: {
-                            r: 6,
-                            magnet: true,
-                            stroke: '#31d0c6',
-                            strokeWidth: 2,
-                            fill: '#fff',
-                        },
-                    },
-                }
-            },
-            items: [{
-                id: 'port1',
-                group: 'out',
-            }]
-        }
-    })
+    // nodeCircle = graph.createNode({
+    //     width: 60,
+    //     height: 60,
+    //     attrs:{
+    //         body: {
+    //             rx: 60,
+    //             ry: 60,
+    //         },
+    //     },
+    //     shape: "html",
+    //     html: () => {
+    //         const wrap = document.createElement("div");
+    //         wrap.style.width = "58px";
+    //         wrap.style.height = "58px";
+    //         wrap.style.display = "flex";
+    //         wrap.style.alignItems = "center";
+    //         wrap.style.justifyContent = "center";
+    //         wrap.style.border = "1px solid rgb(49, 208, 198)";
+    //         wrap.style.background = "#fff";
+    //         wrap.style.borderRadius = "50%";
+    //         wrap.innerText = "Circle";
+    //         return wrap;
+    //     },
+    // });
 
     return {
         nodeRect,

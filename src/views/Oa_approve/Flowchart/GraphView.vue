@@ -41,7 +41,10 @@ export default defineComponent({
     );
     // 关闭弹出框
     const closeDialod = () => {
+      // 如果弹窗关闭,清空graphmodel中的值
       usVuex.useMutations("oa_approveModule", "SET_ITEMPANEL", false);
+      usVuex.useMutations("graphModule", "SET_DISABLED", true);
+      usVuex.useMutations("graphModule", "SET_GFORM", {});
     };
 
     nextTick(() => {
@@ -62,7 +65,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .flow_chat {
   // display: flex;
-  height: calc(100vh - 103px);
+  height: calc(100vh - 105px);
   .el-tabs {
     height: 100%;
   }
