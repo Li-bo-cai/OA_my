@@ -5,7 +5,7 @@
         人员选择
       </div>
       <div data-type="copy" className="dnd-copy" @mousedown="startDrag">
-        条件分支
+        <span>条件分支</span>
       </div>
       <div data-type="circle" className="dnd-circle" @mousedown="startDrag">
         结束
@@ -120,13 +120,21 @@ export default defineComponent({
 }
 
 .dnd-copy {
+  position: relative;
   width: 60px;
   height: 60px;
   border: 1px solid #31d0c6;
-  transform: rotateZ(45deg) skew(30deg, 3deg);
+  transform: rotateZ(45deg);
   overflow: hidden;
   margin: 16px;
   cursor: move;
+  span {
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    right: -5px;
+    transform: rotateZ(-45deg);
+  }
 }
 
 .dnd-circle {

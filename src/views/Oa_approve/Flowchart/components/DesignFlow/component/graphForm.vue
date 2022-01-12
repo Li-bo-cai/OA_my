@@ -8,9 +8,10 @@
         <el-input size="mini" v-model="ruleForm.name"></el-input>
       </el-form-item>
       <el-form-item label="节点类型" prop="type">
-        <el-select v-model="ruleForm.type" placeholder="Activity zone">
-          <el-option label="Zone one" value="shanghai"></el-option>
-          <el-option label="Zone two" value="beijing"></el-option>
+        <el-select v-model="ruleForm.type" placeholder="人员默认为审批人">
+          <el-option label="发起人" :value="1"></el-option>
+          <el-option label="审批人" :value="2"></el-option>
+          <el-option label="抄送人" :value="3"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>

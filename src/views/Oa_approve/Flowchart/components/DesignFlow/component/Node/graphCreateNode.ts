@@ -1,13 +1,4 @@
 
-const tools = [{
-    name: 'button-remove',
-    args: {
-        x: '100%',
-        y: 0,
-        offset: { x: -10, y: 10 },
-    },
-}]
-
 const group = {
     out: {
         position: 'bottom',    // 链接桩位置
@@ -38,7 +29,6 @@ const createNode = (graph: any) => {
                 strokeWidth: 2,
             },
         },
-        tools: tools,
         type: 1,
         ports: {
             groups: group,
@@ -65,7 +55,6 @@ const createNode = (graph: any) => {
             },
         },
         shape: 'custom-polygon',
-        tools: tools,
         type: 4,
         ports: {
             groups: group,
@@ -92,8 +81,7 @@ const createNode = (graph: any) => {
                 cursor: 'pointer',
             }
         },
-        tools: tools,
-        // shape: 'custom-node',
+        type: 4,
     })
 
     // nodeCircle = graph.createNode({

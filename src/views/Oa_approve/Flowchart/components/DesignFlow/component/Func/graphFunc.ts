@@ -5,6 +5,15 @@ import {insiseGraphForm} from '@/store/modules/graph'
 
 const graphStore:VUex = new VUex(store)
 
+const tools = [{
+    name: 'button-remove',
+    args: {
+        x: '100%',
+        y: 0,
+        offset: { x: -10, y: 10 },
+    },
+}]
+
 const graphFunc = (graph: Graph) => {
     graph.centerContent(); //画布居中
     // // 节点移入
@@ -28,65 +37,39 @@ const graphFunc = (graph: Graph) => {
     });
     // // 节点双击
     // graph.on("node:contextmenu", ({ node, e }: any) => {
-    //     e.stopPropagation()
-    //     const data = node.store.data
-    //     const newWidth = data.position.x + data.size.width + 10
-    //     const newHeight = data.position.y + data.size.height / 2
-    //     const node3 = graph.createNode({
-    //         x: newWidth,
-    //         y: newHeight,
-    //         width: 80,
-    //         height: 40,
-    //         attrs: {
-    //             label: {
-    //                 text: "Rect",
-    //                 fill: "#6a6c8a",
-    //             },
-    //             body: {
-    //                 stroke: "#31d0c6",
-    //                 strokeWidth: 2,
-    //             },
-    //         },
-    //         shape: 'custom-node',
-    //     })
-    //     graph.addNode(node3)
-    //     node.attr("body", {
-    //         stroke: "#000",
-    //         fill: "#F39C12",
-    //     });
-    //     console.log(node);
     // });
     // // 节点单击事件
     graph.on('node:click', ({ node }: any) => {
+        reset()
         node.attr('body/stroke', 'black')
         console.log(node,'这串数据将要存入仓库');
         const data = node.store.data
+        const type = data.type
         const gForm:insiseGraphForm = {
             id:data.id,
             name:data.attrs.label.text,
-            type:data.type,
+            type:type,
         }
-        graphStore.useMutations('graphModule','SET_DISABLED',false)
         graphStore.useMutations('graphModule','SET_GFORM',gForm)
+        if(type==0){
+            graphStore.useMutations('graphModule','SET_DISABLED',true)
+            return
+
+        }else if(type == 4){
+            graphStore.useMutations('graphModule','SET_DISABLED',true)
+            node.addTools(tools)
+            return
+        }
+        node.addTools(tools)
+        graphStore.useMutations('graphModule','SET_DISABLED',false)
+    })
+    // 节点移除事件
+    graph.on('node:removed',({node}:any)=>{
+        graphStore.useMutations('graphModule','SET_DISABLED',true)
+        // console.log(node);
     })
     // // 边的单击事件
     // graph.on('edge:click', ({ view, edge }: any) => {
-    //     reset()
-    //     edge.appendLabel({
-    //         attrs: {
-    //             label: {
-    //                 text: 'Eege',
-    //             }
-    //         },
-    //     })
-    //     edge.attr('line/stroke', 'orange')
-    //     edge.prop('labels/0', {
-    //         attrs: {
-    //             body: {
-    //                 stroke: 'orange',
-    //             },
-    //         },
-    //     })
     // })
     // 边的移入
     graph.on('edge:mouseenter', ({ edge }) => {
@@ -106,15 +89,13 @@ const graphFunc = (graph: Graph) => {
         edge.removeTools()
     })
 
-
-
-
     function reset() {
         graph.drawBackground({ color: '#fff' })
         const nodes = graph.getNodes()
         const edges = graph.getEdges()
         nodes.forEach((node: any) => {
             node.attr('body/stroke', 'orange')
+            node.removeTools()
         })
         edges.forEach((edge: any) => {
             edge.attr('line/stroke', 'black')

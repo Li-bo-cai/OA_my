@@ -25,8 +25,16 @@ export default () => {
             }],
     });
 
-    const submitForm = (val: any) => {
-        console.log(123);
+    const submitForm = (formEl:InstanceType<typeof ElForm> | undefined) => {
+        if (!formEl) return
+        formEl.validate((valid) => {
+            if (valid) {
+            //   alert('submit!');
+            } else {
+              console.log('error submit!!');
+              return false;
+            }
+          });
     };
 
     return {

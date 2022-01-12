@@ -43,8 +43,7 @@ export default defineComponent({
     const closeDialod = () => {
       // 如果弹窗关闭,清空graphmodel中的值
       usVuex.useMutations("oa_approveModule", "SET_ITEMPANEL", false);
-      usVuex.useMutations("graphModule", "SET_DISABLED", true);
-      usVuex.useMutations("graphModule", "SET_GFORM", {});
+      usVuex.useMutations("graphModule", "SET_ALL_DATA_CLEAR", "");
     };
 
     nextTick(() => {

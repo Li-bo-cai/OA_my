@@ -14,6 +14,7 @@ export interface insiseGraphForm {
 interface IRootState {
     [key: string]: any
 }
+let a!:number
 const graphModule: Module<ICountState, IRootState> = {
     namespaced: true,
     state() {
@@ -22,7 +23,7 @@ const graphModule: Module<ICountState, IRootState> = {
             gForm: {
                 id: '',
                 name: '',
-                type: 1
+                type: a 
             }
         }
     },
@@ -31,8 +32,16 @@ const graphModule: Module<ICountState, IRootState> = {
         SET_GFORM(state, payload) {
             state.gForm = payload
         },
+        // 设置禁用状态
         SET_DISABLED(state,payload){
             state.disabled = payload
+        },
+        // 设置全局清空
+        SET_ALL_DATA_CLEAR(state,payload){
+            state.gForm.id = '',
+            state.gForm.name = ''
+            state.gForm.type = a
+            state.disabled = true
         }
     },
     actions: {}
