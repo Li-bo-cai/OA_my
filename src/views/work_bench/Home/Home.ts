@@ -1,69 +1,28 @@
-import { reactive } from "vue";
-import { useRouter } from "vue-router";
-// 首页数据加载
-export default () => {
-    const router = useRouter()
-    // 窗口显示控制
-    const display = reactive({
-        dialogVisible: false,
-        showVive: false,
-        showVive2: false,
-        showVive3: false,
-        showVive4: false,
-        showVive5: false,
-    });
-    // 我的考勤
-    const go_attendance = () => {
-        router.push("my-attendance");
-    };
-    // 请假申请
-    const leave_request = () => {
-        router.push("leave_request");
-    };
-    // 待处理工作
-    const get_pending_work = () => {
-        router.push("PendingWork");
-    };
-    // // 去处理
-    // const go_handle = (item: any) => {
-    //     router.push("ToPending");
-    // };
-    // // 企业公告
-    // const go_notice = (item: any) => {
-    //     router.push("companyAnnounce");
-    // };
-    // // 企业公告页面
-    // const go_notice_page = () => {
-    //     router.push("companyAnnounce");
-    // };
-    // // 文件资源
-    // const go_document = (item: any) => {
-    //     router.push("document");
-    // };
-    // // 文件资源页面
-    // const go_document_page = () => {
-    //     router.push("document");
-    // };
-    // // 集团动态
-    // const go_dynamic = (item: any) => {
-    //     router.push("groupDynamics");
-    // };
-    // 集团动态页面
-    const go_dynamic_page = () => {
-        router.push("groupDynamics");
-    };
+import { Chart } from "@antv/g2"
+import { nextTick } from "vue"
 
+export default () => {
+    const data = [
+        { genre: 'Sports', sold: 275 },
+        { genre: 'Strategy', sold: 115 },
+        { genre: 'Action', sold: 120 },
+        { genre: 'Shooter', sold: 350 },
+        { genre: 'Other', sold: 150 },
+    ];
+    const chart = new Chart({
+        container: 'chart', // 指定图表容器 ID
+        width: 600, // 指定图表宽度
+        height: 300, // 指定图表高度
+    })
+    chart.data(data);
+    // Step 2: 载入数据源
+    // Step 3: 创建图形语法，绘制柱状图
+    chart.interval().position('genre*sold');
+    // Step 4: 渲染图表
+    chart.render();
+    // nextTick(() => {
+    // })
     return {
-        ...display, //窗口显示
-        go_attendance,
-        leave_request,
-        get_pending_work,
-        // go_handle,
-        // go_notice,
-        // go_notice_page,
-        // go_document,
-        // go_document_page,
-        // go_dynamic,
-        go_dynamic_page,
+
     }
 }
