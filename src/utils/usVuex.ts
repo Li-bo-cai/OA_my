@@ -18,12 +18,12 @@ export default class VUex {
     }
     
     // Mutsations方法
-     useMutations(nameModule: string, mapper: string, payload: any):void {
+     useMutations(nameModule: string, mapper: string, payload?: any):void {
         return this.stores.commit(`${nameModule}/${mapper}`, payload)
     }
     
     //Actions方法
-     useActions(nameModule: string, mapper: string,payload: any):Promise<any> {
+     useActions(nameModule: string, mapper: string,payload?: any):Promise<any> {
         return this.stores.dispatch(`${nameModule}/${mapper}`,payload)
     }
 }

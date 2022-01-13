@@ -1,7 +1,6 @@
 import { createStore  } from 'vuex'
 
 import loginModule from './modules/login'
-import homeModule from './modules/home'
 import organzationModule from './modules/organization'
 import postModule from './modules/post'
 import attendceModule from './modules/attendce'
@@ -12,6 +11,7 @@ import employeeModule from './modules/employee'
 import externalModule from './modules/external'
 import holidayModule from './modules/holiday'
 /* ------------------------------------------------------- */
+import homeModule from './modules/home'
 import routesMoudle from './modules/routes'
 import shortCutModule from './modules/shortCut'
 import oa_approveModule from './modules/oa_approve'
@@ -34,8 +34,8 @@ export const store = createStore({
     messageModule,//消息模块
     socketModule, //socket 消息传递模块
     graphModule, //流程传递模块
-
     homeModule, //首页模块
+
     organzationModule,//集团组织架构
     postModule,//岗位管理
     employeeModule,//员工管理模块

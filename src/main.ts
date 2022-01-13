@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VUex from './utils/usVuex'
-const usVuex = new VUex(store)
+export const usVuex = new VUex(store)
 
 // import Antd from 'ant-design-vue'
 
