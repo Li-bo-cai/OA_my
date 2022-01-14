@@ -1,6 +1,6 @@
 import { Chart, Util } from "@antv/g2"
 import { computed, nextTick, onMounted, reactive, ref, watch } from "vue"
-import {usVuex} from '@/main'
+import { usVuex } from '@/main'
 
 const homeStore = usVuex
 
@@ -15,11 +15,11 @@ class SelfChart {
         this.height = (document.querySelector('#' + this.container) as HTMLDivElement).clientHeight
         this.chart = new Chart({
             container: this.container, // 指定图表容器 ID
-            autoFit:true,
+            autoFit: true,
             // width: this.width, // 指定图表宽度
             height: this.height, // 指定图表高度
-            padding:'auto',
-            appendPadding:[0,30,0,0]
+            padding: 'auto',
+            appendPadding: [0, 30, 0, 0]
         })
     }
     createChart(data: any) {
@@ -36,44 +36,44 @@ class SelfChart {
 }
 
 export default () => {
-    
+
     const allData = reactive<any>(computed(() => {
         return homeStore.useState('homeModule', 'chartData')
     }))
-    const createFunc = (value:any)=>{
+    const createFunc = (value: any) => {
         for (const key in value) {
-    
+
             const divDom = document.createElement('div')
             divDom.id = key
             divDom.className = 'chart'
             // divDom.style.width = '300px'
             divDom.style.height = '200px'
-    
+
             const chartBox: HTMLDivElement | null = document.querySelector('.chart_box');
-    
+
             (chartBox as HTMLDivElement).appendChild(divDom)
-    
+
             const spaceChart = new SelfChart(key)
             spaceChart.chart.coordinate().transpose();
             spaceChart.chart.interaction('active-region');
-            const keyArr =  Object.keys(value[key][0])
+            const keyArr = Object.keys(value[key][0])
             spaceChart.chart.interval().position(`${keyArr[0]}*${keyArr[1]}`); //'type*value'
             // 添加文本标注
-            value[key].forEach((item:any) => {
+            value[key].forEach((item: any) => {
                 const DatakeyArr = Object.keys(item)
                 spaceChart.chart
-                  .annotation()
-                  .text({
-                    position: [item[DatakeyArr[0]],item[DatakeyArr[1]]],
-                    content: item[DatakeyArr[1]],
-                    style: {
-                      textAlign: 'center',
-                      fontWeight:'bold',
-                      fill:'#fff',
-                    },
-                    offsetX: 20,
-                  })
-              });
+                    .annotation()
+                    .text({
+                        position: [item[DatakeyArr[0]], item[DatakeyArr[1]]],
+                        content: item[DatakeyArr[1]],
+                        style: {
+                            textAlign: 'center',
+                            fontWeight: 'bold',
+                            fill: '#fff',
+                        },
+                        offsetX: 20,
+                    })
+            });
             spaceChart.createChart(value[key])
         }
     }
@@ -82,12 +82,12 @@ export default () => {
         homeStore.useActions('homeModule', 'GET_HOME_DATA')
     })
 
-    watch(allData,(newVal,oldVal)=>{
-        nextTick(()=>{
-            createFunc(newVal)
+    watch(allData, (newVal, oldVal) => {
+        nextTick(() => {
+            createFunc(newVal.staff)
         })
     })
-    
+
     nextTick(() => {
         // createFunc(allData.value)
 

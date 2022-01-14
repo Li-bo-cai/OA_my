@@ -4,44 +4,43 @@
     height: 60px;
     overflow: hidden;
     color: #69ca62;
-    box-shadow: inset 0 0 0 1px rgba(202, 148, 98, 0.5);
+    box-shadow: inset 0 0 0 1px rgba(230, 116, 9, 0.5);
 }
 .show::before,
 .show::after {
     position: absolute;
     top: 0;
     left: 0;
-    display: block;
     z-index: 1;
+    display: block;
     width: 600px;
     height: 60px;
     content: "";
-    background: #000;
     box-shadow: inset 0 0 0 2px;
-    // border: 5px solid #fff;
-    animation: clipMe 4s linear infinite;
-    // border-top: 400px solid blue;
-    // border-right: 400px solid blue;
-    // border-bottom: 400px solid red;
-    // border-left: 400px solid red;
-    // animation: rotate 4s linear infinite;
+    animation: clipMe 8s linear infinite;
 }
 .show::before {
-    // animation-delay: -4s;
+    animation-delay: -4s;
 }
 
 @keyframes clipMe {
     0%,
     100% {
-        clip: rect(0px, 600px, 0px, 350px);
+        clip: rect(0px, 600px, 1px, 300px);
     }
-    15% {
-        clip: rect(0px, 600px, 60px, 440px);
+    10% {
+        clip: rect(0px, 600px, 60px, 480px);
     }
-    55% {
-        clip: rect(60px, 600px, 60px, 220px);
+    20% {
+        clip: rect(59px, 600px, 60px, 300px);
     }
-    85% {
-        clip: rect(0px, 250px, 60px, 0px);
+    45% {
+        clip: rect(59px, 300px, 60px, 0px);
+    }
+    68% {
+        clip: rect(0px, 120px, 60px, 0px);
+    }
+    78% {
+        clip: rect(0px, 300px, 1px, 0px);
     }
 }
