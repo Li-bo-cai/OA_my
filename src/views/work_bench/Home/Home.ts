@@ -1,5 +1,5 @@
 import { Chart, Util } from "@antv/g2"
-import { computed, nextTick, onMounted, reactive, ref } from "vue"
+import { computed, nextTick, onMounted, reactive, ref, watch } from "vue"
 import {usVuex} from '@/main'
 
 const homeStore = usVuex
@@ -18,6 +18,8 @@ class SelfChart {
             autoFit:true,
             // width: this.width, // 指定图表宽度
             height: this.height, // 指定图表高度
+            padding:'auto',
+            appendPadding:[0,30,0,0]
         })
     }
     createChart(data: any) {
@@ -35,37 +37,59 @@ class SelfChart {
 
 export default () => {
     
-    const allData = ref<any>(computed(() => {
+    const allData = reactive<any>(computed(() => {
         return homeStore.useState('homeModule', 'chartData')
     }))
-    console.log(allData);
+    const createFunc = (value:any)=>{
+        for (const key in value) {
     
-    onMounted(() => {
-        homeStore.useActions('homeModule', 'GET_HOME_DATA')
-    })
-    
-    nextTick(() => {
-        
-        if(!allData.value) return
-        for (const key in allData.value) {
-
             const divDom = document.createElement('div')
             divDom.id = key
             divDom.className = 'chart'
             // divDom.style.width = '300px'
             divDom.style.height = '200px'
-
-            const home: HTMLDivElement | null = document.querySelector('.home');
-
-            (home as HTMLDivElement).appendChild(divDom)
-
+    
+            const chartBox: HTMLDivElement | null = document.querySelector('.chart_box');
+    
+            (chartBox as HTMLDivElement).appendChild(divDom)
+    
             const spaceChart = new SelfChart(key)
             spaceChart.chart.coordinate().transpose();
             spaceChart.chart.interaction('active-region');
-            const keyArr =  Object.keys(allData.value[key][0])
+            const keyArr =  Object.keys(value[key][0])
             spaceChart.chart.interval().position(`${keyArr[0]}*${keyArr[1]}`); //'type*value'
-            spaceChart.createChart(allData.value[key])
+            // 添加文本标注
+            value[key].forEach((item:any) => {
+                const DatakeyArr = Object.keys(item)
+                spaceChart.chart
+                  .annotation()
+                  .text({
+                    position: [item[DatakeyArr[0]],item[DatakeyArr[1]]],
+                    content: item[DatakeyArr[1]],
+                    style: {
+                      textAlign: 'center',
+                      fontWeight:'bold',
+                      fill:'#fff',
+                    },
+                    offsetX: 20,
+                  })
+              });
+            spaceChart.createChart(value[key])
         }
+    }
+
+    onMounted(() => {
+        homeStore.useActions('homeModule', 'GET_HOME_DATA')
+    })
+
+    watch(allData,(newVal,oldVal)=>{
+        nextTick(()=>{
+            createFunc(newVal)
+        })
+    })
+    
+    nextTick(() => {
+        // createFunc(allData.value)
 
 
         // const genderChart = new SelfChart('gender')
@@ -118,5 +142,6 @@ export default () => {
         // state.createChart(city)
     })
     return {
+
     }
 }
