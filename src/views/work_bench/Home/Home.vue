@@ -5,13 +5,50 @@
         <h1> G2展示盘表 </h1>
       </div>
     </div>
-
     <div class="content_chart">
-      <el-scrollbar class="left_box">
-        <div class="chart_box">
+      <div class="left_box pseudo">
+        <div class="box_title">
+          <span>人员人事指标</span>
         </div>
-      </el-scrollbar>
-      <div class="content_box">
+        <el-scrollbar height="calc(100vh - 308px)">
+          <div class="chart_box">
+            <div v-for="(value,key) in allData.staff" :key="key" class="chart_item">
+              <div class="title">
+                <h3>{{ value.title }}</h3>
+                <h3>{{ value.units }}</h3>
+              </div>
+              <div :id="`${key}`"></div>
+            </div>
+          </div>
+        </el-scrollbar>
+      </div>
+      <div class="content_box pseudo">
+        <div class="box_title">
+          <span>人员人事指标</span>
+        </div>
+        <el-scrollbar height="calc(100vh - 308px)">
+          <div class="attendce">
+            <div class="table">
+              <div class="title">
+                <h3>考勤指标</h3>
+              </div>
+              <el-table :data="allData.attendance">
+                <el-table-column prop="name"></el-table-column>
+                <el-table-column label="考勤人数" prop="staff"></el-table-column>
+                <el-table-column label="迟到/次" prop="late"></el-table-column>
+                <el-table-column label="缺卡/次" prop="lack"></el-table-column>
+                <el-table-column label="请假/时" prop="vacation"></el-table-column>
+                <el-table-column label="出差/时" prop="travel"></el-table-column>
+                <el-table-column label="旷工/时" prop="absent"></el-table-column>
+                <el-table-column label="满勤人数" prop="full_num"></el-table-column>
+                <el-table-column label="满勤率/%" prop="full_rate"></el-table-column>
+              </el-table>
+            </div>
+            <div class="time_chart">
+              <div id="overtime"></div>
+            </div>
+          </div>
+        </el-scrollbar>
       </div>
       <div class="right_box">
       </div>
@@ -61,7 +98,7 @@ export default defineComponent({
 @import "./animation.scss";
 .home {
   position: relative;
-  background: #000;
+  background: #021a40;
   height: calc(100vh - 110px);
   overflow: hidden;
 }
@@ -70,38 +107,32 @@ export default defineComponent({
   justify-content: center;
   width: 100%;
   margin-top: 10px;
-  margin-bottom: 60px;
-  .show {
-    position: relative;
-    overflow: hidden;
-  }
+  padding: 10px;
+  padding-bottom: 60px;
   h1 {
     position: absolute;
-    top: 1px;
-    left: 1px;
+    top: 5px;
+    left: 5px;
     z-index: 1;
     color: #f8f8f8;
-    // background: #000;
     text-align: center;
-    width: 598px;
-    height: 58px;
-    line-height: 58px;
+    width: 590px;
+    height: 50px;
+    line-height: 50px;
     margin: 0 auto;
+    box-shadow: inset 0 0 0 1px rgba(230, 116, 9, 0.5);
   }
 }
 
 .content_chart {
   display: flex;
-  height: calc(100vh - 240px);
+  height: calc(100vh - 245px);
   .left_box {
     width: 25%;
-    .chart_box {
-      padding: 20px;
-      // padding-bottom: 20px;
-    }
   }
   .content_box {
     flex: 1;
+    overflow: hidden;
   }
   .right_box {
     width: 15%;
@@ -118,7 +149,42 @@ export default defineComponent({
     font-weight: bold;
   }
 }
-.chart {
-  margin-bottom: 20px;
+.box_title {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  padding: 7px;
+  span {
+    display: inline-block;
+    padding: 2px;
+    color: #237dbf;
+    border: 1px solid #237dbf;
+  }
+}
+.chart_box {
+  padding: 20px;
+  background: rgb(47, 110, 247, 0.1);
+  overflow: hidden;
+  .chart_item {
+    margin-bottom: 20px;
+  }
+  .chart_item:last-child {
+    margin: 0;
+  }
+}
+.attendce {
+  padding: 20px;
+  background: rgb(47, 110, 247, 0.1);
+}
+.table {
+  margin-bottom: 40px;
+}
+.title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  h3 {
+    color: red;
+  }
 }
 </style>
