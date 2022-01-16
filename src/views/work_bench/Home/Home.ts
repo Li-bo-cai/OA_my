@@ -1,8 +1,13 @@
-import { Chart, Util } from "@antv/g2"
+import { Chart, Util, registerTheme } from "@antv/g2"
 import { computed, nextTick, onMounted, reactive, ref, watch } from "vue"
 import { usVuex } from '@/main'
 
 const homeStore = usVuex
+
+registerTheme('newTheme', {
+    defaultColor: 'red',
+    minColumnWidth: 12,
+});
 
 class SelfChart {
     container: string;
@@ -65,7 +70,7 @@ export default () => {
                         offsetX: 20,
                     })
                 spaceChart.chart.scale('y', {
-                    alias: '销售额（万）',
+                    alias: '单位·小时',
                 })
             });
             spaceChart.createChart(obj[key].data)
@@ -86,7 +91,7 @@ export default () => {
             value: {
                 max: 100,
                 min: 0,
-                alias: '销售额（万）',
+                alias: '单位·小时',
             },
         });
 
@@ -115,7 +120,12 @@ export default () => {
                 position: 'end'
             },
         });
-
+        timeChart.legend({
+            position: 'bottom', // 设置图例的显示位置
+            itemGap: 20, // 图例项之间的间距
+            maxRow: 2, //设置最大行数
+            flipPage: false, //是否进行分页
+        });
         timeChart.tooltip({
             shared: true,
             showMarkers: false,
@@ -128,13 +138,15 @@ export default () => {
             .adjust([
                 {
                     type: 'dodge',
-                    marginRatio: 0,
+                    marginRatio: 0.5,
                 },
-            ]);
+            ])
 
         timeChart.data(value);
+
         timeChart.interaction('active-region');
-        timeChart.interaction('legend-highlight');
+        // timeChart.interaction('legend-highlight');
+        timeChart.theme('newTheme');
         timeChart.render()
     }
 

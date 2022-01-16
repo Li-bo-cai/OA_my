@@ -4,6 +4,7 @@
       <div class="show">
         <h1> G2展示盘表 </h1>
       </div>
+      <div class="line"></div>
     </div>
     <div class="content_chart">
       <div class="left_box pseudo">
@@ -50,7 +51,24 @@
           </div>
         </el-scrollbar>
       </div>
-      <div class="right_box">
+      <div class="right_box pseudo">
+        <div class="box_title">
+          <span>人员人事指标</span>
+        </div>
+        <el-scrollbar height="calc(100vh - 308px)">
+          <div class="other_table">
+            <div class="table">
+              <div class="title">
+                <h3>考勤指标</h3>
+              </div>
+              <el-table :data="allData.examine">
+                <el-table-column prop="name"></el-table-column>
+                <el-table-column label="平均审批时长" prop="long"></el-table-column>
+                <el-table-column label="未审批数量" prop="num"></el-table-column>
+              </el-table>
+            </div>
+          </div>
+        </el-scrollbar>
       </div>
     </div>
 
@@ -105,6 +123,7 @@ export default defineComponent({
 .header_title {
   display: flex;
   justify-content: center;
+  position: relative;
   width: 100%;
   margin-top: 10px;
   padding: 10px;
@@ -129,13 +148,18 @@ export default defineComponent({
   height: calc(100vh - 245px);
   .left_box {
     width: 25%;
+    margin: 0 20px 20px 20px;
   }
   .content_box {
-    flex: 1;
-    overflow: hidden;
+    width: 50%;
+    margin: 0 0 20px 0;
   }
   .right_box {
-    width: 15%;
+    width: 20%;
+    margin: 0 20px 20px 20px;
+    .other_table {
+      background: rgb(47, 110, 247, 0.1);
+    }
   }
 }
 .time_clock {
