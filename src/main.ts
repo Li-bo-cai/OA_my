@@ -5,7 +5,6 @@ import store from './store'
 import VUex from './utils/usVuex'
 export const usVuex = new VUex(store)
 
-// import Antd from 'ant-design-vue'
 
 import ElementPlus from 'element-plus'
 import '@/assets/css/element-variables.scss'
@@ -15,7 +14,6 @@ import '@/assets/css/index.scss'
 import '@/assets/font/iconfont.css'
 
 import SocketIO from '@/utils/socket'
-
 
 
 import DragDirective from '@/utils/drag'
