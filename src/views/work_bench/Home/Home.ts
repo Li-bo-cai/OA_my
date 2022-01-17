@@ -33,9 +33,9 @@ class SelfChart {
         // Step 2: 载入数据源
         this.chart.scale('population', { nice: true });
         // tooltip 是否设置提示
-        this.chart.tooltip({
-            showMarkers: false
-        });
+        // this.chart.tooltip({
+        //     showMarkers: false
+        // });
         // Step 4: 渲染图表
         this.chart.render();
     }
@@ -69,9 +69,9 @@ export default () => {
                         },
                         offsetX: 20,
                     })
-                spaceChart.chart.scale('y', {
-                    alias: '单位·小时',
-                })
+            });
+            spaceChart.chart.tooltip({
+                itemTpl: '<li style="padding-bottom:10px"><div style="background-color:{color};" class="g2-tooltip-marker"></div>数据: {value}</li>'//定义标头
             });
             spaceChart.createChart(obj[key].data)
         }
@@ -95,7 +95,7 @@ export default () => {
             },
         });
 
-        timeChart.axis('cat', {
+        timeChart.axis('group', {
             label: {
                 style: {
                     fill: '#aaaaaa',
@@ -133,20 +133,34 @@ export default () => {
 
         timeChart
             .interval()
-            .position('cat*value')
-            .color('type')
+            .position('group*value')
+            .color('top')
             .adjust([
                 {
                     type: 'dodge',
-                    marginRatio: 0.5,
+                    marginRatio: 0.3,
                 },
             ])
+            .label('name', () => {
+                const offset = 4;
+                const shadowBlur = 2;
+                const fill = 'white';
+                return {
+                    offset,
+                    style: {
+                        fill,
+                        stroke: null,
+                        shadowBlur,
+                        shadowColor: 'rgba(0, 0, 0, .45)',
+                    }
+                };
+            });
 
         timeChart.data(value);
 
         timeChart.interaction('active-region');
         // timeChart.interaction('legend-highlight');
-        timeChart.theme('newTheme');
+        // timeChart.theme('newTheme');
         timeChart.render()
     }
 

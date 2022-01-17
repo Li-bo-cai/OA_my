@@ -16,41 +16,17 @@ export const oa_approve: Array<RouteRecordRaw> = [
                 meta: { title: '全部' }
             },
             {
-                path: '/oa_approve/pending',
-                component: () => import('@/views/Oa_approve/Pending/index.vue'),
-                name: 'pending',
-                meta: { title: '待处理' }
-            },
-            {
-                path: '/oa_approve/processed',
-                component: () => import('@/views/Oa_approve/Processed/index.vue'),
-                name: 'processed',
-                meta: { title: '已处理' }
-            },
-            {
-                path: '/oa_approve/send',
-                component: () => import('@/views/Oa_approve/Send/index.vue'),
-                name: 'send',
-                meta: { title: '已发起' }
-            },
-            {
-                path: '/oa_approve/received',
-                component: () => import('@/views/Oa_approve/Received/index.vue'),
-                name: 'received',
-                meta: { title: '我收到的' }
-            },
-            {
                 path: '/oa_approve/work_flow',
                 component: () => import('@/views/Oa_approve/WorkFlow/index.vue'),
                 name: 'work_flow',
                 meta: { title: '流程配置' }
             },
             {
-                path: 'oa_approve/graph',
-                component: () => ('@/views/Oa_approve/WorkFlow/GraphView.vue'),
-                name: 'graph',
-                meta: { title: 'g6流程' }
-            }
+                path: '/oa_approve/form_designer',
+                component: () => import('@/views/Oa_approve/Supervisor/index.vue'),
+                name: 'form_designer',
+                meta: { title: '表单配置' }
+            },
         ]
     },
 ]
