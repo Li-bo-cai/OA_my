@@ -10,6 +10,8 @@
   "dependencies": {
     "@antv/g2": "^4.1.37",
     "@antv/x6": "^1.28.1",
+    "@formily/core": "^2.0.8",
+    "@formily/vue": "^2.0.8",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-plus": "^1.1.0-beta.9",

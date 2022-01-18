@@ -1112,6 +1112,77 @@
   resolved "https://registry.nlark.com/@element-plus/icons/download/@element-plus/icons-0.0.11.tgz#9b187c002774548b911850d17fa5fc2f9a515f57"
   integrity sha1-mxh8ACd0VIuRGFDRf6X8L5pRX1c=
 
+"@formily/core@2.0.8", "@formily/core@^2.0.8":
+  version "2.0.8"
+  resolved "https://registry.npmmirror.com/@formily/core/download/@formily/core-2.0.8.tgz#992b907fa5e8776d10ea5b421e35b5ffa1f49245"
+  integrity sha512-CiZntugbBE7KGxxrlqPpZl2UTZ/Dyd+ocW23EervUt087FmtsHp0932jII0Zzz1wGU3l+f62KXmgr4d1Oxx+Ag==
+  dependencies:
+    "@formily/reactive" "2.0.8"
+    "@formily/shared" "2.0.8"
+    "@formily/validator" "2.0.8"
+
+"@formily/json-schema@2.0.8":
+  version "2.0.8"
+  resolved "https://registry.npmmirror.com/@formily/json-schema/download/@formily/json-schema-2.0.8.tgz#1fa87bc78f588a8a175e88d2a978a976abcf71e3"
+  integrity sha512-sPivmCNYJTBC4dQfnZEFuvBm3WUlrHBEj4hf1qj4lJXaqmp0zdfNuVwu8D8bciFnHe94Yg9+hwSZU6zDoTw9+w==
+  dependencies:
+    "@formily/core" "2.0.8"
+    "@formily/reactive" "2.0.8"
+    "@formily/shared" "2.0.8"
+
+"@formily/path@2.0.8":
+  version "2.0.8"
+  resolved "https://registry.npmmirror.com/@formily/path/download/@formily/path-2.0.8.tgz#9279b27a76819bf4c38862e2d98c23c62f9c6e92"
+  integrity sha512-HJ0+zTEFr5QVWK08z8+QATFx1q8yxO9MOY9KKiu7qeWWoTsVn+cNzuKcFcKifVRuQDuwyUx5O+0eYGBmNVriNA==
+
+"@formily/reactive-vue@2.0.8":
+  version "2.0.8"
+  resolved "https://registry.npmmirror.com/@formily/reactive-vue/download/@formily/reactive-vue-2.0.8.tgz#5a162c141f49927cf459070725f083d572cc5177"
+  integrity sha512-3bMGnheWHFdXc2bomo+LpNl1Y4aQtHnZlHVPE6xiPv15ZQ3VQlenbjwOLn74pIjZezlL3EbV3nTTry6rk5s+5w==
+  dependencies:
+    "@formily/reactive" "2.0.8"
+    vue-demi "^0.9.0"
+
+"@formily/reactive@2.0.8":
+  version "2.0.8"
+  resolved "https://registry.npmmirror.com/@formily/reactive/download/@formily/reactive-2.0.8.tgz#335bca5707e764ccb3829e7afd06e37b93e564cd"
+  integrity sha512-bPsa8Pyd2A8ZT2nIdohLXHAzhMvR6saDD+FQnnD9Abssf5CwMiHHMVBQWGDc5HmtVb4JeEsCQLA2PYJDKi1zGg==
+
+"@formily/shared@2.0.8":
+  version "2.0.8"
+  resolved "https://registry.npmmirror.com/@formily/shared/download/@formily/shared-2.0.8.tgz#d0f15e823b7098867640010c5f40ff49a41e39da"
+  integrity sha512-XCLvx31x1sH5S5Eugq2gDPhrCa02OczFOMLSJTrGRco7I64Mg01vq0Yj6dudIQYPUfLfVGIoT5O87GeqhKDKvg==
+  dependencies:
+    "@formily/path" "2.0.8"
+    camel-case "^4.1.1"
+    lower-case "^2.0.1"
+    no-case "^3.0.4"
+    param-case "^3.0.4"
+    pascal-case "^3.1.1"
+    upper-case "^2.0.1"
+
+"@formily/validator@2.0.8":
+  version "2.0.8"
+  resolved "https://registry.npmmirror.com/@formily/validator/download/@formily/validator-2.0.8.tgz#d7402b9cc2e74995301b9f0fc03116e7b6632f0c"
+  integrity sha512-UcfIy89iBwkesZ5u8z5ehwCtoYpWtfdBqSAMG9KCEGGZMpGwqm/EwF1lCGkrl0jzbEZ0rc2heMASf7X+5xDIQg==
+  dependencies:
+    "@formily/shared" "2.0.8"
+
+"@formily/vue@^2.0.8":
+  version "2.0.8"
+  resolved "https://registry.npmmirror.com/@formily/vue/download/@formily/vue-2.0.8.tgz#7b502724fc4326937392ee9dd9ce919b8f8835ca"
+  integrity sha512-PHd/8K7ILRGX6/UttRwv/eMWU0tF/RG3M9qjeCq2hsAl4A2b/3fYI5H/YKG4kruWCC5w5ZTq1SYQYv+vArjQXw==
+  dependencies:
+    "@formily/core" "2.0.8"
+    "@formily/json-schema" "2.0.8"
+    "@formily/reactive" "2.0.8"
+    "@formily/reactive-vue" "2.0.8"
+    "@formily/shared" "2.0.8"
+    "@formily/validator" "2.0.8"
+    fs-extra "^10.0.0"
+    vue-demi "^0.9.0"
+    vue-frag "^1.1.4"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.nlark.com/@hapi/address/download/@hapi/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -2768,6 +2839,14 @@ camel-case@3.0.x:
     no-case "^2.2.0"
     upper-case "^1.1.1"
 
+camel-case@^4.1.1:
+  version "4.1.2"
+  resolved "https://registry.nlark.com/camel-case/download/camel-case-4.1.2.tgz?cache=0&sync_timestamp=1624608083534&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcamel-case%2Fdownload%2Fcamel-case-4.1.2.tgz#9728072a954f805228225a6deea6b38461e1bd5a"
+  integrity sha1-lygHKpVPgFIoIlpt7qazhGHhvVo=
+  dependencies:
+    pascal-case "^3.1.2"
+    tslib "^2.0.3"
+
 camelcase@^5.0.0, camelcase@^5.3.1:
   version "5.3.1"
   resolved "https://registry.nlark.com/camelcase/download/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
@@ -3843,6 +3922,14 @@ domutils@^2.5.2, domutils@^2.6.0:
     domelementtype "^2.2.0"
     domhandler "^4.2.0"
 
+dot-case@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.nlark.com/dot-case/download/dot-case-3.0.4.tgz#9b2b670d00a431667a8a75ba29cd1b98809ce751"
+  integrity sha1-mytnDQCkMWZ6inW6Kc0bmICc51E=
+  dependencies:
+    no-case "^3.0.4"
+    tslib "^2.0.3"
+
 dot-prop@^5.2.0:
   version "5.3.0"
   resolved "https://registry.npm.taobao.org/dot-prop/download/dot-prop-5.3.0.tgz?cache=0&sync_timestamp=1605778235569&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdot-prop%2Fdownload%2Fdot-prop-5.3.0.tgz#90ccce708cd9cd82cc4dc8c3ddd9abdd55b20e88"
@@ -4695,6 +4782,15 @@ from2@^2.1.0:
   dependencies:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
+
+fs-extra@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.nlark.com/fs-extra/download/fs-extra-10.0.0.tgz#9ff61b655dde53fb34a82df84bb214ce802e17c1"
+  integrity sha1-n/YbZV3eU/s0qC34S7IUzoAuF8E=
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
 
 fs-extra@^7.0.1:
   version "7.0.1"
@@ -6088,6 +6184,13 @@ lower-case@^1.1.1:
   resolved "https://registry.nlark.com/lower-case/download/lower-case-1.1.4.tgz#9a2cabd1b9e8e0ae993a4bf7d5875c39c42e8eac"
   integrity sha1-miyr0bno4K6ZOkv31YdcOcQujqw=
 
+lower-case@^2.0.1, lower-case@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.nlark.com/lower-case/download/lower-case-2.0.2.tgz?cache=0&sync_timestamp=1624607698082&other_urls=https%3A%2F%2Fregistry.nlark.com%2Flower-case%2Fdownload%2Flower-case-2.0.2.tgz#6fa237c63dbdc4a82ca0fd882e4722dc5e634e28"
+  integrity sha1-b6I3xj29xKgsoP2ILkci3F5jTig=
+  dependencies:
+    tslib "^2.0.3"
+
 lru-cache@^4.0.1, lru-cache@^4.1.2:
   version "4.1.5"
   resolved "https://registry.nlark.com/lru-cache/download/lru-cache-4.1.5.tgz#8bbe50ea85bed59bc9e33dcab8235ee9bcf443cd"
@@ -6488,6 +6591,14 @@ no-case@^2.2.0:
   dependencies:
     lower-case "^1.1.1"
 
+no-case@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.nlark.com/no-case/download/no-case-3.0.4.tgz#d361fd5c9800f558551a8369fc0dcd4662b6124d"
+  integrity sha1-02H9XJgA9VhVGoNp/A3NRmK2Ek0=
+  dependencies:
+    lower-case "^2.0.2"
+    tslib "^2.0.3"
+
 node-forge@^0.10.0:
   version "0.10.0"
   resolved "https://registry.nlark.com/node-forge/download/node-forge-0.10.0.tgz#32dea2afb3e9926f02ee5ce8794902691a676bf3"
@@ -6872,6 +6983,14 @@ param-case@2.1.x:
   dependencies:
     no-case "^2.2.0"
 
+param-case@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.nlark.com/param-case/download/param-case-3.0.4.tgz?cache=0&sync_timestamp=1624607700998&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fparam-case%2Fdownload%2Fparam-case-3.0.4.tgz#7d17fe4aa12bde34d4a77d91acfb6219caad01c5"
+  integrity sha1-fRf+SqEr3jTUp32RrPtiGcqtAcU=
+  dependencies:
+    dot-case "^3.0.4"
+    tslib "^2.0.3"
+
 parent-module@^1.0.0:
   version "1.0.1"
   resolved "https://registry.nlark.com/parent-module/download/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
@@ -6939,6 +7058,14 @@ parseurl@~1.3.2, parseurl@~1.3.3:
   version "1.3.3"
   resolved "https://registry.nlark.com/parseurl/download/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
   integrity sha1-naGee+6NEt/wUT7Vt2lXeTvC6NQ=
+
+pascal-case@^3.1.1, pascal-case@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.nlark.com/pascal-case/download/pascal-case-3.1.2.tgz#b48e0ef2b98e205e7c1dae747d0b1508237660eb"
+  integrity sha1-tI4O8rmOIF58Ha50fQsVCCN2YOs=
+  dependencies:
+    no-case "^3.0.4"
+    tslib "^2.0.3"
 
 pascalcase@^0.1.1:
   version "0.1.1"
@@ -9145,6 +9272,13 @@ upper-case@^1.1.1:
   resolved "https://registry.nlark.com/upper-case/download/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
   integrity sha1-9rRQHC7EzdJrp4vnIilh3ndiFZg=
 
+upper-case@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.nlark.com/upper-case/download/upper-case-2.0.2.tgz#d89810823faab1df1549b7d97a76f8662bae6f7a"
+  integrity sha1-2JgQgj+qsd8VSbfZenb4Ziuub3o=
+  dependencies:
+    tslib "^2.0.3"
+
 uri-js@^4.2.2:
   version "4.4.1"
   resolved "https://registry.nlark.com/uri-js/download/uri-js-4.4.1.tgz#9b1a52595225859e55f669d928f88c6c57f2a77e"
@@ -9281,6 +9415,11 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
 
+vue-demi@^0.9.0:
+  version "0.9.1"
+  resolved "https://registry.npmmirror.com/vue-demi/download/vue-demi-0.9.1.tgz#25d6e1ebd4d4010757ff3571e2bf6a1d7bf3de82"
+  integrity sha1-Jdbh69TUAQdX/zVx4r9qHXvz3oI=
+
 vue-eslint-parser@^7.0.0, vue-eslint-parser@^7.10.0:
   version "7.10.0"
   resolved "https://registry.nlark.com/vue-eslint-parser/download/vue-eslint-parser-7.10.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue-eslint-parser%2Fdownload%2Fvue-eslint-parser-7.10.0.tgz#ea4e4b10fd10aa35c8a79ac783488d8abcd29be8"
@@ -9293,6 +9432,11 @@ vue-eslint-parser@^7.0.0, vue-eslint-parser@^7.10.0:
     esquery "^1.4.0"
     lodash "^4.17.21"
     semver "^6.3.0"
+
+vue-frag@^1.1.4:
+  version "1.4.0"
+  resolved "https://registry.npmmirror.com/vue-frag/download/vue-frag-1.4.0.tgz#eede3df860163f6c2d9b07c7d9492b2cf53de24b"
+  integrity sha512-S3LfATqRwSMR6O8mf92wKF3y2E/Gs/3MFJXW4CozMOLUeOopNUlkcYuhVLagw7fkNmn/Pyb1zfRY5UCwU+X6Gw==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
