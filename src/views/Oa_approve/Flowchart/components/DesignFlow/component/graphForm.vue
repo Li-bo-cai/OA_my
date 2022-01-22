@@ -15,7 +15,7 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button size="mini" type="primary" @click="submitForm(ruleFormRef)">确定</el-button>
+        <el-button size="mini" type="primary" @click="changGraphNode(ruleFormRef)">确定</el-button>
       </el-form-item>
     </el-form>
   </div>

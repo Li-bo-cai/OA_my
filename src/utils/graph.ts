@@ -1,11 +1,7 @@
-import { Graph, Shape, Dom, Addon } from "@antv/x6";
-import { inject, nextTick, onBeforeUnmount, reactive } from "vue";
-import graphData from "./Node/graphNode";
-import graphFunc from "./Func/graphFunc";
+import { Addon, Dom, Graph } from "@antv/x6";
 
-export const createGraphic = () => {
-
-    const graph: Graph = new Graph({
+const init = () => {
+    const graph = new Graph({
         panning: {
             enabled: true,
             modifiers: "shift",
@@ -40,8 +36,11 @@ export const createGraphic = () => {
             },
         },
     });
-    // let dnd: Addon.Dnd = reactive<any>(null)
-    const { Dnd } = Addon 
+    return graph
+}
+
+const dndInit = (graph: Graph) => {
+    const { Dnd } = Addon
     const dnd = new Dnd({
         target: graph,
         scaled: false,
@@ -62,18 +61,7 @@ export const createGraphic = () => {
                 : true;
         },
     })
+    return dnd
+}
 
-    nextTick(() => {
-        graph.fromJSON(graphData); //数据被加载
-        graphFunc(graph); //调用方法
-    })
-
-    onBeforeUnmount(() => {
-        graph.dispose(); //画布被销毁
-    });
-
-    return {
-        graph,
-        dnd,
-    }
-};
+export { init, dndInit }

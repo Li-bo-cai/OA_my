@@ -9,9 +9,11 @@ const graphStore:VUex = new VUex(store)
 export default () => {
 
     const ruleFormRef = ref<InstanceType<typeof ElForm>>();
+
     const disabled:boolean = ref<any>(computed(()=>{
         return graphStore.useState('graphModule','disabled')
     }))
+
     const ruleForm:insiseGraphForm = reactive<any>(computed(()=>{
         return graphStore.useState('graphModule','gForm')
     }));
@@ -25,11 +27,11 @@ export default () => {
             }],
     });
 
-    const submitForm = (formEl:InstanceType<typeof ElForm> | undefined) => {
+    const changGraphNode = (formEl:InstanceType<typeof ElForm> | undefined) => {
         if (!formEl) return
         formEl.validate((valid) => {
             if (valid) {
-            //   alert('submit!');
+            graphStore.useMutations('graphModule','SET_GFORM',ruleForm)
             } else {
               console.log('error submit!!');
               return false;
@@ -42,6 +44,6 @@ export default () => {
         ruleForm,
         ruleFormRef,
         disabled,
-        submitForm,
+        changGraphNode,
     }
 }

@@ -19,41 +19,16 @@
 </template>
 
 <script lang="ts">
-import { createGraphic } from "./graph";
-import createNode from "./Node/graphCreateNode";
-import { defineComponent, nextTick, onBeforeUnmount, reactive } from "vue";
-import { Addon, Graph } from "@antv/x6";
+import { createGraphic } from "./graphHooks";
+import { defineComponent, onBeforeUnmount } from "vue";
 
 export default defineComponent({
   setup() {
-    let dnd: Addon.Dnd = reactive<any>(null);
-    let graph: Graph = reactive<any>(null);
-
-    nextTick(() => {
-      const all = createGraphic();
-      graph = all.graph;
-      dnd = all.dnd;
-    });
-
-    const startDrag = (e: any) => {
-      const { nodeRect, nodeCopy, nodeCircle } = createNode(graph);
-      const target = e.currentTarget;
-      const type = target.getAttribute("data-type");
-      let node: any;
-      if (type == "rect") {
-        node = nodeRect;
-      } else if (type == "copy") {
-        node = nodeCopy;
-      } else if (type == "circle") {
-        node = nodeCircle;
-      }
-      dnd.start(node, e);
-    };
     onBeforeUnmount(() => {
       // console.log("被销毁了");
     });
     return {
-      startDrag,
+      ...createGraphic(),
     };
   },
 });
