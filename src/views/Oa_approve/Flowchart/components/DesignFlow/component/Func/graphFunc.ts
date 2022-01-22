@@ -2,6 +2,7 @@ import { Graph } from "@antv/x6";
 import store from "@/store";
 import VUex from '@/utils/usVuex'
 import { insiseGraphForm } from '@/store/modules/graph'
+import { computed, reactive, ref, watch } from "vue";
 
 const graphStore: VUex = new VUex(store)
 
@@ -13,6 +14,16 @@ const tools = [{
         offset: { x: -10, y: 10 },
     },
 }]
+
+let nowNode: { store: any; } ;  //当前选中节点
+
+const gTypeFile:any = reactive(computed(()=>{
+    return graphStore.useState('graphModule','gForm')
+}))
+
+const confirmStatus = ref(computed(()=>{
+    return graphStore.useState('graphModule','confirmStatus')
+}))
 
 export const graphFunc = (graph: Graph) => {
     graph.centerContent(); //画布居中
@@ -58,6 +69,8 @@ export const graphFunc = (graph: Graph) => {
         ])
     }
 
+    
+    
     // 节点点击事件
     function nodeClick({ node }: any) {
         reset()
@@ -68,7 +81,7 @@ export const graphFunc = (graph: Graph) => {
         const gForm: insiseGraphForm = {
             id: data.id,
             name: data.attrs.label.text,
-            type: type,
+            type: data.attrs.type,
         }
         graphStore.useMutations('graphModule', 'SET_GFORM', gForm)
 
@@ -82,6 +95,8 @@ export const graphFunc = (graph: Graph) => {
         }
         node.addTools(tools)
         graphStore.useMutations('graphModule', 'SET_DISABLED', false)
+        // 将点击后的node属性传递到外面
+        nowNode = node
     }
 
     function reset() {
@@ -103,4 +118,15 @@ export const graphFunc = (graph: Graph) => {
             })
         })
     }
+
+    watch(confirmStatus,(newVal:any)=>{
+        if(newVal){
+            console.log(graph.toJSON());
+            
+            console.log(nowNode);
+            nowNode.store.data.type == gTypeFile.type
+            nowNode.store.data.attrs.label.text == gTypeFile.name
+            graphStore.useMutations('graphModule', 'SET_CF_STATUS', false)
+        }
+    })
 }

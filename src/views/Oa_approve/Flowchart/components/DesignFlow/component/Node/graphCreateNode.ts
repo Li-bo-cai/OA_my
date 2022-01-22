@@ -28,8 +28,8 @@ const createNode = (graph: any) => {
                 stroke: '#F39C12',
                 strokeWidth: 2,
             },
+            type: 1,
         },
-        type: 1,
         ports: {
             groups: group,
             items: [{
@@ -53,9 +53,9 @@ const createNode = (graph: any) => {
                 strokeWidth: 2,
                 refPoints: '0,10 10,0 20,10 10,20',
             },
+            type: 4,
         },
         shape: 'custom-polygon',
-        type: 4,
         ports: {
             groups: group,
             items: [{
@@ -79,9 +79,9 @@ const createNode = (graph: any) => {
                 fill: '#333',
                 fontSize: 13,
                 cursor: 'pointer',
-            }
+            },
+            type: 4,
         },
-        type: 4,
     })
 
     // nodeCircle = graph.createNode({

@@ -2,6 +2,8 @@
   <div class="design_flow">
     <el-scrollbar class="design_scroll">
       <div class="design_top_btn">
+        <el-button size="mini" plain icon="el-icon-folder-checked" @click="save_btn">上一步</el-button>
+        <el-button size="mini" plain icon="el-icon-folder-checked" @click="save_btn">下一步</el-button>
         <el-button size="mini" plain icon="el-icon-folder-checked" @click="save_btn">保存</el-button>
         <el-button size="mini" plain icon="el-icon-delete" @click="clear_btn">清空</el-button>
         <el-button size="mini" plain icon="el-icon-rank" @click="regain_btn">实际尺寸</el-button>

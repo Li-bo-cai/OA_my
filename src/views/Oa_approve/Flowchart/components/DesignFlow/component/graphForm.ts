@@ -32,6 +32,7 @@ export default () => {
         formEl.validate((valid) => {
             if (valid) {
             graphStore.useMutations('graphModule','SET_GFORM',ruleForm)
+            graphStore.useMutations('graphModule','SET_CF_STATUS',true)
             } else {
               console.log('error submit!!');
               return false;
