@@ -134,7 +134,6 @@ const graphData = {
       width: 80,   // Number，可选，节点大小的 width 值
       height: 40,  // Number，可选，节点大小的 height 值
       label: 'begin', // String，节点标签
-      type:0,
       event: 'none',
       attrs: {
         body: {
@@ -147,6 +146,7 @@ const graphData = {
           fill: '#333',
           fontSize: 13,
           cursor: 'pointer',
+          type:0,
         }
       },
       ports: {

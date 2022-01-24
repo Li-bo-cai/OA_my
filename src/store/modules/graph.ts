@@ -9,7 +9,10 @@ interface ICountState {
 export interface insiseGraphForm {
     id: string,
     name: string,
-    type: number
+    type?: number,
+    changeOptType?:number
+    limit_timeType?:number
+    limit_time?:number
 }
 interface IRootState {
     [key: string]: any
@@ -24,7 +27,10 @@ const graphModule: Module<ICountState, IRootState> = {
             gForm: {
                 id: '',
                 name: '',
-                type: a
+                type: a,
+                changeOptType:a,
+                limit_timeType:1,
+                limit_time:a
             }
         }
     },

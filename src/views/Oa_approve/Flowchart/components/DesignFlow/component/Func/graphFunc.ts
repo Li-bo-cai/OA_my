@@ -15,14 +15,14 @@ const tools = [{
     },
 }]
 
-let nowNode: { store: any; } ;  //当前选中节点
+let nowNode: any;  //当前选中节点
 
-const gTypeFile:any = reactive(computed(()=>{
-    return graphStore.useState('graphModule','gForm')
+const gTypeFile: any = reactive(computed(() => {
+    return graphStore.useState('graphModule', 'gForm')
 }))
 
-const confirmStatus = ref(computed(()=>{
-    return graphStore.useState('graphModule','confirmStatus')
+const confirmStatus = ref(computed(() => {
+    return graphStore.useState('graphModule', 'confirmStatus')
 }))
 
 export const graphFunc = (graph: Graph) => {
@@ -39,7 +39,7 @@ export const graphFunc = (graph: Graph) => {
     // // 节点双击
     // graph.on("node:contextmenu", ();
     // // 节点单击事件
-    graph.on('node:click',nodeClick)
+    graph.on('node:click', nodeClick)
     // 节点移除事件
     graph.on('node:removed', ({ node }: any) => {
         graphStore.useMutations('graphModule', 'SET_DISABLED', true)
@@ -56,7 +56,7 @@ export const graphFunc = (graph: Graph) => {
 
 
     // 边的移入事件
-    function edgeMouseenter ({ edge }:any) {
+    function edgeMouseenter({ edge }: any) {
         edge.addTools([
             // 'source-arrowhead',
             'target-arrowhead',
@@ -69,20 +69,23 @@ export const graphFunc = (graph: Graph) => {
         ])
     }
 
-    
-    
+
+
     // 节点点击事件
     function nodeClick({ node }: any) {
         reset()
         node.attr('body/stroke', 'black')
         // console.log(node,'这串数据将要存入仓库');
         const data = node.store.data
-        const type = data.type
+
+        const type = data.attrs.label.type
+        
         const gForm: insiseGraphForm = {
             id: data.id,
             name: data.attrs.label.text,
-            type: data.attrs.type,
+            type: data.attrs.label.type,
         }
+        
         graphStore.useMutations('graphModule', 'SET_GFORM', gForm)
 
         if (type == 0) {
@@ -90,8 +93,6 @@ export const graphFunc = (graph: Graph) => {
             return
         } else if (type == 4) {
             graphStore.useMutations('graphModule', 'SET_DISABLED', true)
-            node.addTools(tools)
-            return
         }
         node.addTools(tools)
         graphStore.useMutations('graphModule', 'SET_DISABLED', false)
@@ -119,13 +120,22 @@ export const graphFunc = (graph: Graph) => {
         })
     }
 
-    watch(confirmStatus,(newVal:any)=>{
-        if(newVal){
+    watch(confirmStatus, (newVal: any) => {
+        if (newVal) {
+            const allGraphData = graph.toJSON()
             console.log(graph.toJSON());
             
-            console.log(nowNode);
-            nowNode.store.data.type == gTypeFile.type
-            nowNode.store.data.attrs.label.text == gTypeFile.name
+            const nowNode_Id = nowNode.id
+
+            allGraphData.cells.forEach((item: any) => {
+                if (item.id === nowNode_Id) {
+                    item.attrs.label.text = gTypeFile.value.name
+                    item.attrs.label.type = gTypeFile.value.type
+                }
+            });
+
+            graph.fromJSON(allGraphData); //数据被加载
+
             graphStore.useMutations('graphModule', 'SET_CF_STATUS', false)
         }
     })
