@@ -13,6 +13,8 @@ export interface insiseGraphForm {
     changeOptType?:number
     limit_timeType?:number
     limit_time?:number
+    more?:number
+    examineModel?:number
 }
 interface IRootState {
     [key: string]: any
@@ -30,7 +32,9 @@ const graphModule: Module<ICountState, IRootState> = {
                 type: a,
                 changeOptType:a,
                 limit_timeType:1,
-                limit_time:a
+                limit_time:a,
+                more:1,
+                examineModel:1
             }
         }
     },

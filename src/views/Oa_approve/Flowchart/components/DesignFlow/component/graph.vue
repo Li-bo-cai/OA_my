@@ -45,7 +45,7 @@ export default defineComponent({
 }
 #container {
   flex: 1;
-  height: 280px;
+  height: calc(100vh - 235px);
   margin-left: 8px;
   margin-right: 8px;
   box-shadow: 0 0 10px 1px #e9e9e9;

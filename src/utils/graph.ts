@@ -1,5 +1,8 @@
 import { Addon, Dom, Graph } from "@antv/x6";
 
+const gWidth = document.querySelector('#container')?.clientWidth
+const gHeight = document.querySelector('#container')?.clientHeight
+
 const init = () => {
     const graph = new Graph({
         panning: {
@@ -7,8 +10,8 @@ const init = () => {
             modifiers: "shift",
         },
         container: document.querySelector('#container') as HTMLDivElement,
-        width: 800,
-        height: 600,
+        width: gWidth,
+        height: gHeight,
         interacting: {
             nodeMovable: true, //是否允许节点移动
         },

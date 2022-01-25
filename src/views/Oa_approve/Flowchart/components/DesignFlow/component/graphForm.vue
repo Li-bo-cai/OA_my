@@ -14,7 +14,7 @@
           <el-option label="抄送人" :value="3"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item v-if="ruleForm.type" label="选择人员方式" prop="type">
+      <el-form-item class="basics" v-if="ruleForm.type" label="选择人员方式" prop="type">
         <el-radio-group v-model="ruleForm.changeOptType">
           <el-radio :label="1" v-if="ruleForm.type==1">所有人</el-radio>
           <el-radio :label=" 2">指定人员</el-radio>
@@ -27,22 +27,33 @@
         <span style="color:#38adff;" v-if="ruleForm.changeOptType==1&&ruleForm.type==1">
           默认所有人都可发起此审批
         </span>
+        <div>
+          <el-button v-if="ruleForm.changeOptType==2" type="primary" class="el-icon-plus" size="mini" round>选择人员</el-button>
+          <el-select v-if="ruleForm.type==2&&ruleForm.changeOptType==3" v-model="ruleForm.more" placeholder="Select" size="small">
+            <el-option label="自选一个人" :value="1" />
+            <el-option label="自选多个人" :value="2" />
+          </el-select>
+        </div>
+        <div class="show_people" v-if="ruleForm.changeOptType==2">
+          <el-tag type="" v-for="(item, index) in peoples" size="mini" :key="index" @close="peoples.splice(index, 1)" closable>
+            {{item.name}}
+          </el-tag>
+        </div>
       </el-form-item>
-      <div v-if="ruleForm.changeOptType==2">
-        <el-button type="primary" class="el-icon-plus" size="mini" round>选择人员</el-button>
-      </div>
-      <div class="show_people" v-if="ruleForm.changeOptType==2">
-        <el-tag type="" v-for="(item, index) in peoples" size="mini" :key="index" @close="peoples.splice(index, 1)" closable>
-          {{item.name}}
-        </el-tag>
-      </div>
       <el-form-item label="审批期限（为 0 则不生效）">
-        <el-select v-model="ruleForm.limit_timeType" class="m-2" size="small">
+        <el-select v-model="ruleForm.limit_timeType" size="small">
           <el-option v-for="item in dateOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
         <span style="margin-left:20px;">时长：</span>
         <el-input-number v-model="ruleForm.limit_time" :min="1" :max="10" size="small" />
+      </el-form-item>
+      <el-form-item label="多人审批时审批方式" v-if="ruleForm.more==2">
+        <el-radio-group v-model="ruleForm.examineModel">
+          <el-radio :label="1">按选择顺序依次审批</el-radio>
+          <el-radio :label="2">会签（可同时审批，每个人必须同意）</el-radio>
+          <el-radio :label="3">或签（有一人同意即可）</el-radio>
+        </el-radio-group>
       </el-form-item>
       <el-form-item>
         <el-button size="mini" type="primary" @click="changGraphNode(ruleFormRef)">确定</el-button>
@@ -64,6 +75,8 @@ export default defineComponent({
       changeOptType: 1,
       limit_timeType: 1,
       limit_time: 1,
+      more: 1,
+      examineModel: 1,
     });
 
     const peoples: any = reactive([{ name: "张三" }]);
@@ -91,11 +104,13 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .form {
-  // height: 600px;
+
+}
+.basics {
+  border-bottom: 1px solid #ccc;
 }
 .show_people {
   margin-top: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #ccc;
 }
 </style>
