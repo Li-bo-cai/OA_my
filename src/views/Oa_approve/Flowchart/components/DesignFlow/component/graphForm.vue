@@ -14,7 +14,7 @@
           <el-option label="抄送人" :value="3"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item class="basics" v-if="ruleForm.type" label="选择人员方式" prop="type">
+      <el-form-item class="basics" label="选择人员方式" prop="type">
         <el-radio-group v-model="ruleForm.changeOptType">
           <el-radio :label="1" v-if="ruleForm.type==1">所有人</el-radio>
           <el-radio :label=" 2">指定人员</el-radio>
@@ -27,6 +27,7 @@
         <span style="color:#38adff;" v-if="ruleForm.changeOptType==1&&ruleForm.type==1">
           默认所有人都可发起此审批
         </span>
+        <span v-if="ruleForm.changeOptType==7" style="color:#8c8c8c;">发起人自己作为审批人进行审批</span>
         <div>
           <el-button v-if="ruleForm.changeOptType==2" type="primary" class="el-icon-plus" size="mini" round>选择人员</el-button>
           <el-select v-if="ruleForm.type==2&&ruleForm.changeOptType==3" v-model="ruleForm.more" placeholder="Select" size="small">
@@ -48,11 +49,35 @@
         <span style="margin-left:20px;">时长：</span>
         <el-input-number v-model="ruleForm.limit_time" :min="1" :max="10" size="small" />
       </el-form-item>
-      <el-form-item label="多人审批时审批方式" v-if="ruleForm.more==2">
+      <el-form-item label="指定主管" v-if="ruleForm.changeOptType==5">
+        <span>发起的第</span>
+        <el-input-number style="margin:10px;" v-model="ruleForm.limit_time" :min="1" size="small" />
+        <span>级主管</span>
+        <div style="color:#409eff;font-size: small;">直接主管为 第 1 级主管</div>
+      </el-form-item>
+      <el-form-item label="多人审批时审批方式" v-if="ruleForm.more==2||peoples.length>=2">
         <el-radio-group v-model="ruleForm.examineModel">
           <el-radio :label="1">按选择顺序依次审批</el-radio>
           <el-radio :label="2">会签（可同时审批，每个人必须同意）</el-radio>
           <el-radio :label="3">或签（有一人同意即可）</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="审批终点" v-if="ruleForm.changeOptType==4">
+        <el-radio-group v-model="ruleForm.terminus">
+          <el-radio :label="1">直到最上层主管</el-radio>
+          <el-radio :label="2">不超过发起人的</el-radio>
+        </el-radio-group>
+        <span v-if="ruleForm.terminus==2">
+          <span>第</span>
+          <el-input-number style="margin:10px;" v-model="ruleForm.limit_time" :min="1" size="small" />
+          <span>级主管</span>
+        </span>
+      </el-form-item>
+      <el-form-item v-if="ruleForm.changeOptType==4||ruleForm.changeOptType==5" label="审批人为空时">
+        <el-radio-group v-model="ruleForm.approverisNull">
+          <el-radio :label="1">自动通过</el-radio>
+          <el-radio :label="2">自动转交管理员</el-radio>
+          <el-radio :label="3">转交指定人员</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item>
@@ -77,6 +102,9 @@ export default defineComponent({
       limit_time: 1,
       more: 1,
       examineModel: 1,
+      terminus: 1,
+      terminus_plies: 1,
+      approverisNull: 1,
     });
 
     const peoples: any = reactive([{ name: "张三" }]);
@@ -104,7 +132,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .form {
-
 }
 .basics {
   border-bottom: 1px solid #ccc;

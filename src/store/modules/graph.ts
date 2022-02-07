@@ -10,11 +10,14 @@ export interface insiseGraphForm {
     id: string,
     name: string,
     type?: number,
-    changeOptType?:number
-    limit_timeType?:number
-    limit_time?:number
-    more?:number
-    examineModel?:number
+    changeOptType?: number
+    limit_timeType?: number
+    limit_time?: number
+    more?: number
+    examineModel?: number
+    terminus?: number
+    terminus_plies?: number
+    approverisNull?: number
 }
 interface IRootState {
     [key: string]: any
@@ -30,11 +33,14 @@ const graphModule: Module<ICountState, IRootState> = {
                 id: '',
                 name: '',
                 type: a,
-                changeOptType:a,
-                limit_timeType:1,
-                limit_time:a,
-                more:1,
-                examineModel:1
+                changeOptType: a,
+                limit_timeType: 1,
+                limit_time: a,
+                more: 1,
+                examineModel: 1,
+                terminus: 1,
+                terminus_plies: 1,
+                approverisNull: 1
             }
         }
     },
