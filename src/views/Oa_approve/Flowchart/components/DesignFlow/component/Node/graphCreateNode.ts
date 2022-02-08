@@ -22,7 +22,17 @@ const createNode = (graph: any) => {
             label: {
                 text: "人员选择",
                 fill: '#333',
+            },
+            other:{
                 type: 1,
+                changeOptType: 1,
+                limit_timeType: 1,
+                limit_time: 1,
+                more: 1,
+                examineModel: 1,
+                terminus: 1,
+                terminus_plies: 1,
+                approverisNull: 1
             },
             body: {
                 fill: '#F39C12',

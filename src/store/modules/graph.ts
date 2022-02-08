@@ -7,13 +7,12 @@ interface ICountState {
 }
 
 export interface insiseGraphForm {
-    id: string,
-    name: string,
-    type?: number,
-    changeOptType?: number
-    limit_timeType?: number
-    limit_time?: number
-    more?: number
+    id: string,  //节点id
+    type?: number, //节点类型 1 2 3 发起人 审批人 抄送人
+    changeOptType?: number  //人员选择方式
+    limit_timeType?: number  //审批期限 天/小时
+    limit_time?: number //审批具体时长 
+    more?: number   //审批人自选单人或多人 1 2
     examineModel?: number
     terminus?: number
     terminus_plies?: number
@@ -31,11 +30,10 @@ const graphModule: Module<ICountState, IRootState> = {
             confirmStatus: false,//用户是否点击确定按钮
             gForm: {
                 id: '',
-                name: '',
-                type: a,
-                changeOptType: a,
+                type: 1,
+                changeOptType: 1,
                 limit_timeType: 1,
-                limit_time: a,
+                limit_time: 1,
                 more: 1,
                 examineModel: 1,
                 terminus: 1,
@@ -56,7 +54,6 @@ const graphModule: Module<ICountState, IRootState> = {
         // 设置全局清空
         SET_ALL_DATA_CLEAR(state, payload) {
             state.gForm.id = ''
-            state.gForm.name = ''
             state.gForm.type = a
             state.disabled = true
         },

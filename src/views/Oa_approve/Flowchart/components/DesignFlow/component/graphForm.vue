@@ -4,9 +4,6 @@
       <el-form-item label="节点Id" prop="id">
         <el-input size="mini" v-model="ruleForm.id"></el-input>
       </el-form-item>
-      <el-form-item label="节点名称" prop="name">
-        <el-input size="mini" v-model="ruleForm.name"></el-input>
-      </el-form-item>
       <el-form-item label="节点类型" prop="type">
         <el-select v-model="ruleForm.type" placeholder="人员默认为审批人">
           <el-option label="发起人" :value="1"></el-option>
@@ -93,19 +90,6 @@ import graphForm from "./graphForm";
 import { insiseGraphForm } from "@/store/modules/graph";
 export default defineComponent({
   setup() {
-    const ruleForm: insiseGraphForm = reactive({
-      id: "",
-      name: "",
-      type: 1,
-      changeOptType: 1,
-      limit_timeType: 1,
-      limit_time: 1,
-      more: 1,
-      examineModel: 1,
-      terminus: 1,
-      terminus_plies: 1,
-      approverisNull: 1,
-    });
 
     const peoples: any = reactive([{ name: "张三" }]);
 
@@ -121,7 +105,7 @@ export default defineComponent({
     ];
 
     return {
-      ruleForm,
+      // ruleForm,
       peoples,
       dateOptions,
       ...graphForm(),

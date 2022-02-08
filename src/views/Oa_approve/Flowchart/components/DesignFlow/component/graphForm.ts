@@ -14,13 +14,12 @@ export default () => {
         return graphStore.useState('graphModule','disabled')
     }))
 
-    // const ruleForm:insiseGraphForm = reactive<any>(computed(()=>{
-    //     return graphStore.useState('graphModule','gForm')
-    // }));
+    const ruleForm:insiseGraphForm = reactive<any>(computed(()=>{
+        return graphStore.useState('graphModule','gForm')
+    }));
 
     const rules = reactive({
-        id: [
-            {
+        id: [{
               required: true,
               message: '请输入节点id',
               trigger: 'blur',
@@ -41,7 +40,7 @@ export default () => {
 
     return {
         rules,
-        // ruleForm,
+        ruleForm,
         ruleFormRef,
         disabled,
         changGraphNode,

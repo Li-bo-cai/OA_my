@@ -75,19 +75,22 @@ export const graphFunc = (graph: Graph) => {
     function nodeClick({ node }: any) {
         reset()
         node.attr('body/stroke', 'black')
-        // console.log(node,'这串数据将要存入仓库');
+        console.log(node, '这串数据将要存入仓库');
         const data = node.store.data
-
-        const type = data.attrs.label.type
-        
-        const gForm: insiseGraphForm = {
+        const type = data.attrs.other.type
+        const gForm = {
             id: data.id,
-            name: data.attrs.label.text,
-            type: data.attrs.label.type,
+            type: type,
+            changeOptType: data.attrs.other.changeOptType,
+            limit_timeType: data.attrs.other.limit_timeType,
+            limit_time: data.attrs.other.limit_time,
+            more: data.attrs.other.more,
+            examineModel: data.attrs.other.examineModel,
+            terminus: data.attrs.other.terminus,
+            terminus_plies: data.attrs.other.terminus_plies,
+            approverisNull: data.attrs.other.approverisNull
         }
-        
         graphStore.useMutations('graphModule', 'SET_GFORM', gForm)
-
         if (type == 0) {
             graphStore.useMutations('graphModule', 'SET_DISABLED', true)
             return
@@ -124,12 +127,31 @@ export const graphFunc = (graph: Graph) => {
         if (newVal) {
             const allGraphData = graph.toJSON()
             console.log(graph.toJSON());
-            
+
             const nowNode_Id = nowNode.id
 
             allGraphData.cells.forEach((item: any) => {
                 if (item.id === nowNode_Id) {
-                    item.attrs.label.text = gTypeFile.value.name
+                    switch (gTypeFile.value.changeOptType) {
+                        case 1:
+                            item.attrs.label.text = '所有人'
+                            break;
+                        case 2:
+                            item.attrs.label.text = '张三'
+                            break;
+                        case 3:
+                            item.attrs.label.text = gTypeFile.value.more == 1 ? '发起人自选(单人)' : '发起人自选(多人)'
+                            break;
+                        case 4:
+                            item.attrs.label.text = '连续多级主管(全部)'
+                            break;
+                        case 5:
+                            item.attrs.label.text = gTypeFile.value.limit_time == 1 ? '发起人的直接主管' : `发起人的第 ${gTypeFile.value.limit_time} 级主管`
+                            break;
+                        case 6:
+                            item.attrs.label.text = "角色-人才"
+                            break;
+                    }
                     item.attrs.label.type = gTypeFile.value.type
                 }
             });
