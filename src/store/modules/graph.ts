@@ -8,7 +8,7 @@ interface ICountState {
 
 export interface insiseGraphForm {
     id: string,  //节点id
-    type?: number, //节点类型 1 2 3 发起人 审批人 抄送人
+    type: number, //节点类型 1 2 3 发起人 审批人 抄送人
     changeOptType?: number  //人员选择方式
     limit_timeType?: number  //审批期限 天/小时
     limit_time?: number //审批具体时长 
@@ -45,7 +45,7 @@ const graphModule: Module<ICountState, IRootState> = {
     mutations: {
         // 设置节点信息
         SET_GFORM(state, payload) {
-            state.gForm = payload
+            state.gForm = JSON.parse(JSON.stringify(payload))
         },
         // 设置禁用状态
         SET_DISABLED(state, payload) {

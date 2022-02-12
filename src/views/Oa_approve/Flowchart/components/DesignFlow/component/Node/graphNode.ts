@@ -146,6 +146,8 @@ const graphData = {
           fill: '#333',
           fontSize: 13,
           cursor: 'pointer',
+        },
+        other:{
           type:0,
         }
       },

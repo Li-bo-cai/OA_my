@@ -14,7 +14,7 @@
       <el-form-item class="basics" label="选择人员方式" prop="type">
         <el-radio-group v-model="ruleForm.changeOptType">
           <el-radio :label="1" v-if="ruleForm.type==1">所有人</el-radio>
-          <el-radio :label=" 2">指定人员</el-radio>
+          <el-radio :label="2">指定人员</el-radio>
           <el-radio :label="3" v-if="ruleForm.type==2">发起人自选</el-radio>
           <el-radio :label="4">连续多级主管</el-radio>
           <el-radio :label="5">主管</el-radio>
@@ -44,7 +44,7 @@
           </el-option>
         </el-select>
         <span style="margin-left:20px;">时长：</span>
-        <el-input-number v-model="ruleForm.limit_time" :min="1" :max="10" size="small" />
+        <el-input-number v-model="ruleForm.limit_time" :min="0" :max="10" size="small" />
       </el-form-item>
       <el-form-item label="指定主管" v-if="ruleForm.changeOptType==5">
         <span>发起的第</span>

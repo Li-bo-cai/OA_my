@@ -78,18 +78,8 @@ export const graphFunc = (graph: Graph) => {
         console.log(node, '这串数据将要存入仓库');
         const data = node.store.data
         const type = data.attrs.other.type
-        const gForm = {
-            id: data.id,
-            type: type,
-            changeOptType: data.attrs.other.changeOptType,
-            limit_timeType: data.attrs.other.limit_timeType,
-            limit_time: data.attrs.other.limit_time,
-            more: data.attrs.other.more,
-            examineModel: data.attrs.other.examineModel,
-            terminus: data.attrs.other.terminus,
-            terminus_plies: data.attrs.other.terminus_plies,
-            approverisNull: data.attrs.other.approverisNull
-        }
+        const gForm:insiseGraphForm = Object.assign({id: data.id,},data.attrs.other)
+        
         graphStore.useMutations('graphModule', 'SET_GFORM', gForm)
         if (type == 0) {
             graphStore.useMutations('graphModule', 'SET_DISABLED', true)
@@ -140,7 +130,7 @@ export const graphFunc = (graph: Graph) => {
                             item.attrs.label.text = '张三'
                             break;
                         case 3:
-                            item.attrs.label.text = gTypeFile.value.more == 1 ? '发起人自选(单人)' : '发起人自选(多人)'
+                            item.attrs.label.text = gTypeFile.value.more == 1 ? '发起人自选(一人)' : '发起人自选(多人)'
                             break;
                         case 4:
                             item.attrs.label.text = '连续多级主管(全部)'
