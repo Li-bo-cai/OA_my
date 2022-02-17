@@ -2,7 +2,6 @@ import { ElForm } from "element-plus";
 import { computed, reactive, ref, watch } from "vue";
 import store from "@/store";
 import VUex from '@/utils/usVuex'
-import { insiseGraphForm } from '@/store/modules/graph'
 
 const graphStore: VUex = new VUex(store)
 
@@ -39,7 +38,7 @@ export default () => {
   };
 
   watch(() => ruleForm, (newVal, oldVal) => {
-    newVal.value.type != 1 ? ruleForm.value.changeOptType = 2 : ruleForm.value.changeOptType = 1
+    newVal.value.type != 1 ? ruleForm.value.changeOptType = ref(2) : ruleForm.value.changeOptType = ref(1)
   }, { deep: true })
 
   return {
