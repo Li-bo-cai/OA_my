@@ -70,10 +70,9 @@ export default defineComponent({
     const socket: any = inject("socket");
 
     // 定义登录数据
-    let a!: number;
     const loginForm: insideLogin = reactive({
-      account: a,
-      password: "",
+      account: "yw800100",
+      password: "yw12345678",
     });
 
     // 定义忘记密码数据

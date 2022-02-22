@@ -26,13 +26,19 @@
         </span>
         <span v-show="ruleForm.changeOptType==7" style="color:#8c8c8c;">发起人自己作为审批人进行审批</span>
         <div>
-          <el-button v-show="ruleForm.changeOptType==2" type="primary" class="el-icon-plus" size="mini" round>选择人员</el-button>
+          <el-button v-if="ruleForm.changeOptType==2" type="primary" class="el-icon-plus" size="mini" round>选择人员</el-button>
+          <el-button v-if="ruleForm.changeOptType==6" type="primary" class="el-icon-plus" size="mini" round>选择角色</el-button>
           <el-select v-show="ruleForm.type==2&&ruleForm.changeOptType==3" v-model="ruleForm.more" placeholder="Select" size="small">
             <el-option label="自选一个人" :value="1" />
             <el-option label="自选多个人" :value="2" />
           </el-select>
         </div>
         <div class="show_people" v-show="ruleForm.changeOptType==2">
+          <el-tag type="" v-for="(item, index) in peoples" size="mini" :key="index" @close="peoples.splice(index, 1)" closable>
+            {{item.name}}
+          </el-tag>
+        </div>
+        <div class="show_people" v-show="ruleForm.changeOptType==6">
           <el-tag type="" v-for="(item, index) in peoples" size="mini" :key="index" @close="peoples.splice(index, 1)" closable>
             {{item.name}}
           </el-tag>
@@ -45,6 +51,7 @@
         </el-select>
         <span style="margin-left:20px;">时长：</span>
         <el-input-number v-model="ruleForm.limit_time" :min="0" :max="10" size="small" />
+        <span style="margin-left:20px">{{ruleForm.limit_timeType==1?'天':'小时'}}</span>
       </el-form-item>
       <el-form-item label="指定主管" v-show="ruleForm.changeOptType==5">
         <span>发起的第</span>
@@ -66,7 +73,7 @@
         </el-radio-group>
         <span v-show="ruleForm.terminus==2">
           <span>第</span>
-          <el-input-number style="margin:10px;" v-model="ruleForm.limit_time" :min="1" size="small" />
+          <el-input-number style="margin:10px;" v-model="ruleForm.terminus_plies" :min="1" size="small" />
           <span>级主管</span>
         </span>
       </el-form-item>

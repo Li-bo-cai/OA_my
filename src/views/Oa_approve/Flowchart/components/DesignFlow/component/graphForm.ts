@@ -37,8 +37,8 @@ export default () => {
     });
   };
 
-  watch(() => ruleForm, (newVal, oldVal) => {
-    newVal.value.type != 1 ? ruleForm.value.changeOptType = ref(2) : ruleForm.value.changeOptType = ref(1)
+  watch(() => ruleForm.value.type, (newVal, oldVal) => {
+    newVal != 1 ? ruleForm.value.changeOptType = ref(2) : ruleForm.value.changeOptType = ref(1)
   }, { deep: true })
 
   return {

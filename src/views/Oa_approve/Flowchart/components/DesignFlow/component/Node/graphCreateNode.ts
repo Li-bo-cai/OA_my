@@ -16,8 +16,8 @@ const group = {
 
 const createNode = (graph: any) => {
     const nodeRect = graph.createNode({
-        width: 80,
-        height: 40,
+        width: 120,
+        height: 50,
         attrs: {
             label: {
                 text: "人员选择",
@@ -27,7 +27,7 @@ const createNode = (graph: any) => {
                 type: 1,
                 changeOptType: 1,
                 limit_timeType: 1,
-                limit_time: 1,
+                limit_time: 0,
                 more: 1,
                 examineModel: 1,
                 terminus: 1,

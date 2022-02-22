@@ -6,7 +6,7 @@
     </div>
     <!-- 右侧盒子 -->
     <div class=" graph_info">
-      <el-scrollbar height="calc(100vh - 235px)">
+      <el-scrollbar height="calc(100vh - 190px)">
         <GraphForm />
       </el-scrollbar>
     </div>
@@ -45,7 +45,7 @@ export default defineComponent({
   }
   .graph_info {
     flex: 1;
-    padding: 20px;
+    padding-left: 20px;
   }
 }
 </style>

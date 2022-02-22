@@ -13,10 +13,10 @@ export interface insiseGraphForm {
     limit_timeType?: number  //审批期限 天/小时
     limit_time?: number //审批具体时长 
     more?: number   //审批人自选单人或多人 1 2
-    examineModel?: number
-    terminus?: number
-    terminus_plies?: number
-    approverisNull?: number
+    examineModel?: number //多人审批时的签订条件 1 顺序签 2 会签 3 或签
+    terminus?: number //审批终点 1最上层主管  2 发起人的第n层级
+    terminus_plies?: number //发起人的第n层级
+    approverisNull?: number//审批人为空时
 }
 interface IRootState {
     [key: string]: any
@@ -33,7 +33,7 @@ const graphModule: Module<ICountState, IRootState> = {
                 type: 1,
                 changeOptType: 1,
                 limit_timeType: 1,
-                limit_time: 1,
+                limit_time: 0,
                 more: 1,
                 examineModel: 1,
                 terminus: 1,
