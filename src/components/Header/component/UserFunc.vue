@@ -1,19 +1,19 @@
 <template>
-  <div class="user_func">
-    <div class="user_commom">
-      <div class="user_info">
+  <div class="user-func">
+    <div class="user-commom">
+      <div class="user-info">
         <img :src="require('@/assets/images/1.jpg')" alt="">
-        <div class="img_shade">切换<br />头像</div>
+        <div class="img-shade">切换<br />头像</div>
       </div>
-      <div class="log_out">
+      <div class="log-out">
         <span>蒋竺娟<br />(yw***0)</span>
         <span>注销</span>
       </div>
     </div>
-    <div class="call_us">
+    <div class="call-us">
       <span>问题反馈</span>
     </div>
-    <div class="uer_search">
+    <div class="uer-search">
       <el-input placeholder="功能搜索" v-model="input3">
         <template #suffix>
           <i class="el-input__icon el-icon-search"></i>
@@ -36,24 +36,24 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.user_func {
+.user-func {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
-  .user_commom {
+  .user-commom {
     display: flex;
     align-items: center;
   }
 }
-.user_info {
+.user-info {
   position: relative;
   width: 40px;
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  &:hover .img_shade {
+  &:hover .img-shade {
     top: 0;
   }
   img {
@@ -62,7 +62,7 @@ export default defineComponent({
     border-radius: 50%;
     cursor: pointer;
   }
-  .img_shade {
+  .img-shade {
     position: absolute;
     top: 50px;
     left: 0;
@@ -76,7 +76,7 @@ export default defineComponent({
     cursor: pointer;
   }
 }
-.log_out {
+.log-out {
   flex: 1;
   font-size: 12px;
   i {
@@ -95,7 +95,7 @@ export default defineComponent({
     }
   }
 }
-.call_us {
+.call-us {
   width: 60px;
   font-size: 12px;
   cursor: pointer;
@@ -105,7 +105,7 @@ export default defineComponent({
     color: #5777e7;
   }
 }
-.uer_search {
+.uer-search {
   flex: 1;
   ::v-deep .el-input__inner {
     height: 30px;

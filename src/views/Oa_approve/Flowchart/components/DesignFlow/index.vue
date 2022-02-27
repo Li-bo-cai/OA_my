@@ -1,7 +1,7 @@
 <template>
-  <div class="design_flow">
-    <el-scrollbar class="design_scroll">
-      <div class="design_top_btn">
+  <div class="design-flow">
+    <el-scrollbar class="design-scroll">
+      <div class="design-top-btn">
         <el-button size="mini" plain icon="el-icon-folder-checked" @click="save_btn">上一步</el-button>
         <el-button size="mini" plain icon="el-icon-folder-checked" @click="save_btn">下一步</el-button>
         <el-button size="mini" plain icon="el-icon-folder-checked" @click="save_btn">保存</el-button>
@@ -52,9 +52,9 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.design_flow {
+.design-flow {
   height: 100%;
-  .design_scroll {
+  .design-scroll {
     height: calc(100vh - 161px);
   }
 }

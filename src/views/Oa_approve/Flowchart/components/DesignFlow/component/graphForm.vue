@@ -21,10 +21,10 @@
           <el-radio :label="6">角色</el-radio>
           <el-radio :label="7" v-show="ruleForm.type==2">发起人自己</el-radio>
         </el-radio-group>
-        <span style="color:#38adff;" v-show="ruleForm.changeOptType==1&&ruleForm.type==1">
+        <span class="c409eff" v-show="ruleForm.changeOptType==1&&ruleForm.type==1">
           默认所有人都可发起此审批
         </span>
-        <span v-show="ruleForm.changeOptType==7" style="color:#8c8c8c;">发起人自己作为审批人进行审批</span>
+        <span v-show="ruleForm.changeOptType==7" class="cbbb">发起人自己作为审批人进行审批</span>
         <div>
           <el-button v-if="ruleForm.changeOptType==2" type="primary" class="el-icon-plus" size="mini" round>选择人员</el-button>
           <el-button v-if="ruleForm.changeOptType==6" type="primary" class="el-icon-plus" size="mini" round>选择角色</el-button>
@@ -49,15 +49,15 @@
           <el-option v-for="item in dateOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
-        <span style="margin-left:20px;">时长：</span>
+        <span class="ml20">时长：</span>
         <el-input-number v-model="ruleForm.limit_time" :min="0" :max="10" size="small" />
-        <span style="margin-left:20px">{{ruleForm.limit_timeType==1?'天':'小时'}}</span>
+        <span class="ml20">{{ruleForm.limit_timeType==1?'天':'小时'}}</span>
       </el-form-item>
       <el-form-item label="指定主管" v-show="ruleForm.changeOptType==5">
         <span>发起的第</span>
-        <el-input-number style="margin:10px;" v-model="ruleForm.limit_time" :min="1" size="small" />
+        <el-input-number class="m10" v-model="ruleForm.limit_time" :min="1" size="small" />
         <span>级主管</span>
-        <div style="color:#409eff;font-size: small;">直接主管为 第 1 级主管</div>
+        <div class="ftsm c409eff">直接主管为 第 1 级主管</div>
       </el-form-item>
       <el-form-item label="多人审批时审批方式" v-show="ruleForm.more==2||peoples.length>=2">
         <el-radio-group v-model="ruleForm.examineModel">
@@ -73,7 +73,7 @@
         </el-radio-group>
         <span v-show="ruleForm.terminus==2">
           <span>第</span>
-          <el-input-number style="margin:10px;" v-model="ruleForm.terminus_plies" :min="1" size="small" />
+          <el-input-number class="m10" v-model="ruleForm.terminus_plies" :min="1" size="small" />
           <span>级主管</span>
         </span>
       </el-form-item>

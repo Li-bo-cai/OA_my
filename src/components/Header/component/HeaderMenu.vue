@@ -1,5 +1,5 @@
 <template>
-  <div class="header_menu">
+  <div class="header-menu">
     <el-menu text-color="#232323" :default-active="route.path" :router="true">
       <template v-for="item in Routes">
         <el-menu-item v-if="item.meta" :index="item.path" :key="item.name">
@@ -32,7 +32,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.header_menu {
+.header-menu {
   .el-menu {
     display: flex;
     align-items: center;

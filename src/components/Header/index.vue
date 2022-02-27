@@ -1,13 +1,13 @@
 <template>
-  <div class="head_top">
-    <div class="left_box">
+  <div class="head-top">
+    <div class="left-box">
       <el-scrollbar ref="scroll" @mousewheel="changeScroll">
-        <div class="cros_menu">
+        <div class="cros-menu">
           <HeaderMenu />
         </div>
       </el-scrollbar>
     </div>
-    <div class="right_box">
+    <div class="right-box">
       <UserFunc />
     </div>
   </div>
@@ -37,16 +37,16 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.head_top {
+.head-top {
   display: flex;
   align-items: center;
-  .left_box {
+  .left-box {
     width: 70%;
   }
-  .cros_menu {
+  .cros-menu {
     margin: 10px 0;
   }
-  .right_box {
+  .right-box {
     width: 30%;
   }
 }

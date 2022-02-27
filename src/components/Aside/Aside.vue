@@ -1,12 +1,12 @@
 <template>
   <div class="aside_box" ref="AsideMenuDom">
-    <el-scrollbar class="menu_scroll">
+    <el-scrollbar class="menu-scroll">
       <AsideMenu :Routes="Routes" />
     </el-scrollbar>
-    <div class="shrink_btn" v-show="icon_btn" @click="show_shrink_btn">
+    <div class="shrink-btn" v-show="icon_btn" @click="show_shrink_btn">
       <i title="点击收缩菜单栏" class="el-icon-back"></i>
     </div>
-    <div class="pop_btn" v-show="!icon_btn" @click="show_pop_btn">
+    <div class="pop-btn" v-show="!icon_btn" @click="show_pop_btn">
       <i title="点击弹出菜单栏" class="el-icon-right"></i>
     </div>
   </div>
@@ -60,10 +60,10 @@ export default defineComponent({
   width: 140px;
   transition: width 1s;
 }
-.menu_scroll {
+.menu-scroll {
   height: calc(100vh - 60px);
 }
-.shrink_btn {
+.shrink-btn {
   position: absolute;
   top: 5px;
   right: 0;
@@ -73,7 +73,7 @@ export default defineComponent({
   border-radius: 50%;
   cursor: pointer;
 }
-.pop_btn {
+.pop-btn {
   position: fixed;
   top: 55px;
   left: 0;

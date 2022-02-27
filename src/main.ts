@@ -7,6 +7,8 @@ export const usVuex = new VUex(store)
 
 
 import ElementPlus from 'element-plus'
+import * as ElIcons from '@element-plus/icons'
+
 import '@/assets/css/element-variables.scss'
 import '@/assets/css/element.scss'
 import '@/assets/css/common.scss'
@@ -19,6 +21,10 @@ import SocketIO from '@/utils/socket'
 import DragDirective from '@/utils/drag'
 
 const app = createApp(App)
+
+for (const name in ElIcons) {
+    app.component(name, (ElIcons as any)[name])
+}
 
 app.use(SocketIO, {
     connection: "wss://oms.dev.175.run",

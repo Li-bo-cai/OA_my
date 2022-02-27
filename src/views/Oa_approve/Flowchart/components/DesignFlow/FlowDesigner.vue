@@ -1,11 +1,11 @@
 <template>
   <div class="root">
     <!-- 左侧盒子 -->
-    <div class="graph_box" ref="graph_box">
+    <div class="graph-box" ref="graph_box">
       <Graph />
     </div>
     <!-- 右侧盒子 -->
-    <div class=" graph_info">
+    <div class=" graph-info">
       <el-scrollbar height="calc(100vh - 190px)">
         <GraphForm />
       </el-scrollbar>
@@ -38,12 +38,12 @@ export default defineComponent({
   display: flex;
   width: 100%;
   height: 100%;
-  .graph_box {
+  .graph-box {
     flex: 2;
     padding: 20px;
     border: 1px solid #ccc;
   }
-  .graph_info {
+  .graph-info {
     flex: 1;
     padding-left: 20px;
   }

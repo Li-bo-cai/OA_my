@@ -3,7 +3,7 @@
     <template #title>
       <span>流程设计器名称</span>
     </template>
-    <div class="flow_chat">
+    <div class="flow-chat">
       <el-tabs v-model="activeName" type="border-card">
         <el-tab-pane label="流程设计" name="design_flow">
           <DesignFlow />
@@ -62,7 +62,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.flow_chat {
+.flow-chat {
   // display: flex;
   height: calc(100vh - 105px);
   .el-tabs {

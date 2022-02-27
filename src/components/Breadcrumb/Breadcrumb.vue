@@ -1,16 +1,16 @@
 <template>
-  <div v-if="!route.meta.breadCrub" class="title_bread_only">
+  <div v-if="!route.meta.breadCrub" class="title-bread-only">
     <span>{{ route.meta.title }}</span>
   </div>
 
-  <div v-if="route.meta.breadCrub" class="title_bread">
+  <div v-if="route.meta.breadCrub" class="title-bread">
     <el-breadcrumb separator-class="el-icon-arrow-right" class="o-breadcrumb">
       <el-breadcrumb-item v-for="route in breadList" :key="route.path" separator="/" :to="route.path">{{ route.meta.title }}</el-breadcrumb-item>
     </el-breadcrumb>
-    <div v-if="title=='backhome'" class="back_to_home" @click="back_home">
+    <div v-if="title=='backhome'" class="back-to-home" @click="back_home">
       <span>返回首页</span>
     </div>
-    <div v-if="title=='pageup'" class="back_to_home" @click="page_up">
+    <div v-if="title=='pageup'" class="back-to-home" @click="page_up">
       <span>返回上一页</span>
     </div>
   </div>
@@ -57,7 +57,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.title_bread_only {
+.title-bread-only {
   padding-bottom: 20px;
   border-bottom: 1px solid #edeef2;
   margin-bottom: 30px;
@@ -67,7 +67,7 @@ export default defineComponent({
     font-weight: bold;
   }
 }
-.title_bread {
+.title-bread {
   display: flex;
   align-items: center;
   padding-bottom: 20px;
@@ -77,7 +77,7 @@ export default defineComponent({
 .el-breadcrumb {
   font-size: 18px;
 }
-.back_to_home {
+.back-to-home {
   span {
     display: inline-block;
     width: 102px;

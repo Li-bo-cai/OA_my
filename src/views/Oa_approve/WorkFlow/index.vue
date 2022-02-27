@@ -12,7 +12,7 @@
       <el-table-column prop="address" label="地址"></el-table-column>
       <el-table-column label="操作" width="440">
         <template #default="scope">
-          <div class="operate_btn">
+          <div class="operate-btn">
             <el-button type="primary" size="mini" plain icon="el-icon-edit" @click="edit_btn(scope.row)">编辑</el-button>
             <el-button type="warning" size="mini" plain icon="el-icon-setting" @click="design_btn(scope.row)">设计</el-button>
             <el-button type="success" size="mini" plain icon="el-icon-position" @click="realease_btn(scope.row)">发布</el-button>
@@ -92,7 +92,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.operate_btn {
+.operate-btn {
   // display: flex;
 }
 </style>

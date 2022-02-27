@@ -1,19 +1,19 @@
 <template>
   <div class="home">
-    <div class="header_title">
+    <div class="header-title">
       <div class="show">
         <h1> G2展示盘表 </h1>
       </div>
       <div class="line"></div>
     </div>
-    <div class="content_chart">
-      <div class="left_box pseudo">
-        <div class="box_title">
+    <div class="content-chart">
+      <div class="left-box pseudo">
+        <div class="box-title">
           <span>人员人事指标</span>
         </div>
         <el-scrollbar height="calc(100vh - 308px)">
-          <div class="chart_box">
-            <div v-for="(value,key) in allData.staff" :key="key" class="chart_item">
+          <div class="chart-box">
+            <div v-for="(value,key) in allData.staff" :key="key" class="chart-item">
               <div class="title">
                 <h3>{{ value.title }}</h3>
                 <h3>{{ value.units }}</h3>
@@ -23,8 +23,8 @@
           </div>
         </el-scrollbar>
       </div>
-      <div class="content_box pseudo">
-        <div class="box_title">
+      <div class="content-box pseudo">
+        <div class="box-title">
           <span>人员人事指标</span>
         </div>
         <el-scrollbar height="calc(100vh - 308px)">
@@ -45,18 +45,18 @@
                 <el-table-column label="满勤率/%" prop="full_rate"></el-table-column>
               </el-table>
             </div>
-            <div class="time_chart">
+            <div class="time-chart">
               <div id="overtime"></div>
             </div>
           </div>
         </el-scrollbar>
       </div>
-      <div class="right_box pseudo">
-        <div class="box_title">
+      <div class="right-box pseudo">
+        <div class="box-title">
           <span>人员人事指标</span>
         </div>
         <el-scrollbar height="calc(100vh - 308px)">
-          <div class="other_table">
+          <div class="other-table">
             <div class="table">
               <div class="title">
                 <h3>考勤指标</h3>
@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <div class="time_clock">
+    <div class="time-clock">
       <div>{{date}}</div>
       <div>{{time}}</div>
     </div>
@@ -120,7 +120,7 @@ export default defineComponent({
   height: calc(100vh - 110px);
   overflow: hidden;
 }
-.header_title {
+.header-title {
   display: flex;
   justify-content: center;
   position: relative;
@@ -143,26 +143,26 @@ export default defineComponent({
   }
 }
 
-.content_chart {
+.content-chart {
   display: flex;
   height: calc(100vh - 245px);
-  .left_box {
+  .left-box {
     width: 25%;
     margin: 0 20px 20px 20px;
   }
-  .content_box {
+  .content-box {
     width: 50%;
     margin: 0 0 20px 0;
   }
-  .right_box {
+  .right-box {
     width: 20%;
     margin: 0 20px 20px 20px;
-    .other_table {
+    .other-table {
       background: rgb(47, 110, 247, 0.1);
     }
   }
 }
-.time_clock {
+.time-clock {
   position: absolute;
   top: 20px;
   left: 50px;
@@ -173,7 +173,7 @@ export default defineComponent({
     font-weight: bold;
   }
 }
-.box_title {
+.box-title {
   display: flex;
   justify-content: center;
   font-size: 20px;
@@ -185,14 +185,14 @@ export default defineComponent({
     border: 1px solid #237dbf;
   }
 }
-.chart_box {
+.chart-box {
   padding: 20px;
   background: rgb(47, 110, 247, 0.1);
   overflow: hidden;
-  .chart_item {
+  .chart-item {
     margin-bottom: 20px;
   }
-  .chart_item:last-child {
+  .chart-item:last-child {
     margin: 0;
   }
 }

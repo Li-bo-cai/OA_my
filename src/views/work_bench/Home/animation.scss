@@ -123,23 +123,23 @@
     border-bottom: 3px solid #7599fd;
     border-right: 3px solid #7599fd;
 }
-.box_title {
+.box-title {
     position: relative;
 }
-.box_title::after,
-.box_title::before {
+.box-title::after,
+.box-title::before {
     position: absolute;
     display: block;
     content: "";
     padding: 5px;
 }
-.box_title::before {
+.box-title::before {
     top: -5px;
     left: -5px;
     border-top: 3px solid #7599fd;
     border-left: 3px solid #7599fd;
 }
-.box_title::after {
+.box-title::after {
     top: -5px;
     right: -5px;
     border-top: 3px solid #7599fd;
