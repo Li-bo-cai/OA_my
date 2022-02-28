@@ -6,7 +6,7 @@ import axios from '../index'
  * @param 
 */
 export function department_com_show2(): Promise<AxiosResponse<any>> {
-    return axios.post('/inside/department/com_show2')
+    return axios.get('/inside/department/com_show2')
 }
 /**
  * 检查父级节点下所有员工  /staff/check2

@@ -47,12 +47,14 @@ export default defineComponent({
     const { dialog, checked } = toRefs(props);
     const dialogVisible = dialog;
     const checkedData = checked;
+    const data = ref<number>(1);
 
     const handleClose = () => {
       context.emit("closeDialog", false);
     };
 
     return {
+      data,
       dialogVisible,
       checkedData,
       handleClose,

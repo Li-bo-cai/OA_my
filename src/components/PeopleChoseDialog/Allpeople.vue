@@ -1,7 +1,7 @@
 <template>
   <div class="all-people">
     <el-scrollbar>
-      <el-input v-model="input2" placeholder="搜索人员" size="small" prefix-icon="el-icon-search" />
+      <el-input v-model="search_people" placeholder="搜索人员" size="small" prefix-icon="el-icon-search" />
       <div class="check-box">
         <div class="bread-crumb-title">
           <el-breadcrumb separator-icon="el-icon-arrow-right">
@@ -10,8 +10,9 @@
           </el-breadcrumb>
         </div>
         <div class="check-content">
-          <el-checkbox class="ml30" v-model="checkedAll">全选</el-checkbox>
-          <el-tree :data="data" show-checkbox node-key="id" :props="defaultProps" />
+          <el-checkbox class="ml20" v-model="checkedAll">全选</el-checkbox>
+          {{organizaData}}
+          <el-tree :data="organizaData" show-checkbox node-key="id" :props="defaultProps" />
         </div>
       </div>
     </el-scrollbar>
@@ -19,30 +20,38 @@
 </template>
 
 <script lang="ts">
-import { data } from "./data";
-import { defineComponent, ref, toRefs } from "vue";
-
+import data from "./data";
+import { defineComponent, onMounted, ref, toRefs } from "vue";
 export default defineComponent({
   props: {
     showData: {
-      type: Array,
-      required: true,
-      default: null,
+      type: Number,
+      default: 1,
     },
   },
   setup(props, context) {
     const { showData } = toRefs(props);
-    const allData = showData;
+    const { search_people, organizaData, organiza } = data();
+    const chose_status = showData;
     const defaultProps = {
       children: "children",
-      label: "label",
+      label: "depart_name",
     };
-    const checkedAll = ref(true);
+    const checkedAll = ref<boolean>(false);
+
+    onMounted(() => {
+      organiza();
+      // 当chose_status为1时可以获取部门基本信息
+      // if (chose_status == 1) {
+      // }
+    });
+
     return {
+      search_people,
+      organizaData,
       defaultProps,
-      allData,
+      chose_status,
       checkedAll,
-      data,
     };
   },
 });
