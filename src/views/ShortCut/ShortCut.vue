@@ -48,9 +48,9 @@ export default defineComponent({
   setup() {
     const usVuex: any = inject("usVuex");
 
-    const msg = ref<MessageType | null>(null);
-    const pend = ref<PendingType | null>(null);
-    const chat = ref<ChatType | null>(null);
+    const msg = ref<MessageType>();
+    const pend = ref<PendingType>();
+    const chat = ref<ChatType>();
 
     const showMessageCard = () => {
       usVuex.useMutations("shortCutModule", "SET_MESSAGE_DIALOG", true);
@@ -82,7 +82,6 @@ export default defineComponent({
       }
     };
 
-    
     return {
       msg,
       pend,

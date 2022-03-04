@@ -2,8 +2,9 @@
   <div>
     <el-dialog v-model="dialogVisible" title="人员名单选择器" width="50%" center :before-close="handleClose">
       <div class="people-dialog">
-        <AllPeople :showData="data"></AllPeople>
-        <CheckedPeople></CheckedPeople>
+        <AllDepart :showData="data"></AllDepart>
+        <PeopleCheck v-if="data==2"></PeopleCheck>
+        <CheckedPeople :showData="data"></CheckedPeople>
       </div>
       <template #footer>
         <span class="dialog-footer">
@@ -16,7 +17,8 @@
 </template>
 
 <script lang="ts">
-import AllPeople from "./Allpeople.vue";
+import AllDepart from "./AllDepart.vue";
+import PeopleCheck from "./PeopleCheck.vue";
 import CheckedPeople from "./CheckedPeople.vue";
 import { defineComponent, ref, toRefs } from "vue";
 
@@ -40,14 +42,15 @@ export default defineComponent({
     },
   },
   components: {
-    AllPeople,
+    AllDepart,
     CheckedPeople,
+    PeopleCheck,
   },
   setup(props, context) {
     const { dialog, checked } = toRefs(props);
     const dialogVisible = dialog;
     const checkedData = checked;
-    const data = ref<number>(1);
+    const data = ref<number>(2);
 
     const handleClose = () => {
       context.emit("closeDialog", false);

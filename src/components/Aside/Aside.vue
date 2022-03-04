@@ -23,7 +23,7 @@ export default defineComponent({
     const usVuex: any = inject("usVuex");
 
     const icon_btn = ref<boolean>(true);
-    let AsideMenuDom = ref<HTMLDivElement | null>(null);
+    let AsideMenuDom = ref<HTMLDivElement>();
 
     const show_shrink_btn = () => {
       (AsideMenuDom.value as HTMLDivElement).style.width = "0";

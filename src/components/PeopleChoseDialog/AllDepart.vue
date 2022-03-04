@@ -4,15 +4,10 @@
       <el-input v-model="search_people" placeholder="搜索人员" size="small" prefix-icon="el-icon-search" />
       <div class="check-box">
         <div class="bread-crumb-title">
-          <el-breadcrumb separator-icon="el-icon-arrow-right">
-            <el-breadcrumb-item>homepage</el-breadcrumb-item>
-            <el-breadcrumb-item>promotion</el-breadcrumb-item>
-          </el-breadcrumb>
+          <div class="title">{{chose_status}}</div>
         </div>
         <div class="check-content">
-          <el-checkbox class="ml20" v-model="checkedAll">全选</el-checkbox>
-          {{organizaData}}
-          <el-tree :data="organizaData" show-checkbox node-key="id" :props="defaultProps" />
+          <el-tree ref="depart_tree" :data="organizaData" :show-checkbox="showData==1" node-key="id" :props="defaultProps" default-expanded-keys="1" :accordion="true" @check="handleCheckedNodes" @node-click="handleNodeClick" />
         </div>
       </div>
     </el-scrollbar>
@@ -21,37 +16,53 @@
 
 <script lang="ts">
 import data from "./data";
-import { defineComponent, onMounted, ref, toRefs } from "vue";
+import { computed, defineComponent, onMounted, reactive, toRefs } from "vue";
 export default defineComponent({
   props: {
     showData: {
       type: Number,
+      required: true,
       default: 1,
     },
   },
   setup(props, context) {
     const { showData } = toRefs(props);
-    const { search_people, organizaData, organiza } = data();
-    const chose_status = showData;
+    const param = reactive({
+      showData: showData.value,
+    });
+    const {
+      search_people,
+      organizaData,
+      depart_tree,
+      handleCheckedNodes,
+      organiza,
+      handleNodeClick,
+    } = data(param);
+
+    const chose_status = computed(() => {
+      if (showData.value == 1) {
+        return "部门选择";
+      }
+      return "";
+    });
+
     const defaultProps = {
       children: "children",
       label: "depart_name",
     };
-    const checkedAll = ref<boolean>(false);
 
     onMounted(() => {
       organiza();
-      // 当chose_status为1时可以获取部门基本信息
-      // if (chose_status == 1) {
-      // }
     });
 
     return {
       search_people,
       organizaData,
+      depart_tree,
       defaultProps,
       chose_status,
-      checkedAll,
+      handleCheckedNodes,
+      handleNodeClick,
     };
   },
 });
@@ -66,10 +77,15 @@ export default defineComponent({
   background: #d4d4d5;
   border-radius: 10px;
   overflow: hidden;
+  margin-right: 10px;
 }
 .check-box {
   margin-top: 10px;
   .bread-crumb-title {
+    margin-bottom: 10px;
+    .title {
+      color: #8d8d8d;
+    }
   }
   .check-content {
   }
@@ -90,6 +106,7 @@ export default defineComponent({
   background: #d4d4d5;
 }
 :deep .el-tree {
+  --el-tree-node-hover-bg-color: #d4d4d5;
   --el-tree-node-hover-background-color: #d4d4d5;
 }
 </style>

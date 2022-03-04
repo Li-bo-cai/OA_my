@@ -107,7 +107,7 @@ export default defineComponent({
 }
 .uer-search {
   flex: 1;
-  ::v-deep .el-input__inner {
+  :deep .el-input__inner {
     height: 30px;
     line-height: 30px;
   }

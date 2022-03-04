@@ -25,7 +25,7 @@ export default defineComponent({
   setup() {
     let scroll = ref(null);
     const changeScroll = (e) => {
-      let wrap = scroll.value.$refs.wrap;
+      let wrap = scroll.value.$refs.wrap$;
       wrap.scrollLeft = wrap.scrollLeft - e.wheelDelta;
     };
     return {
