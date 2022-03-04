@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VUex from './utils/usVuex'
+import $common from './utils/common'
 export const usVuex = new VUex(store)
 
 
@@ -47,5 +48,7 @@ app.use(router)
 app.use(store)
 app.use(DragDirective)
 app.config.globalProperties.usVuex = usVuex;
+app.config.globalProperties.$common = $common;
 app.provide('usVuex', usVuex)
+app.provide('$common', $common)
 app.mount('#app')

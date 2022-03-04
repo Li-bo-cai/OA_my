@@ -16,7 +16,7 @@ export default (props: any) => {
         mitt.on('delete-check', deletecheck)
     })
     onUnmounted(() => {
-        mitt.on('delete-check', deletecheck)
+        mitt.off('delete-check', deletecheck)
     })
 
     // 获取架构树

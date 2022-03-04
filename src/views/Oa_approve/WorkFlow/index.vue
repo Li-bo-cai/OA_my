@@ -13,22 +13,23 @@
       <el-table-column label="操作" width="440">
         <template #default="scope">
           <div class="operate-btn">
-            <el-button type="primary" size="mini" plain icon="el-icon-edit" @click="edit_btn(scope.row)">编辑</el-button>
-            <el-button type="warning" size="mini" plain icon="el-icon-setting" @click="design_btn(scope.row)">设计</el-button>
-            <el-button type="success" size="mini" plain icon="el-icon-position" @click="realease_btn(scope.row)">发布</el-button>
-            <el-button type="primary" size="mini" plain icon="el-icon-view" @click="examine_btn(scope.row)">查看</el-button>
-            <el-button type="danger" size="mini" plain icon="el-icon-delete" @click="delete_btn(scope.row)">删除</el-button>
+            <el-button type="primary" size="small" plain :icon="Edit" @click="edit_btn(scope.row)">编辑</el-button>
+            <el-button type="warning" size="small" plain :icon="Setting" @click="design_btn(scope.row)">设计</el-button>
+            <el-button type="success" size="small" plain :icon="Position" @click="realease_btn(scope.row)">发布</el-button>
+            <el-button type="primary" size="small" plain :icon="View" @click="examine_btn(scope.row)">查看</el-button>
+            <el-button type="danger" size="small" plain :icon="Delete" @click="delete_btn(scope.row)">删除</el-button>
           </div>
         </template>
       </el-table-column>
     </el-table>
     {{ItemPanelDialogVisible}}
-    <FlowChartDialog v-if="ItemPanelDialogVisible"/>
+    <FlowChartDialog v-if="ItemPanelDialogVisible" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, inject } from "vue";
+import { Edit, Setting, Position, View, Delete } from "@element-plus/icons-vue";
 import FlowChartDialog from "@/views/Oa_approve/Flowchart/GraphView.vue";
 import { mapState } from "vuex";
 export default defineComponent({
@@ -80,6 +81,11 @@ export default defineComponent({
     };
 
     return {
+      Edit,
+      Setting,
+      Position,
+      View,
+      Delete,
       edit_btn,
       design_btn,
       realease_btn,

@@ -26,19 +26,19 @@
         </span>
         <span v-show="ruleForm.changeOptType==7" class="cbbb">发起人自己作为审批人进行审批</span>
         <div>
-          <el-button v-if="ruleForm.changeOptType==2" type="primary" class="el-icon-plus" size="mini" round>选择人员</el-button>
-          <el-button v-if="ruleForm.changeOptType==6" type="primary" class="el-icon-plus" size="mini" round>选择角色</el-button>
+          <el-button v-if="ruleForm.changeOptType==2" type="primary" class="el-icon-plus" size="small" round>选择人员</el-button>
+          <el-button v-if="ruleForm.changeOptType==6" type="primary" class="el-icon-plus" size="small" round>选择角色</el-button>
           <el-select v-show="ruleForm.type==2&&ruleForm.changeOptType==3" v-model="ruleForm.more" placeholder="Select" size="small">
             <el-option label="自选一个人" :value="1" />
             <el-option label="自选多个人" :value="2" />
           </el-select>
         </div>
-        <div class="show_people" v-show="ruleForm.changeOptType==2">
+        <div class="show-people" v-show="ruleForm.changeOptType==2">
           <el-tag type="" v-for="(item, index) in peoples" size="mini" :key="index" @close="peoples.splice(index, 1)" closable>
             {{item.name}}
           </el-tag>
         </div>
-        <div class="show_people" v-show="ruleForm.changeOptType==6">
+        <div class="show-people" v-show="ruleForm.changeOptType==6">
           <el-tag type="" v-for="(item, index) in peoples" size="mini" :key="index" @close="peoples.splice(index, 1)" closable>
             {{item.name}}
           </el-tag>
@@ -126,7 +126,7 @@ export default defineComponent({
 .basics {
   border-bottom: 1px solid #ccc;
 }
-.show_people {
+.show-people {
   margin-top: 20px;
   padding-bottom: 10px;
 }
