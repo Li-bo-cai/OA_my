@@ -9,7 +9,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="handleClose">取消</el-button>
-          <el-button type="primary" @click="handleClose">确定</el-button>
+          <el-button type="primary" @click="handleConfirm">确定</el-button>
         </span>
       </template>
     </el-dialog>
@@ -20,7 +20,8 @@
 import AllDepart from "./AllDepart.vue";
 import PeopleCheck from "./PeopleCheck.vue";
 import CheckedPeople from "./CheckedPeople.vue";
-import { defineComponent, ref, toRefs } from "vue";
+import { defineComponent, onMounted, onUnmounted, ref, toRefs } from "vue";
+import mitt from "@/utils/mitt";
 
 export default defineComponent({
   props: {
@@ -51,9 +52,28 @@ export default defineComponent({
     const dialogVisible = dialog;
     const checkedData = checked;
     const data = ref<number>(2);
+    const returnAll = ref<any>([]);
 
+    onMounted(() => {
+      mitt.on("all-showData", allShowdata);
+    });
+
+    onUnmounted(() => {
+      mitt.off("all-showData", allShowdata);
+    });
+    // 获取第三数据
+    const allShowdata = (e: any) => {
+      returnAll.value = e;
+    };
+
+    // 关闭弹窗
     const handleClose = () => {
       context.emit("closeDialog", false);
+    };
+
+    const handleConfirm = () => {
+      mitt.on("get-check-data", returnAll);
+      handleClose();
     };
 
     return {
@@ -61,6 +81,7 @@ export default defineComponent({
       dialogVisible,
       checkedData,
       handleClose,
+      handleConfirm,
     };
   },
 });

@@ -51,28 +51,59 @@ export default defineComponent({
   },
   setup(props) {
     const { showData, checkedData }: any = toRefs(props);
-    let showCheckData: any = ref([]);
+    const showCheckData: any = ref([]);
     showCheckData.value = checkedData.value;
-    const changecheck = (e: any) => {
-      showCheckData.value = $common.doWeight(showCheckData.value.concat(e));
-    };
+
     onMounted(() => {
       mitt.on("change-check", changecheck);
+      mitt.on("change-check-group", changecheckgroup);
       mitt.on("delete-checkbox", deletecheckbox);
     });
+
     onUnmounted(() => {
       mitt.off("change-check", changecheck);
+      mitt.off("change-check-group", changecheckgroup);
       mitt.off("delete-checkbox", deletecheckbox);
     });
 
+    // 监听change-check 全选事件发生时的传值
+    const changecheck = (e: any) => {
+      if (showData.value == 1) {
+        showCheckData.value = e;
+      }
+      if (showData.value == 2) {
+        if (e.status) {
+          showCheckData.value = $common.doWeight(
+            showCheckData.value.concat(e.value)
+          );
+        } else {
+          e.value.forEach((item: any, index: number) => {
+            showCheckData.value = $common.deleteAppoint(
+              showCheckData.value,
+              "id",
+              item.id
+            );
+          });
+        }
+        reply();
+      }
+    };
+
+    // 监听change-check-group事件传递的数组
+    const changecheckgroup = (e: any) => {
+      showCheckData.value = $common.doWeight(showCheckData.value.concat(e));
+      reply();
+    };
+
     //监听checkbox的取消选中状态
     const deletecheckbox = (e: any) => {
-      console.log(e);
+      // console.log(e);
       showCheckData.value = $common.deleteAppoint(
         showCheckData.value,
         "id",
         e.id
       );
+      reply();
     };
 
     // 点击删除按钮时触发事件
@@ -84,6 +115,12 @@ export default defineComponent({
       if (showData.value == 2) {
         mitt.emit("delete-check-people", showCheckData.value);
       }
+      reply();
+    };
+
+    // 返回最终结果 通知外界
+    const reply = () => {
+      mitt.emit("all-showData", showCheckData.value);
     };
 
     return {

@@ -24,6 +24,20 @@ class CommonFunc {
         })
         return newArr
     }
+
+    getSameArr(oArray: Array<any>, tArray: Array<any>, attr: string): Array<any> {
+        const tempArray: any[] = [];//临时数组
+
+        oArray.forEach((item, index) => {
+            tArray.forEach((_item, _index) => {
+                if (item[attr] == _item[attr]) {
+                    tempArray.push(item)
+                }
+            })
+        })
+
+        return tempArray
+    }
 }
 
 const $common = new CommonFunc();

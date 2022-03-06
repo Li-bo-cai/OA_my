@@ -11,23 +11,57 @@
 
 <script lang="ts">
 import mitt from "@/utils/mitt";
-import { defineComponent, onMounted, onUnmounted, ref } from "vue";
+import $commom from "@/utils/common";
+import {
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  ref,
+  toRefs,
+  watch,
+} from "vue";
 export default defineComponent({
-  setup() {
+  props: {
+    checkedData: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  setup(props) {
+    const { checkedData }: any = toRefs(props);
     const checkAll = ref(false); //当前多选框是否全选
     const isIndeterminate = ref(false); //多选框状态
-    const checkedPerson = ref([]); //选中的数据
+    const checkedPerson = ref<any>([]); //选中的数据
     let peoples = ref([]); //接口返回可选择人数
-    let allPeople = ref<any>([]); //选中后总的人数存放位置
+    const allPeople = ref<any>([]);
+    allPeople.value = checkedData.value;
 
     onMounted(() => {
       mitt.on("people-check", peoplecheck);
       mitt.on("delete-check-people", deleteCheckPeople);
+      mitt.on("all-showData", allShowdata);
     });
 
     onUnmounted(() => {
       mitt.off("people-check", peoplecheck);
       mitt.off("delete-check-people", deleteCheckPeople);
+      mitt.off("all-showData", allShowdata);
+    });
+
+    watch(
+      peoples,
+      (newVal, oldVal) => {
+        checkedPerson.value = $commom.getSameArr(newVal, allPeople.value, "id");
+      },
+      { deep: true }
+    );
+
+    watch(checkedPerson, (newVal, oldVal) => {
+      const checkedCount = newVal.length;
+      checkAll.value = checkedCount === peoples.value.length;
+      isIndeterminate.value =
+        checkedCount > 0 && checkedCount < peoples.value.length;
+      // console.log("=====>", newVal, checkedCount, isIndeterminate.value);
     });
 
     // 接收组件传递的people-check
@@ -38,16 +72,18 @@ export default defineComponent({
 
     // 最终数据删除传递事件
     const deleteCheckPeople = (e: any) => {
-      checkedPerson.value.forEach((item, index) => {
-        // console.log(e);
-      });
+      checkedPerson.value = $commom.getSameArr(peoples.value, e, "id");
     };
 
     //全选按钮
     const handleCheckAllChange = (val: boolean) => {
       checkedPerson.value = val ? peoples.value : [];
       isIndeterminate.value = false;
-      mitt.emit("change-check", checkedPerson.value);
+      let changeResult = {
+        value: val ? checkedPerson.value : peoples.value,
+        status: val,
+      };
+      mitt.emit("change-check", changeResult);
     };
 
     //checkbox-group的change事件
@@ -56,15 +92,18 @@ export default defineComponent({
       checkAll.value = checkedCount === peoples.value.length;
       isIndeterminate.value =
         checkedCount > 0 && checkedCount < peoples.value.length;
-      mitt.emit("change-check", value);
+      mitt.emit("change-check-group", value);
     };
 
     //checkbox 的change事件
     const trychange = (value: any, e: boolean) => {
-      console.log(value, e);
       if (!e) {
         mitt.emit("delete-checkbox", value);
       }
+    };
+    // 获取第三数据
+    const allShowdata = (e: any) => {
+      allPeople.value = e;
     };
     return {
       checkAll,

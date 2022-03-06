@@ -35,7 +35,6 @@ export default (props: any) => {
             checkedTree.value = treeArr
             mitt.emit('change-check', treeArr)
         }
-
     }
     // 树节点点击事件
     const handleNodeClick = (data: any, node: Node, event: any) => {
@@ -44,22 +43,16 @@ export default (props: any) => {
                 depart_id: data.id,
             }
             staff_check2(param).then((res) => {
-                // console.log(res);
                 if (res.data.code == 1) {
                     mitt.emit('people-check', res.data.data.data)
                 }
             })
         }
-        // nextTick(()=>{
-        //     const treeArr =(depart_tree.value as ElTreeType).getCheckedNodes(true,true)
-        //     console.log(treeArr);
-        // })
     }
     // 监听delete-check返回后重新渲染tree
     const deletecheck = (e: any) => {
         (depart_tree.value as ElTreeType).setCheckedNodes(checkedTree.value, true)
     }
-
 
     return {
         search_people,
@@ -67,6 +60,7 @@ export default (props: any) => {
         depart_tree,
         organiza,
         handleCheckedNodes,
-        handleNodeClick
+        handleNodeClick,
+        
     }
 }
