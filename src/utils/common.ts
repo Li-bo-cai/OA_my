@@ -1,11 +1,26 @@
 class CommonFunc {
     /**
      * 去重方法  
-     * @param oArray 去重数组
+     * @param oArray 去重单个数组
      * @returns Array
      */
-    doWeight(oArray: Array<any>): Array<any> {
+    doWeightOnly(oArray: Array<any>): Array<any> {
+        // console.log('要去重的数据',oArray);
         const newArr = [...new Set(oArray)]
+        return newArr
+    }
+    /**
+     * 
+     * @param oArray 去重对象数组
+     * @returns Array
+     */
+    doweightObject(oArray: Array<any>,attr:string): Array<any>{
+        const obj:any = {};
+        let newArr = [];
+        newArr = oArray.reduce((cur,next) => {
+            obj[next[attr]] ? "" : obj[next[attr]] = true && cur.push(next);
+            return cur;
+        },[])
         return newArr
     }
 

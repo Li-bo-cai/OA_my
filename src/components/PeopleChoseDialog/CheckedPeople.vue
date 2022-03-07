@@ -73,8 +73,9 @@ export default defineComponent({
       }
       if (showData.value == 2) {
         if (e.status) {
-          showCheckData.value = $common.doWeight(
-            showCheckData.value.concat(e.value)
+          showCheckData.value = $common.doweightObject(
+            showCheckData.value.concat(e.value),
+            "id"
           );
         } else {
           e.value.forEach((item: any, index: number) => {
@@ -91,7 +92,10 @@ export default defineComponent({
 
     // 监听change-check-group事件传递的数组
     const changecheckgroup = (e: any) => {
-      showCheckData.value = $common.doWeight(showCheckData.value.concat(e));
+      showCheckData.value = $common.doweightObject(
+        showCheckData.value.concat(e),
+        "id"
+      );
       reply();
     };
 

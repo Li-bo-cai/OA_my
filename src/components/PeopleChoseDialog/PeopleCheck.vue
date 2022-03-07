@@ -52,17 +52,13 @@ export default defineComponent({
       peoples,
       (newVal, oldVal) => {
         checkedPerson.value = $commom.getSameArr(newVal, allPeople.value, "id");
+        const checkedCount = checkedPerson.value.length;
+        checkAll.value = checkedCount === peoples.value.length;
+        isIndeterminate.value =
+          checkedCount > 0 && checkedCount < peoples.value.length;
       },
       { deep: true }
     );
-
-    watch(checkedPerson, (newVal, oldVal) => {
-      const checkedCount = newVal.length;
-      checkAll.value = checkedCount === peoples.value.length;
-      isIndeterminate.value =
-        checkedCount > 0 && checkedCount < peoples.value.length;
-      // console.log("=====>", newVal, checkedCount, isIndeterminate.value);
-    });
 
     // 接收组件传递的people-check
     const peoplecheck = (e: any) => {
