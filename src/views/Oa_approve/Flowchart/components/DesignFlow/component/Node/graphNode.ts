@@ -131,8 +131,8 @@ const graphData = {
       id: 'node1', // String，可选，节点的唯一标识
       x: 40,       // Number，必选，节点位置的 x 值
       y: 40,       // Number，必选，节点位置的 y 值
-      width: 80,   // Number，可选，节点大小的 width 值
-      height: 40,  // Number，可选，节点大小的 height 值
+      width: 120,   // Number，可选，节点大小的 width 值
+      height: 50,  // Number，可选，节点大小的 height 值
       label: 'begin', // String，节点标签
       event: 'none',
       attrs: {

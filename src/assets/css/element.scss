@@ -1,3 +1,4 @@
+@import "./element-variables.scss";
 //表单样式
 .el-form-item {
   font-size: 16px;
@@ -10,7 +11,7 @@
 
 // 输入框样式
 .el-input__inner:hover {
-  border: 1px solid #409eff;
+  border: 1px solid $--color-primary;
 }
 
 input::-webkit-outer-spin-button,
@@ -18,7 +19,7 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
 }
 
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield !important;
 }
 
@@ -57,9 +58,9 @@ input[type='number'] {
 //   border: 0;
 // }
 
-// element 滚动条 
-deep .el-scrollbar__wrap {
-  overflow-x: hidden !important
+// element 滚动条
+::deep .el-scrollbar__wrap {
+  overflow-x: hidden !important;
 }
 
 // dialog圆角修饰
@@ -70,7 +71,7 @@ deep .el-scrollbar__wrap {
 //菜单栏样式
 .el-menu-item,
 .el-sub-menu__title {
-  background: #fff;
+  color: $menuText;
   padding: 0;
   margin: 0 20px;
   border-radius: 4px;
@@ -78,13 +79,11 @@ deep .el-scrollbar__wrap {
 
 .el-menu {
   border-right: none;
-
   .is-active {
-    background: #fff;
-    color: #fff;
+    color: $menuActiveText;
 
     &:not(.el-sub-menu) {
-      background-color: rgb(182, 160, 243);
+      background-color: $menuBg;
     }
   }
 }
@@ -115,10 +114,10 @@ deep .el-scrollbar__wrap {
 
 // 表格样式
 .el-table {
-  border: 1px solid #edeef2;
+  border: 1px solid $--border-color-light;
   border-radius: 8px 8px 0px 0px;
 
-  th>.cell {
+  th > .cell {
     font-weight: 500;
   }
 
@@ -141,16 +140,16 @@ deep .el-scrollbar__wrap {
   color: #646466;
 
   &:hover {
-    color: #5777E7;
+    color: $--color-primary;
   }
 }
 
 .el-tabs__item.is-active {
-  color: #5777E7;
+  color: $--color-primary;
 }
 
 .el-tabs__active-bar {
-  background-color: #5777E7;
+  background-color: $--color-primary;
 }
 
 .el-tab-pane {

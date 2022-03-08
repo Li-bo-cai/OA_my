@@ -4,10 +4,14 @@
       <AsideMenu :Routes="Routes" />
     </el-scrollbar>
     <div class="shrink-btn" v-show="icon_btn" @click="show_shrink_btn">
-      <i title="点击收缩菜单栏" class="el-icon-back"></i>
+      <el-icon title="点击收缩菜单栏">
+        <back />
+      </el-icon>
     </div>
     <div class="pop-btn" v-show="!icon_btn" @click="show_pop_btn">
-      <i title="点击弹出菜单栏" class="el-icon-right"></i>
+      <el-icon title="点击弹出菜单栏">
+        <right />
+      </el-icon>
     </div>
   </div>
 </template>

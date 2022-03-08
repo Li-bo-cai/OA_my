@@ -2,7 +2,7 @@
   <div class="form">
     <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" class="demo-ruleForm" size="" :disabled="disabled" label-position="top">
       <el-form-item label="节点Id" prop="id">
-        <el-input size="mini" v-model="ruleForm.id"></el-input>
+        <el-input size="small" v-model="ruleForm.id"></el-input>
       </el-form-item>
       <el-form-item label="节点类型" prop="type">
         <el-select v-model="ruleForm.type" placeholder="人员默认为审批人">
@@ -11,8 +11,8 @@
           <el-option label="抄送人" :value="3"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item class="basics" label="选择人员方式" prop="type">
-        <el-radio-group v-model="ruleForm.changeOptType">
+      <el-form-item label="选择人员方式" prop="type">
+        <el-radio-group v-model="ruleForm.changeOptType" size="small">
           <el-radio :label="1" v-show="ruleForm.type==1">所有人</el-radio>
           <el-radio :label="2">指定人员</el-radio>
           <el-radio :label="3" v-show="ruleForm.type==2">发起人自选</el-radio>
@@ -21,29 +21,34 @@
           <el-radio :label="6">角色</el-radio>
           <el-radio :label="7" v-show="ruleForm.type==2">发起人自己</el-radio>
         </el-radio-group>
-        <span class="c409eff" v-show="ruleForm.changeOptType==1&&ruleForm.type==1">
-          默认所有人都可发起此审批
-        </span>
-        <span v-show="ruleForm.changeOptType==7" class="cbbb">发起人自己作为审批人进行审批</span>
-        <div>
-          <el-button v-if="ruleForm.changeOptType==2" type="primary" class="el-icon-plus" size="small" round>选择人员</el-button>
-          <el-button v-if="ruleForm.changeOptType==6" type="primary" class="el-icon-plus" size="small" round>选择角色</el-button>
-          <el-select v-show="ruleForm.type==2&&ruleForm.changeOptType==3" v-model="ruleForm.more" placeholder="Select" size="small">
-            <el-option label="自选一个人" :value="1" />
-            <el-option label="自选多个人" :value="2" />
-          </el-select>
-        </div>
+      </el-form-item>
+      <span class="c409eff fs12" v-show="ruleForm.changeOptType==1&&ruleForm.type==1">
+        默认所有人都可发起此审批
+      </span>
+      <span v-show="ruleForm.changeOptType==7" class="cbbb fs12">发起人自己作为审批人进行审批</span>
+      <!-- <el-form-item>
+      </el-form-item> -->
+      <div>
+        <el-button v-show="ruleForm.changeOptType==2" type="primary" :icon="Plus" size="small" round>选择人员</el-button>
+        <el-button v-show="ruleForm.changeOptType==6" type="primary" :icon="Plus" size="small" round>选择角色</el-button>
+        <el-select v-show="ruleForm.type==2&&ruleForm.changeOptType==3" v-model="ruleForm.more" placeholder="Select" size="small">
+          <el-option label="自选一个人" :value="1" />
+          <el-option label="自选多个人" :value="2" />
+        </el-select>
+      </div>
+      <el-form-item class="basics">
         <div class="show-people" v-show="ruleForm.changeOptType==2">
-          <el-tag type="" v-for="(item, index) in peoples" size="mini" :key="index" @close="peoples.splice(index, 1)" closable>
+          <el-tag type="" v-for="(item, index) in peoples" size="small" :key="index" @close="peoples.splice(index, 1)" closable>
             {{item.name}}
           </el-tag>
         </div>
         <div class="show-people" v-show="ruleForm.changeOptType==6">
-          <el-tag type="" v-for="(item, index) in peoples" size="mini" :key="index" @close="peoples.splice(index, 1)" closable>
+          <el-tag type="" v-for="(item, index) in peoples" size="small" :key="index" @close="peoples.splice(index, 1)" closable>
             {{item.name}}
           </el-tag>
         </div>
       </el-form-item>
+
       <el-form-item v-show="ruleForm.type == 2" label="审批期限（为 0 则不生效）">
         <el-select v-model="ruleForm.limit_timeType" size="small">
           <el-option v-for="item in dateOptions" :key="item.value" :label="item.label" :value="item.value">
@@ -85,17 +90,22 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button size="mini" type="primary" @click="changGraphNode(ruleFormRef)">确定</el-button>
+        <el-button size="small" type="primary" @click="changGraphNode(ruleFormRef)">确定</el-button>
       </el-form-item>
     </el-form>
+    <PeopleCloseDialog></PeopleCloseDialog>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
+import { Plus } from "@element-plus/icons-vue";
 import graphForm from "./graphForm";
-import { insiseGraphForm } from "@/store/modules/graph";
+import PeopleCloseDialog from "@/components/PeopleChoseDialog/index.vue";
 export default defineComponent({
+  components: {
+    PeopleCloseDialog,
+  },
   setup() {
     const peoples: any = reactive([{ name: "张三" }]);
 
@@ -112,6 +122,7 @@ export default defineComponent({
 
     return {
       // ruleForm,
+      Plus,
       peoples,
       dateOptions,
       ...graphForm(),
@@ -127,7 +138,8 @@ export default defineComponent({
   border-bottom: 1px solid #ccc;
 }
 .show-people {
-  margin-top: 20px;
-  padding-bottom: 10px;
+  // flex: 1;
+  // margin-top: 20px;
+  // padding-bottom: 10px;
 }
 </style>

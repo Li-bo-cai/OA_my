@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="ItemPanelDialogVisible" width="100%" center :append-to-body="true" :close-on-click-modal="false" :fullscreen="true" :before-close="closeDialod">
+  <el-dialog class="graph-dialog" v-model="ItemPanelDialogVisible" width="100%" center :append-to-body="true" :close-on-click-modal="false" :fullscreen="true" :before-close="closeDialod">
     <template #title>
       <span>流程设计器名称</span>
     </template>
@@ -71,5 +71,9 @@ export default defineComponent({
   .el-tab-pane {
     padding: 0;
   }
+}
+::v-deep .el-overlay-dialog > .el-dialog__footer {
+  padding: 0 !important;
+  // display: none !important;
 }
 </style>

@@ -2,12 +2,12 @@
   <div class="design-flow">
     <el-scrollbar class="design-scroll">
       <div class="design-top-btn">
-        <el-button size="mini" plain icon="el-icon-folder-checked" @click="save_btn">上一步</el-button>
-        <el-button size="mini" plain icon="el-icon-folder-checked" @click="save_btn">下一步</el-button>
-        <el-button size="mini" plain icon="el-icon-folder-checked" @click="save_btn">保存</el-button>
-        <el-button size="mini" plain icon="el-icon-delete" @click="clear_btn">清空</el-button>
-        <el-button size="mini" plain icon="el-icon-rank" @click="regain_btn">实际尺寸</el-button>
-        <el-button size="mini" plain icon="el-icon-picture-outline" @click="submit_btn">下载SVG</el-button>
+        <el-button size="small" plain :icon="ArrowUp" @click="save_btn">上一步</el-button>
+        <el-button size="small" plain :icon="ArrowDown" @click="save_btn">下一步</el-button>
+        <el-button size="small" plain :icon="Checked" @click="save_btn">保存</el-button>
+        <el-button size="small" plain :icon="Delete" @click="clear_btn">清空</el-button>
+        <el-button size="small" plain :icon="Rank" @click="regain_btn">实际尺寸</el-button>
+        <el-button size="small" plain :icon="PictureFilled" @click="submit_btn">下载SVG</el-button>
       </div>
       <div class="design_conter">
         <FlowDesigner />
@@ -18,6 +18,14 @@
 
 <script lang="ts">
 import FlowDesigner from "./FlowDesigner.vue";
+import {
+  ArrowUp,
+  ArrowDown,
+  Checked,
+  Delete,
+  Rank,
+  PictureFilled,
+} from "@element-plus/icons-vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -42,6 +50,12 @@ export default defineComponent({
       console.log(123);
     };
     return {
+      ArrowUp,
+      ArrowDown,
+      Checked,
+      Delete,
+      Rank,
+      PictureFilled,
       save_btn,
       clear_btn,
       regain_btn,

@@ -29,6 +29,7 @@ export const createGraphic = () => {
         graph.value = init()
         dnd.value = dndInit(graph.value)
         graph.value.fromJSON(graphData); //数据被加载
+        graph.value.zoom(-0.3)
         graphFunc(graph.value); //调用方法
     })
 
