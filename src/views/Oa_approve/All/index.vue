@@ -2,7 +2,7 @@
   <div>
     <div class="header">全部</div>
     <el-button type="primary" @click="dialog= true">点击我展开弹窗</el-button>
-    <PeopleChoseDialog :dialog="dialog" @closeDialog="myModealHide"></PeopleChoseDialog>
+    <PeopleChoseDialog :ckStatus="2" :dialog="dialog" @closeDialog="myModealHide"></PeopleChoseDialog>
   </div>
 </template>
 

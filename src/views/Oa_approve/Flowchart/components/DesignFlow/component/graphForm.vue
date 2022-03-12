@@ -28,14 +28,15 @@
       <span v-show="ruleForm.changeOptType==7" class="cbbb fs12">发起人自己作为审批人进行审批</span>
       <!-- <el-form-item>
       </el-form-item> -->
-      <div>
-        <el-button v-show="ruleForm.changeOptType==2" type="primary" :icon="Plus" size="small" round>选择人员</el-button>
-        <el-button v-show="ruleForm.changeOptType==6" type="primary" :icon="Plus" size="small" round>选择角色</el-button>
+      <div class="mb20">
+        <el-button v-show="ruleForm.changeOptType==2" type="primary" :icon="Plus" size="small" round @click="openCmpt(2)">选择人员</el-button>
+        <el-button v-show="ruleForm.changeOptType==6" type="primary" :icon="Plus" size="small" round @click="openCmpt(1)">选择角色</el-button>
         <el-select v-show="ruleForm.type==2&&ruleForm.changeOptType==3" v-model="ruleForm.more" placeholder="Select" size="small">
           <el-option label="自选一个人" :value="1" />
           <el-option label="自选多个人" :value="2" />
         </el-select>
       </div>
+
       <el-form-item class="basics">
         <div class="show-people" v-show="ruleForm.changeOptType==2">
           <el-tag type="" v-for="(item, index) in peoples" size="small" :key="index" @close="peoples.splice(index, 1)" closable>
@@ -93,12 +94,12 @@
         <el-button size="small" type="primary" @click="changGraphNode(ruleFormRef)">确定</el-button>
       </el-form-item>
     </el-form>
-    <PeopleCloseDialog></PeopleCloseDialog>
+    <PeopleCloseDialog :ckStatus="openStatus" :dialog="openComptDialog" @closeDialog="myModealHide"></PeopleCloseDialog>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import { Plus } from "@element-plus/icons-vue";
 import graphForm from "./graphForm";
 import PeopleCloseDialog from "@/components/PeopleChoseDialog/index.vue";
@@ -106,9 +107,8 @@ export default defineComponent({
   components: {
     PeopleCloseDialog,
   },
-  setup() {
-    const peoples: any = reactive([{ name: "张三" }]);
 
+  setup() {
     const dateOptions = [
       {
         label: "天",
@@ -119,13 +119,27 @@ export default defineComponent({
         value: 2,
       },
     ];
+    const peoples: any = reactive([{ name: "张三" }]);
+    const openComptDialog = ref<boolean>(false);
+    const openStatus = ref<number>(0);
+
+    const openCmpt = (val: number) => {
+      openComptDialog.value = true;
+      openStatus.value = val;
+    };
+    const myModealHide = (e: any) => {
+      openComptDialog.value = e;
+    };
 
     return {
-      // ruleForm,
       Plus,
+      openComptDialog,
+      openStatus,
       peoples,
       dateOptions,
       ...graphForm(),
+      openCmpt,
+      myModealHide,
     };
   },
 });

@@ -2,9 +2,9 @@
   <div>
     <el-dialog v-model="dialogVisible" title="人员名单选择器" width="50%" center :before-close="handleClose">
       <div class="people-dialog">
-        <AllDepart :showData="data"></AllDepart>
-        <PeopleCheck v-if="data==2"></PeopleCheck>
-        <CheckedPeople :showData="data"></CheckedPeople>
+        <AllDepart :showData="checkedStatus"></AllDepart>
+        <PeopleCheck v-if="checkedStatus == 2"></PeopleCheck>
+        <CheckedPeople :showData="checkedStatus"></CheckedPeople>
       </div>
       <template #footer>
         <span class="dialog-footer">
@@ -20,7 +20,14 @@
 import AllDepart from "./AllDepart.vue";
 import PeopleCheck from "./PeopleCheck.vue";
 import CheckedPeople from "./CheckedPeople.vue";
-import { defineComponent, onMounted, onUnmounted, ref, toRefs } from "vue";
+import {
+  computed,
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  toRefs,
+} from "vue";
 import mitt from "@/utils/mitt";
 
 export default defineComponent({
@@ -35,6 +42,15 @@ export default defineComponent({
       required: true,
       default: null,
     },
+    ckStatus: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    modelValue: {
+      type: String,
+      default: "",
+    },
   },
   emits: {
     click: null,
@@ -48,19 +64,33 @@ export default defineComponent({
     PeopleCheck,
   },
   setup(props, context) {
-    const { dialog, checked } = toRefs(props);
-    const dialogVisible = dialog;
-    const checkedData = checked;
-    const data = ref<number>(2);
+    const { dialog, checked, ckStatus } = toRefs(props);
+    //组件开关
+    const dialogVisible = ref(
+      computed(() => {
+        return dialog.value;
+      })
+    );
+    //组件传递的数据值
+    const checkedData = computed(() => {
+      return checked.value;
+    });
+    const checkedStatus = ref(
+      computed(() => {
+        return ckStatus.value;
+      })
+    );
     const returnAll = ref<any>([]);
 
     onMounted(() => {
       mitt.on("all-showData", allShowdata);
+      console.log(dialogVisible.value, checkedStatus.value);
     });
 
-    onUnmounted(() => {
+    onBeforeUnmount(() => {
       mitt.off("all-showData", allShowdata);
     });
+
     // 获取第三数据
     const allShowdata = (e: any) => {
       returnAll.value = e;
@@ -71,13 +101,14 @@ export default defineComponent({
       context.emit("closeDialog", false);
     };
 
+    // 确定时抛出数据
     const handleConfirm = () => {
       mitt.on("get-check-data", returnAll);
       handleClose();
     };
 
     return {
-      data,
+      checkedStatus,
       dialogVisible,
       checkedData,
       handleClose,

@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import type Node from 'element-plus/es/components/tree/src/model/node'
 import { ElTree } from "element-plus";
 import mitt from "@/utils/mitt";
@@ -15,7 +15,7 @@ export default (props: any) => {
     onMounted(() => {
         mitt.on('delete-check', deletecheck)
     })
-    onUnmounted(() => {
+    onBeforeUnmount(() => {
         mitt.off('delete-check', deletecheck)
     })
 

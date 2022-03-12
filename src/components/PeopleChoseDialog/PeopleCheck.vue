@@ -14,8 +14,8 @@ import mitt from "@/utils/mitt";
 import $commom from "@/utils/common";
 import {
   defineComponent,
+  onBeforeUnmount,
   onMounted,
-  onUnmounted,
   ref,
   toRefs,
   watch,
@@ -42,7 +42,7 @@ export default defineComponent({
       mitt.on("all-showData", allShowdata);
     });
 
-    onUnmounted(() => {
+    onBeforeUnmount(() => {
       mitt.off("people-check", peoplecheck);
       mitt.off("delete-check-people", deleteCheckPeople);
       mitt.off("all-showData", allShowdata);
