@@ -39,7 +39,7 @@ export default defineComponent({
     };
 
     const Routes = computed(() => {
-      let item: any = usVuex.useState("routesMoudle", "ItemRoutes");
+      let item = usVuex.useState("routesMoudle", "ItemRoutes");
       if (item.meta && item.meta.hasChild) {
         return item.children;
       } else {

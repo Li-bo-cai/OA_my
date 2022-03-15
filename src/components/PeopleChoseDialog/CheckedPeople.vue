@@ -50,7 +50,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { showData, checkedData }: any = toRefs(props);
+    const { showData, checkedData } = toRefs(props);
     const showCheckData: any = ref([]);
     showCheckData.value = checkedData.value;
 

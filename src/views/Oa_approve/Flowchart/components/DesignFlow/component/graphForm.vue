@@ -11,7 +11,7 @@
           <el-option label="抄送人" :value="3"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="选择人员方式" prop="type">
+      <el-form-item label="选择人员方式" prop="type" v-if="ruleForm.type!=0">
         <el-radio-group v-model="ruleForm.changeOptType" size="small">
           <el-radio :label="1" v-show="ruleForm.type==1">所有人</el-radio>
           <el-radio :label="2">指定人员</el-radio>
@@ -94,7 +94,7 @@
         <el-button size="small" type="primary" @click="changGraphNode(ruleFormRef)">确定</el-button>
       </el-form-item>
     </el-form>
-    <PeopleCloseDialog :ckStatus="openStatus" :dialog="openComptDialog" @closeDialog="myModealHide"></PeopleCloseDialog>
+    <PeopleCloseDialog v-model="checedData" :ckStatus="openStatus" v-model:closeDialog="openComptDialog"></PeopleCloseDialog>
   </div>
 </template>
 
@@ -123,23 +123,23 @@ export default defineComponent({
     const openComptDialog = ref<boolean>(false);
     const openStatus = ref<number>(0);
 
+    const checedData = ref([]);
+
+    // 打开选择器弹窗
     const openCmpt = (val: number) => {
       openComptDialog.value = true;
       openStatus.value = val;
     };
-    const myModealHide = (e: any) => {
-      openComptDialog.value = e;
-    };
 
     return {
       Plus,
-      openComptDialog,
+      openComptDialog, //弹窗打开状态
       openStatus,
       peoples,
       dateOptions,
+      checedData, //绑定选好的数据
       ...graphForm(),
       openCmpt,
-      myModealHide,
     };
   },
 });

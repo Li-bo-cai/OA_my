@@ -116,10 +116,7 @@ export const graphFunc = (graph: Graph) => {
     watch(confirmStatus, (newVal: any) => {
         if (newVal) {
             const allGraphData = graph.toJSON()
-            console.log(graph.toJSON());
-
             const nowNode_Id = nowNode.id
-
             allGraphData.cells.forEach((item: any) => {
                 let type = ''
                 if (item.id === nowNode_Id) {

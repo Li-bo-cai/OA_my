@@ -27,6 +27,7 @@ export default defineComponent({
   },
   setup(props, context) {
     const { showData } = toRefs(props);
+
     const param = reactive({
       showData: showData.value,
     });
@@ -43,7 +44,7 @@ export default defineComponent({
       if (showData.value == 1) {
         return "部门选择";
       }
-      return "";
+      return "人员选择";
     });
 
     const defaultProps = {

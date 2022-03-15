@@ -2,9 +2,9 @@
   <div>
     <el-dialog v-model="dialogVisible" title="人员名单选择器" width="50%" center :before-close="handleClose">
       <div class="people-dialog">
-        <AllDepart :showData="checkedStatus"></AllDepart>
-        <PeopleCheck v-if="checkedStatus == 2"></PeopleCheck>
-        <CheckedPeople :showData="checkedStatus"></CheckedPeople>
+        <AllDepart :showData="ckStatus"></AllDepart>
+        <PeopleCheck v-if="ckStatus == 2"></PeopleCheck>
+        <CheckedPeople :showData="ckStatus" :checkedData="modelValue"></CheckedPeople>
       </div>
       <template #footer>
         <span class="dialog-footer">
@@ -32,30 +32,23 @@ import mitt from "@/utils/mitt";
 
 export default defineComponent({
   props: {
-    dialog: {
+    // 弹窗开关状态
+    closeDialog: {
       type: Boolean,
       required: true,
       default: false,
     },
-    checked: {
-      type: Array,
-      required: true,
-      default: null,
-    },
+    // 弹窗显示状态
     ckStatus: {
       type: Number,
       required: true,
       default: 0,
     },
+    // 组件传递的选中的值
     modelValue: {
-      type: String,
-      default: "",
-    },
-  },
-  emits: {
-    click: null,
-    closeDialog: (value: boolean) => {
-      return value;
+      type: Array,
+      require: true,
+      default: () => [],
     },
   },
   components: {
@@ -64,27 +57,26 @@ export default defineComponent({
     PeopleCheck,
   },
   setup(props, context) {
-    const { dialog, checked, ckStatus } = toRefs(props);
+    const { closeDialog, ckStatus } = toRefs(props);
     //组件开关
     const dialogVisible = ref(
       computed(() => {
-        return dialog.value;
+        return closeDialog.value;
       })
     );
-    //组件传递的数据值
-    const checkedData = computed(() => {
-      return checked.value;
-    });
-    const checkedStatus = ref(
-      computed(() => {
-        return ckStatus.value;
-      })
-    );
-    const returnAll = ref<any>([]);
+
+    // // 组件传递的状态值
+    // const checkedStatus = ref(
+    //   computed(() => {
+    //     return ckStatus.value;
+    //   })
+    // );
+
+    // 最终收到结果的消息
+    const returnAll = ref<Array<any>>([]);
 
     onMounted(() => {
       mitt.on("all-showData", allShowdata);
-      console.log(dialogVisible.value, checkedStatus.value);
     });
 
     onBeforeUnmount(() => {
@@ -98,19 +90,19 @@ export default defineComponent({
 
     // 关闭弹窗
     const handleClose = () => {
-      context.emit("closeDialog", false);
+      context.emit("update:closeDialog", false);
     };
 
     // 确定时抛出数据
     const handleConfirm = () => {
-      mitt.on("get-check-data", returnAll);
+      context.emit("update:modelValue", returnAll.value);
       handleClose();
     };
+    name;
 
     return {
-      checkedStatus,
+      // checkedStatus,
       dialogVisible,
-      checkedData,
       handleClose,
       handleConfirm,
     };

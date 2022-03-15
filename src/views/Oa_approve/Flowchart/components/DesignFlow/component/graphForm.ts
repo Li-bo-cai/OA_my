@@ -38,6 +38,9 @@ export default () => {
   };
 
   watch(() => ruleForm.value.type, (newVal, oldVal) => {
+    if(newVal == 0){
+      return
+    }
     newVal != 1 ? ruleForm.value.changeOptType = ref(2) : ruleForm.value.changeOptType = ref(1)
   }, { deep: true })
 

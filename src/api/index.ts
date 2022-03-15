@@ -83,7 +83,6 @@ instance.interceptors.request.use(config => {
 instance.interceptors.response.use(
     response => {
         const { config } = response;
-        const data = response.data
         // 对响应数据做点什么
         if (config.cancelToken) {
             loading.close()
