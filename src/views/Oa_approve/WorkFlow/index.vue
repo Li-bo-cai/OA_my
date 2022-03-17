@@ -22,25 +22,22 @@
         </template>
       </el-table-column>
     </el-table>
-    {{ItemPanelDialogVisible}}
-    <FlowChartDialog v-if="ItemPanelDialogVisible" />
+    <FlowChartDialog v-model:ItemPanelDialogVisible="ItemPanelDialogVisible" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from "vue";
+import { defineComponent, inject, ref } from "vue";
 import { Edit, Setting, Position, View, Delete } from "@element-plus/icons-vue";
 import FlowChartDialog from "@/views/Oa_approve/Flowchart/GraphView.vue";
-import { mapState } from "vuex";
 export default defineComponent({
   components: {
     FlowChartDialog,
   },
-  computed: {
-    ...mapState("oa_approveModule", ["ItemPanelDialogVisible"]),
-  },
   setup() {
     const usVuex: any = inject("usVuex");
+
+    const ItemPanelDialogVisible = ref<boolean>(false);
 
     const tableData = [
       {
@@ -68,7 +65,7 @@ export default defineComponent({
       console.log(123);
     };
     const design_btn = (val: any) => {
-      usVuex.useMutations("oa_approveModule", "SET_ITEMPANEL", true);
+      ItemPanelDialogVisible.value = true;
     };
     const realease_btn = (val: any) => {
       console.log(123);
@@ -86,6 +83,7 @@ export default defineComponent({
       Position,
       View,
       Delete,
+      ItemPanelDialogVisible,
       edit_btn,
       design_btn,
       realease_btn,

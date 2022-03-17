@@ -16,6 +16,7 @@ export default () => {
   const ruleForm = reactive<any>(computed(() => {
     return graphStore.useState('graphModule', 'gForm')
   }));
+  
 
   const rules = reactive({
     id: [{
@@ -29,7 +30,9 @@ export default () => {
     if (!formEl) return
     formEl.validate((valid) => {
       if (valid) {
+        ruleForm.value.hasBeen = true
         graphStore.useMutations('graphModule', 'SET_CF_STATUS', true)
+        graphStore.useMutations('graphModule','SET_GFORM',ruleForm.value)
       } else {
         console.log('error submit!!');
         return false;
@@ -38,11 +41,14 @@ export default () => {
   };
 
   watch(() => ruleForm.value.type, (newVal, oldVal) => {
-    if(newVal == 0){
-      return
+    if (newVal == 0) {
+      return;
     }
-    newVal != 1 ? ruleForm.value.changeOptType = ref(2) : ruleForm.value.changeOptType = ref(1)
-  }, { deep: true })
+    if(!ruleForm.value.hasBeen){
+      ruleForm.value.user.type = newVal
+      newVal == 1 ? ruleForm.value.changeOptType = 1 : ruleForm.value.changeOptType = 2;
+    }
+  });
 
   return {
     rules,

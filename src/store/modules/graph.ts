@@ -6,6 +6,13 @@ interface ICountState {
     [key: string]: any
 }
 
+interface userInfo {
+    type:number,//用户类型  即当前节点类型
+    peoples:Array<any> //选择人员存放位置
+    departs:Array<any> //选择部门存放位置
+    otherInfo:any   //其他储存位置
+}
+
 export interface insiseGraphForm {
     id: string,  //节点id
     type: number, //节点类型 1 2 3 发起人 审批人 抄送人
@@ -17,6 +24,8 @@ export interface insiseGraphForm {
     terminus?: number //审批终点 1最上层主管  2 发起人的第n层级
     terminus_plies?: number //发起人的第n层级
     approverisNull?: number//审批人为空时
+    user?:userInfo //用户信息
+    hasBeen:boolean //用户是否操作改属性
 }
 interface IRootState {
     [key: string]: any
@@ -38,7 +47,14 @@ const graphModule: Module<ICountState, IRootState> = {
                 examineModel: 1,
                 terminus: 1,
                 terminus_plies: 1,
-                approverisNull: 1
+                approverisNull: 1,
+                hasBeen:false,
+                user:{
+                    type:1,
+                    peoples:[],
+                    departs:[],
+                    otherInfo:''
+                }
             }
         }
     },

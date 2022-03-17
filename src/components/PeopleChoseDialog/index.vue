@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog v-model="dialogVisible" title="人员名单选择器" width="50%" center :before-close="handleClose">
+    <el-dialog :model-value="dialogVisible" title="人员名单选择器" width="50%" center :before-close="handleClose">
       <div class="people-dialog">
         <AllDepart :showData="ckStatus"></AllDepart>
         <PeopleCheck v-if="ckStatus == 2"></PeopleCheck>
@@ -21,7 +21,6 @@ import AllDepart from "./AllDepart.vue";
 import PeopleCheck from "./PeopleCheck.vue";
 import CheckedPeople from "./CheckedPeople.vue";
 import {
-  computed,
   defineComponent,
   onBeforeUnmount,
   onMounted,
@@ -33,7 +32,7 @@ import mitt from "@/utils/mitt";
 export default defineComponent({
   props: {
     // 弹窗开关状态
-    closeDialog: {
+    dialogVisible: {
       type: Boolean,
       required: true,
       default: false,
@@ -57,20 +56,7 @@ export default defineComponent({
     PeopleCheck,
   },
   setup(props, context) {
-    const { closeDialog, ckStatus } = toRefs(props);
-    //组件开关
-    const dialogVisible = ref(
-      computed(() => {
-        return closeDialog.value;
-      })
-    );
-
-    // // 组件传递的状态值
-    // const checkedStatus = ref(
-    //   computed(() => {
-    //     return ckStatus.value;
-    //   })
-    // );
+    // const { dialogVisible, ckStatus } = toRefs(props);
 
     // 最终收到结果的消息
     const returnAll = ref<Array<any>>([]);
@@ -90,7 +76,7 @@ export default defineComponent({
 
     // 关闭弹窗
     const handleClose = () => {
-      context.emit("update:closeDialog", false);
+      context.emit("update:dialogVisible", false);
     };
 
     // 确定时抛出数据
@@ -101,8 +87,7 @@ export default defineComponent({
     name;
 
     return {
-      // checkedStatus,
-      dialogVisible,
+      // dialogVisible,
       handleClose,
       handleConfirm,
     };

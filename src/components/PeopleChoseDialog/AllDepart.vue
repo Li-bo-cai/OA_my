@@ -7,7 +7,7 @@
           <div class="title">{{chose_status}}</div>
         </div>
         <div class="check-content">
-          <el-tree ref="depart_tree" :data="organizaData" :show-checkbox="showData==1" node-key="id" :props="defaultProps" default-expanded-keys="1" :accordion="true" @check="handleCheckedNodes" @node-click="handleNodeClick" />
+          <el-tree ref="depart_tree" :data="organizaData" :show-checkbox="showData==1" node-key="id" :props="defaultProps" :default-expanded-keys="[1]" :accordion="true" @check="handleCheckedNodes" @node-click="handleNodeClick" />
         </div>
       </div>
     </el-scrollbar>

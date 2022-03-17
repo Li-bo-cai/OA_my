@@ -159,6 +159,21 @@ li {
     display: flex;
     flex-direction: column;
 }
+.df-jcsb-ac {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.df-jcsc-ac {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.df-jcsa-ac {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 .cursor {
     cursor: pointer;
 }

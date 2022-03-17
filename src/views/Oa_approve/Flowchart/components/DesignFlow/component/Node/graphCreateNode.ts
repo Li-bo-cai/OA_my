@@ -32,7 +32,14 @@ const createNode = (graph: any) => {
                 examineModel: 1,
                 terminus: 1,
                 terminus_plies: 1,
-                approverisNull: 1
+                approverisNull: 1,
+                hasBeen:false,
+                user:{
+                    type:1,
+                    peoples:[],
+                    departs:[],
+                    otherInfo:''
+                }
             },
             body: {
                 fill: '#F39C12',

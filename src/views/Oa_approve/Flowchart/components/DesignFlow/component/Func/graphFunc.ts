@@ -70,7 +70,6 @@ export const graphFunc = (graph: Graph) => {
     }
 
 
-
     // 节点点击事件
     function nodeClick({ node }: any) {
         reset()
@@ -79,14 +78,14 @@ export const graphFunc = (graph: Graph) => {
         const data = node.store.data
         const type = data.attrs.other.type
         const gForm: insiseGraphForm = Object.assign({ id: data.id, }, data.attrs.other)
-
-        graphStore.useMutations('graphModule', 'SET_GFORM', gForm)
         if (type == 0) {
             graphStore.useMutations('graphModule', 'SET_DISABLED', true)
             return
         } else if (type == 4) {
             graphStore.useMutations('graphModule', 'SET_DISABLED', true)
+            return
         }
+        graphStore.useMutations('graphModule', 'SET_GFORM', gForm)
         node.addTools(tools)
         graphStore.useMutations('graphModule', 'SET_DISABLED', false)
         // 将点击后的node属性传递到外面
@@ -117,9 +116,11 @@ export const graphFunc = (graph: Graph) => {
         if (newVal) {
             const allGraphData = graph.toJSON()
             const nowNode_Id = nowNode.id
+            const getForm = graphStore.useState('graphModule','gForm')
             allGraphData.cells.forEach((item: any) => {
                 let type = ''
                 if (item.id === nowNode_Id) {
+                    item.attrs.other = getForm
                     switch (gTypeFile.value.type) {
                         case 1:
                             type = '发起人'
@@ -131,25 +132,24 @@ export const graphFunc = (graph: Graph) => {
                             type = '抄送人'
                             break
                     }
-                    switch (gTypeFile.value.changeOptType) {
-                        case 1:
-                            item.attrs.label.text = type + '\n' + '所有人'
-                            break;
-                        case 2:
-                            item.attrs.label.text = type + '\n' + '张三'
-                            break;
-                        case 3:
-                            item.attrs.label.text = type + '\n' + (gTypeFile.value.more == 1 ? '发起人自选(一人)' : '发起人自选(多人)')
-                            break;
-                        case 4:
-                            item.attrs.label.text = type + '\n' + '连续多级主管(全部)'
-                            break;
-                        case 5:
-                            item.attrs.label.text = type + '\n' + (gTypeFile.value.limit_time == 1 ? '发起人的直接主管' : `发起人的第 ${gTypeFile.value.limit_time} 级主管`)
-                            break;
-                        case 6:
-                            item.attrs.label.text = type + '\n' + "角色-人才"
-                            break;
+                    if (gTypeFile.value.changeOptType == 1) {
+                        item.attrs.label.text = type + '\n' + '所有人'
+                    }
+                    if (gTypeFile.value.changeOptType == 2) {
+                        const number =item.attrs.other.user.peoples.length;
+                        item.attrs.label.text = type + '\n' + '已指定'+ number + '人'
+                    }
+                    if(gTypeFile.value.changeOptType == 3){
+                        item.attrs.label.text = type + '\n' + (gTypeFile.value.more == 1 ? '发起人自选(一人)' : '发起人自选(多人)')
+                    }
+                    if(gTypeFile.value.changeOptType == 4){
+                        item.attrs.label.text = type + '\n' + '连续多级主管(全部)'
+                    }
+                    if(gTypeFile.value.changeOptType == 5){
+                        item.attrs.label.text = type + '\n' + (gTypeFile.value.limit_time == 1 ? '发起人的直接主管' : `发起人的第 ${gTypeFile.value.limit_time} 级主管`)
+                    }
+                    if(gTypeFile.value.changeOptType == 6){
+                        item.attrs.label.text = type + '\n' + "角色-人才"
                     }
                     item.attrs.label.type = gTypeFile.value.type
                 }

@@ -8,7 +8,7 @@ import { department_com_show2, staff_check2, insideCheck } from "@/api/organizat
 export default (props: any) => {
     type ElTreeType = InstanceType<typeof ElTree>;
     const search_people = ref<string>('')  //搜索人员
-    const organizaData = ref('');
+    const organizaData = ref([]);
     const depart_tree = ref<ElTreeType>()   //tree节点
     const checkedTree = ref<any>([])  //被选中的树节点
 

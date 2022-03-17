@@ -2,7 +2,7 @@
   <div>
     <div class="header">全部</div>
     <el-button type="primary" @click="dialog= true">点击我展开弹窗</el-button>
-    <PeopleChoseDialog v-model:closeDialog="dialog" :ckStatus="2"></PeopleChoseDialog>
+    <PeopleChoseDialog v-model:dialogVisible="dialog" :ckStatus="2"></PeopleChoseDialog>
     <Demo v-model="title" v-model:name="name"></Demo>
     {{name}}
   </div>

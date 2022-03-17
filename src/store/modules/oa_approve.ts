@@ -1,7 +1,7 @@
 import { Module } from "vuex";
 
 interface ICountState {
-    ItemPanelDialogVisible: boolean
+    // ItemPanelDialogVisible: boolean
     [key: string]: any
 }
 interface IRootState {
@@ -12,7 +12,7 @@ const oa_approveModule: Module<ICountState, IRootState> = {
     namespaced: true,
     state() {
         return {
-            ItemPanelDialogVisible: false,
+            // ItemPanelDialogVisible: false,
         }
     },
     getters: {

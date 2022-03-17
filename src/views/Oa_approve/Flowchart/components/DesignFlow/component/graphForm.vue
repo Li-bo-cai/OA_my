@@ -29,24 +29,26 @@
       <!-- <el-form-item>
       </el-form-item> -->
       <div class="mb20">
-        <el-button v-show="ruleForm.changeOptType==2" type="primary" :icon="Plus" size="small" round @click="openCmpt(2)">选择人员</el-button>
-        <el-button v-show="ruleForm.changeOptType==6" type="primary" :icon="Plus" size="small" round @click="openCmpt(1)">选择角色</el-button>
-        <el-select v-show="ruleForm.type==2&&ruleForm.changeOptType==3" v-model="ruleForm.more" placeholder="Select" size="small">
+        <el-button v-if="ruleForm.changeOptType==2" type="primary" :icon="Plus" size="small" round @click="openCmpt(2)">选择人员</el-button>
+        <el-button v-if="ruleForm.changeOptType==6" type="primary" :icon="Plus" size="small" round @click="openCmpt(1)">选择角色</el-button>
+        <el-select v-if="ruleForm.type==2&&ruleForm.changeOptType==3" v-model="ruleForm.more" placeholder="Select" size="small">
           <el-option label="自选一个人" :value="1" />
           <el-option label="自选多个人" :value="2" />
         </el-select>
       </div>
 
       <el-form-item class="basics">
-        <div class="show-people" v-show="ruleForm.changeOptType==2">
-          <el-tag type="" v-for="(item, index) in peoples" size="small" :key="index" @close="peoples.splice(index, 1)" closable>
+        <div class="show-people" v-show="ruleForm.changeOptType==2&&ruleForm.type!=0">
+          <el-tag type="" v-for="(item, index) in ruleForm.user.peoples" size="small" :key="index" @close="remove(ruleForm.user.peoples,index)" closable>
             {{item.name}}
           </el-tag>
+          <el-button v-show="ruleForm.user.peoples.length>2" size="small" type="text" @click="ruleForm.user.peoples = []">清除全部</el-button>
         </div>
         <div class="show-people" v-show="ruleForm.changeOptType==6">
-          <el-tag type="" v-for="(item, index) in peoples" size="small" :key="index" @close="peoples.splice(index, 1)" closable>
-            {{item.name}}
+          <el-tag type="" v-for="(item, index) in ruleForm.user.departs" size="small" :key="index" @close="remove(ruleForm.user.departs,index)" closable>
+            {{item.depart_name}}
           </el-tag>
+          <el-button v-show="ruleForm.user.departs.length>2" size="small" type="text" @click="ruleForm.user.departs = []">清除全部</el-button>
         </div>
       </el-form-item>
 
@@ -65,7 +67,7 @@
         <span>级主管</span>
         <div class="ftsm c409eff">直接主管为 第 1 级主管</div>
       </el-form-item>
-      <el-form-item label="多人审批时审批方式" v-show="ruleForm.more==2||peoples.length>=2">
+      <el-form-item label="多人审批时审批方式" v-show="(ruleForm.more==2||checedData.length>=2)&&ruleForm.type==2">
         <el-radio-group v-model="ruleForm.examineModel">
           <el-radio :label="1">按选择顺序依次审批</el-radio>
           <el-radio :label="2">会签（可同时审批，每个人必须同意）</el-radio>
@@ -94,18 +96,18 @@
         <el-button size="small" type="primary" @click="changGraphNode(ruleFormRef)">确定</el-button>
       </el-form-item>
     </el-form>
-    <PeopleCloseDialog v-model="checedData" :ckStatus="openStatus" v-model:closeDialog="openComptDialog"></PeopleCloseDialog>
+    <PeopledialogVisible v-model="checedData" :ckStatus="openStatus" v-model:dialogVisible="openComptDialog"></PeopledialogVisible>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, reactive, ref, watch } from "vue";
 import { Plus } from "@element-plus/icons-vue";
 import graphForm from "./graphForm";
-import PeopleCloseDialog from "@/components/PeopleChoseDialog/index.vue";
+import PeopledialogVisible from "@/components/PeopleChoseDialog/index.vue";
 export default defineComponent({
   components: {
-    PeopleCloseDialog,
+    PeopledialogVisible,
   },
 
   setup() {
@@ -119,27 +121,51 @@ export default defineComponent({
         value: 2,
       },
     ];
-    const peoples: any = reactive([{ name: "张三" }]);
-    const openComptDialog = ref<boolean>(false);
-    const openStatus = ref<number>(0);
 
     const checedData = ref([]);
+    const openStatus = ref<number>(0);
+    const openComptDialog = ref<boolean>(false);
+    const { rules, ruleForm, ruleFormRef, disabled, changGraphNode } =
+      graphForm();
 
     // 打开选择器弹窗
     const openCmpt = (val: number) => {
       openComptDialog.value = true;
       openStatus.value = val;
+      if (val == 1) {
+        checedData.value = ruleForm.value.user.departs;
+      }
+      if (val == 2) {
+        checedData.value = ruleForm.value.user.peoples;
+      }
+    };
+
+    watch(checedData, (newVal) => {
+      if (openStatus.value == 1) {
+        ruleForm.value.user.departs = newVal;
+      }
+      if (openStatus.value == 2) {
+        ruleForm.value.user.peoples = newVal;
+      }
+    });
+
+    const remove = (val: Array<any>, idx: number) => {
+      val.splice(idx, 1);
     };
 
     return {
       Plus,
       openComptDialog, //弹窗打开状态
       openStatus,
-      peoples,
       dateOptions,
+      rules,
       checedData, //绑定选好的数据
-      ...graphForm(),
       openCmpt,
+      ruleForm,
+      ruleFormRef,
+      disabled,
+      changGraphNode,
+      remove,
     };
   },
 });
@@ -152,8 +178,8 @@ export default defineComponent({
   border-bottom: 1px solid #ccc;
 }
 .show-people {
-  // flex: 1;
-  // margin-top: 20px;
-  // padding-bottom: 10px;
+  .el-tag {
+    margin-right: 10px;
+  }
 }
 </style>

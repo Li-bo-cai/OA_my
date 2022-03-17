@@ -86,8 +86,8 @@ export default defineComponent({
             );
           });
         }
-        reply();
       }
+      reply();
     };
 
     // 监听change-check-group事件传递的数组

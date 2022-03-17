@@ -71,7 +71,6 @@ export default defineComponent({
     };
     // 改变页数
     const handleCurrentChange = (num: number) => {
-      debugger;
       usVuex.useMutations("attendceModule", "SET_PAGE", num);
       usVuex.useActions("attendceModule", "GET_STAFF_CHECK");
     };

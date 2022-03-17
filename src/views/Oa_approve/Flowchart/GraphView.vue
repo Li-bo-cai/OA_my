@@ -1,5 +1,5 @@
 <template>
-  <el-dialog class="graph-dialog" v-model="ItemPanelDialogVisible" width="100%" center :append-to-body="true" :close-on-click-modal="false" :fullscreen="true" :before-close="closeDialod">
+  <el-dialog class="graph-dialog" :model-value="ItemPanelDialogVisible" width="100%" center :append-to-body="true" :close-on-click-modal="false" :fullscreen="true" :before-close="closeDialod">
     <template #title>
       <span>流程设计器名称</span>
     </template>
@@ -17,32 +17,27 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  inject,
-  nextTick,
-  onBeforeUnmount,
-  ref,
-} from "vue";
+import { defineComponent, inject, nextTick, onBeforeUnmount, ref } from "vue";
 import DesignFlow from "./components/DesignFlow/index.vue";
 export default defineComponent({
   components: {
     DesignFlow,
   },
-  setup() {
+  props: {
+    ItemPanelDialogVisible: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+  },
+  setup(props, context) {
     const usVuex: any = inject("usVuex");
 
     const activeName = ref<string>("design_flow");
-    const ItemPanelDialogVisible = ref(
-      computed(() => {
-        return usVuex.useState("oa_approveModule", "ItemPanelDialogVisible");
-      })
-    );
     // 关闭弹出框
     const closeDialod = () => {
       // 如果弹窗关闭,清空graphmodel中的值
-      usVuex.useMutations("oa_approveModule", "SET_ITEMPANEL", false);
+      context.emit("update:ItemPanelDialogVisible", false);
       usVuex.useMutations("graphModule", "SET_ALL_DATA_CLEAR", "");
     };
 
@@ -53,7 +48,7 @@ export default defineComponent({
       // console.log("被销毁了");
     });
     return {
-      ItemPanelDialogVisible,
+      // ItemPanelDialogVisible,
       activeName,
       closeDialod,
     };
