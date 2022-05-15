@@ -13,10 +13,10 @@ export default () => {
     return graphStore.useState('graphModule', 'disabled')
   }))
 
-  const ruleForm = reactive<any>(computed(() => {
+  const ruleForm = ref<any>(computed(() => {
     return graphStore.useState('graphModule', 'gForm')
   }));
-  
+
 
   const rules = reactive({
     id: [{
@@ -32,7 +32,7 @@ export default () => {
       if (valid) {
         ruleForm.value.hasBeen = true
         graphStore.useMutations('graphModule', 'SET_CF_STATUS', true)
-        graphStore.useMutations('graphModule','SET_GFORM',ruleForm.value)
+        graphStore.useMutations('graphModule', 'SET_GFORM', ruleForm.value)
       } else {
         console.log('error submit!!');
         return false;
@@ -44,7 +44,7 @@ export default () => {
     if (newVal == 0) {
       return;
     }
-    if(!ruleForm.value.hasBeen){
+    if (!ruleForm.value.hasBeen) {
       ruleForm.value.user.type = newVal
       newVal == 1 ? ruleForm.value.changeOptType = 1 : ruleForm.value.changeOptType = 2;
     }

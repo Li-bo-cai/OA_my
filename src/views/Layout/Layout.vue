@@ -57,7 +57,7 @@ export default defineComponent({
   .menu_scroll {
     height: calc(100vh - 50px);
     #outBox {
-      min-width: 1000px;
+      // min-width: 1000px;
       // height: calc(100vh - 60px);
       padding: 30px;
     }

@@ -1,9 +1,10 @@
 <template>
   <div>
-    <el-dialog :model-value="dialogVisible" title="人员名单选择器" width="50%" center :before-close="handleClose">
+    <el-dialog :model-value="dialogVisible" title="人员名单选择器" width="50%" center :destroy-on-close="true"
+      :before-close="handleClose">
       <div class="people-dialog">
-        <AllDepart :showData="ckStatus"></AllDepart>
-        <PeopleCheck v-if="ckStatus == 2"></PeopleCheck>
+        <AllDepart :showData="ckStatus" :checkedData="modelValue"></AllDepart>
+        <PeopleCheck v-if="ckStatus == 2" :checkedData="modelValue"></PeopleCheck>
         <CheckedPeople :showData="ckStatus" :checkedData="modelValue"></CheckedPeople>
       </div>
       <template #footer>
@@ -56,10 +57,10 @@ export default defineComponent({
     PeopleCheck,
   },
   setup(props, context) {
-    // const { dialogVisible, ckStatus } = toRefs(props);
 
     // 最终收到结果的消息
     const returnAll = ref<Array<any>>([]);
+
 
     onMounted(() => {
       mitt.on("all-showData", allShowdata);
@@ -84,7 +85,6 @@ export default defineComponent({
       context.emit("update:modelValue", returnAll.value);
       handleClose();
     };
-    name;
 
     return {
       // dialogVisible,

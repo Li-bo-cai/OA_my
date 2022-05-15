@@ -19,16 +19,45 @@
 </template>
 
 <script lang="ts">
-import { createGraphic } from "./graphHooks";
-import { defineComponent, onBeforeUnmount } from "vue";
+import GraphX6 from "@/utils/graph";
+import graphData from "./Node/graphNode";
+import { graphFunc } from "./Func/graphFunc";
+import createNode from "./Node/graphCreateNode";
+import { defineComponent, nextTick, onBeforeUnmount, ref } from "vue";
 
 export default defineComponent({
   setup() {
+    const graphCmpt = ref()
+
+    nextTick(() => {
+      graphCmpt.value = new GraphX6('#container', '.map')
+      graphCmpt.value.graph.fromJSON(graphData); //数据被加载
+      graphCmpt.value.graph.zoom(-0.3)
+      graphFunc(graphCmpt.value.graph); //调用方法
+    })
+
+    const startDrag = (e: any) => {
+      let { nodeRect, nodeTerm, nodeCircle } = createNode(graphCmpt.value.graph);
+      let target = e.currentTarget;
+      let type = target.getAttribute("data-type");
+      let node: any;
+
+      if (type == "rect") {
+        node = nodeRect;
+      } else if (type == "copy") {
+        node = nodeTerm;
+      } else if (type == "circle") {
+        node = nodeCircle;
+      }
+      graphCmpt.value.dnd.start(node, e);
+    };
+
     onBeforeUnmount(() => {
-      // console.log("被销毁了");
+      graphCmpt.value.graph.dispose(); //画布被销毁
     });
+
     return {
-      ...createGraphic(),
+      startDrag
     };
   },
 });
@@ -43,6 +72,7 @@ export default defineComponent({
   display: flex;
   position: relative;
 }
+
 #container {
   flex: 1;
   height: calc(100vh - 235px);
@@ -50,12 +80,14 @@ export default defineComponent({
   margin-right: 8px;
   box-shadow: 0 0 10px 1px #e9e9e9;
 }
+
 .map {
   position: absolute;
   right: 10px;
   bottom: 0;
   z-index: 9;
 }
+
 .validating {
   position: relative;
 }
@@ -103,6 +135,7 @@ export default defineComponent({
   overflow: hidden;
   margin: 16px;
   cursor: move;
+
   span {
     display: inline-block;
     position: absolute;
@@ -127,6 +160,7 @@ export default defineComponent({
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

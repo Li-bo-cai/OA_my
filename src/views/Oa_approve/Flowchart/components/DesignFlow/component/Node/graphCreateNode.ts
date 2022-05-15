@@ -23,7 +23,7 @@ const createNode = (graph: any) => {
                 text: "人员选择",
                 fill: '#333',
             },
-            other:{
+            other: {
                 type: 1,
                 changeOptType: 1,
                 limit_timeType: 1,
@@ -33,12 +33,12 @@ const createNode = (graph: any) => {
                 terminus: 1,
                 terminus_plies: 1,
                 approverisNull: 1,
-                hasBeen:false,
-                user:{
-                    type:1,
-                    peoples:[],
-                    departs:[],
-                    otherInfo:''
+                hasBeen: false,
+                user: {
+                    type: 1,
+                    peoples: [],
+                    departs: [],
+                    otherInfo: ''
                 }
             },
             body: {
@@ -56,14 +56,13 @@ const createNode = (graph: any) => {
         }
     })
 
-    const nodeCopy = graph.createNode({
-        width: 80,
+    const nodeTerm = graph.createNode({
+        width: 90,
         height: 60,
         attrs: {
             label: {
                 text: "条件分支",
                 fill: '#333',
-                type: 4,
             },
             body: {
                 fill: '#F39C12',
@@ -71,6 +70,9 @@ const createNode = (graph: any) => {
                 strokeWidth: 2,
                 refPoints: '0,10 10,0 20,10 10,20',
             },
+            other: {
+                type: 4,
+            }
         },
         shape: 'custom-polygon',
         ports: {
@@ -100,36 +102,37 @@ const createNode = (graph: any) => {
         },
     })
 
-    // nodeCircle = graph.createNode({
-    //     width: 60,
-    //     height: 60,
-    //     attrs:{
-    //         body: {
-    //             rx: 60,
-    //             ry: 60,
-    //         },
-    //     },
-    //     shape: "html",
-    //     html: () => {
-    //         const wrap = document.createElement("div");
-    //         wrap.style.width = "58px";
-    //         wrap.style.height = "58px";
-    //         wrap.style.display = "flex";
-    //         wrap.style.alignItems = "center";
-    //         wrap.style.justifyContent = "center";
-    //         wrap.style.border = "1px solid rgb(49, 208, 198)";
-    //         wrap.style.background = "#fff";
-    //         wrap.style.borderRadius = "50%";
-    //         wrap.innerText = "Circle";
-    //         return wrap;
-    //     },
-    // });
-
     return {
         nodeRect,
-        nodeCopy,
+        nodeTerm,
         nodeCircle,
     }
 }
 
 export default createNode
+
+
+// nodeCircle = graph.createNode({
+//     width: 60,
+//     height: 60,
+//     attrs:{
+//         body: {
+//             rx: 60,
+//             ry: 60,
+//         },
+//     },
+//     shape: "html",
+//     html: () => {
+//         const wrap = document.createElement("div");
+//         wrap.style.width = "58px";
+//         wrap.style.height = "58px";
+//         wrap.style.display = "flex";
+//         wrap.style.alignItems = "center";
+//         wrap.style.justifyContent = "center";
+//         wrap.style.border = "1px solid rgb(49, 208, 198)";
+//         wrap.style.background = "#fff";
+//         wrap.style.borderRadius = "50%";
+//         wrap.innerText = "Circle";
+//         return wrap;
+//     },
+// });

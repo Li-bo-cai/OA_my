@@ -1,9 +1,11 @@
 <template>
   <div class="all-people-check">
     <el-scrollbar>
-      <el-checkbox v-if="peoples.length!=0" v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">全选</el-checkbox>
-      <el-checkbox-group v-if="peoples" v-model="checkedPerson" @change="handleCheckedPersonChange">
-        <el-checkbox v-for="item in peoples" :key="item.id" :label="item" @change="trychange(item,$event)">{{item.name}}</el-checkbox>
+      <el-checkbox v-if="peoples.length != 0" v-model="checkAll" :indeterminate="isIndeterminate"
+        @change="handleCheckAllChange">全选</el-checkbox>
+      <el-checkbox-group v-model="checkedPerson" @change="handleCheckedPersonChange">
+        <el-checkbox v-for="(item, index) in peoples" :key="index" :label="item" @change="trychange(item, $event)">
+          {{ item && item.name }}</el-checkbox>
       </el-checkbox-group>
     </el-scrollbar>
   </div>
@@ -32,7 +34,7 @@ export default defineComponent({
     const checkAll = ref(false); //当前多选框是否全选
     const isIndeterminate = ref(false); //多选框状态
     const checkedPerson = ref<any>([]); //选中的数据
-    let peoples = ref([]); //接口返回可选择人数
+    let peoples = ref<any>([]); //接口返回可选择人数
     const allPeople = ref<any>([]);
     allPeople.value = checkedData.value;
 
@@ -50,7 +52,7 @@ export default defineComponent({
 
     watch(
       peoples,
-      (newVal, oldVal) => {
+      (newVal: [], oldVal) => {
         checkedPerson.value = $commom.getSameArr(newVal, allPeople.value, "id");
         const checkedCount = checkedPerson.value.length;
         checkAll.value = checkedCount === peoples.value.length;
