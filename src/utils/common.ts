@@ -14,13 +14,13 @@ class CommonFunc {
      * @param oArray 去重对象数组
      * @returns Array
      */
-    doweightObject(oArray: Array<any>,attr:string): Array<any>{
-        const obj:any = {};
+    doweightObject(oArray: Array<any>, attr: string): Array<any> {
+        const obj: any = {};
         let newArr = [];
-        newArr = oArray.reduce((cur,next) => {
+        newArr = oArray.reduce((cur, next) => {
             obj[next[attr]] ? "" : obj[next[attr]] = true && cur.push(next);
             return cur;
-        },[])
+        }, [])
         return newArr
     }
 
@@ -39,6 +39,14 @@ class CommonFunc {
         })
         return newArr
     }
+
+    /**
+     * 获取两个数组相同的数据
+     * @param oArray 
+     * @param tArray 
+     * @param attr 
+     * @returns 
+     */
 
     getSameArr(oArray: Array<any>, tArray: Array<any>, attr: string): Array<any> {
         const tempArray: any[] = [];//临时数组
