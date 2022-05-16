@@ -57,8 +57,8 @@ const createNode = (graph: any) => {
     })
 
     const nodeTerm = graph.createNode({
-        width: 90,
-        height: 60,
+        width: 120,
+        height: 80,
         attrs: {
             label: {
                 text: "条件分支",
