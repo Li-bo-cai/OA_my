@@ -1,3 +1,4 @@
+@import "./element-variables.scss";
 HTML,
 body,
 div,
@@ -178,6 +179,9 @@ li {
     justify-content: space-around;
     align-items: center;
 }
-.cursor {
+.pointer {
     cursor: pointer;
+    &:hover{
+        color: $--color-primary;
+    }
 }
