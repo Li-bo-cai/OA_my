@@ -1,42 +1,56 @@
 <template>
   <div>
-    <div class="header">全部</div>
-    <el-button type="primary" @click="dialog= true">点击我展开弹窗</el-button>
-    <PeopleChoseDialog v-model:dialogVisible="dialog" :ckStatus="2"></PeopleChoseDialog>
-    <Demo v-model="title" v-model:name="name"></Demo>
-    {{name}}
+    <FormProvider :form="form">
+      <SchemaField :schema="schema"></SchemaField>
+    </FormProvider>
   </div>
 </template>
 
 <script lang="ts">
-import PeopleChoseDialog from "@/components/PeopleChoseDialog/index.vue";
-import Demo from "./Demo.vue";
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
+import { createForm } from "@formily/core";
+import { createSchemaField, FormProvider } from "@formily/vue";
+import { FormItem, Input } from "@formily/element-plus";
 
 export default defineComponent({
   components: {
-    PeopleChoseDialog,
-    Demo,
+    FormProvider,
+    // SchemaField
   },
   setup() {
-    const dialog = ref<boolean>(false);
-    const title = ref([1, 2, 3, 4, 5]);
-    const name = ref("你好世界");
-    const getEmit = (e: any) => {
-      console.log(e);
+    const form = createForm();
+    const { SchemaField } = createSchemaField({
+      components: {
+        FormItem,
+        Input,
+      },
+    });
+    const schema = {
+      type: "object",
+      properties: {
+        input: {
+          type: "string",
+          title: "输入框",
+          "x-decorator": "FormItem",
+          "x-component": "Input",
+        },
+        textarea: {
+          type: "string",
+          title: "文本框",
+          "x-decorator": "FormItem",
+          "x-component": "Input.TextArea",
+        },
+      },
     };
+
     return {
-      dialog,
-      title,
-      name,
-      getEmit,
+      SchemaField,
+      form,
+      schema,
     };
   },
 });
 </script>
 
-<style scoped lange="scss">
-.header {
-  margin-bottom: 20px;
-}
+<style scoped>
 </style>

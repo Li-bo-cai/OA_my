@@ -6,7 +6,7 @@
         <el-input size="small" v-model="ruleForm.id"></el-input>
       </el-form-item>
       <el-form-item label="节点类型" prop="type">
-        <el-select v-model="ruleForm.type" placeholder="人员默认为审批人">
+        <el-select size="small" v-model="ruleForm.type" placeholder="人员默认为审批人">
           <el-option label="发起人" :value="1"></el-option>
           <el-option label="审批人" :value="2"></el-option>
           <el-option label="抄送人" :value="3"></el-option>
@@ -42,13 +42,13 @@
           <el-tag type="" v-for="(item, index) in ruleForm.user.peoples" size="small" :key="index" @close="remove(ruleForm.user.peoples, index)" closable>
             {{ item.name }}
           </el-tag>
-          <el-button v-show="ruleForm.user.peoples.length > 2" size="small" type="text" @click="ruleForm.user.peoples = []">清除全部</el-button>
+          <el-button v-show="ruleForm.user.peoples.length > 2" size="small" text type="primary" @click="ruleForm.user.peoples = []">清除全部</el-button>
         </div>
         <div class="show-people" v-show="ruleForm.changeOptType == 6">
           <el-tag type="" v-for="(item, index) in ruleForm.user.departs" size="small" :key="index" @close="remove(ruleForm.user.departs, index)" closable>
             {{ item.depart_name }}
           </el-tag>
-          <el-button v-show="ruleForm.user.departs.length > 2" size="small" type="text" @click="ruleForm.user.departs = []">清除全部</el-button>
+          <el-button v-show="ruleForm.user.departs.length > 2" size="small" text type="primary" @click="ruleForm.user.departs = []">清除全部</el-button>
         </div>
       </el-form-item>
 

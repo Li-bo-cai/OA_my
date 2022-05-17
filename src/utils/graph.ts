@@ -9,8 +9,6 @@ export default class GraphX6 {
     dnd: Dnd | undefined;
     constructor(selecter: string, map: string) {
         this.container = document.querySelector(selecter)
-        console.log(this.container);
-        
         this.map = document.querySelector(map)
         this.graph
         this.dnd

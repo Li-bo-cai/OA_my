@@ -1,39 +1,52 @@
 <template>
   <div>
-    <div>子组件{{modelValue}}</div>
-    <div>子组件{{name}}</div>
-    <button @click='handleEdit'>点击我是v-model传值</button>
-    <button @click='handleEmit'>点击我是emit传值</button>
+    <FormProvider :form="form">
+      <SchemaField :schema="schema"></SchemaField>
+    </FormProvider>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
+import { createForm } from "@formily/core";
+import { createSchemaField, FormProvider } from "@formily/vue";
+import { FormItem, Input } from "@formily/element-plus";
 
 export default defineComponent({
-  props: {
-    name: {
-      type: String,
-      required: true,
-      default: "",
-    },
-    modelValue: {
-      type: Array,
-      default: null,
-    },
+  components: {
+    FormProvider,
+    // SchemaField
   },
-  setup(props, context) {
-    const newArr = ref(["你好世界", "我很好，谢谢"]);
-    const handleEdit = () => {
-      console.log("我发出了");
-      context.emit("update:modelValue", newArr.value);
+  setup() {
+    const form = createForm();
+    const { SchemaField } = createSchemaField({
+      components: {
+        FormItem,
+        Input,
+      },
+    });
+    const schema = {
+      type: "object",
+      properties: {
+        input: {
+          type: "string",
+          title: "输入框",
+          "x-decorator": "FormItem",
+          "x-component": "Input",
+        },
+        textarea: {
+          type: "string",
+          title: "文本框",
+          "x-decorator": "FormItem",
+          "x-component": "Input.TextArea",
+        },
+      },
     };
-    const handleEmit = () => {
-      context.emit("update:name", "hello world");
-    };
+
     return {
-      handleEdit,
-      handleEmit,
+      SchemaField,
+      form,
+      schema,
     };
   },
 });

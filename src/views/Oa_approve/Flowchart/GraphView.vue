@@ -1,28 +1,30 @@
 <template>
-  <el-dialog class="graph-dialog" :model-value="ItemPanelDialogVisible" width="100%" center :append-to-body="true" :close-on-click-modal="false" :fullscreen="true" :before-close="closeDialod">
+  <el-dialog class="graph-dialog" :model-value="ItemPanelDialogVisible" width="100%" center :append-to-body="true"
+    :close-on-click-modal="false" :fullscreen="true" :before-close="closeDialod">
     <template #title>
       <span>流程设计器名称</span>
     </template>
     <div class="flow-chat">
       <ul class="df-ac tabs-box">
-        <li class="tabs-item" v-for="(item,index) in tabsItem" :key="index" :class="{is_active:item.value==activeName }" @click="changeTabs(item)">
-          <span>{{item.label}}</span>
+        <li class="tabs-item" v-for="(item, index) in tabsItem" :key="index"
+          :class="{ is_active: item.value == activeName }" @click="changeTabs(item)">
+          <span>{{ item.label }}</span>
         </li>
       </ul>
       <div class="tabs-content">
-        <div v-show="activeName == 'form_edit'">
+        <div :class="{ is_show: activeName != 'form_edit' }">
           <FormCmpt />
         </div>
-        <div v-show="activeName == 'design_flow'">
+        <div :class="{ is_show: activeName != 'design_flow' }">
           <DesignFlow />
         </div>
-        <div v-show="activeName == 'design_edit'">
+        <div :class="{ is_show: activeName != 'design_edit' }">
 
         </div>
-        <div v-show="activeName == 'design_rule'">
+        <div :class="{ is_show: activeName != 'design_rule' }">
 
         </div>
-        <div v-show="activeName == 'design_log'">
+        <div :class="{ is_show: activeName != 'design_log' }">
 
         </div>
       </div>
@@ -104,10 +106,12 @@ $light: #f5f7fa;
 $secondary: #909399;
 $primary: #409eff;
 $border: #dcdfe6;
+
 .flow-chat {
   height: calc(100vh - 105px);
   border: 1px solid $border;
   border-radius: 5px;
+  overflow: hidden;
   .tabs-box {
     width: 100%;
     background: $light;
@@ -121,10 +125,12 @@ $border: #dcdfe6;
       font-size: 14px;
       border: 1px solid $light;
       cursor: pointer;
+
       &:hover {
         color: $primary;
       }
     }
+
     .is_active {
       background: #fff;
       color: $primary;
@@ -132,10 +138,16 @@ $border: #dcdfe6;
       border-right: 1px solid #ccc;
     }
   }
-  .tabs-content{
+
+  .tabs-content {
     padding: 15px;
+
+    .is_show {
+      visibility: hidden;
+    }
   }
 }
+
 // ::v-deep .el-overlay-dialog > .el-dialog__footer {
 //   padding: 0 !important;
 //   // display: none !important;
