@@ -87,7 +87,7 @@ export default defineComponent({
   setup() {
     const time = ref<string>("");
     const date = ref<string>("");
-    const timer = ref<any>(null);
+    const timer = ref<unknown>();
     const getTime = () => {
       timer.value = setInterval(() => {
         date.value = moment().format("yyyy年M月D日");

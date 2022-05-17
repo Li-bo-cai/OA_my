@@ -1,8 +1,7 @@
 <template>
   <div class="form">
     <!-- 人员选择表单 -->
-    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" class="demo-ruleForm" size="" :disabled="disabled"
-      label-position="top">
+    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" class="demo-ruleForm" size="" :disabled="disabled" label-position="top">
       <el-form-item label="节点Id" prop="id">
         <el-input size="small" v-model="ruleForm.id"></el-input>
       </el-form-item>
@@ -29,34 +28,27 @@
       </span>
       <span v-show="ruleForm.changeOptType == 7" class="cbbb fs12">发起人自己作为审批人进行审批</span>
       <div class="mb20">
-        <el-button v-if="ruleForm.changeOptType == 2" type="primary" :icon="Plus" size="small" round
-          @click="openCmpt(2)">
+        <el-button v-if="ruleForm.changeOptType == 2" type="primary" :icon="Plus" size="small" round @click="openCmpt(2)">
           选择人员</el-button>
-        <el-button v-if="ruleForm.changeOptType == 6" type="primary" :icon="Plus" size="small" round
-          @click="openCmpt(1)">
+        <el-button v-if="ruleForm.changeOptType == 6" type="primary" :icon="Plus" size="small" round @click="openCmpt(1)">
           选择角色</el-button>
-        <el-select v-if="ruleForm.type == 2 && ruleForm.changeOptType == 3" v-model="ruleForm.more" placeholder="Select"
-          size="small">
+        <el-select v-if="ruleForm.type == 2 && ruleForm.changeOptType == 3" v-model="ruleForm.more" placeholder="Select" size="small">
           <el-option label="自选一个人" :value="1" />
           <el-option label="自选多个人" :value="2" />
         </el-select>
       </div>
       <el-form-item class="basics">
         <div class="show-people" v-show="ruleForm.changeOptType == 2 && ruleForm.type != 0">
-          <el-tag type="" v-for="(item, index) in ruleForm.user.peoples" size="small" :key="index"
-            @close="remove(ruleForm.user.peoples, index)" closable>
+          <el-tag type="" v-for="(item, index) in ruleForm.user.peoples" size="small" :key="index" @close="remove(ruleForm.user.peoples, index)" closable>
             {{ item.name }}
           </el-tag>
-          <el-button v-show="ruleForm.user.peoples.length > 2" size="small" type="text"
-            @click="ruleForm.user.peoples = []">清除全部</el-button>
+          <el-button v-show="ruleForm.user.peoples.length > 2" size="small" type="text" @click="ruleForm.user.peoples = []">清除全部</el-button>
         </div>
         <div class="show-people" v-show="ruleForm.changeOptType == 6">
-          <el-tag type="" v-for="(item, index) in ruleForm.user.departs" size="small" :key="index"
-            @close="remove(ruleForm.user.departs, index)" closable>
+          <el-tag type="" v-for="(item, index) in ruleForm.user.departs" size="small" :key="index" @close="remove(ruleForm.user.departs, index)" closable>
             {{ item.depart_name }}
           </el-tag>
-          <el-button v-show="ruleForm.user.departs.length > 2" size="small" type="text"
-            @click="ruleForm.user.departs = []">清除全部</el-button>
+          <el-button v-show="ruleForm.user.departs.length > 2" size="small" type="text" @click="ruleForm.user.departs = []">清除全部</el-button>
         </div>
       </el-form-item>
 
@@ -106,36 +98,37 @@
     </el-form>
     <!-- 条件选择表单 -->
 
-    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" class="demo-ruleForm" size="" :disabled="disabled"
-      label-position="top">
+    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" class="demo-ruleForm" size="" :disabled="disabled" label-position="top">
       <div>
         <div class="term-card-item" v-for="(item, index) in termGroup" :key="index">
-          <div class="card-header df-ac">
+          <div class="card-header df-jcsa-ac">
             <div>条件组{{ index + 1 }}</div>
             <div class="df-ac">
               <span>条件关系：</span>
               <el-switch v-model="item.status" class="mb-2" active-text="且" inactive-text="或" />
             </div>
-
-            <el-popover placement="bottom" title="选择审批条件" :width="200" trigger="click">
-              <div>
-                <el-checkbox-group v-model="item.tremArr">
-                  <el-checkbox v-for="(item, index) in checkgroup" :key="index" :label="item.label" />
-                </el-checkbox-group>
-              </div>
-              <template #reference>
-                <el-icon class="pointer">
-                  <Plus />
-                </el-icon>
-              </template>
-            </el-popover>
-
             <div>
-              <el-icon>
+              <el-popover placement="bottom" title="选择审批条件" :width="200" trigger="click">
+                <div>
+                  <el-checkbox-group v-model="item.tremArr">
+                    <el-checkbox v-for="(item, index) in checkgroup" :key="index" :label="item.label" />
+                  </el-checkbox-group>
+                </div>
+                <template #reference>
+                  <el-icon class="pointer-primary">
+                    <Plus />
+                  </el-icon>
+                </template>
+              </el-popover>
+              <el-icon class="pointer-danger ml10">
                 <Delete />
               </el-icon>
             </div>
           </div>
+          <div class="card-contener">
+            <div class="p20 cbbb tac">点击右上角 + 为本条件组添加判断条件</div>
+          </div>
+
         </div>
       </div>
     </el-form>
@@ -146,7 +139,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, watch } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import { Plus, Delete } from "@element-plus/icons-vue";
 import graphForm from "./graphForm";
 import PeopledialogVisible from "@/components/PeopleChoseDialog/index.vue";
@@ -231,7 +224,17 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.form {}
+.form {
+  .term-card-item {
+    border: 1px solid #d8d8d9;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 30px 0;
+    .card-header {
+      background: #e8e8e9;
+    }
+  }
+}
 
 .basics {
   border-bottom: 1px solid #ccc;

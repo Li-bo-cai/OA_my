@@ -1,5 +1,5 @@
-import { Chart, Util, registerTheme } from "@antv/g2"
-import { computed, nextTick, onMounted, reactive, ref, watch } from "vue"
+import { Chart, registerTheme } from "@antv/g2"
+import { computed, nextTick, onMounted, reactive, watch } from "vue"
 import { usVuex } from '@/main'
 
 const homeStore = usVuex
@@ -168,7 +168,7 @@ export default () => {
         homeStore.useActions('homeModule', 'GET_HOME_DATA')
     })
 
-    watch(allData, (newVal, oldVal) => {
+    watch(allData, (newVal) => {
         nextTick(() => {
             createFunc(newVal.staff)
             createTimeChart(newVal.overtime)

@@ -98,49 +98,6 @@ ol,
 li {
     list-style-type: none;
 }
-/*公共方法*/
-/* margin */
-.m10 {
-    margin: 10px;
-}
-/* margin-top */
-.mt20 {
-    margin-top: 20px;
-}
-.mt30 {
-    margin-top: 30px;
-}
-/* margin-left */
-.ml20 {
-    margin-left: 20px;
-}
-.ml30 {
-    margin-left: 30px;
-}
-/* margin-bottom */
-.mb20 {
-    margin-bottom: 20px;
-}
-.mb30 {
-    margin-bottom: 30px;
-}
-/* margin-right */
-.mr20 {
-    margin-right: 20px;
-}
-.mr30 {
-    margin-right: 30px;
-}
-/* font-size */
-.fs16 {
-    font-size: 16px;
-}
-.fs14 {
-    font-size: 14px;
-}
-.fs12 {
-    font-size: 12px;
-}
 /* color */
 .c409eff {
     color: #409eff;
@@ -179,9 +136,54 @@ li {
     justify-content: space-around;
     align-items: center;
 }
-.pointer {
-    cursor: pointer;
-    &:hover{
-        color: $--color-primary;
+
+.tac {
+    text-align: center;
+}
+
+// 定义字体(px)单位
+@each $str, $long in primary $--color-primary, success $--color-success, danger $--color-danger,
+    warning $--color-warning
+{
+    .pointer-#{$str} {
+        cursor: pointer;
+        &:hover {
+            color: $long;
+        }
+    }
+}
+
+// 定义字体(px)单位，小于20都为px单位字体
+@for $i from 11 to 30 {
+    .fs#{$i} {
+        font-size: $i + px;
+    }
+}
+
+// 定义margin 和 padding
+@for $i from 0 to 200 {
+    .m#{$i} {
+        margin: $i + px !important;
+    }
+
+    .mlr#{$i} {
+        margin: 0 $i + px !important;
+    }
+
+    .p#{$i} {
+        padding: $i + px !important;
+    }
+
+    .plr#{$i} {
+        padding: 0 $i + px !important;
+    }
+
+    @each $short, $long in l left, t top, r right, b bottom {
+        .m#{$short}#{$i} {
+            margin-#{$long}: $i + px !important;
+        }
+        .p#{short}#{$i} {
+            padding-#{$long}: $i + px !important;
+        }
     }
 }

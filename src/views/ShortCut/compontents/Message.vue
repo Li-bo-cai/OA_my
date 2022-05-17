@@ -16,7 +16,7 @@ export default defineComponent({
   },
   setup() {
     const usVuex: any = inject("usVuex");
-    const socket: any = inject("socket");
+    // const socket: any = inject("socket");
 
     // 关闭弹窗
     const close_window = () => {

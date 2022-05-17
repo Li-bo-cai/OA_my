@@ -11,8 +11,9 @@
     "@antv/g2": "^4.1.37",
     "@antv/x6": "^1.28.1",
     "@element-plus/icons-vue": "^1.0.0",
-    "@formily/core": "^2.0.8",
-    "@formily/vue": "^2.0.8",
+    "@formily/core": "^2.1.2",
+    "@formily/element-plus": "^1.0.0-beta.1",
+    "@formily/vue": "^2.1.2",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-plus": "^2.0.4",
@@ -37,7 +38,7 @@
     "@vue/eslint-config-typescript": "^7.0.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
-    "sass": "^1.26.5",
+    "sass": "^1.32.11",
     "sass-loader": "^8.0.2",
     "typescript": "~4.1.5"
   }
