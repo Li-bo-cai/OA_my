@@ -1,19 +1,23 @@
 <template>
   <div>
     <el-input label="输入框" v-model="form.values.input" @change="changeForm"></el-input>
-    {{form.values}}
-    <FormProvider :form="form">
+    {{ form.values }}
+    <br>
+    {{ schema }}
+    <FormProvider :form="form" ref="formily">
       <SchemaField :schema="schema" />
-      <Submit @submit="onSubmit">提交</Submit>
+      <FormButtonGroup align-form-item>
+        <Submit :onSubmit="onSubmit">提交</Submit>
+      </FormButtonGroup>
     </FormProvider>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, onMounted, reactive, ref } from "vue";
 import { createForm } from "@formily/core";
 import { createSchemaField, FormProvider } from "@formily/vue";
-import { FormItem, Input, Submit } from "@formily/element-plus";
+import { FormItem, Input, Submit, FormButtonGroup } from "@formily/element-plus";
 
 const { SchemaField } = createSchemaField({
   components: {
@@ -25,17 +29,17 @@ const { SchemaField } = createSchemaField({
 export default defineComponent({
   components: {
     FormProvider,
-    Submit,
     SchemaField,
+    Submit,
+    FormButtonGroup
   },
   setup() {
-    const form = reactive(
-      createForm({
-        values: {
-          input: "",
-        },
-      })
-    );
+    const form = createForm()
+    const formily = ref()
+
+    onMounted(() => {
+      console.log(formily);
+    })
 
     const schema = reactive({
       type: "object",
@@ -44,9 +48,9 @@ export default defineComponent({
           type: "string",
           title: "输入框",
           "x-decorator": "FormItem",
-          "x-decorator-props": {
-            label: "输入框",
-          },
+          // "x-decorator-props": {
+          //   label: "输入框",
+          // },
           "x-component": "Input",
           "x-component-props": {
             placeholder: "请输入",
@@ -55,7 +59,7 @@ export default defineComponent({
         },
         textarea: {
           type: "string",
-          title: "文本框",
+          // title: "文本框",
           "x-decorator": "FormItem",
           "x-decorator-props": {
             label: "文本框",
@@ -64,22 +68,22 @@ export default defineComponent({
           "x-component-props": {
             type: "textarea",
             placeholder: "请输入",
-            initialValues: "1111",
           },
         },
       },
     });
 
-    setTimeout(() => {
-      // schema.properties.input["x-decorator-props"].label = "4567";
-    }, 1000);
+    // setTimeout(() => {
+    // schema.properties.input["x-decorator-props"].label = "4567";
+    // }, 1000);
 
     // setTimeout(() => {
     //   form.values.input = "你好";
     // }, 2000);
 
-    const changeForm = () => {
+    const changeForm = (e: any) => {
       console.log(form);
+      // schema.properties.input["x-decorator-props"].label = e
       console.log(schema);
     };
 
@@ -89,6 +93,7 @@ export default defineComponent({
 
     return {
       form,
+      formily,
       schema,
       onSubmit,
       changeForm,
