@@ -1,23 +1,34 @@
 <template>
   <div>
-    <el-input label="输入框" v-model="form.values.input" @change="changeForm"></el-input>
-    {{ form.values }}
-    <br>
-    {{ schema }}
-    <FormProvider :form="form" ref="formily">
-      <SchemaField :schema="schema" />
-      <FormButtonGroup align-form-item>
-        <Submit :onSubmit="onSubmit">提交</Submit>
-      </FormButtonGroup>
-    </FormProvider>
+    <el-input label="输入框" v-model="form.values.input"></el-input>
+    {{schema}}
+    <Form :form="form">
+      <FormProvider :form="form">
+        <SchemaField :schema="schema" />
+        <!-- <FormConsumer>
+        <template #default="{form}">
+          <el-button type="primary" @click="onSubmit(form)">提交</el-button>
+        </template>
+        </FormConsumer> -->
+        <FormButtonGroup align-form-item>
+          <Submit @submit="onSubmit">提交</Submit>
+        </FormButtonGroup>
+      </FormProvider>
+    </Form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref } from "vue";
-import { createForm } from "@formily/core";
-import { createSchemaField, FormProvider } from "@formily/vue";
-import { FormItem, Input, Submit, FormButtonGroup } from "@formily/element-plus";
+import { defineComponent, reactive } from "vue";
+import { createForm, onFormValuesChange, onFormSubmit } from "@formily/core";
+import { createSchemaField, FormProvider, FormConsumer } from "@formily/vue";
+import {
+  Form,
+  FormItem,
+  Input,
+  Submit,
+  FormButtonGroup,
+} from "@formily/element-plus";
 
 const { SchemaField } = createSchemaField({
   components: {
@@ -29,17 +40,32 @@ const { SchemaField } = createSchemaField({
 export default defineComponent({
   components: {
     FormProvider,
-    SchemaField,
     Submit,
-    FormButtonGroup
+    SchemaField,
+    Form,
+    FormButtonGroup,
+    // FormConsumer,
   },
   setup() {
-    const form = createForm()
-    const formily = ref()
-
-    onMounted(() => {
-      console.log(formily);
-    })
+    const form = reactive(
+      createForm({
+        values: {
+          input: "",
+        },
+        effects: () => {
+          onFormValuesChange((form) => {
+            //监听数据变化了
+            // console.log(form); //这个form 很重要 这里你才能够拿到表单的值
+          });
+          onFormSubmit((form) => {
+            //监听表单提交
+            console.log(form);
+            form.fields.input.title = "1234";
+            console.log(form.fields);
+          });
+        },
+      })
+    );
 
     const schema = reactive({
       type: "object",
@@ -47,56 +73,46 @@ export default defineComponent({
         input: {
           type: "string",
           title: "输入框",
+          required: true,
           "x-decorator": "FormItem",
           // "x-decorator-props": {
           //   label: "输入框",
           // },
           "x-component": "Input",
-          "x-component-props": {
-            placeholder: "请输入",
-          },
+          // "x-component-props": {
+          //   placeholder: "请输入",
+          // },
           // "x-editable": true,
         },
         textarea: {
           type: "string",
-          // title: "文本框",
+          title: "文本框",
           "x-decorator": "FormItem",
-          "x-decorator-props": {
-            label: "文本框",
-          },
+          // "x-decorator-props": {
+          //   label: "文本框",
+          // },
           "x-component": "Input.TextArea",
-          "x-component-props": {
-            type: "textarea",
-            placeholder: "请输入",
-          },
+          // "x-component-props": {
+          //   type: "textarea",
+          //   placeholder: "请输入",
+          //   initialValues: "1111",
+          // },
         },
       },
     });
 
     // setTimeout(() => {
-    // schema.properties.input["x-decorator-props"].label = "4567";
-    // }, 1000);
-
-    // setTimeout(() => {
     //   form.values.input = "你好";
     // }, 2000);
 
-    const changeForm = (e: any) => {
-      console.log(form);
-      // schema.properties.input["x-decorator-props"].label = e
-      console.log(schema);
-    };
-
     const onSubmit = (value: any) => {
-      console.log(value);
+      // console.log(value);
     };
 
     return {
       form,
-      formily,
       schema,
       onSubmit,
-      changeForm,
     };
   },
 });
