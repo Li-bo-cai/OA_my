@@ -2,25 +2,30 @@
   <div>
     <el-input label="输入框" v-model="form.values.input"></el-input>
     {{schema}}
-    <Form :form="form">
-      <FormProvider :form="form">
-        <SchemaField :schema="schema" />
-        <!-- <FormConsumer>
+    <!-- <Form :form="form"> -->
+    <FormProvider :form="form">
+      <SchemaField :schema="schema" @change="handeleChange" />
+      <!-- <FormConsumer>
         <template #default="{form}">
           <el-button type="primary" @click="onSubmit(form)">提交</el-button>
         </template>
         </FormConsumer> -->
-        <FormButtonGroup align-form-item>
-          <Submit @submit="onSubmit">提交</Submit>
-        </FormButtonGroup>
-      </FormProvider>
-    </Form>
+      <FormButtonGroup align-form-item>
+        <Submit @submit="onSubmit">提交</Submit>
+      </FormButtonGroup>
+    </FormProvider>
+    <!-- </Form> -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import { createForm, onFormValuesChange, onFormSubmit } from "@formily/core";
+import {
+  createForm,
+  onFormValuesChange,
+  onFormSubmit,
+  onFormInit,
+} from "@formily/core";
 import { createSchemaField, FormProvider, FormConsumer } from "@formily/vue";
 import {
   Form,
@@ -47,25 +52,27 @@ export default defineComponent({
     // FormConsumer,
   },
   setup() {
-    const form = reactive(
-      createForm({
-        values: {
-          input: "",
-        },
-        effects: () => {
-          onFormValuesChange((form) => {
-            //监听数据变化了
-            // console.log(form); //这个form 很重要 这里你才能够拿到表单的值
-          });
-          onFormSubmit((form) => {
-            //监听表单提交
-            console.log(form);
-            form.fields.input.title = "1234";
-            console.log(form.fields);
-          });
-        },
-      })
-    );
+    const form = createForm({
+      initialValues: {
+        input: "",
+        textarea: "",
+      },
+      effects: () => {
+        onFormInit(() => {
+          // console.log(1234);
+        });
+        onFormValuesChange((form) => {
+          //监听数据变化了
+          console.log(form.getState()); //这个form 很重要 这里你才能够拿到表单的值
+        });
+        onFormSubmit((form) => {
+          // //监听表单提交
+          // console.log(form);
+          // form.fields.input.title = "1234";
+          // console.log(form.fields);
+        });
+      },
+    });
 
     const schema = reactive({
       type: "object",
@@ -79,6 +86,7 @@ export default defineComponent({
           //   label: "输入框",
           // },
           "x-component": "Input",
+          " x-validator": {},
           // "x-component-props": {
           //   placeholder: "请输入",
           // },
@@ -92,11 +100,10 @@ export default defineComponent({
           //   label: "文本框",
           // },
           "x-component": "Input.TextArea",
-          // "x-component-props": {
-          //   type: "textarea",
-          //   placeholder: "请输入",
-          //   initialValues: "1111",
-          // },
+          "x-component-props": {
+            type: "textarea",
+            placeholder: "请输入",
+          },
         },
       },
     });
@@ -106,13 +113,18 @@ export default defineComponent({
     // }, 2000);
 
     const onSubmit = (value: any) => {
-      // console.log(value);
+      console.log(value);
+    };
+
+    const handeleChange = () => {
+      console.log(1234);
     };
 
     return {
       form,
       schema,
       onSubmit,
+      handeleChange,
     };
   },
 });

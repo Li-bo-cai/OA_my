@@ -8,6 +8,7 @@ export const usVuex = new VUex(store)
 
 
 import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import * as ElIcons from '@element-plus/icons-vue'
 
 import '@/assets/css/index.scss'
