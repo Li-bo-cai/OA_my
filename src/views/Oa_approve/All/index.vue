@@ -47,7 +47,7 @@ export default defineComponent({
     FormProvider,
     Submit,
     SchemaField,
-    Form,
+    // Form,
     FormButtonGroup,
     // FormConsumer,
   },
