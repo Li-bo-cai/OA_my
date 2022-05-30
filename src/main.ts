@@ -21,8 +21,8 @@ import DragDirective from '@/utils/drag'
 
 const app = createApp(App)
 
-for (const name in ElIcons) {
-    app.component(name, (ElIcons as any)[name])
+for (const [key, component] of Object.entries(ElIcons)) {
+    app.component(key, component)
 }
 
 app.use(SocketIO, {

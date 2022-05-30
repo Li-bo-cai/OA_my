@@ -28,7 +28,7 @@ export default () => {
 
   const changGraphNode = (formEl: InstanceType<typeof ElForm> | undefined) => {
     if (!formEl) return
-    formEl.validate((valid) => {
+    formEl.validate((valid: any) => {
       if (valid) {
         ruleForm.value.hasBeen = true
         graphStore.useMutations('graphModule', 'SET_CF_STATUS', true)

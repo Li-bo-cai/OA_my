@@ -1,134 +1,106 @@
 <template>
-  <div>
-    <el-input label="输入框" v-model="form.values.input"></el-input>
-    {{schema}}
-    <!-- <Form :form="form"> -->
+  <Form :form="form">
     <FormProvider :form="form">
-      <SchemaField :schema="schema" @change="handeleChange" />
-      <!-- <FormConsumer>
-        <template #default="{form}">
-          <el-button type="primary" @click="onSubmit(form)">提交</el-button>
-        </template>
-        </FormConsumer> -->
-      <FormButtonGroup align-form-item>
-        <Submit @submit="onSubmit">提交</Submit>
-      </FormButtonGroup>
+      <SchemaField :schema="schema" />
+      <Submit @submit="onSubmit">提交</Submit>
     </FormProvider>
-    <!-- </Form> -->
-  </div>
+    <el-input ref="input" v-model="form2.input" @input="changeInput"></el-input>
+  </Form>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive } from "vue";
+<script lang="ts" setup>
 import {
   createForm,
   onFormValuesChange,
-  onFormSubmit,
-  onFormInit,
+  onFormReact,
+  onFormInputChange,
 } from "@formily/core";
-import { createSchemaField, FormProvider, FormConsumer } from "@formily/vue";
-import {
-  Form,
-  FormItem,
-  Input,
-  Submit,
-  FormButtonGroup,
-} from "@formily/element-plus";
+import { createSchemaField, FormProvider } from "@formily/vue";
+import { FormItem, Input, Submit, Form } from "@formily/element-plus";
+import { reactive } from "vue-demi";
+
+const schema = {
+  type: "object",
+  properties: {
+    input: {
+      type: "string",
+      title: "输入框",
+      "x-decorator": "FormItem",
+      "x-decorator-props": {
+        label: "输入框",
+      },
+      "x-component": "Input",
+    },
+    input2: {
+      type: "string",
+      title: "输入框",
+      "x-decorator": "FormItem",
+      "x-decorator-props": {
+        label: "输入框",
+      },
+      "x-component": "input",
+    },
+    textarea: {
+      type: "string",
+      title: "文本框",
+      "x-decorator": "FormItem",
+      "x-component": "Input.TextArea",
+      "x-decorator-props": {
+        label: "文本框",
+      },
+      "x-component-props": {
+        type: "textarea",
+      },
+    },
+  },
+};
+
+const form2 = reactive({
+  input: "",
+});
+
+const form = createForm({
+  initialValues: {
+    input: "20",
+    textarea: "15",
+  },
+  effects() {
+    onFormReact((form) => {
+      console.log(form, "实现表单响应式逻辑");
+    });
+    onFormInputChange((form) => {
+      console.log(form, "监听字段输入");
+    });
+    onFormValuesChange((form) => {
+      console.log(form, "表单值变化");
+    });
+  },
+});
+
+form.onMount = () => {
+  console.log("我加载了");
+  // form.subscribe((payload) => {
+  //   console.log(payload, "---------------");
+  //   form.setValues({ form: payload.payload.values });
+  // });
+  form.setValues({ input: "20" });
+  // form.setState((state) => {
+  //   console.log(12);
+  // });
+};
 
 const { SchemaField } = createSchemaField({
   components: {
-    Input,
     FormItem,
+    Input,
   },
 });
 
-export default defineComponent({
-  components: {
-    FormProvider,
-    Submit,
-    SchemaField,
-    // Form,
-    FormButtonGroup,
-    // FormConsumer,
-  },
-  setup() {
-    const form = createForm({
-      initialValues: {
-        input: "",
-        textarea: "",
-      },
-      effects: () => {
-        onFormInit(() => {
-          // console.log(1234);
-        });
-        onFormValuesChange((form) => {
-          //监听数据变化了
-          console.log(form.getState()); //这个form 很重要 这里你才能够拿到表单的值
-        });
-        onFormSubmit((form) => {
-          // //监听表单提交
-          // console.log(form);
-          // form.fields.input.title = "1234";
-          // console.log(form.fields);
-        });
-      },
-    });
+const changeInput = (value: any) => {
+  form.setValues({ input2: value });
+};
 
-    const schema = reactive({
-      type: "object",
-      properties: {
-        input: {
-          type: "string",
-          title: "输入框",
-          required: true,
-          "x-decorator": "FormItem",
-          // "x-decorator-props": {
-          //   label: "输入框",
-          // },
-          "x-component": "Input",
-          " x-validator": {},
-          // "x-component-props": {
-          //   placeholder: "请输入",
-          // },
-          // "x-editable": true,
-        },
-        textarea: {
-          type: "string",
-          title: "文本框",
-          "x-decorator": "FormItem",
-          // "x-decorator-props": {
-          //   label: "文本框",
-          // },
-          "x-component": "Input.TextArea",
-          "x-component-props": {
-            type: "textarea",
-            placeholder: "请输入",
-          },
-        },
-      },
-    });
-
-    // setTimeout(() => {
-    //   form.values.input = "你好";
-    // }, 2000);
-
-    const onSubmit = (value: any) => {
-      console.log(value);
-    };
-
-    const handeleChange = () => {
-      console.log(1234);
-    };
-
-    return {
-      form,
-      schema,
-      onSubmit,
-      handeleChange,
-    };
-  },
-});
+const onSubmit = (value: any) => {
+  console.log(value);
+};
 </script>
-
-<style scoped>
-</style>
