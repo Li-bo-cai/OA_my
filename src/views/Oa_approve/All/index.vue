@@ -1,11 +1,19 @@
 <template>
-  <Form :form="form">
+  <div>
     <FormProvider :form="form">
-      <SchemaField :schema="schema" />
-      <Submit @submit="onSubmit">提交</Submit>
+      <Form :form="form" :label-col="6" :wrapper-col="10">
+        <SchemaField :schema="schema" />
+        <Submit @submit="onSubmit">提交</Submit>
+      </Form>
+      <FormConsumer>
+        <template #default="{ form }">
+          <div style="white-space: pre">
+            {{ JSON.stringify(form.values, null, 2) }}
+          </div>
+        </template>
+      </FormConsumer>
     </FormProvider>
-    <el-input ref="input" v-model="form2.input" @input="changeInput"></el-input>
-  </Form>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -15,15 +23,15 @@ import {
   onFormReact,
   onFormInputChange,
 } from "@formily/core";
-import { createSchemaField, FormProvider } from "@formily/vue";
+import { createSchemaField, FormProvider, FormConsumer } from "@formily/vue";
 import { FormItem, Input, Submit, Form } from "@formily/element-plus";
-import { reactive } from "vue-demi";
 
 const form = createForm({
+  validateFirst: true,
   initialValues: {
-    input: "20",
+    input: "",
     input2: "",
-    textarea: "15",
+    textarea: "",
   },
   effects() {
     onFormReact((form) => {
@@ -31,15 +39,16 @@ const form = createForm({
     });
     onFormInputChange((form) => {
       console.log(form, "监听字段输入");
+      // for (let key in form.values) {
+      //   form.setValues({ [key]: form.values[key] });
+      // }
     });
     onFormValuesChange((form) => {
       console.log(form, "表单值变化");
     });
   },
 });
-const form2 = reactive({
-  input: "",
-});
+
 const schema = {
   type: "object",
   properties: {
@@ -54,10 +63,10 @@ const schema = {
     },
     input2: {
       type: "string",
-      title: "输入框",
+      title: "原生输入框",
       "x-decorator": "FormItem",
       "x-decorator-props": {
-        label: "输入框",
+        label: "原生输入框",
       },
       "x-component": "input",
     },
@@ -76,17 +85,17 @@ const schema = {
   },
 };
 
-form.onMount = () => {
-  console.log("我加载了");
-  // form.subscribe((payload) => {
-  //   console.log(payload, "---------------");
-  //   form.setValues({ form: payload.payload.values });
-  // });
-  // form.setValues({ input: "20" });
-  // form.setState((state) => {
-  //   console.log(12);
-  // });
-};
+// form.onMount = () => {
+//   console.log("我加载了");
+//   // form.subscribe((payload) => {
+//   //   console.log(payload, "---------------");
+//   //   form.setValues({ form: payload.payload.values });
+//   // });
+//   // form.setValues({ input: "20" });
+//   // form.setState((state) => {
+//   //   console.log(12);
+//   // });
+// };
 
 const { SchemaField } = createSchemaField({
   components: {
@@ -94,10 +103,6 @@ const { SchemaField } = createSchemaField({
     Input,
   },
 });
-
-const changeInput = (value: any) => {
-  form.setValues({ input2: value });
-};
 
 const onSubmit = (value: any) => {
   console.log(value);
