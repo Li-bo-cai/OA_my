@@ -6,7 +6,7 @@ module.exports = {
     proxy: {
       '/api': {
         // target: 'https://oa.413club.cn',
-        target: 'https://oa-dev.413club.cn',
+        target: 'https://preapi.175.run',
         changeOrigin: true,
         ws: false,
         pathRewrite: {

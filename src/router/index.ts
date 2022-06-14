@@ -10,7 +10,7 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
-  const token = sessionStorage.getItem('Token')
+    const token = sessionStorage.getItem('Token')
   if (token) {
     next()
   } else {

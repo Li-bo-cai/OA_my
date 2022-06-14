@@ -30,7 +30,6 @@ const form = createForm({
   validateFirst: true,
   initialValues: {
     input: "",
-    input2: "",
     textarea: "",
   },
   effects() {
@@ -56,46 +55,19 @@ const schema = {
       type: "string",
       title: "输入框",
       "x-decorator": "FormItem",
-      "x-decorator-props": {
-        label: "输入框",
-      },
       "x-component": "Input",
-    },
-    input2: {
-      type: "string",
-      title: "原生输入框",
-      "x-decorator": "FormItem",
-      "x-decorator-props": {
-        label: "原生输入框",
-      },
-      "x-component": "input",
     },
     textarea: {
       type: "string",
       title: "文本框",
       "x-decorator": "FormItem",
       "x-component": "Input.TextArea",
-      "x-decorator-props": {
-        label: "文本框",
-      },
       "x-component-props": {
         type: "textarea",
       },
     },
   },
 };
-
-// form.onMount = () => {
-//   console.log("我加载了");
-//   // form.subscribe((payload) => {
-//   //   console.log(payload, "---------------");
-//   //   form.setValues({ form: payload.payload.values });
-//   // });
-//   // form.setValues({ input: "20" });
-//   // form.setState((state) => {
-//   //   console.log(12);
-//   // });
-// };
 
 const { SchemaField } = createSchemaField({
   components: {
