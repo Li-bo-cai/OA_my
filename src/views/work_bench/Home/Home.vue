@@ -79,36 +79,28 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import moment from "moment";
 import { defineComponent, onBeforeUnmount, onMounted, ref } from "vue";
 import hmoeFunc from "./Home";
-export default defineComponent({
-  setup() {
-    const time = ref<string>("");
-    const date = ref<string>("");
-    const timer = ref<unknown>();
-    const getTime = () => {
-      timer.value = setInterval(() => {
-        date.value = moment().format("yyyy年M月D日");
-        time.value = moment().format("HH:mm:ss");
-      }, 1000);
-    };
 
-    onMounted(() => {
-      getTime();
-    });
+const time = ref<string>("");
+const date = ref<string>("");
+const timer = ref<unknown>();
+const { allData } = hmoeFunc();
+const getTime = () => {
+  timer.value = setInterval(() => {
+    date.value = moment().format("yyyy年M月D日");
+    time.value = moment().format("HH:mm:ss");
+  }, 1000);
+};
 
-    onBeforeUnmount(() => {
-      timer.value = null;
-    });
+onMounted(() => {
+  getTime();
+});
 
-    return {
-      ...hmoeFunc(),
-      date,
-      time,
-    };
-  },
+onBeforeUnmount(() => {
+  timer.value = null;
 });
 </script>
 

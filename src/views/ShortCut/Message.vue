@@ -2,31 +2,27 @@
   <div class="drag-target" v-drag>
     <div class="message_body">
     </div>
-    <i class="el-icon-close close_pop" @click="close_window"></i>
+    <el-icon class="close_pop" @click="close_window">
+      <Close />
+    </el-icon>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, inject } from "vue";
-import { mapState } from "vuex";
+<script setup lang="ts">
+import { computed, defineComponent, inject, toRefs } from "vue";
+const usVuex: any = inject("usVuex");
+const state = computed(() => {
+  return usVuex.useState('shortCutModule')
+})
+const { style } = toRefs(state.value)
 
-export default defineComponent({
-  computed: {
-    ...mapState("shortCutModule", ["style"]),
-  },
-  setup() {
-    const usVuex: any = inject("usVuex");
-    // const socket: any = inject("socket");
+// const socket: any = inject("socket");
 
-    // 关闭弹窗
-    const close_window = () => {
-      usVuex.useMutations("shortCutModule", "SET_MESSAGE_DIALOG", false);
-    };
-    return {
-      close_window,
-    };
-  },
-});
+// 关闭弹窗
+const close_window = () => {
+  usVuex.useMutations("shortCutModule", "SET_MESSAGE_DIALOG", false);
+};
+
 </script>
 
 <style scoped lang="scss">
@@ -44,15 +40,18 @@ export default defineComponent({
   border: 1px solid #ccc;
   cursor: pointer;
 }
+
 .close_pop {
   position: absolute;
   top: 5px;
   right: 5px;
   font-size: 18px;
+
   &:hover {
     background: rgb(247, 247, 247);
   }
 }
+
 .message_body {
   width: 100%;
   height: 100%;

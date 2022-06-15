@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import UserFunc from "./component/UserFunc.vue";
-import HeaderMenu from "./component/HeaderMenu.vue";
+import UserFunc from "./UserFunc.vue";
+import HeaderMenu from "./HeaderMenu.vue";
 import { defineComponent, ref } from "vue";
 export default defineComponent({
   components: {

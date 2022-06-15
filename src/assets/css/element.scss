@@ -77,10 +77,13 @@ input[type="number"] {
   border-radius: 4px;
 }
 
+.el-menu-item.is-active {
+  color: $--border-color-lighter !important;
+}
 .el-menu {
   border-right: none;
   .is-active {
-    color: $menuActiveText;
+    color: $--border-color-lighter;
 
     &:not(.el-sub-menu) {
       background-color: $menuBg;

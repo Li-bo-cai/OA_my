@@ -15,27 +15,17 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.vue";
 import AttendanceList from "./compontents/AttendanceList.vue";
-export default defineComponent({
-  components: {
-    Breadcrumb,
-    AttendanceList,
-  },
-  setup() {
-    var activeName = ref<string>("att_list");
 
-    const handleClick = (tab: any, event: any) => {
-      console.log(123);
-    };
-    return {
-      activeName,
-      handleClick,
-    };
-  },
-});
+var activeName = ref<string>("att_list");
+
+const handleClick = (tab: any, event: any) => {
+  console.log(123);
+};
+
 </script>
 
 <style scoped>

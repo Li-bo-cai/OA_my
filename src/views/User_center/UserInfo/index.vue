@@ -75,20 +75,12 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script lang="ts" setup>
+import { ref } from "vue";
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.vue";
-export default defineComponent({
-  components: {
-    Breadcrumb,
-  },
-  setup() {
-    const ruleForm = ref({});
-    return {
-      ruleForm,
-    };
-  },
-});
+
+const ruleForm = ref({});
+
 </script>
 
 <style scoped lang="scss">

@@ -13,31 +13,22 @@
       </div>
       <!-- 搜索部分 -->
       <div class="search_box">
-        <EmployeeSeach />
+        <EmployeeSeach></EmployeeSeach>
       </div>
       <!-- 表格部分 -->
       <div class="table_box">
-        <EmployeeTable />
+        <EmployeeTable></EmployeeTable>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb.vue";
-import EmployeeSeach from "./compontent/EmployeeSeach.vue";
-import EmployeeTable from "./compontent/EmployeeTable.vue";
-export default defineComponent({
-  components: {
-    Breadcrumb,
-    EmployeeSeach,
-    EmployeeTable,
-  },
-  setup() {
-    return {};
-  },
-});
+import EmployeeSeach from "./EmployeeSeach.vue";
+import EmployeeTable from "./EmployeeTable.vue";
+
+
 </script>
 
 <style scoped lang="scss">
@@ -46,17 +37,20 @@ export default defineComponent({
     display: flex;
     align-items: center;
     margin-bottom: 40px;
+
     .title {
       min-width: 72px;
       font-size: 18px;
       font-weight: 500;
       margin-right: 30px;
     }
+
     .el-button {
       margin-right: 50px;
     }
   }
-  .search_box{
+
+  .search_box {
     margin-bottom: 55px;
   }
 }

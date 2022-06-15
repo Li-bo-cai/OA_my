@@ -12,7 +12,7 @@ $--table-border: 1px solid #dfe6ec;
 $menuText: #333; //菜单字体颜色
 $menuActiveText: #fff;
 
-$menuBg: #d9a9f0; //菜单背景颜色
+$menuBg: $--color-primary; //菜单背景颜色
 $menuHover: #263445; //菜单hover颜色
 
 $subMenuBg: #1f2d3d;

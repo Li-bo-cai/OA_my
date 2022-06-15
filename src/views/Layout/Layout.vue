@@ -24,7 +24,7 @@
 <script lang="ts">
 import Header from "@/components/Header/index.vue";
 import Aside from "@/components/Aside/Aside.vue";
-import ShortCut from "@/views/ShortCut/ShortCut.vue";
+import ShortCut from "@/views/ShortCut/index.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({

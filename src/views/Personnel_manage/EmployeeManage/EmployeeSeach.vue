@@ -21,19 +21,13 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 
-export default defineComponent({
-  setup() {
-    const formSearch = ref({
-      name: "",
-    });
-    return {
-      formSearch,
-    };
-  },
+const formSearch = ref({
+  name: "",
 });
+
 </script>
 
 <style scoped lang="scss">
@@ -41,8 +35,10 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   @media screen and (max-width: 1980px) {
     flex-wrap: wrap;
+
     .el-form-item {
       margin-bottom: 20px;
     }

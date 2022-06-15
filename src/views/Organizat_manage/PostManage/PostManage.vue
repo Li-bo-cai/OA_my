@@ -18,7 +18,7 @@
         <div class="right_top_box">
           <div class="Info">
             <p>暂无数据</p>
-            <p>岗位描述:<span>{{ruleForm.desc?ruleForm.desc:'暂无数据'}}</span></p>
+            <p>岗位描述:<span>{{ ruleForm.desc ? ruleForm.desc : '暂无数据' }}</span></p>
           </div>
           <div class="edit">
             <el-switch v-model="ruleForm.state" active-text="启用该岗位" :active-value="2" :inactive-value="1" />
@@ -60,54 +60,43 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {
-  defineComponent,
+  computed,
   getCurrentInstance,
   onMounted,
   reactive,
-  ref,
+  toRefs,
 } from "vue";
-import { mapState } from "vuex";
-import addPostRules from "./postManage";
+import addPostRulesJS from "./postManage";
 import PostLeftBox from "./compontents/PostLeftBox.vue";
 import PostRightBox from "./compontents/postRightBox.vue";
-export default defineComponent({
-  components: {
-    PostLeftBox,
-    PostRightBox,
-  },
-  computed: {
-    ...mapState("postModule", ["post_options"]),
-  },
-  setup() {
-    let a!: number;
-    const { proxy }: any = getCurrentInstance();
-    const usVuex = proxy.usVuex;
-    const ruleForm = reactive({
-      status: "",
-      group_id: a,
-      desc: "",
-      state: 2,
-    });
 
-    onMounted(() => {
-      usVuex.useActions("postModule", "GET_POST_TREE");
-      usVuex.useActions("postModule", "GET_POST_OPTIONS");
-    });
+let a!: number;
+const { proxy }: any = getCurrentInstance();
+const usVuex = proxy.usVuex;
+const state = computed(() => {
+  return usVuex.useState('postModule')
+})
+const { post_options } = toRefs(state.value)
+const { title, showAddCompany, addPostRules, add_post, } = addPostRulesJS()
 
-    const defineClick = (val: string) => {
-      console.log(123);
-    };
-
-    return {
-      ...addPostRules(),
-
-      ruleForm,
-      defineClick,
-    };
-  },
+const ruleForm = reactive({
+  status: "",
+  group_id: a,
+  desc: "",
+  state: 2,
 });
+
+onMounted(() => {
+  usVuex.useActions("postModule", "GET_POST_TREE");
+  usVuex.useActions("postModule", "GET_POST_OPTIONS");
+});
+
+const defineClick = (val: string) => {
+  console.log(123);
+};
+
 </script>
 
 <style scoped lang="scss">
@@ -117,29 +106,36 @@ export default defineComponent({
   overflow: hidden;
   border: 1px solid #edeef2;
   border-radius: 8px;
+
   .left_box {
     flex: 1;
     border-right: 1px solid #edeef2;
     min-width: 210px;
+
     .letf_top_box {
       .el-button {
         margin-left: 20px;
       }
     }
   }
+
   .right_box {
     flex: 4;
+
     .right_top_box {
       justify-content: space-between;
       padding: 0 20px;
+
       .Info {
         p:first-child {
           margin-bottom: 10px;
         }
       }
+
       .edit {
         display: flex;
         align-items: center;
+
         .el-button {
           width: 60px;
           margin-left: 10px;
@@ -147,6 +143,7 @@ export default defineComponent({
       }
     }
   }
+
   .letf_top_box,
   .right_top_box {
     display: flex;
@@ -154,24 +151,29 @@ export default defineComponent({
     height: 80px;
     border-bottom: 1px solid #edeef2;
   }
+
   .left_botton_box {
     // border-bottom: 1px solid #edeef2;
   }
 }
+
 ::deep .el-dialog__body {
   padding: 30px 38px;
   padding-top: 0;
 }
+
 .dialog_tit_tit {
   display: block;
   font-size: 18px;
   font-weight: 500;
   padding-bottom: 25px;
 }
+
 .dialog_body {
   .dialog_footer_btn {
     display: flex;
     flex-direction: row-reverse;
+
     .el-button:nth-child(2) {
       margin-right: 20px;
     }

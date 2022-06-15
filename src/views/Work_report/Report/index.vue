@@ -4,14 +4,9 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from "vue";
 
-export default defineComponent({
-  setup() {
-    return {};
-  },
-});
 </script>
 
 <style scoped>

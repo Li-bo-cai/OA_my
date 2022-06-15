@@ -21,77 +21,72 @@
       </el-table-column>
     </el-table>
     <div class="pagin_ation">
-      <el-pagination background :hide-on-single-page="true" :current-page="staffInfo.page" :page-sizes="[10, 15, 20, 25]" layout="total, prev, pager, next, sizes" :total="total" @size-change="handleSizeChange" @current-change="handleCurrentChange">
+      <el-pagination background :hide-on-single-page="true" :current-page="staffInfo.page"
+        :page-sizes="[10, 15, 20, 25]" layout="total, prev, pager, next, sizes" :total="total"
+        @size-change="handleSizeChange" @current-change="handleCurrentChange">
       </el-pagination>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted } from "vue";
-import { mapState } from "vuex";
+<script setup lang="ts">
+import { getCurrentInstance, onMounted, toRefs } from "vue";
+const { proxy }: any = getCurrentInstance();
+const usVuex = proxy.usVuex;
+const state = usVuex('employee_tableData')
+const { employee_tableData, total, staffInfo } = toRefs(state.value)
 
-export default defineComponent({
-  computed: {
-    ...mapState("employeeModule", ["employee_tableData", "total", "staffInfo"]),
-  },
-  setup() {
-    const { proxy }: any = getCurrentInstance();
-    const usVuex = proxy.usVuex;
-    onMounted(() => {
-      usVuex.useActions("employeeModule", "GET_STAFF_CHECK");
-    });
-    // 改变页面数量
-    const handleSizeChange = (num: number) => {
-      usVuex.useMutations("employeeModule", "SET_PAGE", 1);
-      usVuex.useMutations("employeeModule", "SET_PER_PAGE", num);
-      usVuex.useActions("employeeModule", "GET_STAFF_CHECK");
-    };
-    // 改变页数
-    const handleCurrentChange = (num: number) => {
-      usVuex.useMutations("employeeModule", "SET_PAGE", num);
-      usVuex.useActions("employeeModule", "GET_STAFF_CHECK");
-    };
-    // 编辑
-    const handleEdit = (item: any) => {
-      console.log(123);
-    };
-    // 查看
-    const handleSee = (item: any) => {
-      console.log(123);
-    };
-    // 录入考情机
-    const handleMachine = (item: any) => {
-      console.log(123);
-    };
-    return {
-      handleSizeChange,
-      handleCurrentChange,
-      handleEdit,
-      handleSee,
-      handleMachine,
-    };
-  },
+onMounted(() => {
+  usVuex.useActions("employeeModule", "GET_STAFF_CHECK");
 });
+
+// 改变页面数量
+const handleSizeChange = (num: number) => {
+  usVuex.useMutations("employeeModule", "SET_PAGE", 1);
+  usVuex.useMutations("employeeModule", "SET_PER_PAGE", num);
+  usVuex.useActions("employeeModule", "GET_STAFF_CHECK");
+};
+// 改变页数
+const handleCurrentChange = (num: number) => {
+  usVuex.useMutations("employeeModule", "SET_PAGE", num);
+  usVuex.useActions("employeeModule", "GET_STAFF_CHECK");
+};
+// 编辑
+const handleEdit = (item: any) => {
+  console.log(123);
+};
+// 查看
+const handleSee = (item: any) => {
+  console.log(123);
+};
+// 录入考情机
+const handleMachine = (item: any) => {
+  console.log(123);
+};
+
 </script>
 
 <style scoped lang="scss">
 .employee_table {
   margin-bottom: 30px;
 }
+
 .table_btn {
   display: flex;
   justify-content: center;
+
   p {
     font-size: 14px;
     color: #5777e7;
     margin-right: 30px;
     cursor: pointer;
   }
+
   p:last-child {
     margin: 0;
   }
 }
+
 .pagin_ation {
   display: flex;
   flex-direction: row-reverse;
