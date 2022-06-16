@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="tableData" style="width: 100%" highlight-current-row
+    <el-table :data="tableData" style="width: 100%" :highlight-current-row="true"
       :header-cell-style="{ 'text-align': 'center' }">
       <el-table-column prop="date" label="日期"></el-table-column>
       <el-table-column prop="name" label="姓名"></el-table-column>
@@ -24,7 +24,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <FlowChartDialog v-model:ItemPanelDialogVisible="ItemPanelDialogVisible" />
+    <FlowChartDialog v-model:itemPanelDialogVisible="itemPanelDialogVisible" />
   </div>
 </template>
 
@@ -34,7 +34,7 @@ import { Edit, Setting, Position, View, Delete } from "@element-plus/icons-vue";
 import FlowChartDialog from "@/views/Oa_approve/Flowchart/GraphView.vue";
 const usVuex: any = inject("usVuex");
 
-const ItemPanelDialogVisible = ref<boolean>(false);
+const itemPanelDialogVisible = ref<boolean>(false);
 
 const tableData = [
   {
@@ -62,7 +62,7 @@ const edit_btn = (val: any) => {
   console.log(123);
 };
 const design_btn = (val: any) => {
-  ItemPanelDialogVisible.value = true;
+  itemPanelDialogVisible.value = true;
 };
 const realease_btn = (val: any) => {
   console.log(123);

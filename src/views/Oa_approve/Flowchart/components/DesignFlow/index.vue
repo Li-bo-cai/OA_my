@@ -54,7 +54,7 @@ import {
   PictureFilled,
 } from "@element-plus/icons-vue";
 import { nextTick, onBeforeUnmount, ref } from "vue";
-import GraphX6 from "@/utils/graph";
+import GraphX6 from "@/utils/graph"; 
 import graphData from "./component/Node/graphNode";
 import createNode from "./component/Node/graphCreateNode";
 import { graphFunc } from "./component/Func/graphFunc";

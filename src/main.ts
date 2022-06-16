@@ -10,6 +10,7 @@ export const usVuex = new VUex(store)
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElIcons from '@element-plus/icons-vue'
+import zhCn from "element-plus/lib/locale/lang/zh-cn";
 
 import '@/assets/css/index.scss'
 import '@/assets/font/iconfont.css'
@@ -41,7 +42,7 @@ app.use(SocketIO, {
     },
 })
 
-app.use(ElementPlus, { size: "small", zIndex: 3000 })
+app.use(ElementPlus, { locale: zhCn, size: "small", zIndex: 3000 })
 app.use(router)
 app.use(store)
 app.use(DragDirective)

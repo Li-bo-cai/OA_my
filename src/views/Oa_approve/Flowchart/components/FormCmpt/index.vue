@@ -7,7 +7,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent } from "vue";
 import { createForm } from "@formily/core";
 import { createSchemaField, FormProvider } from "@formily/vue";
 import { FormItem, Input } from "@formily/element-plus";
