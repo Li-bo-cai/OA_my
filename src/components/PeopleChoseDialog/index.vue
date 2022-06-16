@@ -26,7 +26,6 @@ import {
   onBeforeUnmount,
   onMounted,
   ref,
-  toRefs,
 } from "vue";
 import mitt from "@/utils/mitt";
 

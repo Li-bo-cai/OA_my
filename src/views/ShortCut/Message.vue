@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineComponent, inject, toRefs } from "vue";
+import { computed, inject, toRefs } from "vue";
 const usVuex: any = inject("usVuex");
 const state = computed(() => {
   return usVuex.useState('shortCutModule')

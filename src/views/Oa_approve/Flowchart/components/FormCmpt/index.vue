@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { defineComponent } from "vue";
 import { createForm } from "@formily/core";
 import { createSchemaField, FormProvider } from "@formily/vue";
@@ -37,21 +37,6 @@ const schema = {
   },
 };
 
-export default defineComponent({
-  components: {
-    FormProvider,
-    SchemaField
-  },
-  setup() {
-
-
-    return {
-      // SchemaField,
-      form,
-      schema,
-    };
-  },
-});
 </script>
 
 <style scoped>

@@ -44,7 +44,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {
   ArrowUp,
   ArrowDown,
@@ -53,104 +53,86 @@ import {
   Rank,
   PictureFilled,
 } from "@element-plus/icons-vue";
-import { defineComponent, nextTick, onBeforeUnmount, ref } from "vue";
+import { nextTick, onBeforeUnmount, ref } from "vue";
 import GraphX6 from "@/utils/graph";
 import graphData from "./component/Node/graphNode";
 import createNode from "./component/Node/graphCreateNode";
 import { graphFunc } from "./component/Func/graphFunc";
 import GraphForm from "./component/graphForm.vue";
+const graph_box = ref<HTMLDivElement | null>(null);
+const graphCmpt = ref();
 
-export default defineComponent({
-  components: {
-    GraphForm,
-  },
-  setup() {
-    const graph_box = ref<HTMLDivElement | null>(null);
-    const graphCmpt = ref();
-
-    nextTick(() => {
-      graphCmpt.value = new GraphX6("#container", ".map");
-      graphCmpt.value.graph.fromJSON(graphData); //数据被加载
-      graphCmpt.value.graph.zoom(-0.3);
-      graphFunc(graphCmpt.value.graph); //调用方法
-    });
-
-    onBeforeUnmount(() => {
-      graphCmpt.value.graph.dispose(); //画布被销毁
-    });
-
-    // 保存按钮
-    const save_btn = () => {
-      console.log(123);
-    };
-    // 保存按钮
-    const clear_btn = () => {
-      console.log(123);
-    };
-    // 保存按钮
-    const regain_btn = () => {
-      console.log(123);
-    };
-    // 保存按钮
-    const submit_btn = () => {
-      console.log(123);
-    };
-    // 拖动创建
-    const startDrag = (e: any) => {
-      let { nodeRect, nodeTerm, nodeCircle } = createNode(
-        graphCmpt.value.graph
-      );
-      let target = e.currentTarget;
-      let type = target.getAttribute("data-type");
-      let node: any;
-      if (type == "rect") {
-        node = nodeRect;
-      } else if (type == "copy") {
-        node = nodeTerm;
-      } else if (type == "circle") {
-        node = nodeCircle;
-      }
-      graphCmpt.value.dnd.start(node, e);
-    };
-
-    return {
-      ArrowUp,
-      ArrowDown,
-      Checked,
-      Delete,
-      Rank,
-      PictureFilled,
-      save_btn,
-      clear_btn,
-      regain_btn,
-      submit_btn,
-      startDrag,
-      graph_box,
-    };
-  },
+nextTick(() => {
+  graphCmpt.value = new GraphX6("#container", ".map");
+  graphCmpt.value.graph.fromJSON(graphData); //数据被加载
+  graphCmpt.value.graph.zoom(-0.3);
+  graphFunc(graphCmpt.value.graph); //调用方法
 });
+
+onBeforeUnmount(() => {
+  graphCmpt.value.graph.dispose(); //画布被销毁
+});
+
+// 保存按钮
+const save_btn = () => {
+  console.log(123);
+};
+// 保存按钮
+const clear_btn = () => {
+  console.log(123);
+};
+// 保存按钮
+const regain_btn = () => {
+  console.log(123);
+};
+// 保存按钮
+const submit_btn = () => {
+  console.log(123);
+};
+// 拖动创建
+const startDrag = (e: any) => {
+  let { nodeRect, nodeTerm, nodeCircle } = createNode(
+    graphCmpt.value.graph
+  );
+  let target = e.currentTarget;
+  let type = target.getAttribute("data-type");
+  let node: any;
+  if (type == "rect") {
+    node = nodeRect;
+  } else if (type == "copy") {
+    node = nodeTerm;
+  } else if (type == "circle") {
+    node = nodeCircle;
+  }
+  graphCmpt.value.dnd.start(node, e);
+};
 </script>
 
 <style scoped lang="scss">
 .design-flow {
   height: 100%;
+
   .design-scroll {
     height: calc(100vh - 161px);
   }
 }
+
 .root {
   display: flex;
   width: 100%;
   height: 100%;
+
   .graph-box {
     flex: 2;
     padding: 20px;
     border: 1px solid #ccc;
   }
+
   .graph-info {
     flex: 1;
     padding-left: 20px;
   }
+
   .graph {
     width: 100%;
     height: 100%;

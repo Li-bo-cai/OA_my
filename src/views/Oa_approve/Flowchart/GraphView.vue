@@ -32,73 +32,63 @@
   </el-dialog>
 </template>
 
-<script lang="ts">
-import { defineComponent, inject, nextTick, onBeforeUnmount, ref } from "vue";
+<script setup lang="ts">
+import { withDefaults, defineProps, defineEmits, inject, nextTick, onBeforeUnmount, ref } from "vue";
 import DesignFlow from "./components/DesignFlow/index.vue";
 import FormCmpt from "./components/FormCmpt/index.vue";
-export default defineComponent({
-  components: {
-    DesignFlow,
-    FormCmpt,
-  },
-  props: {
-    ItemPanelDialogVisible: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-  },
-  setup(props, context) {
-    const usVuex: any = inject("usVuex");
-    const tabsItem = [
-      {
-        label: "表单设计",
-        value: "form_edit",
-      },
-      {
-        label: "流程设计",
-        value: "design_flow",
-      },
-      {
-        label: "流程设置",
-        value: "design_edit",
-      },
-      {
-        label: "流程规则",
-        value: "design_rule",
-      },
-      {
-        label: "流程记录",
-        value: "design_log",
-      },
-    ];
+const usVuex: any = inject("usVuex");
+interface Props {
+  ItemPanelDialogVisible: boolean
+}
+const props = withDefaults(defineProps<Props>(), {
+  ItemPanelDialogVisible: false
+})
+const emit = defineEmits<{
+  (e: 'ItemPanelDialogVisible', value: boolean): void
+}>()
 
-    const activeName = ref<string>("form_edit");
-    // 关闭弹出框
-    const closeDialod = () => {
-      // 如果弹窗关闭,清空graphmodel中的值
-      context.emit("update:ItemPanelDialogVisible", false);
-      usVuex.useMutations("graphModule", "SET_ALL_DATA_CLEAR", "");
-    };
-
-    const changeTabs = (item: any) => {
-      activeName.value = item.value;
-    };
-
-    nextTick(() => {
-      // console.log(12);
-    });
-    onBeforeUnmount(() => {
-      // console.log("被销毁了");
-    });
-    return {
-      tabsItem,
-      activeName,
-      changeTabs,
-      closeDialod,
-    };
+const tabsItem = [
+  {
+    label: "表单设计",
+    value: "form_edit",
   },
+  {
+    label: "流程设计",
+    value: "design_flow",
+  },
+  {
+    label: "流程设置",
+    value: "design_edit",
+  },
+  {
+    label: "流程规则",
+    value: "design_rule",
+  },
+  {
+    label: "流程记录",
+    value: "design_log",
+  },
+];
+
+const activeName = ref<string>("form_edit");
+// 关闭弹出框
+const closeDialod = () => {
+  // 如果弹窗关闭,清空graphmodel中的值
+  emit("ItemPanelDialogVisible", false);
+  usVuex.useMutations("graphModule", "SET_ALL_DATA_CLEAR", "");
+};
+
+const changeTabs = (item: any) => {
+  activeName.value = item.value;
+};
+
+nextTick(() => {
+  // console.log(12);
 });
+onBeforeUnmount(() => {
+  // console.log("被销毁了");
+});
+
 </script>
 
 <style scoped lang="scss">
@@ -112,9 +102,11 @@ $border: #dcdfe6;
   border: 1px solid $border;
   border-radius: 5px;
   overflow: hidden;
+
   .tabs-box {
     width: 100%;
     background: $light;
+
     // border: 1px solid $border;
     .tabs-item {
       height: 39px;

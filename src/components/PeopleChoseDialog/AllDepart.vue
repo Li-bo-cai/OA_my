@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts">
-// import data from "./data";
 import { computed, defineComponent, onMounted, ref, reactive, nextTick, onBeforeUnmount } from "vue";
 import type Node from 'element-plus/es/components/tree/src/model/node'
 import { ElTree } from "element-plus";

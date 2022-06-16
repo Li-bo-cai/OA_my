@@ -5,7 +5,7 @@
       <div class="left_box">
         <!-- 左上盒子 -->
         <div class="letf_top_box">
-          <el-button type="primary" @click="showAddCompany=true">新增公司</el-button>
+          <el-button type="primary" @click="showAddCompany = true">新增公司</el-button>
         </div>
         <!-- 左下盒子 -->
         <div class="left_botton_box">
@@ -17,8 +17,8 @@
         <!-- 右上盒子 -->
         <div class="right_top_box">
           <div class="Info">
-            <p>部门：{{depart_name}}</p>
-            <p>负责人: <span>{{principal?principal:'暂无'}}</span></p>
+            <p>部门：{{ depart_name }}</p>
+            <p>负责人: <span>{{ principal ? principal : '暂无' }}</span></p>
           </div>
           <div class="edit">
             <el-button type="primary">编辑</el-button>
@@ -40,7 +40,8 @@
         </div>
         <div class="change_principal">
           <div>负责人</div>
-          <el-autocomplete v-model="principal_state" :fetch-suggestions="querySearchAsync" placeholder="请输入负责人" @select="handleSelect" />
+          <el-autocomplete v-model="principal_state" :fetch-suggestions="querySearchAsync" placeholder="请输入负责人"
+            @select="handleSelect" />
         </div>
         <div class="dialog_footer_btn">
           <el-button type="primary" @click="logout">确 定</el-button>
@@ -54,29 +55,19 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, getCurrentInstance, ref } from "vue";
-import { mapState } from "vuex";
+<script setup lang="ts">
+import { computed, getCurrentInstance, ref, toRefs } from "vue";
 import LeftBox from "./compontents/LeftBox.vue";
 import RightBox from "./compontents/RightBox.vue";
-export default defineComponent({
-  components: {
-    LeftBox,
-    RightBox,
-  },
-  computed: {
-    ...mapState("organzationModule", ["principal", "depart_name"]),
-  },
-  setup() {
-    const { proxy }: any = getCurrentInstance();
-    const usVuex = proxy.usVuex;
-    let showAddCompany = ref<boolean>(false); //展示新增公司弹窗
 
-    return {
-      showAddCompany,
-    };
-  },
-});
+const { proxy }: any = getCurrentInstance();
+const usVuex = proxy.usVuex;
+const state = computed(() => {
+  return usVuex.useState('organzationModule')
+})
+const { principal, depart_name } = toRefs(state.value)
+let showAddCompany = ref<boolean>(false); //展示新增公司弹窗
+
 </script>
 
 <style scoped lang="scss">
@@ -86,31 +77,38 @@ export default defineComponent({
   overflow: hidden;
   border: 1px solid #edeef2;
   border-radius: 8px;
+
   .left_box {
     flex: 1;
     border-right: 1px solid #edeef2;
     min-width: 210px;
+
     .letf_top_box {
       .el-button {
         margin-left: 20px;
       }
     }
   }
+
   .right_box {
     flex: 4;
+
     .right_top_box {
       justify-content: space-between;
       padding: 0 20px;
+
       .Info {
         p:first-child {
           margin-bottom: 10px;
         }
       }
-      .edit{
+
+      .edit {
         margin-right: 20px;
       }
     }
   }
+
   .letf_top_box,
   .right_top_box {
     display: flex;
@@ -118,34 +116,42 @@ export default defineComponent({
     height: 80px;
     border-bottom: 1px solid #edeef2;
   }
+
   .left_botton_box {
     // border-bottom: 1px solid #edeef2;
   }
 }
+
 ::deep .el-dialog__body {
   padding: 30px 38px;
   padding-top: 0;
 }
+
 .dialog_tit_tit {
   display: block;
   font-size: 18px;
   font-weight: 500;
   padding-bottom: 25px;
 }
+
 .dialog_body {
+
   .input_company,
   .change_principal {
     display: flex;
     align-items: center;
     margin-bottom: 30px;
-    & > div:first-child {
+
+    &>div:first-child {
       min-width: 72px;
       margin-right: 20px;
     }
   }
+
   .dialog_footer_btn {
     display: flex;
     flex-direction: row-reverse;
+
     .el-button:nth-child(2) {
       margin-right: 20px;
     }

@@ -80,6 +80,7 @@ const recover = (val: string) => {
   position: fixed;
   top: calc(50% - 36px);
   right: 0;
+  z-index: 99999;
 }
 
 .quick_icon {
