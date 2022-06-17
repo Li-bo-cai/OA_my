@@ -1,10 +1,11 @@
 <template>
   <div>
-
+    <Designer :schema="schema"></Designer>
   </div>
 </template>
 
 <script setup lang="ts">
+import Designer from '@/components/Designer'
 const schema = {
   type: "object",
   properties: {

@@ -11,7 +11,7 @@
       <el-table-column prop="name" label="姓名"></el-table-column>
       <el-table-column prop="name" label="姓名"></el-table-column>
       <el-table-column prop="address" label="地址"></el-table-column>
-      <el-table-column label="操作" width="440">
+      <el-table-column label="操作" width="400" fixed="right">
         <template #default="scope">
           <div class="operate-btn">
             <el-button type="primary" size="small" plain :icon="Edit" @click="edit_btn(scope.row)">编辑</el-button>
@@ -32,6 +32,7 @@
 import { inject, ref } from "vue";
 import { Edit, Setting, Position, View, Delete } from "@element-plus/icons-vue";
 import FlowChartDialog from "@/views/Oa_approve/Flowchart/GraphView.vue";
+
 const usVuex: any = inject("usVuex");
 
 const itemPanelDialogVisible = ref<boolean>(false);

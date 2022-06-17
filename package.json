@@ -22,9 +22,9 @@
     "moment": "^2.29.1",
     "socket.io": "^4.4.0",
     "socket.io-client": "^4.4.0",
-    "sortablejs": "^1.15.0",
     "vue": "^3.2.12",
     "vue-router": "^4.0.0-0",
+    "vuedraggable": "^4.1.0",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
