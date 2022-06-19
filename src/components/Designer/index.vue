@@ -1,10 +1,10 @@
 <template>
     <div class="designer">
         <div class="left-contener">
-            <ProductBox :tools="tools"></ProductBox>
+            <ProductBox :toolBag="toolBag" @changeTools="changeTools"></ProductBox>
         </div>
         <div class="center-contener">
-            <Contener :sechmaData="sechmaData"></Contener>
+            <Contener :toolBag="toolBag"></Contener>
         </div>
         <div class="right-contener">
 
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue'
+import { defineComponent, reactive } from 'vue'
 import ProductBox from './ProductBox/index.vue'
 import Contener from './Contener/index.vue'
 import toolBagJs from './toolBag'
@@ -24,10 +24,21 @@ export default defineComponent({
         Contener
     },
     setup() {
-        const { tools, sechmaData } = toRefs(reactive(toolBagJs))
+        const toolBag = reactive(toolBagJs)
+        const tools = JSON.parse(JSON.stringify(toolBagJs.tools))
+
+        const changeTools = (value: any) => {
+            console.log(tools);
+
+            if (value) {
+                toolBag.tools = tools
+            }
+            console.log(toolBag);
+        }
+
         return {
-            tools,
-            sechmaData
+            toolBag,
+            changeTools
         }
     }
 })

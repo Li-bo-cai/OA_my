@@ -3,8 +3,29 @@ const toolBagJs = {
         {
             label: '输入控件',
             toolItem: [
-                { name: "库存", id: 1, disabledMove: false, disabledPark: false },
-                { name: "输入框", id: 2, disabledMove: false, disabledPark: false }
+                {
+                    id: '1',
+                    type: '1-1',
+                    info: {
+                        type: "string",
+                        title: "输入框",
+                        "x-decorator": "FormItem",
+                        "x-component": "Input",
+                    }
+                },
+                {
+                    id: '2',
+                    type: '1-2',
+                    info: {
+                        type: "string",
+                        title: "文本框",
+                        "x-decorator": "FormItem",
+                        "x-component": "Input.TextArea",
+                        "x-component-props": {
+                            type: "textarea",
+                        },
+                    }
+                }
             ]
         },
         {
@@ -17,27 +38,27 @@ const toolBagJs = {
         },
     ],
     sechmaData: [
-        {
-            id: 1,
-            info: {
-                type: "string",
-                title: "输入框",
-                "x-decorator": "FormItem",
-                "x-component": "Input",
-            }
-        },
-        {
-            id: 2,
-            info: {
-                type: "string",
-                title: "文本框",
-                "x-decorator": "FormItem",
-                "x-component": "Input.TextArea",
-                "x-component-props": {
-                    type: "textarea",
-                },
-            }
-        }
+        // {
+        //     id: '3',
+        //     info: {
+        //         type: "string",
+        //         title: "输入框",
+        //         "x-decorator": "FormItem",
+        //         "x-component": "Input",
+        //     }
+        // },
+        // {
+        //     id: '4',
+        //     info: {
+        //         type: "string",
+        //         title: "文本框",
+        //         "x-decorator": "FormItem",
+        //         "x-component": "Input.TextArea",
+        //         "x-component-props": {
+        //             type: "textarea",
+        //         },
+        //     }
+        // }
     ]
 }
 

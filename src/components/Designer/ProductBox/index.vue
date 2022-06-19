@@ -3,22 +3,22 @@
         <el-scrollbar height="calc(100vh - 110px)">
             <div class="demo-collapse">
                 <el-collapse v-model="activeNames" @change="handleChange">
-                    <el-collapse-item v-for="(tool, index) in toolArray" :title="tool.label" :name="tool.label"
+                    <el-collapse-item v-for="(tool, index) in toolBag.tools" :title="tool.label" :name="tool.label"
                         animation="300" :key="index">
-                        <draggable :list="tool.toolItem" ghost-class="ghost" handle=".move" filter=".forbid"
-                            chosen-class="chosenClass" animation="300" :sort="false" :itemKey="tool.label"
-                            class="tool-box">
+                        <Draggable v-model="tool.toolItem" ghost-class="ghost" handle=".move" filter=".forbid"
+                            :group="groupA" chosen-class="chosenClass" animation="300" :force-fallback="false"
+                            :sort="false" itemKey="type" class="tool-box" @start="onStart" @end="onEnd">
                             <template #item="{ element }">
-                                <div class="tool-item move">
+                                <div class="tool-item move" :data-id="element.type">
                                     <div>
                                         <el-icon>
                                             <CreditCard />
                                         </el-icon>
                                     </div>
-                                    <div>{{ element.name }}</div>
+                                    <div>{{ element.info.title }}</div>
                                 </div>
                             </template>
-                        </draggable>
+                        </Draggable>
                     </el-collapse-item>
                 </el-collapse>
             </div>
@@ -27,32 +27,56 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
-import draggable from 'vuedraggable'
+import { defineComponent, ref, toRefs } from 'vue'
+import Draggable from 'vuedraggable'
 
 export default defineComponent({
     props: {
-        tools: {
-            type: Array,
-            default: () => []
+        toolBag: {
+            type: Object,
+            default: () => ({})
         }
     },
     components: {
-        draggable
+        Draggable
     },
-    setup(props) {
-        const toolArray = reactive(props.tools as Array<any>)
-
+    setup(props, context) {
         const activeNames = ref(['输入控件'])
+        const draggIemtIndex = ref('')
+        // const draggItemData = ref('')
 
         const handleChange = (val: string[]) => {
             console.log(val)
         }
 
+        //拖拽开始的事件
+        const onStart = (e: any) => {
+            console.log("开始拖拽", e);
+            let arr = props.toolBag.tools;
+            let [a, b]: any = [...draggIemtIndex.value.split('-')];
+            draggIemtIndex.value = e.item.dataset.id;
+            // draggItemData.value = arr[a - 1].toolItem[b - 1];
+        };
+
+        //拖拽结束的事件
+        const onEnd = () => {
+            console.log("结束拖拽");
+            context.emit('changeTools', true)
+        };
+
         return {
-            toolArray,
+            groupA: {
+                name: "itxst",
+                put: false, //不允许拖入
+                pull: (data: any) => {
+                    console.log(data);
+                    return true
+                },
+            },
             activeNames,
             handleChange,
+            onStart,
+            onEnd
         }
     }
 })
