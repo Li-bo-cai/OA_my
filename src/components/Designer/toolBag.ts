@@ -10,6 +10,10 @@ const toolBagJs = {
                         type: "string",
                         title: "输入框",
                         "x-decorator": "FormItem",
+                        "x-decorator-props": {
+                            "labelCol": 5,
+                            "wrapperCol": 16,
+                        },
                         "x-component": "Input",
                     }
                 },
@@ -20,6 +24,10 @@ const toolBagJs = {
                         type: "string",
                         title: "文本框",
                         "x-decorator": "FormItem",
+                        "x-decorator-props": {
+                            "labelCol": 5,
+                            "wrapperCol": 16,
+                        },
                         "x-component": "Input.TextArea",
                         "x-component-props": {
                             type: "textarea",
@@ -44,6 +52,10 @@ const toolBagJs = {
                 type: "string",
                 title: "输入框",
                 "x-decorator": "FormItem",
+                "x-decorator-props": {
+                    "labelCol": 5,
+                    "wrapperCol": 16,
+                },
                 "x-component": "Input",
             }
         },
@@ -54,6 +66,10 @@ const toolBagJs = {
                 title: "文本框",
                 "x-decorator": "FormItem",
                 "x-component": "Input.TextArea",
+                "x-decorator-props": {
+                    "labelCol": 5,
+                    "wrapperCol": 16,
+                },
                 "x-component-props": {
                     type: "textarea",
                 },

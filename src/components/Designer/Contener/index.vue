@@ -1,30 +1,27 @@
 <template>
     <div class="contener-box">
         <el-scrollbar height="calc(100vh - 110px)">
-            <Form :form="form" style="height: 100%;" class="mr10">
-                <Draggable v-model="sechmaData" ghost-class="ghost" chosen-class="chosenClass" animation="300"
-                    itemKey="id" touch-start-threshold="50" :fallback-tolerance="50" :fallback-class="true"
-                    @start="onStart" @end="onEnd" :group="groupB" style="height: 100%;">
-                    <template #item="{ element }">
-                        <div class="draggable-item move" :class="{ is_active: nowItem == element }"
-                            @click="getItem(element)">
-                            <FormProvider :form="form">
-                                <SchemaField :schema="{
-                                    type: 'object',
-                                    properties: {
-                                        [element.id]: element.info
-                                    },
-                                }">
-                                </SchemaField>
-                            </FormProvider>
-                            <div class="draggable-btn" v-show="nowItem.id == element.id">
-                                <el-button type="primary" :icon="Delete" circle @click="delToolItem(element)" />
-                            </div>
+            <Draggable v-model="sechmaData" ghost-class="ghost" chosen-class="chosenClass" animation="300" itemKey="id"
+                touch-start-threshold="50" :fallback-tolerance="50" :fallback-class="true" @start="onStart" @end="onEnd"
+                :group="groupB" style="height: calc(100vh - 120px);">
+                <template #item="{ element }">
+                    <div class="draggable-item move" :class="{ is_active: nowItem == element }"
+                        @click="getItem(element)">
+                        <FormProvider :form="form">
+                            <SchemaField :schema="{
+                                type: 'object',
+                                properties: {
+                                    [element.id]: element.info
+                                },
+                            }">
+                            </SchemaField>
+                        </FormProvider>
+                        <div class="draggable-btn" v-show="nowItem.id == element.id">
+                            <el-button type="primary" :icon="Delete" circle @click="delToolItem(element)" />
                         </div>
-                    </template>
-                </Draggable>
-                <!-- <el-button type="primary" @click="onSubmit">提交</el-button> -->
-            </Form>
+                    </div>
+                </template>
+            </Draggable>
         </el-scrollbar>
     </div>
 </template>

@@ -89,6 +89,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .demo-collapse {
     margin: 0 5px;
+    user-select: none;
 
     .tool-box {
         display: flex;
@@ -107,7 +108,6 @@ export default defineComponent({
         margin-right: 5px;
         border: 1px solid #ccc;
         cursor: pointer;
-        user-select: none
     }
 
     .tool-item:last-child {

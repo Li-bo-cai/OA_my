@@ -17,13 +17,15 @@
 import { defineComponent, reactive, ref } from 'vue'
 import { createForm } from '@formily/core'
 import { createSchemaField, FormProvider } from "@formily/vue";
+import { Hello } from '../components/button'
 import * as ElementPlus from "@formily/element-plus"
 import modifyToolJS from "../utils/modifyTool"
 
 
 const { SchemaField } = createSchemaField({
     components: {
-        ...ElementPlus
+        ...ElementPlus,
+        Hello
     },
 });
 
@@ -52,5 +54,6 @@ export default defineComponent({
 <style scoped lang="scss">
 .config-box {
     padding: 5px;
+    user-select: none;
 }
 </style>
