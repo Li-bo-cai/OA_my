@@ -1,25 +1,31 @@
 <template>
     <div class="contener-box">
-        <Draggable v-model="sechmaData" ghost-class="ghost" chosen-class="chosenClass" animation="300" itemKey="id"
-            touch-start-threshold="50" :fallback-tolerance="50" :fallback-class="true" @start="onStart" @end="onEnd"
-            :group="groupB" style="height: 100%;">
-            <template #item="{ element }">
-                <div class="draggable-item move" :class="{ is_active: nowItem == element }" @click="getItem(element)">
-                    <FormProvider :form="form">
-                        <SchemaField :schema="{
-                            type: 'object',
-                            properties: {
-                                [element.id]: element.info
-                            },
-                        }">
-                        </SchemaField>
-                    </FormProvider>
-                    <div class="draggable-btn" v-show="nowItem.id == element.id">
-                        <el-button type="primary" :icon="Delete" circle @click="delToolItem(element)" />
-                    </div>
-                </div>
-            </template>
-        </Draggable>
+        <el-scrollbar height="calc(100vh - 110px)">
+            <Form :form="form" style="height: 100%;" class="mr10">
+                <Draggable v-model="sechmaData" ghost-class="ghost" chosen-class="chosenClass" animation="300"
+                    itemKey="id" touch-start-threshold="50" :fallback-tolerance="50" :fallback-class="true"
+                    @start="onStart" @end="onEnd" :group="groupB" style="height: 100%;">
+                    <template #item="{ element }">
+                        <div class="draggable-item move" :class="{ is_active: nowItem == element }"
+                            @click="getItem(element)">
+                            <FormProvider :form="form">
+                                <SchemaField :schema="{
+                                    type: 'object',
+                                    properties: {
+                                        [element.id]: element.info
+                                    },
+                                }">
+                                </SchemaField>
+                            </FormProvider>
+                            <div class="draggable-btn" v-show="nowItem.id == element.id">
+                                <el-button type="primary" :icon="Delete" circle @click="delToolItem(element)" />
+                            </div>
+                        </div>
+                    </template>
+                </Draggable>
+                <!-- <el-button type="primary" @click="onSubmit">提交</el-button> -->
+            </Form>
+        </el-scrollbar>
     </div>
 </template>
 
@@ -48,11 +54,12 @@ export default defineComponent({
         SchemaField,
         FormProvider,
         Draggable,
+        ...ElementPlus
     },
     setup(props, context) {
         // console.log(props.toolBag);
         const { sechmaData } = toRefs(props.toolBag)
-
+        const form = createForm()
         const nowItem = ref({
             id: ''
         })
@@ -88,9 +95,12 @@ export default defineComponent({
                 }
             })
         }
+        const onSubmit = (value: any) => {
+            console.log(form.values);
+        };
 
         return {
-            form: createForm(),
+            form: form,
             groupB: {
                 name: "itxst",
                 put: true, //不允许拖入
@@ -104,6 +114,7 @@ export default defineComponent({
             onMove,
             getItem,   //点击事件
             delToolItem,
+            onSubmit
         }
     }
 })

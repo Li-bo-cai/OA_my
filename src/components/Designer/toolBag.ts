@@ -38,27 +38,27 @@ const toolBagJs = {
         },
     ],
     sechmaData: [
-        // {
-        //     id: '3',
-        //     info: {
-        //         type: "string",
-        //         title: "输入框",
-        //         "x-decorator": "FormItem",
-        //         "x-component": "Input",
-        //     }
-        // },
-        // {
-        //     id: '4',
-        //     info: {
-        //         type: "string",
-        //         title: "文本框",
-        //         "x-decorator": "FormItem",
-        //         "x-component": "Input.TextArea",
-        //         "x-component-props": {
-        //             type: "textarea",
-        //         },
-        //     }
-        // }
+        {
+            id: '3',
+            info: {
+                type: "string",
+                title: "输入框",
+                "x-decorator": "FormItem",
+                "x-component": "Input",
+            }
+        },
+        {
+            id: '4',
+            info: {
+                type: "string",
+                title: "文本框",
+                "x-decorator": "FormItem",
+                "x-component": "Input.TextArea",
+                "x-component-props": {
+                    type: "textarea",
+                },
+            }
+        }
     ]
 }
 

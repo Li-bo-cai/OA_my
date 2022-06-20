@@ -27,7 +27,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, toRefs } from 'vue'
+import { defineComponent, ref } from 'vue'
+import uuid from '../utils/getUid'
 import Draggable from 'vuedraggable'
 
 export default defineComponent({
@@ -42,8 +43,8 @@ export default defineComponent({
     },
     setup(props, context) {
         const activeNames = ref(['输入控件'])
-        const draggIemtIndex = ref('')
-        // const draggItemData = ref('')
+        const draggIemtIndex = ref('')  //当前分组下标
+        const draggItemData = ref('')   //当前拖拽工具
 
         const handleChange = (val: string[]) => {
             console.log(val)
@@ -51,17 +52,17 @@ export default defineComponent({
 
         //拖拽开始的事件
         const onStart = (e: any) => {
-            console.log("开始拖拽", e);
-            let arr = props.toolBag.tools;
-            let [a, b]: any = [...draggIemtIndex.value.split('-')];
+            console.log("开始拖拽");
             draggIemtIndex.value = e.item.dataset.id;
-            // draggItemData.value = arr[a - 1].toolItem[b - 1];
         };
 
         //拖拽结束的事件
-        const onEnd = () => {
-            console.log("结束拖拽");
-            context.emit('changeTools', true)
+        const onEnd = (e: any) => {
+            console.log("结束拖拽", e);
+            context.emit('changeTools', true)  //通知拖拽结束，重新渲染左侧工具栏
+            if (e.pullMode === 'clone') {
+                context.emit('increasedTool', draggItemData.value) //通知拖拽结束，新增数据，传递数据，展示右侧选项框
+            }
         };
 
         return {
@@ -69,8 +70,11 @@ export default defineComponent({
                 name: "itxst",
                 put: false, //不允许拖入
                 pull: (data: any) => {
-                    console.log(data);
-                    return true
+                    let arr = props.toolBag.tools;
+                    let [a, b]: any = [...draggIemtIndex.value.split('-')];
+                    draggItemData.value = arr[a - 1].toolItem[b - 1];
+                    arr[a - 1].toolItem[b - 1].id = uuid(8, 16)
+                    return 'clone'
                 },
             },
             activeNames,
