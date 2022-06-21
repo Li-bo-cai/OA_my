@@ -1,32 +1,32 @@
 import * as vue from 'vue';
 import { reactive, ref } from 'vue';
 import uuid from '../utils/getUid'
-import { createForm } from '@formily/core'
-import { createSchemaField } from '@formily/vue'
-import { FormItem, Input, FormGrid, ArrayItems } from '@formily/element-plus'
+import { createForm, onFormInputChange, onFormReact } from '@formily/core'
+import { createSchemaField, FormProvider } from '@formily/vue'
+import { FormItem, Input, ArrayItems, Space } from '@formily/element-plus'
 import './DataSource.scss'
 const React = { createElement: vue.h, Fragment: vue.Fragment }
 
 type stateInfc = {
     [key: string]: any
 }
+const { SchemaField } = createSchemaField({
+    components: {
+        FormItem,
+        Input,
+        ArrayItems,
+        Space
+    }
+})
 
 export const DataSource = vue.defineComponent({
     setup(props, context) {
-        const { SchemaField } = createSchemaField({
-            components: {
-                FormItem,
-                Input,
-                FormGrid,
-            },
-        })
         const modalVisibleRef = ref(true); //弹窗开关
         const state = ref<Array<stateInfc>>([])   //配置数据树
-        const activeItem = ref();
-        const formRef = reactive(createForm())  //表单数据
+        const activeItem = ref();  //当前选中节点
+        const formRef = ref(createForm())  //表单数据
         const openModal = () => (modalVisibleRef.value = true)
         const handleClose = () => (modalVisibleRef.value = false)
-        const form = formRef;
 
         const addStateClick = () => {
             // 新增节点
@@ -39,7 +39,26 @@ export const DataSource = vue.defineComponent({
             // 选中节点
             return () => {
                 activeItem.value = item;
-                console.log(activeItem.value);
+                const arr: { label: string; value: any; }[] = []
+                Object.keys(item).map((_item) => {
+                    arr.push({
+                        label: _item,
+                        value: item[_item]
+                    })
+                })
+                formRef.value = createForm({
+                    values: {
+                        'map': [...arr]
+                    },
+                    effects() {
+                        onFormReact((form) => {
+                            console.log(form, "实现表单响应式逻辑");
+                        });
+                        onFormInputChange((form) => {
+                            console.log(form);
+                        })
+                    },
+                })
             }
         }
 
@@ -50,25 +69,14 @@ export const DataSource = vue.defineComponent({
             }
         }
 
-        const addPairClick = () => {
-            //新增键值对
-            return () => {
-                form.setFieldState('map', (state: any) => {
-                    state.value.push({})
-                })
-                // activeItem.value.push({
-                //     [uuid(8, 16)]: null
-                // })
-            }
-        }
-
         return () => {
+            const form = formRef.value;
             return (
                 <div>
                     <el-button onClick={openModal}>配置可选项</el-button>
                     <el-dialog
                         v-model={modalVisibleRef.value}
-                        width="45%"
+                        width="50%"
                         before-close={handleClose}
                         v-slots={{
                             header: () => (
@@ -107,63 +115,64 @@ export const DataSource = vue.defineComponent({
                             <div class={'right-property-box'}>
                                 <div class={'header'}>
                                     <div>节点属性</div>
-                                    <el-button size="large" text icon={"Plus"} onClick={addPairClick}>添加键值对</el-button>
+                                    {activeItem.value && <el-button size="large" text icon={"Plus"} onClick={() => {
+                                        //新增键值对
+                                        form.setFieldState('map', (state: any) => {
+                                            state.value.push({})
+                                        })
+                                    }}>添加键值对</el-button>}
                                 </div>
 
                                 <el-scrollbar height="40vh">
                                     <div class={'options-box'}>
-                                        <SchemaField
-                                            schema={{
-                                                type: 'object',
-                                                properties: {
-                                                    map: {
-                                                        type: 'array',
-                                                        'x-component': 'ArrayItems',
-                                                        items: {
-                                                            type: 'object',
-                                                            'x-decorator': 'ArrayItems.Item',
-                                                            'x-decorator-props': { type: 'divide' },
-                                                            'x-component': 'Space',
-                                                            properties: {
-                                                                label: {
-                                                                    'x-decorator': 'FormItem',
-                                                                    'x-decorator-props': {
-                                                                        label: '键名'
+                                        <FormProvider form={form}>
+                                            <SchemaField
+                                                schema={{
+                                                    type: 'object',
+                                                    properties: {
+                                                        map: {
+                                                            type: 'array',
+                                                            'x-component': 'ArrayItems',
+                                                            items: {
+                                                                type: 'object',
+                                                                'x-decorator': 'ArrayItems.Item',
+                                                                'x-decorator-props': { type: 'divide' },
+                                                                'x-component': 'Space',
+                                                                properties: {
+                                                                    label: {
+                                                                        'x-decorator': 'FormItem',
+                                                                        'x-decorator-props': {
+                                                                            label: '键名'
+                                                                        },
+                                                                        name: 'label',
+                                                                        'x-component': 'Input'
                                                                     },
-                                                                    name: 'label',
-                                                                    'x-component': 'Input'
-                                                                },
-                                                                value: {
-                                                                    'x-decorator': 'FormItem',
-                                                                    'x-decorator-props': {
-                                                                        label: '键值'
+                                                                    value: {
+                                                                        'x-decorator': 'FormItem',
+                                                                        'x-decorator-props': {
+                                                                            label: '键值'
+                                                                        },
+                                                                        name: 'value',
+                                                                        'x-component': 'Input'
                                                                     },
-                                                                    name: 'value',
-                                                                    'x-component': 'Input'
-                                                                },
-                                                                remove: {
-                                                                    type: 'void',
-                                                                    'x-component': 'ArrayItems.Remove',
-                                                                    'x-component-props': {
-                                                                        style: {
-                                                                            margin: 5,
-                                                                            display: 'flex',
-                                                                            justifyContent: 'center',
-                                                                            alignItems: 'center'
-                                                                        }
+                                                                    remove: {
+                                                                        type: 'void',
+                                                                        'x-decorator': 'FormItem',
+                                                                        'x-component': 'ArrayItems.Remove',
                                                                     }
                                                                 }
                                                             }
                                                         }
                                                     }
-                                                }
-                                            }}
-                                        />
+                                                }}
+                                            />
+                                        </FormProvider>
                                     </div>
                                 </el-scrollbar>
+
                             </div>
                         </div >
-                    </el-dialog>
+                    </el-dialog >
                 </div >
             )
         }
