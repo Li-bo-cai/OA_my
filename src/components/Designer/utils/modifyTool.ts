@@ -109,7 +109,7 @@ const modifyToolJS = [
                         "wrapperCol": 18,
                         "labelAlign": "left"
                     },
-                    "x-component": "Hello",
+                    "x-component": "DataSource",
                 }
 
             }

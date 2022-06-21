@@ -1,0 +1,56 @@
+.configC-box {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.left-tree-box {
+    width: 40%;
+    border-right: 1px solid #ccc;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ccc;
+    }
+    .option-Item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        &:hover {
+            .delete-icon {
+                display: block;
+            }
+        }
+    }
+    .is_hover {
+        &:hover {
+            background-color: #eee;
+        }
+    }
+    .is_active {
+        background: #9fcefd;
+    }
+    .delete-icon {
+        display: none;
+        width: 1em;
+        height: 1em;
+        & :hover {
+            color: #409eff;
+        }
+    }
+}
+.right-property-box {
+    width: 60%;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ccc;
+    }
+    .options-box{
+        padding: 0 10px;
+    }
+}

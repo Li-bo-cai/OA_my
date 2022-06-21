@@ -1,15 +1,17 @@
 <template>
     <div class="config-box">
-        <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item v-for="(toolItem, index) in modifyTools" :title="toolItem.label" :name="toolItem.label"
-                :key="index">
-                <div>
-                    <FormProvider :form="form">
-                        <SchemaField :schema="toolItem.sechmaItem" />
-                    </FormProvider>
-                </div>
-            </el-collapse-item>
-        </el-collapse>
+        <el-scrollbar height="calc(100vh - 110px)">
+            <el-collapse v-model="activeNames" @change="handleChange">
+                <el-collapse-item v-for="(toolItem, index) in modifyTools" :title="toolItem.label"
+                    :name="toolItem.label" :key="index">
+                    <div style="margin-right: 10px;">
+                        <FormProvider :form="form">
+                            <SchemaField :schema="toolItem.sechmaItem" />
+                        </FormProvider>
+                    </div>
+                </el-collapse-item>
+            </el-collapse>
+        </el-scrollbar>
     </div>
 </template>
 
@@ -17,15 +19,16 @@
 import { defineComponent, reactive, ref } from 'vue'
 import { createForm } from '@formily/core'
 import { createSchemaField, FormProvider } from "@formily/vue";
-import { Hello } from '../components/button'
+
 import * as ElementPlus from "@formily/element-plus"
 import modifyToolJS from "../utils/modifyTool"
 
+import * as configCmpt from "../components/index"
 
 const { SchemaField } = createSchemaField({
     components: {
         ...ElementPlus,
-        Hello
+        ...configCmpt
     },
 });
 
@@ -53,7 +56,8 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .config-box {
-    padding: 5px;
+    padding: 0 5px;
+    overflow: hidden;
     user-select: none;
 }
 </style>

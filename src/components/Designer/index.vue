@@ -65,12 +65,12 @@ export default defineComponent({
 }
 
 .center-contener {
-    width: 45%;
+    width: 50%;
     border: 1px solid #ccc;
 }
 
 .right-contener {
-    width: 30%;
+    width: 25%;
     border: 1px solid #ccc;
 }
 </style>
