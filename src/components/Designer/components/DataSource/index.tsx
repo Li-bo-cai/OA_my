@@ -1,10 +1,11 @@
 import * as vue from 'vue';
-import { reactive, ref } from 'vue';
-import uuid from '../utils/getUid'
+import { ref } from 'vue';
+import uuid from '../../utils/getUid'
 import { createForm, onFormInputChange, onFormReact } from '@formily/core'
 import { createSchemaField, FormProvider } from '@formily/vue'
 import { FormItem, Input, ArrayItems, Space } from '@formily/element-plus'
 import './DataSource.scss'
+
 const React = { createElement: vue.h, Fragment: vue.Fragment }
 
 type stateInfc = {
@@ -20,13 +21,29 @@ const { SchemaField } = createSchemaField({
 })
 
 export const DataSource = vue.defineComponent({
-    setup(props, context) {
-        const modalVisibleRef = ref(true); //弹窗开关
+    props: {
+        onChange: {
+            type: Function
+        }
+    },
+    setup(props) {
+        const modalVisibleRef = ref(false); //弹窗开关
         const state = ref<Array<stateInfc>>([])   //配置数据树
         const activeItem = ref();  //当前选中节点
         const formRef = ref(createForm())  //表单数据
+
         const openModal = () => (modalVisibleRef.value = true)
-        const handleClose = () => (modalVisibleRef.value = false)
+
+        const handleClose = () => {
+            // 关闭弹窗
+            modalVisibleRef.value = false
+        }
+
+        const confirm = () => {
+            console.log(state.value);
+            props.onChange?.(state.value)
+            handleClose()
+        }
 
         const addStateClick = () => {
             // 新增节点
@@ -35,7 +52,8 @@ export const DataSource = vue.defineComponent({
                 value: uuid(8, 16)
             })
         }
-        const activeItemClick = (item: any) => {
+
+        const activeItemClick = (item: any, index: number) => {
             // 选中节点
             return () => {
                 activeItem.value = item;
@@ -46,6 +64,7 @@ export const DataSource = vue.defineComponent({
                         value: item[_item]
                     })
                 })
+
                 formRef.value = createForm({
                     values: {
                         'map': [...arr]
@@ -55,7 +74,12 @@ export const DataSource = vue.defineComponent({
                             console.log(form, "实现表单响应式逻辑");
                         });
                         onFormInputChange((form) => {
-                            console.log(form);
+                            const obj = {}
+                            form.values.map.forEach((mapValue: { label: string; value: any; }) => {
+                                Object.assign(obj, { [mapValue.label]: mapValue.value })
+                            })
+                            activeItem.value = obj
+                            state.value[index] = obj
                         })
                     },
                 })
@@ -84,8 +108,8 @@ export const DataSource = vue.defineComponent({
                             ),
                             footer: () => (
                                 <span class={'dialog-footer'}>
-                                    <el-button onclick={handleClose}>Cancel</el-button>
-                                    <el-button type="primary" onclick={handleClose}  >Confirm</el-button>
+                                    <el-button onclick={handleClose}>取消</el-button>
+                                    <el-button type="primary" onclick={confirm}>确定</el-button>
                                 </span>
                             )
                         }}
@@ -102,8 +126,8 @@ export const DataSource = vue.defineComponent({
                                     <div class={'options-box'}>
                                         {state.value.map((item, index) => {
                                             return (
-                                                <div class={item.value == (activeItem.value && activeItem.value.value) ? 'option-Item is_active' : 'option-Item is_hover'} onClick={activeItemClick(item)}>
-                                                    <div>{item.label || item.value || '默认标题'}</div>
+                                                <div class={item.value == (activeItem.value && activeItem.value.value) ? 'option-Item is_active' : 'option-Item is_hover'} onClick={activeItemClick(item, index)}>
+                                                    <div>{item[Object.keys(item)[0]] || '默认标题'}</div>
                                                     <svg class={'delete-icon'} onClick={delItemClick(index)} viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-78e17ca8=""><path fill="currentColor" d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z"></path></svg>
                                                 </div>
                                             )
@@ -137,30 +161,37 @@ export const DataSource = vue.defineComponent({
                                                                 type: 'object',
                                                                 'x-decorator': 'ArrayItems.Item',
                                                                 'x-decorator-props': { type: 'divide' },
-                                                                'x-component': 'Space',
+                                                                // 'x-component': 'Space',
                                                                 properties: {
-                                                                    label: {
-                                                                        'x-decorator': 'FormItem',
-                                                                        'x-decorator-props': {
-                                                                            label: '键名'
-                                                                        },
-                                                                        name: 'label',
-                                                                        'x-component': 'Input'
-                                                                    },
-                                                                    value: {
-                                                                        'x-decorator': 'FormItem',
-                                                                        'x-decorator-props': {
-                                                                            label: '键值'
-                                                                        },
-                                                                        name: 'value',
-                                                                        'x-component': 'Input'
-                                                                    },
-                                                                    remove: {
+                                                                    space: {
                                                                         type: 'void',
-                                                                        'x-decorator': 'FormItem',
-                                                                        'x-component': 'ArrayItems.Remove',
+                                                                        'x-component': 'Space',
+                                                                        properties: {
+                                                                            label: {
+                                                                                'x-decorator': 'FormItem',
+                                                                                'x-decorator-props': {
+                                                                                    label: '键名'
+                                                                                },
+                                                                                name: 'label',
+                                                                                'x-component': 'Input'
+                                                                            },
+                                                                            value: {
+                                                                                'x-decorator': 'FormItem',
+                                                                                'x-decorator-props': {
+                                                                                    label: '键值'
+                                                                                },
+                                                                                name: 'value',
+                                                                                'x-component': 'Input'
+                                                                            },
+                                                                            remove: {
+                                                                                type: 'void',
+                                                                                'x-decorator': 'FormItem',
+                                                                                'x-component': 'ArrayItems.Remove',
+                                                                            }
+                                                                        }
                                                                     }
                                                                 }
+
                                                             }
                                                         }
                                                     }

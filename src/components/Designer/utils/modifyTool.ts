@@ -110,6 +110,16 @@ const modifyToolJS = [
                         "labelAlign": "left"
                     },
                     "x-component": "DataSource",
+                },
+                "x-reactions": {
+                    title: '响应器规则',
+                    "x-decorator": "FormItem",
+                    "x-decorator-props": {
+                        "labelCol": 6,
+                        "wrapperCol": 18,
+                        "labelAlign": "left"
+                    },
+                    "x-component": "Reactions",
                 }
 
             }
