@@ -1,11 +1,13 @@
+import { createForm } from '@formily/core';
+import { clone } from '@formily/shared';
 import * as vue from 'vue';
 import { ref } from 'vue';
 
 export const Reactions = vue.defineComponent({
-    setup() {
-
+    setup(props) {
+        
         const modalVisibleRef = ref(false); //弹窗开关
-
+        const formRef = ref(createForm({}))
 
         const openModal = () => (modalVisibleRef.value = true)
         const handleClose = () => {
@@ -14,6 +16,7 @@ export const Reactions = vue.defineComponent({
         }
 
         return () => {
+            const form = formRef.value
             return (
                 <div>
                     <el-button onClick={openModal}>配置响应器</el-button>
@@ -33,7 +36,9 @@ export const Reactions = vue.defineComponent({
                             )
                         }}
                     >
-                        1234
+                        <div class={'header'}>
+
+                        </div>
                     </el-dialog>
                 </div>
             )

@@ -33,6 +33,16 @@ const { SchemaField } = createSchemaField({
 });
 
 export default defineComponent({
+    props: {
+        allNodeInfo: {
+            type: Object,
+            default: () => ({})
+        },
+        activeNodeInfo: {
+            type: Object,
+            default: () => ({})
+        }
+    },
     components: {
         FormProvider,
         SchemaField

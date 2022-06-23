@@ -28,8 +28,8 @@
 
 <script lang="ts">
 import { createForm } from '@formily/core'
-import { defineComponent, ref, toRefs } from 'vue'
-import { createSchemaField, FormProvider } from "@formily/vue";
+import { defineComponent, reactive, ref, toRefs } from 'vue'
+import { createSchemaField, FormProvider, useFieldSchema } from "@formily/vue";
 import * as ElementPlus from "@formily/element-plus"
 import Draggable from 'vuedraggable'
 import { Delete } from '@element-plus/icons-vue'
@@ -54,9 +54,10 @@ export default defineComponent({
         ...ElementPlus
     },
     setup(props, context) {
-        // console.log(props.toolBag);
         const { sechmaData } = toRefs(props.toolBag)
-        const form = createForm()
+
+        const form = reactive(createForm())
+
         const nowItem = ref({
             id: ''
         })
@@ -80,8 +81,11 @@ export default defineComponent({
 
         // 点击事件
         const getItem = (e: any) => {
-            console.log(e);
-            nowItem.value = e
+            nowItem.value = e;
+            console.log(form);
+
+            // context.emit('activeNode', { allData: sechmaData, activData: e })
+
         }
         // 点击删除按钮
         type Any = any

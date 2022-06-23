@@ -4,16 +4,16 @@
             <ProductBox :toolBag="toolBag" @changeTools="changeTools" @increasedTool="increasedTool"></ProductBox>
         </div>
         <div class="center-contener">
-            <Contener :toolBag="toolBag"></Contener>
+            <Contener :toolBag="toolBag" @activeNode="activeNode"></Contener>
         </div>
         <div class="right-contener">
-            <ConfigItem></ConfigItem>
+            <ConfigItem :allNodeInfo="allNodeInfo" :activeNodeInfo="activeNodeInfo"></ConfigItem>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import ProductBox from './ProductBox/index.vue'
 import Contener from './Contener/index.vue'
 import ConfigItem from './ConfigItem/index.vue'
@@ -26,8 +26,11 @@ export default defineComponent({
         ConfigItem
     },
     setup() {
-        const toolBag = reactive(toolBagJs)
+        const toolBag = reactive(toolBagJs)   //左侧功能按钮
         const tools = JSON.parse(JSON.stringify(toolBagJs.tools))
+
+        const allNodeInfo = ref()
+        const activeNodeInfo = ref()
 
         const changeTools = (value: any) => {
             // 重新渲染左侧工具栏
@@ -39,14 +42,22 @@ export default defineComponent({
         }
 
         const increasedTool = (value: any) => {
-            console.log(value);
+            // console.log(value);
+            allNodeInfo.value = value.allData;
+            activeNodeInfo.value = value.activData
+        }
 
+        const activeNode = (value: any) => {
+            console.log(value);
         }
 
         return {
             toolBag,
+            allNodeInfo,
+            activeNodeInfo,
             changeTools,
-            increasedTool
+            increasedTool,
+            activeNode
         }
     }
 })
