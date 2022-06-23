@@ -1,13 +1,13 @@
 <template>
     <div class="contener-box">
         <el-scrollbar height="calc(100vh - 110px)">
-            <Draggable v-model="sechmaData" ghost-class="ghost" chosen-class="chosenClass" animation="300" itemKey="id"
-                touch-start-threshold="50" :fallback-tolerance="50" :fallback-class="true" @start="onStart" @end="onEnd"
-                :group="groupB" style="height: calc(100vh - 120px);">
-                <template #item="{ element }">
-                    <div class="draggable-item move" :class="{ is_active: nowItem == element }"
-                        @click="getItem(element)">
-                        <FormProvider :form="form">
+            <FormProvider :form="form">
+                <Draggable v-model="sechmaData" ghost-class="ghost" chosen-class="chosenClass" animation="300"
+                    itemKey="id" touch-start-threshold="50" :fallback-tolerance="50" :fallback-class="true"
+                    @start="onStart" @end="onEnd" :group="groupB" style="height: calc(100vh - 120px);">
+                    <template #item="{ element }">
+                        <div class="draggable-item move" :class="{ is_active: nowItem == element }"
+                            @click="getItem(element)">
                             <SchemaField :schema="{
                                 type: 'object',
                                 properties: {
@@ -15,24 +15,24 @@
                                 },
                             }">
                             </SchemaField>
-                        </FormProvider>
-                        <div class="draggable-btn" v-show="nowItem.id == element.id">
-                            <el-button type="primary" :icon="Delete" circle @click="delToolItem(element)" />
+                            <div class="draggable-btn" v-show="nowItem.id == element.id">
+                                <el-button type="primary" :icon="Delete" circle @click="delToolItem(element)" />
+                            </div>
                         </div>
-                    </div>
-                </template>
-            </Draggable>
+                    </template>
+                </Draggable>
+            </FormProvider>
         </el-scrollbar>
     </div>
 </template>
 
 <script lang="ts">
 import { createForm } from '@formily/core'
-import { defineComponent, reactive, ref, toRefs } from 'vue'
+import { defineComponent, watch, ref, toRefs } from 'vue'
 import { createSchemaField, FormProvider, useFieldSchema } from "@formily/vue";
 import * as ElementPlus from "@formily/element-plus"
 import Draggable from 'vuedraggable'
-import { Delete } from '@element-plus/icons-vue'
+import { Delete } from '@element-plus/icons-vue';
 
 const { SchemaField } = createSchemaField({
     components: {
@@ -55,8 +55,17 @@ export default defineComponent({
     },
     setup(props, context) {
         const { sechmaData } = toRefs(props.toolBag)
+        const fromRef = ref(createForm({
+            readOnly: true,
+        }))
 
-        const form = reactive(createForm())
+        watch(sechmaData, (newValue, oldValue) => {
+            fromRef.value = createForm({
+                readOnly: true,
+            })
+        })
+
+        const form = fromRef.value
 
         const nowItem = ref({
             id: ''
@@ -82,10 +91,8 @@ export default defineComponent({
         // 点击事件
         const getItem = (e: any) => {
             nowItem.value = e;
-            console.log(form);
-
-            // context.emit('activeNode', { allData: sechmaData, activData: e })
-
+            console.log(form, e);
+            context.emit('activeNode', { allData: form.fields, activData: e })
         }
         // 点击删除按钮
         type Any = any
@@ -97,7 +104,7 @@ export default defineComponent({
             })
         }
         const onSubmit = (value: any) => {
-            console.log(form.values);
+            console.log(form);
         };
 
         return {
