@@ -42,13 +42,14 @@ export default defineComponent({
         }
 
         const increasedTool = (value: any) => {
+            // 拖拽结束后返回存在的表单
             // console.log(value);
-            allNodeInfo.value = value.allData;
-            activeNodeInfo.value = value.activData
         }
 
         const activeNode = (value: any) => {
             console.log(value);
+            // allNodeInfo.value = value.allData;
+            // activeNodeInfo.value = value.activData
         }
 
         return {

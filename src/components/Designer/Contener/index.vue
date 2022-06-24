@@ -6,7 +6,7 @@
                     itemKey="id" touch-start-threshold="50" :fallback-tolerance="50" :fallback-class="true"
                     @start="onStart" @end="onEnd" :group="groupB" style="height: calc(100vh - 120px);">
                     <template #item="{ element }">
-                        <div class="draggable-item move" :class="{ is_active: nowItem == element }"
+                        <div class="draggable-item move" :class="{ is_active: nowItem.id == element.id }"
                             @click="getItem(element)">
                             <SchemaField :schema="{
                                 type: 'object',
@@ -29,7 +29,7 @@
 <script lang="ts">
 import { createForm } from '@formily/core'
 import { defineComponent, watch, ref, toRefs } from 'vue'
-import { createSchemaField, FormProvider, useFieldSchema } from "@formily/vue";
+import { createSchemaField, FormProvider } from "@formily/vue";
 import * as ElementPlus from "@formily/element-plus"
 import Draggable from 'vuedraggable'
 import { Delete } from '@element-plus/icons-vue';
@@ -88,15 +88,20 @@ export default defineComponent({
             return true;
         };
 
-        // 点击事件
         const getItem = (e: any) => {
+            // 点击事件
             nowItem.value = e;
-            console.log(form, e);
-            context.emit('activeNode', { allData: form.fields, activData: e })
+            console.log(form);
+            
+            // 获取指定filed信息
+            form.getFieldState(e.id, (res) => {
+                context.emit('activeNode', { allData: form.fields, activData: res })
+            })
         }
-        // 点击删除按钮
+
         type Any = any
         const delToolItem = (delItem: any) => {
+            // 点击删除按钮
             (sechmaData.value as Array<Any>).forEach((item: any, index: any) => {
                 if (item.id == delItem.id) {
                     (sechmaData.value as Array<Any>).splice(index, 1)
