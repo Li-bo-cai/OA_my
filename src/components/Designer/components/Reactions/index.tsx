@@ -1,13 +1,11 @@
-import { createForm } from '@formily/core';
-import { clone } from '@formily/shared';
 import * as vue from 'vue';
-import { ref } from 'vue';
+import { createForm } from '@formily/core';
 
 export const Reactions = vue.defineComponent({
     setup(props) {
         
-        const modalVisibleRef = ref(false); //弹窗开关
-        const formRef = ref(createForm({}))
+        const modalVisibleRef = vue.ref(false); //弹窗开关
+        const formRef = vue.ref(createForm({}))
 
         const openModal = () => (modalVisibleRef.value = true)
         const handleClose = () => {

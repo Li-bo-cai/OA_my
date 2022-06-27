@@ -6,12 +6,7 @@
                     :name="toolItem.label" :key="index">
                     <div style="margin-right: 10px;">
                         <FormProvider :form="form">
-                            <!-- <SchemaField :schema="toolItem.sechmaItem" /> -->
-                            <SchemaField>
-                                <SchemaObjectField name="custom" x-component="Custom"
-                                    :x-component-props="{ 'schema': toolItem.sechmaItem }">
-                                </SchemaObjectField>
-                            </SchemaField>
+                            <SchemaField :schema="toolItem.sechmaItem" />
                         </FormProvider>
                     </div>
                 </el-collapse-item>
@@ -23,29 +18,18 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import { createForm } from '@formily/core'
-import { createSchemaField, FormProvider, useFieldSchema } from "@formily/vue";
+import { createSchemaField, FormProvider } from "@formily/vue";
 
 import * as ElementPlus from "@formily/element-plus"
 import modifyToolJS from "../utils/modifyTool"
 
 import * as configCmpt from "../components/index"
 
-const Custom = defineComponent({
-    setup() {
-        const schemaRef = useFieldSchema()
-        return () => {
-            const schema = schemaRef.value
-            console.log(schema);
-        }
-    }
-})
 
-
-const { SchemaField, SchemaObjectField } = createSchemaField({
+const { SchemaField } = createSchemaField({
     components: {
         ...ElementPlus,
         ...configCmpt,
-        Custom
     },
 });
 
@@ -62,7 +46,7 @@ export default defineComponent({
     },
     components: {
         FormProvider,
-        SchemaField
+        SchemaField,
     },
     setup() {
         const modifyTools = reactive(modifyToolJS)

@@ -1,5 +1,4 @@
 import * as vue from 'vue';
-import { ref } from 'vue';
 import uuid from '../../utils/getUid'
 import { createForm, onFormInputChange, onFormReact } from '@formily/core'
 import { createSchemaField, FormProvider } from '@formily/vue'
@@ -29,10 +28,10 @@ export const DataSource = observer(
             }
         },
         setup(props) {
-            const modalVisibleRef = ref(false); //弹窗开关
-            const state = ref<Array<stateInfc>>([])   //配置数据树
-            const activeItem = ref();  //当前选中节点
-            const formRef = ref(createForm())  //表单数据
+            const modalVisibleRef = vue.ref(false); //弹窗开关
+            const state = vue.ref<Array<stateInfc>>([])   //配置数据树
+            const activeItem = vue.ref();  //当前选中节点
+            const formRef = vue.ref(createForm())  //表单数据
 
             const openModal = () => (modalVisibleRef.value = true)
 

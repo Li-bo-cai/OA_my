@@ -31,7 +31,7 @@ app.use(SocketIO, {
     options: {
         path: '',
         transports: ['websocket', 'post'],
-        autoConnect: true,  //是否自动打开
+        autoConnect: false,  //是否自动打开
         transportOptions: {
             polling: {
                 extraHeaders: {

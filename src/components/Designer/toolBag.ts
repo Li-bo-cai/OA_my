@@ -7,15 +7,20 @@ const toolBagJs = {
                     id: '1',
                     type: '1-1',
                     info: {
-                        type: "string",
-                        title: "输入框",
-                        "x-decorator": "FormItem",
+                        type: 'void',
+                        title: '输入框',
+                        "x-decorator": "SelfCompt",
                         "x-decorator-props": {
-                            "labelCol": 5,
-                            "wrapperCol": 16,
+                            type: "string",
+                            title: "输入框",
+                            "x-decorator": "FormItem",
+                            "x-decorator-props": {
+                                "labelCol": 5,
+                                "wrapperCol": 16,
+                            },
+                            "x-component": "Input",
                         },
-                        "x-component": "Input",
-                    }
+                    },
                 },
                 {
                     id: '2',
@@ -45,7 +50,7 @@ const toolBagJs = {
             toolItem: []
         },
     ],
-    sechmaData: [
+    schemaData: [
         // {
         //     id: '3',
         //     info: {

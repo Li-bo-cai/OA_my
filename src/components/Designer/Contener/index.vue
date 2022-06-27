@@ -2,7 +2,7 @@
     <div class="contener-box">
         <el-scrollbar height="calc(100vh - 110px)">
             <FormProvider :form="form">
-                <Draggable v-model="sechmaData" ghost-class="ghost" chosen-class="chosenClass" animation="300"
+                <Draggable v-model="schemaData" ghost-class="ghost" chosen-class="chosenClass" animation="300"
                     itemKey="id" touch-start-threshold="50" :fallback-tolerance="50" :fallback-class="true"
                     @start="onStart" @end="onEnd" :group="groupB" style="height: calc(100vh - 120px);">
                     <template #item="{ element }">
@@ -29,14 +29,16 @@
 <script lang="ts">
 import { createForm } from '@formily/core'
 import { defineComponent, watch, ref, toRefs } from 'vue'
+import Draggable from 'vuedraggable'
 import { createSchemaField, FormProvider } from "@formily/vue";
 import * as ElementPlus from "@formily/element-plus"
-import Draggable from 'vuedraggable'
+import { SelfCompt } from '../components/index'
 import { Delete } from '@element-plus/icons-vue';
 
 const { SchemaField } = createSchemaField({
     components: {
-        ...ElementPlus
+        ...ElementPlus,
+        SelfCompt
     },
 });
 
@@ -54,12 +56,13 @@ export default defineComponent({
         ...ElementPlus
     },
     setup(props, context) {
-        const { sechmaData } = toRefs(props.toolBag)
+        const { schemaData } = toRefs(props.toolBag)
+
         const fromRef = ref(createForm({
             readOnly: true,
         }))
 
-        watch(sechmaData, (newValue, oldValue) => {
+        watch(schemaData, (newValue, oldValue) => {
             fromRef.value = createForm({
                 readOnly: true,
             })
@@ -88,23 +91,18 @@ export default defineComponent({
             return true;
         };
 
+        // 点击事件
         const getItem = (e: any) => {
-            // 点击事件
             nowItem.value = e;
-            console.log(form);
-            
-            // 获取指定filed信息
-            form.getFieldState(e.id, (res) => {
-                context.emit('activeNode', { allData: form.fields, activData: res })
-            })
+            console.log(form, e);
+            context.emit('activeNode', { allData: form.fields, activData: e })
         }
-
+        // 点击删除按钮
         type Any = any
         const delToolItem = (delItem: any) => {
-            // 点击删除按钮
-            (sechmaData.value as Array<Any>).forEach((item: any, index: any) => {
+            (schemaData.value as Array<Any>).forEach((item: any, index: any) => {
                 if (item.id == delItem.id) {
-                    (sechmaData.value as Array<Any>).splice(index, 1)
+                    (schemaData.value as Array<Any>).splice(index, 1)
                 }
             })
         }
@@ -119,7 +117,7 @@ export default defineComponent({
                 put: true, //不允许拖入
                 pull: ""
             },
-            sechmaData,  //表单展示的值
+            schemaData,  //表单展示的值
             nowItem, //当前选中的值
             Delete,
             onStart, //拖拽开始的事件
