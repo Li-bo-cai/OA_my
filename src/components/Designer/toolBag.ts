@@ -7,19 +7,14 @@ const toolBagJs = {
                     id: '1',
                     type: '1-1',
                     info: {
-                        type: 'void',
-                        title: '输入框',
-                        "x-decorator": "SelfCompt",
+                        type: "string",
+                        title: "输入框",
+                        "x-decorator": "FormItem",
                         "x-decorator-props": {
-                            type: "string",
-                            title: "输入框",
-                            "x-decorator": "FormItem",
-                            "x-decorator-props": {
-                                "labelCol": 5,
-                                "wrapperCol": 16,
-                            },
-                            "x-component": "Input",
+                            "labelCol": 5,
+                            "wrapperCol": 16,
                         },
+                        "x-component": "Input",
                     },
                 },
                 {

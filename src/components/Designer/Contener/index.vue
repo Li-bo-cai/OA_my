@@ -8,12 +8,25 @@
                     <template #item="{ element }">
                         <div class="draggable-item move" :class="{ is_active: nowItem.id == element.id }"
                             @click="getItem(element)">
-                            <SchemaField :schema="{
+                            <!-- <SchemaField :schema="{
                                 type: 'object',
                                 properties: {
                                     [element.id]: element.info
                                 },
                             }">
+                            </SchemaField> -->
+                            <SchemaField :schema="{
+                                type: 'object',
+                                properties: {
+                                    [element.id]: {
+                                        type: element.info.type,
+                                        title: element.info.title,
+                                        'x-decorator': 'SelfCompt',
+                                        'x-decorator-props': element.info
+                                    }
+                                },
+                            }">
+
                             </SchemaField>
                             <div class="draggable-btn" v-show="nowItem.id == element.id">
                                 <el-button type="primary" :icon="Delete" circle @click="delToolItem(element)" />
@@ -94,7 +107,7 @@ export default defineComponent({
         // 点击事件
         const getItem = (e: any) => {
             nowItem.value = e;
-            console.log(form, e);
+            console.log(form, e, '点击事件');
             context.emit('activeNode', { allData: form.fields, activData: e })
         }
         // 点击删除按钮
