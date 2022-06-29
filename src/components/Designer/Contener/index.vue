@@ -19,17 +19,14 @@
                                 type: 'object',
                                 properties: {
                                     [element.id]: {
-                                        type: element.info.type,
-                                        title: element.info.title,
                                         'x-decorator': 'SelfCompt',
                                         'x-decorator-props': element.info
                                     }
                                 },
                             }">
-
                             </SchemaField>
                             <div class="draggable-btn" v-show="nowItem.id == element.id">
-                                <el-button type="primary" :icon="Delete" circle @click="delToolItem(element)" />
+                                <el-button type="primary" :icon="Delete" circle @click.stop="delToolItem(element)" />
                             </div>
                         </div>
                     </template>
@@ -40,8 +37,8 @@
 </template>
 
 <script lang="ts">
-import { createForm } from '@formily/core'
-import { defineComponent, watch, ref, toRefs } from 'vue'
+import { createForm, Form } from '@formily/core'
+import { defineComponent, watch, ref, toRefs, computed } from 'vue'
 import Draggable from 'vuedraggable'
 import { createSchemaField, FormProvider } from "@formily/vue";
 import * as ElementPlus from "@formily/element-plus"
@@ -71,17 +68,18 @@ export default defineComponent({
     setup(props, context) {
         const { schemaData } = toRefs(props.toolBag)
 
-        const fromRef = ref(createForm({
-            readOnly: true,
-        }))
+        const formRef = ref()
 
         watch(schemaData, (newValue, oldValue) => {
-            fromRef.value = createForm({
+            formRef.value = createForm({
                 readOnly: true,
             })
-        })
+        }, { immediate: true })
 
-        const form = fromRef.value
+
+        const form = computed(() => {
+            return formRef.value
+        }).value
 
         const nowItem = ref({
             id: ''
@@ -107,7 +105,8 @@ export default defineComponent({
         // 点击事件
         const getItem = (e: any) => {
             nowItem.value = e;
-            console.log(form, e, '点击事件');
+            console.log(form, '点击事件form');
+            console.log(e, '点击事件e');
             context.emit('activeNode', { allData: form.fields, activData: e })
         }
         // 点击删除按钮
@@ -148,11 +147,11 @@ export default defineComponent({
 .contener-box {
     cursor: pointer;
     user-select: none;
-    padding: 5px;
+    padding: 5px 5px 0 5px;
     height: 100%;
 
     .draggable-item {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         padding: 5px;
 
         &:hover {
@@ -169,7 +168,7 @@ export default defineComponent({
 
 .is_active {
     border: 1px solid #409eff;
-    padding: 4px;
+    padding: 4px !important;
 }
 
 .chosenClass {

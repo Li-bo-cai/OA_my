@@ -1,8 +1,7 @@
 import * as vue from 'vue';
-import { createForm, useFieldSchema } from '@formily/vue';
+import { createForm, useField, useFieldSchema } from '@formily/vue';
 import { createSchemaField, FormProvider } from "@formily/vue";
 import * as ElementPlus from "@formily/element-plus"
-import { effect } from 'vue';
 
 const { SchemaField } = createSchemaField({
     components: {
@@ -11,18 +10,14 @@ const { SchemaField } = createSchemaField({
 });
 
 export const SelfCompt = vue.defineComponent({
-    setup(props) {
+    setup() {
+        const fromRef = createForm()
         const schemaRef = useFieldSchema()
-        console.log(props);
-
-        const fromRef = vue.ref(createForm())
-        const schema: any = schemaRef.value;
 
         return () => {
-            const form = fromRef.value
-
-            // console.log(form, 1211111);
-            
+            const schema: any = schemaRef.value;
+            const form = fromRef
+            console.log(schema.toJSON(), schema.name);
             return (
                 <FormProvider form={form}>
                     <SchemaField schema={{
