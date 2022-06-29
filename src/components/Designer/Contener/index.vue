@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { createForm, Form } from '@formily/core'
+import { createForm } from '@formily/core'
 import { defineComponent, watch, ref, toRefs, computed } from 'vue'
 import Draggable from 'vuedraggable'
 import { createSchemaField, FormProvider } from "@formily/vue";
@@ -71,15 +71,13 @@ export default defineComponent({
         const formRef = ref()
 
         watch(schemaData, (newValue, oldValue) => {
-            formRef.value = createForm({
-                readOnly: true,
-            })
-        }, { immediate: true })
+            formRef.value = createForm()
+        }, { immediate: true, deep: true })
 
 
         const form = computed(() => {
             return formRef.value
-        }).value
+        })
 
         const nowItem = ref({
             id: ''
@@ -105,9 +103,9 @@ export default defineComponent({
         // 点击事件
         const getItem = (e: any) => {
             nowItem.value = e;
-            console.log(form, '点击事件form');
+            console.log(form.value, '点击事件form');
             console.log(e, '点击事件e');
-            context.emit('activeNode', { allData: form.fields, activData: e })
+            context.emit('activeNode', { allData: form.value.fields, activData: e })
         }
         // 点击删除按钮
         type Any = any
