@@ -7,7 +7,8 @@
             <Contener :toolBag="toolBag" @activeNode="activeNode"></Contener>
         </div>
         <div class="right-contener">
-            <ConfigItem :allNodeInfo="allNodeInfo" :activeNodeInfo="activeNodeInfo"></ConfigItem>
+            <ConfigItem :allNodeInfo="allNodeInfo" :activeNodeInfo="activeNodeInfo" :activeSchema="activeSchema">
+            </ConfigItem>
         </div>
     </div>
 </template>
@@ -19,6 +20,7 @@ import Contener from './Contener/index.vue'
 import ConfigItem from './ConfigItem/index.vue'
 import toolBagJs from './toolBag'
 import mitt from '@/utils/mitt'
+import { computed } from '@vue/reactivity'
 
 export default defineComponent({
     components: {
@@ -37,6 +39,15 @@ export default defineComponent({
         const allNodeInfo = ref()
         const activeNodeInfo = ref()
 
+        const activeSchema: any = computed(() => {
+            schemaArr.value.forEach((item, index) => {
+                if (!item || activeNodeInfo.value) return
+                if (item.name == activeNodeInfo.value.id) {
+                    return item
+                }
+            })
+        })
+
         const changeTools = (value: any) => {
             // 重新渲染左侧工具栏
             if (value) {
@@ -52,15 +63,15 @@ export default defineComponent({
         }
 
         const activeNode = (value: any) => {
-            console.log(value);
+            console.log(value, 1111111111);
             // allNodeInfo.value = value.allData;
-            // activeNodeInfo.value = value.activData
+            activeNodeInfo.value = value.activData
         }
 
         onMounted(() => {
             mitt.on('onFormMount', (e: any) => {
-                console.log(e);
-                schemaArr.value.push(e)
+                schemaArr.value.push(e);
+                console.log(schemaArr.value, 'schemaArr');
             })
             mitt.on('onFormUnmount', (e: any) => {
                 schemaArr.value = schemaArr.value.map((item: T | undefined) => {
@@ -69,15 +80,17 @@ export default defineComponent({
                         return item
                     }
                 })
+                console.log(schemaArr.value, 'schemaArr');
             })
         })
         return {
             toolBag,
-            allNodeInfo,
-            activeNodeInfo,
+            allNodeInfo,  //所有节点信息
+            activeNodeInfo, //选中节点的信息
+            activeSchema,  //选中的节点的schema对象
             changeTools,
             increasedTool,
-            activeNode
+            activeNode,
         }
     }
 })
