@@ -88,6 +88,7 @@ export default defineComponent({
       if (props.showData == 2) {
         const param: insideCheck = {
           depart_id: data.id,
+          page_size: 9999999
         }
         staff_check2(param).then((res) => {
           if (res.data.code == 1) {

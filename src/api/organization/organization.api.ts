@@ -23,7 +23,7 @@ export interface insideCheck {
     post?: string,
     state?: number,
     page?: number,
-    per_page?: number
+    page_size?: number
 }
 export function staff_check2(params: insideCheck): Promise<AxiosResponse<any>> {
     return axios.post('/inside/staff/check2', params)

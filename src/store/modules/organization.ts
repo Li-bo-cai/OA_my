@@ -12,7 +12,7 @@ interface ICountState {
 interface IRootState {
     [key: string]: any
 }
-let a: number 
+let a: number
 const organzationModule: Module<ICountState, IRootState> = {
     namespaced: true,
     state() {
@@ -56,7 +56,7 @@ const organzationModule: Module<ICountState, IRootState> = {
         },
         // 设置页面显示数量
         SET_PER_PAGE(state, payload) {
-            state.staffInfo.per_page = payload
+            state.staffInfo.page_size = payload
         },
         // 设置页数
         SET_PAGE(state, payload) {

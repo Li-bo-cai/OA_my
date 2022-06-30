@@ -1,37 +1,42 @@
 <template>
     <div class="contener-box">
         <el-scrollbar height="calc(100vh - 110px)">
-            <FormProvider :form="form">
-                <Draggable v-model="schemaData" ghost-class="ghost" chosen-class="chosenClass" animation="300"
-                    itemKey="id" touch-start-threshold="50" :fallback-tolerance="50" :fallback-class="true"
-                    @start="onStart" @end="onEnd" :group="groupB" style="height: calc(100vh - 120px);">
-                    <template #item="{ element }">
-                        <div class="draggable-item move" :class="{ is_active: nowItem.id == element.id }"
-                            @click="getItem(element)">
-                            <!-- <SchemaField :schema="{
+            <div :class="{ is_active_form: activeForm }">
+                <FormProvider :form="form">
+                    <Form :form="form" @click="setForm">
+                        <Draggable v-model="schemaData" ghost-class="ghost" chosen-class="chosenClass" animation="300"
+                            itemKey="id" touch-start-threshold="50" :fallback-tolerance="50" :fallback-class="true"
+                            @start="onStart" @end="onEnd" :group="groupB" style="height: calc(100vh - 120px);">
+                            <template #item="{ element }">
+                                <div class="draggable-item move" :class="{ is_active: nowItem.id == element.id }"
+                                    @click.stop="getItem(element)">
+                                    <!-- <SchemaField :schema="{
                                 type: 'object',
                                 properties: {
                                     [element.id]: element.info
                                 },
                             }">
                             </SchemaField> -->
-                            <SchemaField :schema="{
-                                type: 'object',
-                                properties: {
-                                    [element.id]: {
-                                        'x-decorator': 'SelfCompt',
-                                        'x-decorator-props': element.info
-                                    }
-                                },
-                            }">
-                            </SchemaField>
-                            <div class="draggable-btn" v-show="nowItem.id == element.id">
-                                <el-button type="primary" :icon="Delete" circle @click.stop="delToolItem(element)" />
-                            </div>
-                        </div>
-                    </template>
-                </Draggable>
-            </FormProvider>
+                                    <SchemaField :schema="{
+                                        type: 'object',
+                                        properties: {
+                                            [element.id]: {
+                                                'x-decorator': 'SelfCompt',
+                                                'x-decorator-props': element.info
+                                            }
+                                        },
+                                    }">
+                                    </SchemaField>
+                                    <div class="draggable-btn" v-show="nowItem.id == element.id">
+                                        <el-button type="primary" :icon="Delete" circle
+                                            @click.stop="delToolItem(element)" />
+                                    </div>
+                                </div>
+                            </template>
+                        </Draggable>
+                    </Form>
+                </FormProvider>
+            </div>
         </el-scrollbar>
     </div>
 </template>
@@ -69,6 +74,7 @@ export default defineComponent({
         const { schemaData } = toRefs(props.toolBag)
 
         const formRef = ref()
+        const activeForm = ref(true)
 
         watch(schemaData, (newValue, oldValue) => {
             formRef.value = createForm()
@@ -100,9 +106,16 @@ export default defineComponent({
             return true;
         };
 
-        // 点击事件
+        // 点击事件 (from)
+        const setForm = () => {
+            activeForm.value = true;
+            nowItem.value = { id: '' };
+            console.log();
+        }
+        // 点击事件 (item)
         const getItem = (e: any) => {
             nowItem.value = e;
+            activeForm.value = false;
             console.log(form.value, '点击事件form');
             console.log(e, '点击事件e');
             context.emit('activeNode', { allData: form.value.fields, activData: e })
@@ -129,11 +142,13 @@ export default defineComponent({
             },
             schemaData,  //表单展示的值
             nowItem, //当前选中的值
+            activeForm,  //当前是否选中表单
             Delete,
             onStart, //拖拽开始的事件
             onEnd,   //拖拽结束的事件
             onMove,
             getItem,   //点击事件
+            setForm,
             delToolItem,
             onSubmit
         }
@@ -167,6 +182,10 @@ export default defineComponent({
 .is_active {
     border: 1px solid #409eff;
     padding: 4px !important;
+}
+
+.is_active_form {
+    border: 1px solid #409eff;
 }
 
 .chosenClass {

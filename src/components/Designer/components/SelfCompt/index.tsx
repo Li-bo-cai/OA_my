@@ -3,6 +3,8 @@ import { createForm, useField, useFieldSchema } from '@formily/vue';
 import { createSchemaField, FormProvider } from "@formily/vue";
 import * as ElementPlus from "@formily/element-plus"
 import { onFormMount, onFormUnmount } from '@formily/core';
+import mitt from "@/utils/mitt";
+import { onUnmounted } from 'vue';
 
 const { SchemaField } = createSchemaField({
     components: {
@@ -11,23 +13,31 @@ const { SchemaField } = createSchemaField({
 });
 
 export const SelfCompt = vue.defineComponent({
+
     setup() {
+        const schemaRef = useFieldSchema()
         const fromRef = createForm({
             effects(form) {
                 onFormMount((form) => {
                     console.log('我挂载啦');
+                    mitt.emit('onFormMount', schemaRef.value)
                 })
                 onFormUnmount((form) => {
-                    console.log("我卸载啦", form);
+                    console.log("我卸载啦");
+                    mitt.emit('onFormUnmount', schemaRef.value)
                 })
             },
         })
-        const schemaRef = useFieldSchema()
+
+        onUnmounted(() => {
+            mitt.off('onFormMount')
+            mitt.off('onFormUnmount')
+        })
 
         return () => {
-            const schema: any = schemaRef.value;
             const form = fromRef
-            console.log(schema.toJSON(), schema.name);
+            const schema: any = schemaRef.value;
+
             return (
                 <FormProvider form={form}>
                     <SchemaField schema={{

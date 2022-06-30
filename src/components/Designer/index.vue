@@ -13,11 +13,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, onMounted, reactive, ref } from 'vue'
 import ProductBox from './ProductBox/index.vue'
 import Contener from './Contener/index.vue'
 import ConfigItem from './ConfigItem/index.vue'
 import toolBagJs from './toolBag'
+import mitt from '@/utils/mitt'
 
 export default defineComponent({
     components: {
@@ -28,6 +29,10 @@ export default defineComponent({
     setup() {
         const toolBag = reactive(toolBagJs)   //左侧功能按钮
         const tools = JSON.parse(JSON.stringify(toolBagJs.tools))
+        type T = {
+            [key: string]: any
+        }
+        const schemaArr = ref<Array<T | undefined>>([]);
 
         const allNodeInfo = ref()
         const activeNodeInfo = ref()
@@ -52,6 +57,20 @@ export default defineComponent({
             // activeNodeInfo.value = value.activData
         }
 
+        onMounted(() => {
+            mitt.on('onFormMount', (e: any) => {
+                console.log(e);
+                schemaArr.value.push(e)
+            })
+            mitt.on('onFormUnmount', (e: any) => {
+                schemaArr.value = schemaArr.value.map((item: T | undefined) => {
+                    if (!item) return
+                    if (e.name !== item.name) {
+                        return item
+                    }
+                })
+            })
+        })
         return {
             toolBag,
             allNodeInfo,
