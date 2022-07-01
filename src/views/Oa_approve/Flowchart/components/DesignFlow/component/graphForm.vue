@@ -141,9 +141,7 @@
         </div>
       </div>
     </el-form>
-
-    <PeopledialogVisible v-model="checedData" :ckStatus="openStatus" v-model:dialogVisible="openComptDialog">
-    </PeopledialogVisible>
+    <PeopledialogVisible v-model="checedData" :ckStatus="openStatus" v-model:dialogVisible="openComptDialog" />
   </div>
 </template>
 

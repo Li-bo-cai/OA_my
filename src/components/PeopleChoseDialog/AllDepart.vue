@@ -17,11 +17,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, reactive, nextTick, onBeforeUnmount } from "vue";
+import { computed, defineComponent, onMounted, ref, nextTick, onBeforeUnmount } from "vue";
 import type Node from 'element-plus/es/components/tree/src/model/node'
 import { ElTree } from "element-plus";
 import mitt from "@/utils/mitt";
 import { department_com_show2, staff_check2, insideCheck } from "@/api/organization/organization.api";
+
 export default defineComponent({
   props: {
     showData: {
@@ -31,6 +32,7 @@ export default defineComponent({
     },
     checkedData: {
       type: Array,
+      required: true,
       default: () => [],
     }
   },
@@ -68,7 +70,7 @@ export default defineComponent({
           organizaData.value = res.data.data;
           nextTick(() => {
             if (props.showData == 1) {
-              (depart_tree.value as ElTreeType).setCheckedNodes(JSON.parse(JSON.stringify(props.checkedData)), true)
+              (depart_tree.value as ElTreeType).setCheckedNodes([...props.checkedData] as Node[], true)
             }
           })
         }

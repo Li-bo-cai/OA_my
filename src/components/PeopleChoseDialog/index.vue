@@ -58,8 +58,7 @@ export default defineComponent({
   setup(props, context) {
 
     // 最终收到结果的消息
-    const returnAll = ref<Array<any>>([]);
-
+    const returnAll = ref([]);
 
     onMounted(() => {
       mitt.on("all-showData", allShowdata);
@@ -86,7 +85,6 @@ export default defineComponent({
     };
 
     return {
-      // dialogVisible,
       handleClose,
       handleConfirm,
     };

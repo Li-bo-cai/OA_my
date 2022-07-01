@@ -5,7 +5,8 @@
         @change="handleCheckAllChange">全选</el-checkbox>
       <el-checkbox-group v-model="checkedPerson" @change="handleCheckedPersonChange">
         <el-checkbox v-for="(item, index) in peoples" :key="index" :label="item" @change="trychange(item, $event)">
-          {{ item && item.name }}</el-checkbox>
+          {{ item && item.name }}
+        </el-checkbox>
       </el-checkbox-group>
     </el-scrollbar>
   </div>
@@ -19,24 +20,22 @@ import {
   onBeforeUnmount,
   onMounted,
   ref,
-  toRefs,
   watch,
 } from "vue";
 export default defineComponent({
   props: {
     checkedData: {
       type: Array,
+      required: true,
       default: () => [],
     },
   },
   setup(props) {
-    const { checkedData }: any = toRefs(props);
+    const allPeople = ref([...props.checkedData]);
     const checkAll = ref(false); //当前多选框是否全选
     const isIndeterminate = ref(false); //多选框状态
     const checkedPerson = ref<any>([]); //选中的数据
-    let peoples = ref<any>([]); //接口返回可选择人数
-    const allPeople = ref<any>([]);
-    allPeople.value = checkedData.value;
+    const peoples = ref<any>([]); //接口返回可选择人数
 
     onMounted(() => {
       mitt.on("people-check", peoplecheck);
@@ -52,25 +51,29 @@ export default defineComponent({
 
     watch(
       peoples,
-      (newVal: [], oldVal) => {
+      (newVal: []) => {
         checkedPerson.value = $commom.getSameArr(newVal, allPeople.value, "id");
         const checkedCount = checkedPerson.value.length;
         checkAll.value = checkedCount === peoples.value.length;
         isIndeterminate.value =
           checkedCount > 0 && checkedCount < peoples.value.length;
       },
-      { deep: true }
+      { immediate: true, deep: true }
     );
 
     // 接收组件传递的people-check
     const peoplecheck = (e: any) => {
+      // console.log(elCheckGroup.value);
       peoples.value = e;
-      // console.log(e);
     };
 
     // 最终数据删除传递事件
     const deleteCheckPeople = (e: any) => {
       checkedPerson.value = $commom.getSameArr(peoples.value, e, "id");
+      const checkedCount = checkedPerson.value.length;
+      checkAll.value = checkedCount === peoples.value.length;
+      isIndeterminate.value =
+        checkedCount > 0 && checkedCount < peoples.value.length;
     };
 
     //全选按钮
@@ -99,10 +102,12 @@ export default defineComponent({
         mitt.emit("delete-checkbox", value);
       }
     };
+
     // 获取第三数据
     const allShowdata = (e: any) => {
       allPeople.value = e;
     };
+
     return {
       checkAll,
       peoples,

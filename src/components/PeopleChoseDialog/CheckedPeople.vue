@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref, toRefs } from "vue";
+import { defineComponent, onMounted, onUnmounted, ref, watch } from "vue";
 import mitt from "@/utils/mitt";
 import $common from "@/utils/common";
 
@@ -46,13 +46,12 @@ export default defineComponent({
     },
     checkedData: {
       type: Array,
+      required: true,
       default: () => [],
     },
   },
   setup(props) {
-    // const { showData, checkedData } = toRefs(props);
-    const showCheckData: any = ref([]);
-    showCheckData.value = JSON.parse(JSON.stringify(props.checkedData));
+    const showCheckData: any = ref([...props.checkedData])
 
     onMounted(() => {
       mitt.on("change-check", changecheck);
@@ -65,6 +64,13 @@ export default defineComponent({
       mitt.off("change-check-group", changecheckgroup);
       mitt.off("delete-checkbox", deletecheckbox);
     });
+
+    watch(showCheckData, (newVal) => {
+      // 返回最终结果 通知外界
+      mitt.emit("all-showData", newVal);
+    }, {
+      deep: true
+    })
 
     // 监听change-check 全选事件发生时的传值
     const changecheck = (e: any) => {
@@ -87,7 +93,6 @@ export default defineComponent({
           });
         }
       }
-      reply();
     };
 
     // 监听change-check-group事件传递的数组
@@ -96,18 +101,15 @@ export default defineComponent({
         showCheckData.value.concat(e),
         "id"
       );
-      reply();
     };
 
     //监听checkbox的取消选中状态
     const deletecheckbox = (e: any) => {
-      // console.log(e);
       showCheckData.value = $common.deleteAppoint(
         showCheckData.value,
         "id",
         e.id
       );
-      reply();
     };
 
     // 点击删除按钮时触发事件
@@ -119,12 +121,6 @@ export default defineComponent({
       if (props.showData == 2) {
         mitt.emit("delete-check-people", showCheckData.value);
       }
-      reply();
-    };
-
-    // 返回最终结果 通知外界
-    const reply = () => {
-      mitt.emit("all-showData", showCheckData.value);
     };
 
     return {
