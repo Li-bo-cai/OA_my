@@ -28,11 +28,6 @@ export const SelfCompt = vue.defineComponent({
             },
         })
 
-        // onUnmounted(() => {
-        //     mitt.off('onFormMount')
-        //     mitt.off('onFormUnmount')
-        // })
-
         return () => {
             const form = fromRef
             const schema: any = schemaRef.value;

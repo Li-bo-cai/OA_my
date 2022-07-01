@@ -14,13 +14,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref } from 'vue'
+import { defineComponent, onMounted, onUnmounted, computed, reactive, ref } from 'vue'
 import ProductBox from './ProductBox/index.vue'
 import Contener from './Contener/index.vue'
 import ConfigItem from './ConfigItem/index.vue'
 import toolBagJs from './toolBag'
 import mitt from '@/utils/mitt'
-import { computed } from '@vue/reactivity'
 
 export default defineComponent({
     components: {
@@ -34,18 +33,28 @@ export default defineComponent({
         type T = {
             [key: string]: any
         }
-        const schemaArr = ref<Array<T | undefined>>([]);
+        const schemaArr = ref<any>([]);
 
         const allNodeInfo = ref()
         const activeNodeInfo = ref()
 
         const activeSchema: any = computed(() => {
-            schemaArr.value.forEach((item, index) => {
+            schemaArr.value.forEach((item: any) => {
                 if (!item || activeNodeInfo.value) return
                 if (item.name == activeNodeInfo.value.id) {
                     return item
                 }
             })
+        })
+
+        onMounted(() => {
+            mitt.on('onFormMount', onFormMount)
+            mitt.on('onFormUnmount', onFormUnmount)
+        })
+
+        onUnmounted(() => {
+            mitt.off('onFormMount', onFormMount)
+            mitt.off('onFormUnmount', onFormUnmount)
         })
 
         const changeTools = (value: any) => {
@@ -57,32 +66,31 @@ export default defineComponent({
             }
         }
 
-        const increasedTool = (value: any) => {
+        const increasedTool = () => {
             // 拖拽结束后返回存在的表单
             // console.log(value);
         }
 
         const activeNode = (value: any) => {
-            console.log(value, 1111111111);
             // allNodeInfo.value = value.allData;
             activeNodeInfo.value = value.activData
         }
 
-        onMounted(() => {
-            mitt.on('onFormMount', (e: any) => {
-                schemaArr.value.push(e);
-                console.log(schemaArr.value, 'schemaArr');
+        const onFormMount = (e: any) => {
+            schemaArr.value.push(e);
+            console.log(schemaArr.value, 'schemaArr');
+        }
+
+        const onFormUnmount = (e: any) => {
+            schemaArr.value = schemaArr.value.map((item: T | undefined) => {
+                if (!item) return
+                if (e.name !== item.name) {
+                    return item
+                }
             })
-            mitt.on('onFormUnmount', (e: any) => {
-                schemaArr.value = schemaArr.value.map((item: T | undefined) => {
-                    if (!item) return
-                    if (e.name !== item.name) {
-                        return item
-                    }
-                })
-                console.log(schemaArr.value, 'schemaArr');
-            })
-        })
+            console.log(schemaArr.value, 'schemaArr');
+        }
+
         return {
             toolBag,
             allNodeInfo,  //所有节点信息

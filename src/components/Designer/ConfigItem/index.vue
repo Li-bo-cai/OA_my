@@ -24,8 +24,6 @@ import * as ElementPlus from "@formily/element-plus"
 import modifyToolJS from "../utils/modifyTool"
 
 import * as configCmpt from "../components/index"
-import { type } from 'os';
-
 
 const { SchemaField } = createSchemaField({
     components: {
@@ -34,9 +32,6 @@ const { SchemaField } = createSchemaField({
     },
 });
 
-type T = {
-    [key: string]: any
-}
 export default defineComponent({
     props: {
         allNodeInfo: {
@@ -60,8 +55,7 @@ export default defineComponent({
         const modifyTools = reactive(modifyToolJS)
         const activeNames = ref(['字段属性'])
 
-        console.log(props.activeSchema, 55555555);
-
+        console.log(props.activeSchema,'hahsfjkh');
 
         const handleChange = (val: string[]) => {
             console.log(val)
