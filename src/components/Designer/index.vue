@@ -39,12 +39,16 @@ export default defineComponent({
         const activeNodeInfo = ref()
 
         const activeSchema: any = computed(() => {
-            schemaArr.value.forEach((item: any) => {
-                if (!item || activeNodeInfo.value) return
+            let schema = {}
+            schemaArr.value.map((item: any) => {
+                if (!item || !activeNodeInfo.value) return
                 if (item.name == activeNodeInfo.value.id) {
-                    return item
+                    schema = item
                 }
             })
+            console.log(11111111111, schema);
+
+            return schema
         })
 
         onMounted(() => {
