@@ -1,9 +1,10 @@
 <template>
     <div class="config-box">
         <el-scrollbar height="calc(100vh - 110px)">
-            <el-collapse v-model="activeNames" @change="handleChange">
-                <el-collapse-item v-for="(toolItem, index) in modifyTools" :title="toolItem.label"
-                    :name="toolItem.label" :key="index">
+            <el-collapse v-model="activeNames" @change="handleChange" v-if="activeSchema">
+                <el-collapse-item
+                    v-for="(toolItem, index) in activeSchema['x-decorator-props']['x-component-props'].info"
+                    :title="toolItem.label" :name="toolItem.label" :key="index">
                     <div style="margin-right: 10px;">
                         <FormProvider :form="form">
                             <SchemaField :schema="toolItem.sechmaItem" />
@@ -16,14 +17,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, onMounted, onUnmounted, reactive, ref, watch, watchEffect } from 'vue'
 import { createForm } from '@formily/core'
 import { createSchemaField, FormProvider } from "@formily/vue";
 
 import * as ElementPlus from "@formily/element-plus"
-import modifyToolJS from "../utils/modifyTool"
+// import modifyToolJS from "../utils/modifyTool"
 
 import * as configCmpt from "../components/index"
+import mitt from '@/utils/mitt';
 
 const { SchemaField } = createSchemaField({
     components: {
@@ -42,28 +44,51 @@ export default defineComponent({
             type: Object,
             default: () => ({})
         },
-        activeSchema: {
-            type: Object,
-            default: () => ({})
-        }
     },
     components: {
         FormProvider,
         SchemaField,
     },
-    setup(props) {
-        const modifyTools = reactive(modifyToolJS)
+    setup() {
+        const form = createForm()
+        // const modifyTools = reactive(modifyToolJS)
+        const activeSchema = ref()
         const activeNames = ref(['字段属性'])
 
-        console.log(props.activeSchema,'hahsfjkh');
+        watchEffect(() => {
+            // console.log(modifyTools[0].sechmaItem.properties?.id);
+        })
+
+        watch(activeSchema, (newValue) => {
+            if (newValue) {
+                form.setInitialValues({
+                    id: newValue.name,
+                    title: newValue['x-decorator-props'].title,
+                })
+            }
+        })
+
+        onMounted(() => {
+            mitt.on('activeSchema', getActiveSchema)
+        })
+
+        onUnmounted(() => {
+            mitt.off('activeSchema', getActiveSchema)
+        })
+
+        const getActiveSchema = (value: any) => {
+            console.log(value);
+            activeSchema.value = value
+        }
 
         const handleChange = (val: string[]) => {
             console.log(val)
         }
 
         return {
-            form: createForm(),
-            modifyTools,
+            form: form,
+            // modifyTools,
+            activeSchema,
             activeNames,
             handleChange
         }

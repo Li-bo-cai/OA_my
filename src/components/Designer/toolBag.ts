@@ -1,3 +1,4 @@
+import modifyToolJS from "./utils/modifyTool"
 const toolBagJs = {
     tools: [
         {
@@ -15,6 +16,9 @@ const toolBagJs = {
                             "wrapperCol": 16,
                         },
                         "x-component": "Input",
+                        "x-component-props": {
+                            info: modifyToolJS
+                        }
                     },
                 },
                 {
@@ -31,9 +35,10 @@ const toolBagJs = {
                         "x-component": "Input.TextArea",
                         "x-component-props": {
                             type: "textarea",
+                            info: modifyToolJS
                         },
                     }
-                }
+                },
             ]
         },
         {

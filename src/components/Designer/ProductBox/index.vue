@@ -58,7 +58,7 @@ export default defineComponent({
 
         //拖拽结束的事件
         const onEnd = (e: any) => {
-            console.log("结束拖拽", e);
+            // console.log("结束拖拽", e);
             context.emit('changeTools', true)  //通知拖拽结束，重新渲染左侧工具栏
             if (e.pullMode === 'clone') {
                 context.emit('increasedTool', draggItemData.value) //通知拖拽结束，新增数据，传递数据，展示右侧选项框

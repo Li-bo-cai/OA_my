@@ -7,14 +7,13 @@
             <Contener :toolBag="toolBag" @activeNode="activeNode"></Contener>
         </div>
         <div class="right-contener">
-            <ConfigItem :allNodeInfo="allNodeInfo" :activeNodeInfo="activeNodeInfo" :activeSchema="activeSchema">
-            </ConfigItem>
+            <ConfigItem :allNodeInfo="allNodeInfo" :activeNodeInfo="activeNodeInfo"></ConfigItem>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, computed, reactive, ref } from 'vue'
+import { defineComponent, onMounted, onUnmounted, reactive, ref } from 'vue'
 import ProductBox from './ProductBox/index.vue'
 import Contener from './Contener/index.vue'
 import ConfigItem from './ConfigItem/index.vue'
@@ -37,19 +36,6 @@ export default defineComponent({
 
         const allNodeInfo = ref()
         const activeNodeInfo = ref()
-
-        const activeSchema: any = computed(() => {
-            let schema = {}
-            schemaArr.value.map((item: any) => {
-                if (!item || !activeNodeInfo.value) return
-                if (item.name == activeNodeInfo.value.id) {
-                    schema = item
-                }
-            })
-            console.log(11111111111, schema);
-
-            return schema
-        })
 
         onMounted(() => {
             mitt.on('onFormMount', onFormMount)
@@ -76,8 +62,17 @@ export default defineComponent({
         }
 
         const activeNode = (value: any) => {
-            // allNodeInfo.value = value.allData;
+            allNodeInfo.value = value.allData;
+            console.log(allNodeInfo.value, 'all');
+
             activeNodeInfo.value = value.activData
+            schemaArr.value.map((item: any) => {
+                if (!item || !activeNodeInfo.value) return
+                if (item.name == activeNodeInfo.value.id) {
+                    // activeSchema,  //选中的节点的schema对象
+                    mitt.emit('activeSchema', item.toJSON())
+                }
+            })
         }
 
         const onFormMount = (e: any) => {
@@ -92,14 +87,12 @@ export default defineComponent({
                     return item
                 }
             })
-            console.log(schemaArr.value, 'schemaArr');
         }
 
         return {
             toolBag,
             allNodeInfo,  //所有节点信息
             activeNodeInfo, //选中节点的信息
-            activeSchema,  //选中的节点的schema对象
             changeTools,
             increasedTool,
             activeNode,

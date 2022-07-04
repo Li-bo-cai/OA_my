@@ -103,8 +103,8 @@ export default defineComponent({
         // 点击事件
         const getItem = (e: any) => {
             nowItem.value = e;
-            console.log(form.value, '点击事件form');
-            console.log(e, '点击事件e');
+            // console.log(form.value, '点击事件form');
+            // console.log(e, '点击事件e');
             context.emit('activeNode', { allData: form.value.fields, activData: e })
         }
         // 点击删除按钮
