@@ -17,8 +17,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, reactive, ref, watch, watchEffect } from 'vue'
-import { createForm } from '@formily/core'
+import { defineComponent, onMounted, onUnmounted, reactive, ref, toRef, watch, watchEffect } from 'vue'
+import { createForm, onFormInitialValuesChange, onFormInputChange, onFormValuesChange } from '@formily/core'
 import { createSchemaField, FormProvider } from "@formily/vue";
 
 import * as ElementPlus from "@formily/element-plus"
@@ -36,6 +36,10 @@ const { SchemaField } = createSchemaField({
 
 export default defineComponent({
     props: {
+        schemaData: {
+            type: Array,
+            default: () => ([])
+        },
         allNodeInfo: {
             type: Object,
             default: () => ({})
@@ -49,36 +53,51 @@ export default defineComponent({
         FormProvider,
         SchemaField,
     },
-    setup() {
-        const form = createForm()
-        // const modifyTools = reactive(modifyToolJS)
+    setup(props, context) {
+        const schemaData: any = toRef(props, 'schemaData')
+        const form = ref(createForm())
         const activeSchema = ref()
         const activeNames = ref(['字段属性'])
-
-        watchEffect(() => {
-            // console.log(modifyTools[0].sechmaItem.properties?.id);
-        })
+        const allSchemaarr = ref([])
 
         watch(activeSchema, (newValue) => {
             if (newValue) {
-                form.setInitialValues({
+                form.value = createForm({
+                    effects() {
+                        onFormInputChange((form) => {
+                            console.log(form, 5555555);
+                            console.log(schemaData.value, 5848484848);
+                            if (!schemaData.value) return
+                            schemaData.value[0].info.title = form.values.title
+                            console.log(schemaData.value, 9999999999);
+                            mitt.emit('updateSchemaData', schemaData.value)
+                        })
+                    }
+                })
+                form.value.setInitialValues({
                     id: newValue.name,
-                    title: newValue['x-decorator-props'].title,
                 })
             }
         })
 
         onMounted(() => {
             mitt.on('activeSchema', getActiveSchema)
+            mitt.on('allSchemaArr', getAllSchemaArr)
         })
 
         onUnmounted(() => {
             mitt.off('activeSchema', getActiveSchema)
+            mitt.off('allSchemaArr', getAllSchemaArr)
         })
 
         const getActiveSchema = (value: any) => {
             console.log(value);
             activeSchema.value = value
+        }
+
+        const getAllSchemaArr = (value: any) => {
+            // console.log(value, 888888888888);
+            allSchemaarr.value = value
         }
 
         const handleChange = (val: string[]) => {

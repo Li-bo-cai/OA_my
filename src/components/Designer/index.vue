@@ -1,19 +1,20 @@
 <template>
     <div class="designer">
         <div class="left-contener">
-            <ProductBox :toolBag="toolBag" @changeTools="changeTools" @increasedTool="increasedTool"></ProductBox>
+            <ProductBox :tools="toolBag.tools" @changeTools="changeTools" @increasedTool="increasedTool"></ProductBox>
         </div>
         <div class="center-contener">
             <Contener :toolBag="toolBag" @activeNode="activeNode"></Contener>
         </div>
         <div class="right-contener">
-            <ConfigItem :allNodeInfo="allNodeInfo" :activeNodeInfo="activeNodeInfo"></ConfigItem>
+            <ConfigItem :schemaData="toolBag.schemaData" :activeNodeInfo="activeNodeInfo">
+            </ConfigItem>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, reactive, ref } from 'vue'
+import { defineComponent, h, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import ProductBox from './ProductBox/index.vue'
 import Contener from './Contener/index.vue'
 import ConfigItem from './ConfigItem/index.vue'
@@ -24,7 +25,7 @@ export default defineComponent({
     components: {
         ProductBox,
         Contener,
-        ConfigItem
+        ConfigItem,
     },
     setup() {
         const toolBag = reactive(toolBagJs)   //左侧功能按钮
@@ -32,19 +33,26 @@ export default defineComponent({
         type T = {
             [key: string]: any
         }
-        const schemaArr = ref<any>([]);
-
+        const schemaArr = ref<any>([]);   //schema   center 数组
         const allNodeInfo = ref()
         const activeNodeInfo = ref()
+
+        watch(schemaArr, (newValue) => {
+            // mitt.emit('allSchemaArr', newValue)  //传递所有的schema数组
+            if (newValue) return
+            toolBag.schemaData = newValue
+        }, { immediate: true, deep: true })
 
         onMounted(() => {
             mitt.on('onFormMount', onFormMount)
             mitt.on('onFormUnmount', onFormUnmount)
+            mitt.on('updateSchemaData', updateSchemaData)
         })
 
         onUnmounted(() => {
             mitt.off('onFormMount', onFormMount)
             mitt.off('onFormUnmount', onFormUnmount)
+            mitt.off('updateSchemaData', updateSchemaData)
         })
 
         const changeTools = (value: any) => {
@@ -63,21 +71,19 @@ export default defineComponent({
 
         const activeNode = (value: any) => {
             allNodeInfo.value = value.allData;
-            console.log(allNodeInfo.value, 'all');
-
             activeNodeInfo.value = value.activData
             schemaArr.value.map((item: any) => {
                 if (!item || !activeNodeInfo.value) return
                 if (item.name == activeNodeInfo.value.id) {
                     // activeSchema,  //选中的节点的schema对象
-                    mitt.emit('activeSchema', item.toJSON())
+                    mitt.emit('activeSchema', item.toJSON()) //设置工具属性
                 }
             })
         }
 
         const onFormMount = (e: any) => {
             schemaArr.value.push(e);
-            console.log(schemaArr.value, 'schemaArr');
+            // console.log(schemaArr.value, 'schemaArr');
         }
 
         const onFormUnmount = (e: any) => {
@@ -87,6 +93,12 @@ export default defineComponent({
                     return item
                 }
             })
+            mitt.emit('activeSchema', '') //设置工具属性为空
+        }
+
+        const updateSchemaData = (value: any) => {
+            console.log('执行了。。。。。。。。。。。。。。。');
+            toolBag.schemaData = value;            
         }
 
         return {

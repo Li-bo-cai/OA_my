@@ -3,7 +3,7 @@
         <el-scrollbar height="calc(100vh - 110px)">
             <div class="demo-collapse">
                 <el-collapse v-model="activeNames" @change="handleChange">
-                    <el-collapse-item v-for="(tool, index) in toolBag.tools" :title="tool.label" :name="tool.label"
+                    <el-collapse-item v-for="(tool, index) in tools" :title="tool.label" :name="tool.label"
                         animation="300" :key="index">
                         <Draggable v-model="tool.toolItem" ghost-class="ghost" handle=".move" filter=".forbid"
                             :group="groupA" chosen-class="chosenClass" animation="300" :force-fallback="false"
@@ -33,9 +33,10 @@ import Draggable from 'vuedraggable'
 
 export default defineComponent({
     props: {
-        toolBag: {
-            type: Object,
-            default: () => ({})
+        tools: {
+            type: Array as any,
+            require: true,
+            default: () => ([])
         }
     },
     components: {
@@ -70,7 +71,7 @@ export default defineComponent({
                 name: "itxst",
                 put: false, //不允许拖入
                 pull: (data: any) => {
-                    let arr = props.toolBag.tools;
+                    let arr: any = props.tools;
                     let [a, b]: any = [...draggIemtIndex.value.split('-')];
                     draggItemData.value = arr[a - 1].toolItem[b - 1];
                     arr[a - 1].toolItem[b - 1].id = uuid(8, 16)
@@ -80,7 +81,7 @@ export default defineComponent({
             activeNames,
             handleChange,
             onStart,
-            onEnd
+            onEnd,
         }
     }
 })

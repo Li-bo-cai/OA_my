@@ -8,13 +8,6 @@
                     <template #item="{ element }">
                         <div class="draggable-item move" :class="{ is_active: nowItem.id == element.id }"
                             @click="getItem(element)">
-                            <!-- <SchemaField :schema="{
-                                type: 'object',
-                                properties: {
-                                    [element.id]: element.info
-                                },
-                            }">
-                            </SchemaField> -->
                             <SchemaField :schema="{
                                 type: 'object',
                                 properties: {
@@ -23,8 +16,7 @@
                                         'x-decorator-props': element.info
                                     }
                                 },
-                            }">
-                            </SchemaField>
+                            }"></SchemaField>
                             <div class="draggable-btn" v-show="nowItem.id == element.id">
                                 <el-button type="primary" :icon="Delete" circle @click.stop="delToolItem(element)" />
                             </div>
@@ -44,6 +36,7 @@ import { createSchemaField, FormProvider } from "@formily/vue";
 import * as ElementPlus from "@formily/element-plus"
 import { SelfCompt } from '../components/index'
 import { Delete } from '@element-plus/icons-vue';
+import mitt from '@/utils/mitt';
 
 const { SchemaField } = createSchemaField({
     components: {
@@ -66,22 +59,21 @@ export default defineComponent({
         ...ElementPlus
     },
     setup(props, context) {
-        const { schemaData } = toRefs(props.toolBag)
+        const { schemaData }: any = toRefs(props.toolBag)
 
-        const formRef = ref()
+        const formRef = ref(createForm())
 
-        watch(schemaData, (newValue, oldValue) => {
-            formRef.value = createForm()
+        watch(() => props.toolBag.schemaData, (newValue, oldValue) => {
+            console.log(newValue);
+            // schemaData.value = newValue
+            schemaData.value = newValue
+            console.log('执行了，吗？');
         }, { immediate: true, deep: true })
 
 
-        const form = computed(() => {
-            return formRef.value
-        })
+        const form = formRef.value
 
-        const nowItem = ref({
-            id: ''
-        })
+        const nowItem = ref({ id: '' })
 
         //拖拽开始的事件
         const onStart = () => {
@@ -105,7 +97,7 @@ export default defineComponent({
             nowItem.value = e;
             // console.log(form.value, '点击事件form');
             // console.log(e, '点击事件e');
-            context.emit('activeNode', { allData: form.value.fields, activData: e })
+            context.emit('activeNode', { allData: form.fields, activData: e })
         }
         // 点击删除按钮
         type Any = any

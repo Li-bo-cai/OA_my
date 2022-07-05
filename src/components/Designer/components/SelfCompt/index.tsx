@@ -15,6 +15,7 @@ export const SelfCompt = vue.defineComponent({
 
     setup() {
         const schemaRef = useFieldSchema()
+
         const fromRef = createForm({
             effects() {
                 onFormMount((form) => {

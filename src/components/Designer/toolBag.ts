@@ -1,44 +1,13 @@
-import modifyToolJS from "./utils/modifyTool"
+import input from "./modules/input"
+import textarea from "./modules/textarea"
+
 const toolBagJs = {
     tools: [
         {
             label: '输入控件',
             toolItem: [
-                {
-                    id: '1',
-                    type: '1-1',
-                    info: {
-                        type: "string",
-                        title: "输入框",
-                        "x-decorator": "FormItem",
-                        "x-decorator-props": {
-                            "labelCol": 5,
-                            "wrapperCol": 16,
-                        },
-                        "x-component": "Input",
-                        "x-component-props": {
-                            info: modifyToolJS
-                        }
-                    },
-                },
-                {
-                    id: '2',
-                    type: '1-2',
-                    info: {
-                        type: "string",
-                        title: "文本框",
-                        "x-decorator": "FormItem",
-                        "x-decorator-props": {
-                            "labelCol": 5,
-                            "wrapperCol": 16,
-                        },
-                        "x-component": "Input.TextArea",
-                        "x-component-props": {
-                            type: "textarea",
-                            info: modifyToolJS
-                        },
-                    }
-                },
+                input,
+                textarea
             ]
         },
         {
@@ -50,37 +19,7 @@ const toolBagJs = {
             toolItem: []
         },
     ],
-    schemaData: [
-        // {
-        //     id: '3',
-        //     info: {
-        //         type: "string",
-        //         title: "输入框",
-        //         "x-decorator": "FormItem",
-        //         "x-decorator-props": {
-        //             "labelCol": 5,
-        //             "wrapperCol": 16,
-        //         },
-        //         "x-component": "Input",
-        //     }
-        // },
-        // {
-        //     id: '4',
-        //     info: {
-        //         type: "string",
-        //         title: "文本框",
-        //         "x-decorator": "FormItem",
-        //         "x-component": "Input.TextArea",
-        //         "x-decorator-props": {
-        //             "labelCol": 5,
-        //             "wrapperCol": 16,
-        //         },
-        //         "x-component-props": {
-        //             type: "textarea",
-        //         },
-        //     }
-        // }
-    ]
+    schemaData: []
 }
 
 export default toolBagJs
