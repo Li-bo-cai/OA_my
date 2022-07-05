@@ -28,7 +28,7 @@ export default defineComponent({
         ConfigItem,
     },
     setup() {
-        const toolBag = reactive(toolBagJs)   //左侧功能按钮
+        const toolBag = reactive({ ...toolBagJs })   //左侧功能按钮
         const tools = JSON.parse(JSON.stringify(toolBagJs.tools))
         type T = {
             [key: string]: any
@@ -97,8 +97,8 @@ export default defineComponent({
         }
 
         const updateSchemaData = (value: any) => {
+            toolBag.schemaData = value;
             console.log('执行了。。。。。。。。。。。。。。。');
-            toolBag.schemaData = value;            
         }
 
         return {

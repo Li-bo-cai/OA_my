@@ -65,8 +65,8 @@ export default defineComponent({
                 form.value = createForm({
                     effects() {
                         onFormInputChange((form) => {
-                            console.log(form, 5555555);
-                            console.log(schemaData.value, 5848484848);
+                            // console.log(form, 5555555);
+                            // console.log(schemaData.value, 5848484848);
                             if (!schemaData.value) return
                             schemaData.value[0].info.title = form.values.title
                             console.log(schemaData.value, 9999999999);

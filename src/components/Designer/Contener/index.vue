@@ -8,7 +8,8 @@
                     <template #item="{ element }">
                         <div class="draggable-item move" :class="{ is_active: nowItem.id == element.id }"
                             @click="getItem(element)">
-                            <SchemaField :schema="{
+                            <ContenerItem :element="element"></ContenerItem>
+                            <!-- <SchemaField :schema="{
                                 type: 'object',
                                 properties: {
                                     [element.id]: {
@@ -16,7 +17,7 @@
                                         'x-decorator-props': element.info
                                     }
                                 },
-                            }"></SchemaField>
+                            }"></SchemaField> -->
                             <div class="draggable-btn" v-show="nowItem.id == element.id">
                                 <el-button type="primary" :icon="Delete" circle @click.stop="delToolItem(element)" />
                             </div>
@@ -30,13 +31,12 @@
 
 <script lang="ts">
 import { createForm } from '@formily/core'
-import { defineComponent, watch, ref, toRefs, computed } from 'vue'
+import { defineComponent, watch, ref, toRefs, h, } from 'vue'
 import Draggable from 'vuedraggable'
 import { createSchemaField, FormProvider } from "@formily/vue";
 import * as ElementPlus from "@formily/element-plus"
 import { SelfCompt } from '../components/index'
 import { Delete } from '@element-plus/icons-vue';
-import mitt from '@/utils/mitt';
 
 const { SchemaField } = createSchemaField({
     components: {
@@ -44,6 +44,41 @@ const { SchemaField } = createSchemaField({
         SelfCompt
     },
 });
+
+
+const ContenerItem = defineComponent({
+    props: {
+        element: {
+            type: Object,
+            default: () => ({})
+        }
+    },
+    watch: {
+        "props.element": {
+            handler(newValue: any) {
+                console.log(11111111111111, newValue);
+            },
+            immediate: true, deep: true
+        }
+    },
+    render(props: any) {
+        console.log(props, 8888888);
+        return (
+            h(SchemaField, {
+                schema: {
+                    type: 'object',
+                    properties: {
+                        [props.element.id]: {
+                            'x-decorator': 'SelfCompt',
+                            'x-decorator-props': props.element.info
+                        }
+                    },
+                }
+            })
+        )
+    }
+})
+
 
 export default defineComponent({
     props: {
@@ -53,7 +88,8 @@ export default defineComponent({
         }
     },
     components: {
-        SchemaField,
+        // SchemaField,
+        ContenerItem,
         FormProvider,
         Draggable,
         ...ElementPlus
@@ -65,7 +101,6 @@ export default defineComponent({
 
         watch(() => props.toolBag.schemaData, (newValue, oldValue) => {
             console.log(newValue);
-            // schemaData.value = newValue
             schemaData.value = newValue
             console.log('执行了，吗？');
         }, { immediate: true, deep: true })
