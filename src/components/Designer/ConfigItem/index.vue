@@ -55,6 +55,7 @@ export default defineComponent({
     },
     setup(props, context) {
         const schemaData: any = toRef(props, 'schemaData')
+
         const form = ref(createForm())
         const activeSchema = ref()
         const activeNames = ref(['字段属性'])
@@ -62,20 +63,23 @@ export default defineComponent({
 
         watch(activeSchema, (newValue) => {
             if (newValue) {
+                console.log(newValue, schemaData.value, 88787);
                 form.value = createForm({
                     effects() {
                         onFormInputChange((form) => {
-                            // console.log(form, 5555555);
-                            // console.log(schemaData.value, 5848484848);
                             if (!schemaData.value) return
-                            schemaData.value[0].info.title = form.values.title
-                            console.log(schemaData.value, 9999999999);
+                            schemaData.value.forEach((item: any) => {
+                                if (item.id == newValue.name) {
+                                    Object.assign(item.info, { ...form.values })
+                                }
+                            })
                             mitt.emit('updateSchemaData', schemaData.value)
                         })
                     }
                 })
                 form.value.setInitialValues({
                     id: newValue.name,
+                    title: newValue['x-decorator-props'].title
                 })
             }
         })
@@ -91,12 +95,10 @@ export default defineComponent({
         })
 
         const getActiveSchema = (value: any) => {
-            console.log(value);
             activeSchema.value = value
         }
 
         const getAllSchemaArr = (value: any) => {
-            // console.log(value, 888888888888);
             allSchemaarr.value = value
         }
 

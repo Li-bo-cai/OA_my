@@ -15,22 +15,30 @@ export const SelfCompt = vue.defineComponent({
 
     setup() {
         const schemaRef = useFieldSchema()
+        const formRef = vue.ref()
 
-        const fromRef = createForm({
-            effects() {
-                onFormMount((form) => {
-                    console.log('我挂载啦');
-                    mitt.emit('onFormMount', schemaRef.value)
-                })
-                onFormUnmount((form) => {
-                    console.log("我卸载啦");
-                    mitt.emit('onFormUnmount', schemaRef.value)
-                })
-            },
+        vue.watch(() => schemaRef.value, (newValue) => {
+            formRef.value = createForm({
+                effects() {
+                    onFormMount((form) => {
+                        console.log('我挂载啦');
+                        mitt.emit('onFormMount', schemaRef.value)
+                    })
+                    onFormUnmount((form) => {
+                        console.log("我卸载啦");
+                        mitt.emit('onFormUnmount', schemaRef.value)
+                    })
+                },
+            })
+        }, {
+            immediate: true, deep: true
         })
 
+
         return () => {
-            const form = fromRef
+            const form = formRef.value
+            console.log(form);
+
             const schema: any = schemaRef.value;
 
             return (

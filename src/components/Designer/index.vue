@@ -72,7 +72,7 @@ export default defineComponent({
         const activeNode = (value: any) => {
             allNodeInfo.value = value.allData;
             activeNodeInfo.value = value.activData
-            schemaArr.value.map((item: any) => {
+            schemaArr.value.forEach((item: any) => {
                 if (!item || !activeNodeInfo.value) return
                 if (item.name == activeNodeInfo.value.id) {
                     // activeSchema,  //选中的节点的schema对象
@@ -93,12 +93,10 @@ export default defineComponent({
                     return item
                 }
             })
-            mitt.emit('activeSchema', '') //设置工具属性为空
         }
 
         const updateSchemaData = (value: any) => {
             toolBag.schemaData = value;
-            console.log('执行了。。。。。。。。。。。。。。。');
         }
 
         return {

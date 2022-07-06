@@ -164,7 +164,6 @@ const modifyToolJS = (objInfo: { id?: string; type?: string; info: any }) => {
                     "title": {
                         type: "string",
                         title: "标题",
-                        default: objInfo?.info.title,
                         "x-decorator": "FormItem",
                         "x-decorator-props": {
                             "labelCol": 6,
@@ -176,7 +175,6 @@ const modifyToolJS = (objInfo: { id?: string; type?: string; info: any }) => {
                     "description": {
                         type: "string",
                         title: "描述",
-                        default: objInfo?.info.description,
                         "x-decorator": "FormItem",
                         "x-decorator-props": {
                             "labelCol": 6,

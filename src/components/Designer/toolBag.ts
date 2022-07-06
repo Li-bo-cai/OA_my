@@ -1,5 +1,6 @@
 import input from "./modules/input"
 import textarea from "./modules/textarea"
+import select from './modules/select'
 
 const toolBagJs = {
     tools: [
@@ -7,7 +8,8 @@ const toolBagJs = {
             label: '输入控件',
             toolItem: [
                 input,
-                textarea
+                textarea,
+                select
             ]
         },
         {

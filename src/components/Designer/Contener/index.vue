@@ -9,15 +9,6 @@
                         <div class="draggable-item move" :class="{ is_active: nowItem.id == element.id }"
                             @click="getItem(element)">
                             <ContenerItem :element="element"></ContenerItem>
-                            <!-- <SchemaField :schema="{
-                                type: 'object',
-                                properties: {
-                                    [element.id]: {
-                                        'x-decorator': 'SelfCompt',
-                                        'x-decorator-props': element.info
-                                    }
-                                },
-                            }"></SchemaField> -->
                             <div class="draggable-btn" v-show="nowItem.id == element.id">
                                 <el-button type="primary" :icon="Delete" circle @click.stop="delToolItem(element)" />
                             </div>
@@ -53,29 +44,29 @@ const ContenerItem = defineComponent({
             default: () => ({})
         }
     },
-    watch: {
-        "props.element": {
-            handler(newValue: any) {
-                console.log(11111111111111, newValue);
-            },
-            immediate: true, deep: true
-        }
-    },
-    render(props: any) {
-        console.log(props, 8888888);
-        return (
-            h(SchemaField, {
+    setup(props) {
+        const cmpt = ref()
+        watch(() => props.element, (newValue) => {
+            console.log(newValue.info, 8484844444);
+            cmpt.value = h(SchemaField, {
                 schema: {
                     type: 'object',
                     properties: {
-                        [props.element.id]: {
+                        [newValue.id]: {
                             'x-decorator': 'SelfCompt',
-                            'x-decorator-props': props.element.info
+                            'x-decorator-props': newValue.info
                         }
                     },
                 }
             })
-        )
+        }, { immediate: true, deep: true })
+
+        return () => {
+            const demo = cmpt.value
+            return (
+                demo
+            )
+        }
     }
 })
 
@@ -100,9 +91,7 @@ export default defineComponent({
         const formRef = ref(createForm())
 
         watch(() => props.toolBag.schemaData, (newValue, oldValue) => {
-            console.log(newValue);
             schemaData.value = newValue
-            console.log('执行了，吗？');
         }, { immediate: true, deep: true })
 
 
@@ -129,6 +118,7 @@ export default defineComponent({
 
         // 点击事件
         const getItem = (e: any) => {
+            if (nowItem.value == e) return
             nowItem.value = e;
             // console.log(form.value, '点击事件form');
             // console.log(e, '点击事件e');
