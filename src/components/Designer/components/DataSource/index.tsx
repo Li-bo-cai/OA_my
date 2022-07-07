@@ -25,6 +25,9 @@ export const DataSource = observer(
         props: {
             onChange: {
                 type: Function
+            },
+            value: {
+                type: Array as any
             }
         },
         setup(props) {
@@ -32,17 +35,20 @@ export const DataSource = observer(
             const state = vue.ref<Array<stateInfc>>([])   //配置数据树
             const activeItem = vue.ref();  //当前选中节点
             const formRef = vue.ref(createForm())  //表单数据
+            
+            vue.watch(() => props.value, (newValue) => {
+                newValue ? state.value = props.value : state.value = []
+            }, { immediate: true })
 
             const openModal = () => (modalVisibleRef.value = true)
 
             const handleClose = () => {
                 // 关闭弹窗
-                modalVisibleRef.value = false
+                modalVisibleRef.value = false;
             }
 
             const confirm = () => {
-                console.log(state.value);
-                props.onChange?.(state.value)
+                props.onChange?.(state.value);
                 handleClose()
             }
 
@@ -87,10 +93,15 @@ export const DataSource = observer(
                 }
             }
 
-            const delItemClick = (value: number) => {
+            const delItemClick = (value: number, e: Event | undefined) => {
                 // 删除左侧数据
                 return () => {
+                    (e as Event).stopPropagation()
+                    console.log(e);
                     state.value.splice(value, 1)
+                    if (state.value.length == 0) {
+                        activeItem.value = [];
+                    }
                 }
             }
 
@@ -129,7 +140,7 @@ export const DataSource = observer(
                                                 return (
                                                     <div class={item.value == (activeItem.value && activeItem.value.value) ? 'option-Item is_active' : 'option-Item is_hover'} onClick={activeItemClick(item, index)}>
                                                         <div>{item[Object.keys(item)[0]] || '默认标题'}</div>
-                                                        <svg class={'delete-icon'} onClick={delItemClick(index)} viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-78e17ca8=""><path fill="currentColor" d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z"></path></svg>
+                                                        <svg class={'delete-icon'} onClick={delItemClick(index, event)} viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-78e17ca8=""><path fill="currentColor" d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z"></path></svg>
                                                     </div>
                                                 )
                                             })}

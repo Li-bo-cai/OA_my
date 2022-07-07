@@ -28,6 +28,7 @@ import { createSchemaField, FormProvider } from "@formily/vue";
 import * as ElementPlus from "@formily/element-plus"
 import { SelfCompt } from '../components/index'
 import { Delete } from '@element-plus/icons-vue';
+import mitt from '@/utils/mitt';
 
 const { SchemaField } = createSchemaField({
     components: {
@@ -132,6 +133,7 @@ export default defineComponent({
                     (schemaData.value as Array<Any>).splice(index, 1)
                 }
             })
+            mitt.emit('activeSchema', '')
         }
         const onSubmit = (value: any) => {
             console.log(form);

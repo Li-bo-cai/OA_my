@@ -17,6 +17,6 @@ const textarea = {
         },
     }
 }
-textarea.info['x-component-props'].info = modifyToolJS(textarea)
+textarea.info['x-component-props'].info = modifyToolJS()
 
 export default textarea

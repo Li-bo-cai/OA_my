@@ -143,7 +143,7 @@
 
 // ]
 
-const modifyToolJS = (objInfo: { id?: string; type?: string; info: any }) => {
+const modifyToolJS = () => {
     return [
         {
             label: '字段属性',
@@ -212,7 +212,7 @@ const modifyToolJS = (objInfo: { id?: string; type?: string; info: any }) => {
                         "default": "visible"
                     },
                     "x-pattern": {
-                        title: "展示状态",
+                        title: "UI状态",
                         "x-decorator": "FormItem",
                         "x-decorator-props": {
                             "labelCol": 6,

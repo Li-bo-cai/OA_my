@@ -16,6 +16,6 @@ const input = {
         }
     },
 }
-input.info['x-component-props'].info = modifyToolJS(input)
+input.info['x-component-props'].info = modifyToolJS()
 
 export default input

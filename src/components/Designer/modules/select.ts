@@ -16,6 +16,6 @@ const select = {
         }
     },
 }
-select.info['x-component-props'].info = modifyToolJS(select)
+select.info['x-component-props'].info = modifyToolJS()
 
 export default select

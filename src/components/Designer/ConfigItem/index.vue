@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, reactive, ref, toRef, watch, watchEffect } from 'vue'
+import { defineComponent, onMounted, onUnmounted, ref, toRef, watch, } from 'vue'
 import { createForm, onFormInitialValuesChange, onFormInputChange, onFormValuesChange } from '@formily/core'
 import { createSchemaField, FormProvider } from "@formily/vue";
 
@@ -56,7 +56,7 @@ export default defineComponent({
     setup(props, context) {
         const schemaData: any = toRef(props, 'schemaData')
 
-        const form = ref(createForm())
+        const form = ref()
         const activeSchema = ref()
         const activeNames = ref(['字段属性'])
         const allSchemaarr = ref([])
@@ -79,7 +79,7 @@ export default defineComponent({
                 })
                 form.value.setInitialValues({
                     id: newValue.name,
-                    title: newValue['x-decorator-props'].title
+                    ...newValue['x-decorator-props']
                 })
             }
         })
@@ -90,6 +90,8 @@ export default defineComponent({
         })
 
         onUnmounted(() => {
+            console.log('我卸载了');
+
             mitt.off('activeSchema', getActiveSchema)
             mitt.off('allSchemaArr', getAllSchemaArr)
         })
